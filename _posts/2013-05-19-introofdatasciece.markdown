@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2013-05-19 11:31:27+00:00
 layout: post
-slug: '%e6%95%b0%e6%8d%ae%e7%a7%91%e5%ad%a6%e7%ae%80%e4%bb%8b'
+slug: 'introofdatasciece'
 title: 数据科学简介
 wordpress_id: 1948
 categories:

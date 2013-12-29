@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2013-03-18 06:06:11+00:00
 layout: post
-slug: '%e7%94%a8python%e7%9a%84simplehttpserver%e6%90%ad%e5%bb%ba%e6%9c%ac%e5%9c%b0ga%e6%b5%8b%e8%af%95%e7%8e%af%e5%a2%83'
+slug: 'simplehttpserver'
 title: 用Python的simpleHttpServer搭建本地GA测试环境
 wordpress_id: 1904
 categories:

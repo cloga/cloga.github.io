@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2013-06-25 14:38:57+00:00
 layout: post
-slug: couchdb%e5%92%8cmongodb%e7%ae%80%e4%bb%8b
+slug: 'couchdb&mongodb'
 title: CouchDB和MongoDB简介
 wordpress_id: 1955
 categories:

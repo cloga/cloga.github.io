@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2013-09-17 04:58:44+00:00
 layout: post
-slug: python%e4%b8%ad%e7%9a%84%e7%bb%93%e6%9e%84%e5%8c%96%e6%95%b0%e6%8d%ae%e5%88%86%e6%9e%90%e5%88%a9%e5%99%a8-pandas%e7%ae%80%e4%bb%8b
+slug: 'pandasintro'
 title: Python中的结构化数据分析利器-Pandas简介
 wordpress_id: 2034
 categories:

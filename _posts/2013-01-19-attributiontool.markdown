@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2013-01-19 05:50:19+00:00
 layout: post
-slug: '%e8%ae%a1%e7%ae%97ga%e5%bd%92%e5%9b%a0%e6%a8%a1%e5%9e%8b%e6%95%b0%e6%8d%ae%e7%9a%84%e5%b0%8f%e5%b7%a5%e5%85%b7'
+slug: 'attributiontool'
 title: 计算GA归因模型数据的小工具
 wordpress_id: 1839
 categories:

@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2013-11-30 13:28:09+00:00
 layout: post
-slug: '%e5%85%b3%e4%ba%8epython%e4%bd%a0%e4%b8%8d%e5%8f%af%e4%b8%8d%e7%9f%a5%e7%9a%84%e5%87%a0%e4%bb%b6%e4%ba%8b'
+slug: 'somethingaboutpython'
 title: 关于Python你不可不知的几件事
 wordpress_id: 2091
 categories:

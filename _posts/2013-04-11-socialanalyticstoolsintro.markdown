@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2013-04-11 04:23:13+00:00
 layout: post
-slug: '%e7%a4%be%e4%ba%a4%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e7%9a%84%e5%b7%a5%e5%85%b7%e4%bb%8b%e7%bb%8d'
+slug: 'socialanalyticstoolsintro'
 title: 社交网络分析工具介绍
 wordpress_id: 1914
 categories:

@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2013-09-03 00:24:03+00:00
 layout: post
-slug: networkx%e7%ae%80%e4%bb%8b
+slug: 'networkxintro'
 title: 复杂网络程序包NetworkX简介
 wordpress_id: 2006
 categories:

@@ -4,7 +4,7 @@ title: 网站首页
 tagline: index page
 ---
 
-
+{% include JB/setup %}
 
 <ul class="posts">
   {% for post in site.posts %}

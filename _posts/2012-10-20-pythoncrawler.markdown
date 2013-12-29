@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2012-10-20 15:55:19+00:00
 layout: post
-slug: '%e7%94%a8python%e5%86%99%e7%ae%80%e5%8d%95%e7%88%ac%e8%99%ab'
+slug: 'pythoncrawler'
 title: 用Python写简单爬虫
 wordpress_id: 1694
 categories:

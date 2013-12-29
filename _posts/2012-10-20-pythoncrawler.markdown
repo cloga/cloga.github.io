@@ -16,6 +16,8 @@ Python提供了许多Module，通过这些Module，可以很简单的做一些�
 
 首先，要通过urllib2这个Module获得对应的HTML源码。
 
+<script src="https://gist.github.com/cloga/8171284.js"></script>
+
     
     import urllib2
     url='http://www.baidu.com/s?wd=cloga'

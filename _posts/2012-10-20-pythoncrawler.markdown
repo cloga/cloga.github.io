@@ -18,12 +18,6 @@ Python提供了许多Module，通过这些Module，可以很简单的做一些�
 
 <script src="https://gist.github.com/cloga/8171284.js"></script>
 
-    
-    import urllib2
-    url='http://www.baidu.com/s?wd=cloga'
-    content=urllib2.urlopen(url).read()
-
-
 通过上面这三句就可以将URL的源码存在content变量中，其类型为字符型。
 
 接下来是要从这堆HTML源码中提取我们需要的内容。用Chrome查看一下对应的内容的代码（也可以用Firefox的Firebug）。

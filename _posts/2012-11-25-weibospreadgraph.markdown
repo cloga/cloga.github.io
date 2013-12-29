@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2012-11-25 16:52:03+00:00
 layout: post
-slug: '%e6%96%b0%e6%b5%aa%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e8%b7%af%e5%be%84%e5%9b%be%e7%9a%84%e5%88%b6%e4%bd%9c'
+slug: 'weibospreadgraph'
 title: 新浪微博传播路径图的制作
 wordpress_id: 1722
 categories:

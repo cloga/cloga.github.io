@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2012-12-24 07:42:27+00:00
 layout: post
-slug: '%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b'
+slug: 'socialgrpah'
 title: 网络分析与图简介
 wordpress_id: 1770
 categories:

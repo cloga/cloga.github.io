@@ -1,0 +1,96 @@
+---
+author: cloga0216
+comments: true
+date: 2011-04-10 15:36:53+00:00
+layout: post
+slug: ga%e4%b8%ad%e7%9a%84js%e6%89%a9%e5%b1%95%e4%b9%8b%e9%81%8d%e5%8e%86a%e6%a0%87%e7%ad%be
+title: GA中的JS扩展之遍历a标签
+wordpress_id: 1027
+categories:
+- GA的JS扩展
+tags:
+- js
+---
+
+**为什么要对GA****进行扩展？**
+
+默认的GA设置已经能帮满足大部分的跟踪需求，但是，跟踪需求永远是层出不穷，通过一段短小强大的JS（Javascript）能完成更复杂的跟踪需求，因此，了解一些JS扩展能为我们提供更灵活的GA部署方案。JS知识基本上是网站分析师的标配技能，看一下Roirevolution、LunaMetrics、GAexpert以及其他以WA咨询为主的咨询公司，他们都贡献出许多优秀的JS扩展。
+
+**如何学习JS****？**
+
+如果您和我一样不是技术出身，最初面对JS、对象、属性、方法等这些术语可能会感到有些头大。不要心急、不要害怕，一点一点开始，先从最基本的知识开始（建议大家看一下[http://www.w3school.com.cn/](http://www.w3school.com.cn/)中JS及DOM的相关内容）。我们需要做的不是去创作轮子，相关的JS函数其实已经在编程中应用，我们需要做的只是了解自己的需求，从现有的一些JS（或者Jquery）应用中将这些函数迁移过来。相信经过一段时间的学习，你会发现可能我们不会自己编写一些高级的JS，但是我们可以修改一些现有的JS实现自己的跟踪需求，就像我们不会自己编写VBA，但是可以将别人的VB代码存在excel中形成自定义函数，通过嵌套函数来完成复杂的数据分析工作一样。
+
+<!-- more -->
+
+**JS****扩展在GA****中能做什么？**
+
+首先，JS扩展能帮我们简化一些操作，例如，当我们进行跨域跟踪时，我们需要做的一件事是，在每一个跨域链接上添加_link函数以便在不同的主域间传递cookie，通过一段JS扩展可以免除手动标记每个链接。其次，JS扩展还能帮助我们完成一些常规部署无法完成的任务，比如，在网站优化工具中，将页面停留时间作为一个目标；根据域名的不同加载不同的网络资源ID；根据部分表单的完成等等。还有一些其他的高级跟踪需求，比如，Brian给出的JS扩展中可以获得最初的引荐来源及最近的引荐来源；另外，利用自定义函数和一些JS技巧我们甚至可以跟踪注册用户的性别；登陆用户的用户名。
+
+**GA****中的JS****扩展之遍历a****标签**
+
+下面让介绍第一个JS扩展，遍历页面内的a标签。这段code是我之前在网上找到的，丢在网站上很久了，来源已经不可考，但是，还是感谢一下原作者。
+
+这段代码的作用是当页面加载时运行一个函数，在每个出站链接上添加_link函数，传递cookie值。基本的代码如下：
+
+_<script>
+__var oldwhandler=window.onload__
+window.onload =
+__ function lhandler () {
+var links = document.getElementsByTagName('a');
+for (var x=0; x < links.length; x++) {
+var oldlhandler=link[x].onclick
+links[x].onclick = function () {
+oldlhandler();
+var mydomain = new RegExp(document.domain, 'i');
+if(!mydomain.test(this.getAttribute('href'))) {
+_gaq.push(['_trackPageview',"/outgoing/" + this.getAttribute("href")]);
+_gaq.push(['_link', this.getAttribute("href")]);return false;
+}
+};
+}
+};
+</script>
+note:code update 11.05.25_
+
+我将以非技术的视角解读一下这段代码。
+
+function ()表示一个函数，{}之间的函数体，即函数的内容。
+
+var links = document.getElementsByTagName('a')是将页面中的的a标签的节点元素存储为名称为links的数组。
+
+for循环的作用是遍历页面中的所有a标签。links.length的作用是返回links数组中的元素数。
+
+links[x].onclick = function () {}是JS中的事件处理程序，即在每个a标签上添加一个onclick事件执行一个函数。
+
+接下来将当前域名存储为一个正则式对象，用于比较。
+
+if条件比较a标签中的href属性是否含有当前域名，即判断是否为跨域的链接，请注意这里添加一个逻辑非处理，即当href属性不包含当前域名时为条件为真。
+
+if条件为真执行的两个语句大家应该都比较熟悉，第一个语句是虚拟浏览量生成出站链接，第二个语句是添加_link传递cookie进行跨域。（别忘记在GA代码中使用_setAllowLinker）。
+
+**这段code****的主要应用情境**
+
+1、跨域跟踪。
+
+进行跨域跟踪时，跨域跟踪需要在所有跨域链接上添加_link函数，手动添加有些不太现实，这段代码可以遍历所有的a标签，是一个不错的选择。需要说明的是，跨域链接是指几个需要共享cookie的主域之间的链接，因此，var mydomain = new RegExp(document.domain, 'i');需要作出一些修改，将其中的document.domain修改为'(a|b).com'，具体的域名按照实际情况修改。同时需要删除对_trackPageview的调用。
+
+2、将出站链接跟踪为一个虚拟页面浏览。
+
+与跨域跟踪类似，这段代码可以自动每个出站链接添加虚拟页面浏览。当然如果你希望是事件的话，只需要改成_trackEven语句就可以了。需要说明的是，如果你的网站没有子域的话，那么，这段代码可以删除或注释掉对_link的调用直接使用。如果你的网站存在子域，那么，需要将var mydomain = new RegExp(document.domain, 'i');中的document.domain修改为你的主域，比如对于我的网站来说，应该修改为var mydomain = new RegExp('cloga.info', 'i');
+
+3、跟踪这个页面内对每个链接的点击
+
+这种情况主要是当进行某些推广活动时，以页面的跳出率作为KPI，这个时候需要将页面内每一个链接的点击都作为虚拟页面浏览。这时我们需要做的是去掉if判断，即将代码修改如下：
+
+_<script>
+window.onload = function () {
+var links = document.getElementsByTagName('a');
+for (var x=0; x < links.length; x++) {
+links[x].onclick = function () {
+_gaq.push(['_trackPageview',"/outgoing/" + this.getAttribute("href")]);
+};
+}
+};
+</script>_
+
+好啦，这段遍历a标签执行GA函数的代码就介绍完了，但是，这段代码的应用并不止这些，比如，可以将a标签换成任意的HTML元素，进行某些奇妙的操作。欢迎您交流一些跟踪部署中使用的JS技巧，如果您在日常的部署中遇到哪些无法满足的需求，也可以给我留言~

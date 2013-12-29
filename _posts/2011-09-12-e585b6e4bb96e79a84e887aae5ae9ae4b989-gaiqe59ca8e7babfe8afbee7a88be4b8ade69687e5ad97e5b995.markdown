@@ -1,0 +1,15 @@
+---
+author: cloga0216
+comments: true
+date: 2011-09-12 15:19:45+00:00
+layout: post
+slug: '%e5%85%b6%e4%bb%96%e7%9a%84%e8%87%aa%e5%ae%9a%e4%b9%89-gaiq%e5%9c%a8%e7%ba%bf%e8%af%be%e7%a8%8b%e4%b8%ad%e6%96%87%e5%ad%97%e5%b9%95'
+title: 其他的自定义-GAIQ在线课程中文字幕
+wordpress_id: 1299
+categories:
+- GAIQ在线课程中文字幕
+tags:
+- GAIQ
+---
+
+

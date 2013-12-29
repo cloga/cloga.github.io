@@ -1,0 +1,70 @@
+---
+author: cloga0216
+comments: true
+date: 2011-04-04 13:56:15+00:00
+layout: post
+slug: google%e7%bd%91%e7%ab%99%e4%bc%98%e5%8c%96%e5%b7%a5%e5%85%b7%e7%9a%84%e5%b7%a5%e4%bd%9c%e5%8e%9f%e7%90%86
+title: Google网站优化工具的工作原理
+wordpress_id: 991
+categories:
+- 网站优化工具
+tags:
+- 网站优化工具
+---
+
+Google网站优化工具是您提高网站转化率的免费利器。它能帮您回答这样的问题：“哪个版本的页面更有利于转化？”“哪种图片、呼吁采取行动按钮及标题组合更有利于转化？”
+
+网站优化工具为我们提供了两类基本的实验：A/B实验和多变量实验。
+
+A/B实验即控制组对照组实验，每个用来测试的页面都有单独的URL，通常是用来测试完全不同的多个页面。
+
+多变量（多版本）实验是用来测试一个页面的多个版本，所有的版本都是同一个URL。<!-- more -->
+
+A/B实验的原理：
+
+1、 访问者浏览器对http://www.mysite.com/landing_page.html
+2、 landing_page.html的内容加载到浏览器中。
+3、 GWO的控制脚本（在页面的顶部）执行。
+4、 控制脚本寻找GWOcookie。这是为了了解访问者之前是否访问过这个页面。
+5、 控制脚本向Google服务器请求另一个脚本，siteopt.js，并且添加如下的实验键和GWO cookie值：
+[http://www.google-analytics.com/siteopt.js?v=1&utmxkey=<experiment](http://www.google-analytics.com/siteopt.js?v=1&utmxkey=) key>&utmx=<__utmx cookie value>&utmxx=<__utmxx cookie value>&utmxtime=<request timestamp>
+6、 访问跟踪代码运行，跟踪了访问及页面的版本。这基本上是一个标准的Google Analytics（GA）跟踪调用，使用自定义“虚拟URL”代表到测试页面的访问。
+7、 这个虚拟URL是这样：/<experiment key>/test，实验键与控制脚本中的k变量相同，var k=’1234567890’。
+
+多变量实验的原理：
+
+1、 访问者的浏览器发出了对[http://www.mysite.com/landing_page.html](http://www.mysite.com/landing_page.html)的请求
+2、 landing_page.html的内容加载到浏览器。（从技术上来讲，页面是浏览器的一个流，在所有数据流入及嵌入的脚本执行以前，解析器是不会看到整个页面的）。
+3、 GWO控制脚本（在页面顶部）执行。
+4、 控制脚本寻找GWO cookie。这是为了看一下访问者是否曾访问过这个页面。
+5、 控制脚本向Google的服务器做出另一个脚本，siteopt.js的请求，附加了实验的键（key）及GWO的cookie值，如下：
+[http://www.google-analytics.com/siteopt.js?v=1&utmxkey=<experiment](http://www.google-analytics.com/siteopt.js?v=1&utmxkey=) key>&utmx=<__utmx cookie value>&utmxx=<__utmxx cookie value>&utmxtime=<request timestamp>MVT
+如果这是访问者对这个页面的第一次访问：
+·向siteopt.js传递的utmx和utmxx为空。
+·将为访问者随机挑选组合。
+·siteopt.js将设置__utmx和__utmxx cookie。
+如果这不是访问者对这个页面的第一次访问：
+·将向siteopt.js传递utmx及utmxx的值，siteopt.js将获得之前设置的值。
+·为访问者选择的组合将基于utmx的值。
+·GWO cookie的两年有效期将被重置。
+siteopt.js包含定义utmx_section函数的代码。实际上替换页面内容的是这个函数，
+utmx_section函数执行，替换每个部分的内容。被替换的内容来自于创建实验时的输入。
+如果显示的内容部分是内容的原始版本，那么GWO将这部分内容什么也不做。将仅仅向用户展现原始的内容部分。如果你在测试开始前修改了原始页面的内容，那么用户将看到做出的修改。
+访问跟踪代码运行，这用来跟踪访问及看到的组合。这个基于一个标准的Google Analytics（GA）跟踪调用，使用自定义“虚拟URL”来代表对测试页面的访问。这个虚拟URL的形式是这样：“/<experiment key>/test”，实验键与控制脚本中的k变量一样，比如，var k=’2045836535’。
+
+转化页面：
+
+当访问者来到了转化页时：
+1、 转化脚本运行，跟踪转化和组合版本（对于MVT来说）或者页面版本（对于A/B）。
+2、 与跟踪脚本类型，这基本上是标准的Google Analytics（GA）跟踪调用，使用自定义“虚拟URL”来代表对转化页的访问。这个虚拟URL看起来是这样：/<experiment key>/goal，这里的实验键与控制脚本中的k变量相同，var k=’2045836535’。
+3、 当做出GA调用时，__utmx cookie的值被传递给Google的服务器。如果访问者有__utmx cookie（与实验ID一致），GWO使用来自cookie的值来知道这个转化属于哪个组合或页面。
+
+需要记忆的一些要点：
+
+1、A/B实验与多变量实验的一个差别是A/B实验是通过重定向将访问者从原始页面分流到替代版本的页面，而多变量实验则是通过脚本控制向访问者展示的内容组合，都是在一个页面（URL）上进行。
+
+2、网站优化工具的转化是利用GA的虚拟页面浏览来实现的，但是，与GA的转化定义的不同，GA的转化是在访问级别上发生的，即目标页面获得的访问数（即unique PV），而网站优化工具的转化则是访问者级别的，即对于每个访问者（通过cookie来标识），在其生命周期内只能转化一次。这是为了避免新老顾客对实验结果的影响。
+
+3、由于网站优化工具的跟踪脚本实际上就是GA的跟踪代码，因此，当你使用了一些自定义设置操作了GA的cookie时，也需要对网站优化工具也要使用对应的修改，比如跨子域、跨主域，因为，网站优化工具是使用默认的跟踪代码。
+
+好了，亲爱的读者，如果您对网站优化工具有其他的疑问可以留言给我，同时也希望您能共享一些您使用网站优化工具的经验~

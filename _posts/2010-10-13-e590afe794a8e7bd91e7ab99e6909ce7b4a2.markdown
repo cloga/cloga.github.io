@@ -1,0 +1,50 @@
+---
+author: cloga0216
+comments: true
+date: 2010-10-13 13:34:27+00:00
+layout: post
+slug: '%e5%90%af%e7%94%a8%e7%bd%91%e7%ab%99%e6%90%9c%e7%b4%a2'
+title: 启用网站搜索
+wordpress_id: 568
+tags:
+- 网站搜索
+---
+
+如果你的网站有内部搜索引擎帮助访问者定位内容，那么，你可能想要了解这个功能是否影响访问者的体验。捕捉内部搜索词是网站优化的重要财富。例如，这反映了错拼、同义词、部分匹配或者仅仅是不同的描述。
+为了启用这一功能，第一步是选择“请跟踪网站搜索”，如图8.2所示。这启用了一个新的Google Analytics报告菜单，这一菜单可以在内容>网站搜索中找到。
+这个功能启用后，你需要输入定义URL中包含访问者的网站搜索词的查询参数。通常你可以通过自己进行一次网站搜索，在结果的URL中查找你的搜索词来很快找到这个参数。它通常是?q=cloga或&s=cloga的形式。在这里例子中，查询参数名分别是q和s。Google Analytics通过这些值来确定访问者进行了一次网站搜索及其所使用的搜索词。
+请注意，还有一个选项可以从搜索完成后的URL去除你所定义的网站搜索查询参数。如果这些参数在Google Analytics报告中对你没有更大用处，那么这个选项是很有用的。但是，这些参数可能对于定义你的目标、渠道步骤或者过滤器很重要（见后两部分）。如果你使用虚拟页面浏览来提高报告的可读性，那么网站搜索查询参数可能也很重要（在第7章“trackPageview()：Google Analytics主力”中讨论过）。因此，只有在绝对必要的情况下，你才应该去除查询参数。
+Google Analytics网站搜索也提供了定义类别的选项。如果你的网站搜索功能允许访问者为搜索选择一个类别，那么请使用这一选项。例如，一个零售网站可能有男装、女装等等类别。一个房地产网站可能有公寓、独立产权公寓、住宅等公寓。通过集中于访问者的搜索重点，类别能帮助他们更容易的找到信息。理解类别间如何比较通常是评估站内搜索引擎性能的第一步。<!-- more -->
+以定义网站搜索查询参数类似，类别参数也包含在结果页的URL中——例如，?cat=menswear或者&sect=condo。对于这些例子，类别参数名分别是cat和sect。与定义查询参数类似，你也能从URL中去除类别参数。但是，同样的，除非完全有必要，否则，不要去除查询参数。
+**如果我的URL不包含网站搜索参数，那该怎么办？
+**在这种情况下，你能使用虚拟页面浏览来插入一个参数。如果你的网站搜索结果页包含访问者的搜索关键词作为环境变量，例如%searchtem，那么，你可以将这个用作虚拟页面浏览。下面是实现这一目的的GATC例子：
+旧的ga.js：
+`<script type=”text/javascript”>
+var gaJsHost = ((“https:” == document.location.protocol) ? “https://ssl. “ : “http://www. “);
+document.write(unescape(“%3Cscript src=’” + gaJsHost +”google-analytics.com/ga.js’ type=’text/javascript’%3E%3C/script%3E”));
+</script>
+<script type=”text/javascript”>
+try {
+var pageTracker = _gat._getTracker(“UA-12345-1”);
+**pageTracker._trackPageview(‘/site search/?q=%searchterm’);
+**}catch(err) {}</script>
+`异步ga.js：
+`<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-12345-1']);
+**_gaq.push(['_trackPageview',’/site search/?q=%searchterm’]);
+**(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>
+`在这个例子中，我用查询参数q以及它的值，被设置为环境变量%searchterm创建了虚拟页面浏览。后面，你可以使用q作为你的网站搜索参数就像是真实的URL一样。第7章“trackPageview()：Google Analytics的主力”部分讨论了虚拟页面浏览的使用。
+**注：**网站搜索数据处理在过滤器数据处理之前。尽管应用过滤器来修改网站搜索查询或类别参数（可能是它们对读者更友好），但是这些不会显示在你的网站搜索报告中。
+**跟踪网站搜索零结果
+**评估网站搜索功能的效果和性能时的一个常见需求是跟踪哪个搜索词产生了零结果。零结果是一个特别糟糕的用户体验，通常导致自杀行为——访问者跑到了别的网站。
+如果没有访问者正在寻找的产品，那么这个反应是相当公平的。但是，我发现事实通常不是这样的。相反，由于某些原因，站内搜索通常只是作为一个附属品，而根本没有重视其性能和质量，尽管，很明显网络用户很依赖于搜索。于是，许多访问者离开网站时，带着错误的信念，这个网站不能满足他的需求。
+捕捉零结果使你能识别好的和坏的用户体验。当零结果发生时，用一个类别参数来标记零结果搜索结果URL，例如：
+www.mysite.com?q=widget&tab=zero
+确保在设置中添加了类别参数tab（或其他名称），如图8.2所示。那么，当你查看网站搜索报告时，将看到仅分析零搜索结果的专有类别。
+**注：**使用网站搜索的KPI将在第10章“关注KPI”中讨论。衡量网站搜索成功将在第11章“现实世界中的任务”。

@@ -1,0 +1,40 @@
+---
+author: cloga0216
+comments: true
+date: 2010-09-20 15:33:24+00:00
+layout: post
+slug: '%e6%a0%87%e8%ae%b0email%e8%90%a5%e9%94%80%e6%b4%bb%e5%8a%a8'
+title: 标记Email营销活动
+wordpress_id: 453
+tags:
+- Email
+---
+
+继续使用前面的例子，假如，你计划从2010年9月开始进行一个月的email电子简报。简报是关于鞋的秋季促销。你想要确保所有来自email营销的点击都被记录在Google Analytics报告中。
+为了让情况更复杂一些，假设营销部门还想比较发送纯文本email与HTML格式（包含富文本格式和图片）的效果。他们希望知道访问数和转化是否会因为发送email的格式而不同（这是A/B分割测验的基础）。
+你能用图7.3中的着陆页URL跟踪这两个email营销活动。在这两个例子中，广告系列内容字段用来区分email格式。然后将生成好的标记好的着陆页URL提供给设置你的email营销的人。
+你可能在一个email中有许多指向不同着陆页的链接。因此，你需要正确的调整每一个URL。例如，shoes.htm可能是boots.htm。但是，跟踪参数将是一样的。
+
+
+[![](http://www.cloga.info/wp-content/uploads/2010/09/7-3a.bmp)](http://www.cloga.info/wp-content/uploads/2010/09/7-3a.bmp)
+
+
+
+
+图7.3a 标记文本格式的email
+
+
+
+
+[![](http://www.cloga.info/wp-content/uploads/2010/09/7-3b.bmp)](http://www.cloga.info/wp-content/uploads/2010/09/7-3b.bmp)
+
+
+
+
+图7.3b 标记html格式的email
+
+
+**纯文本Email VS HTML Email**
+目前HTML格式的email非常受欢迎并且得到了广泛传播。但是，作为一种正在形成的格式，人们进行了研究以确定其影响。
+2006年的一项研究表明，与纯文本相比，受众更可能点击HTML email中的链接。(MailerMailer Email Metrics Report,2006年1月-6月)
+根据E-consultancy’s Online Marketing Benchmarks 2004年在英国进行的研究，HTML通常比相同内容的纯文本版本多产生20-40的反应。需要说明的是这非常依赖于目标市场和所讨论的产品/服务。

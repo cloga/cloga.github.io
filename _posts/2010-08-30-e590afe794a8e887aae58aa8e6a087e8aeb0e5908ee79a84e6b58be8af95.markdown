@@ -1,0 +1,34 @@
+---
+author: cloga0216
+comments: true
+date: 2010-08-30 16:22:55+00:00
+layout: post
+slug: '%e5%90%af%e7%94%a8%e8%87%aa%e5%8a%a8%e6%a0%87%e8%ae%b0%e5%90%8e%e7%9a%84%e6%b5%8b%e8%af%95'
+title: 启用自动标记后的测试
+wordpress_id: 182
+tags:
+- Google Analytics
+- web metrics
+---
+
+正如在第2章“[为什么PPC服务提供商的数据与网站分析报告不符](http://www.cloga.info/archives/133.html)”的部分所讨论的，第三方广告跟踪系统能无意中损坏或去除Google Analytics跟踪AdWords所需要的gclid参数。例如，Adform、Atlas Search、Bluestreak、DoubleClick以及Efficient Frontier等跟踪系统，使用重定向URLs来在企业之外收集访问者统计数据。这些跟踪系统可能无意中破坏了AdWords的glicd。因此，在启用自动跟踪之后通常需要通过点击一个Google搜索结果页的一个广告样本来进行检查。
+
+如果测试失败，那么请联系你的第三方广告跟踪提供商，因为这可能很好解决。例如，你的AdWords自动标记的着陆页URL可能看起来是这样的：
+
+[http://www.cloga.info/?gclid=COvQgK7JrY8CFSUWEAodKEEyuA](http://www.cloga.info/?gclid=COvQgK7JrY8CFSUWEAodKEEyuA)
+
+如果第三方跟踪系统使用了重定向，那最终着陆页将是这样：
+
+[http://www.redirect.com?url=http://www.cloga.info/?gclid=COvQgK7JrY8CFSUWEAodKEEyuA](http://www.redirect.com/?url=http:/www.cloga.info/?gclid=COvQgK7JrY8CFSUWEAodKEEyuA)
+
+注意两个“？”——这是无效的，因为你不能在一个URL中有两个问号。一些第三方跟踪系统可能需要你用#代替第二个？，这样URL就能被正确处理。这应该是第三方广告跟踪系统的事，而不是AdWords的。另一种解决方案是为着陆页添加一个编码的虚拟变量，如：
+
+[http://www.cloga.info/%3Fdum=1](http://www.cloga.info/%3Fdum=1)
+
+AdWords自动标记将添加gclid
+
+[http://www.cloga.info/%3Fdum=1＆gclid=COvQgK7JrY8CFSUWEAodKEEyuA](http://www.cloga.info/%3Fdum=1＆gclid=COvQgK7JrY8CFSUWEAodKEEyuA)
+
+这样就行了。即URL将为Google Analytics的跟踪保留gclid参数的正确格式。然后，你可以在Google Analytics配置设置中排除虚拟变量的跟踪（见第8章“初级设置”）。
+
+**注：**如果你已经在着陆页的URL中有参数，那么你不需要添加虚拟参数。但是，你能需要将？改为其等效的编码%3F。

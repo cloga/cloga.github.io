@@ -1,0 +1,35 @@
+---
+author: cloga0216
+comments: true
+date: 2010-10-20 23:59:05+00:00
+layout: post
+slug: '%e8%b7%9f%e8%b8%aa%e6%af%8f%e4%b8%80%e4%b8%aa%e6%ad%a5%e9%aa%a4%e6%9c%89%e7%9b%b8%e5%90%8curl%e7%9a%84%e6%b8%a0%e9%81%93'
+title: 跟踪每一个步骤有相同URL的渠道
+wordpress_id: 605
+tags:
+- 渠道
+---
+
+你可能遇到过这样一种情况，你需要跟踪每一步骤的URL都相同的渠道。例如，你的注册渠道可能是这样的：
+**第1步 注册
+**www.mysite.com/sign_up.cgi
+**第2步 接受协议
+**www.mysite.com/sign_up.cgi
+**第3步 完成
+**www.mysite.com/sign_up.cgi
+为了解决这个问题，在每一个步骤中调用_trackPageview()函数跟踪虚拟页面浏览，如第7章的“用虚拟页面浏览来跟踪没有可读性的URL”中所述。例如，在这里所讨论的页面中，你可以创建如下的虚拟页面浏览：
+旧的ga.js：
+`pageTracker._trackPageview(“/funnel_G1/step1.html”)
+pageTracker._trackPageview(“/funnel_G1/step2.html”)
+pageTracker._trackPageview(“/funnel_G1/step3.html”)
+`<!-- more -->异步ga.js：
+`_gaq.push([‘_trackPageview’,’/funnel_G1/step1.html’)
+_gaq.push([‘_trackPageview’,’/funnel_G1/step2.html’)
+_gaq.push([‘_trackPageview’,’/funnel_G1/step3.html’)
+`因为这些虚拟页面浏览代替sign_up.cgi被记录下来，所以，你能像下面这样设置目标的每一个渠道步骤：
+第1步：
+http://www.mysite.com/funnel_G1/step1.html
+第2步：
+http://www.mysite.com/funnel_G1/step2.html
+第3步：
+http://www.mysite.com/funnel_G1/step3.html

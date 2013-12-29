@@ -1,0 +1,49 @@
+---
+author: cloga0216
+comments: true
+date: 2010-09-30 15:02:11+00:00
+layout: post
+slug: '%e8%b7%9f%e8%b8%aa%e8%bd%bd%e5%85%a5%e6%97%b6%e9%97%b4%e4%ba%8b%e4%bb%b6'
+title: 跟踪载入时间事件
+wordpress_id: 520
+tags:
+- time-Tracker
+---
+
+默认情况下，Google Analytics不能跟踪页面加载时间，因为页面浏览请求在GATC嵌入在HTML那一点作为一个单独的事件被跟踪。推荐的GATC放置位置是在每一页的底部（Cloga：本例子中说的GATC指旧的ga.js，非异步代码）。因此，Google Analytics在接近页面下载完毕时跟踪页面浏览。
+事件追踪提供了跟踪页面下载时间的方法。在这个例子中，我使用来自Google的通用time-tracking脚本来跟踪页面下载时间。这是通过用JavaScript的Data()方法在HTML顶部创建一个时间戳，并且用JavaScript的window.onload方法在页面完全下载后创建另一个时间戳来实现的。两个时间戳的差值作为事件值发送给Google Analytics。
+首先从[http://code.google.com/apis/analytics/samples/time-tracker.js](http://code.google.com/apis/analytics/samples/time-tracker.js)下载time-tracker.js，并把它上传到script文件夹中。然后像下面这样修改你希望测量加载时间的页面的HTML<head>部分：
+`<head>
+<script type=”text/javascript” src=”/scripts/time-tracker.js”></script>
+<script type=”text/javascript”>
+var timeTracker = new TimeTracker();
+timeTracker._recordStartTime();
+function getPageLoad(){
+timeTracker._recordEndTime();
+timeTracker._track(pageTracker, ‘Page load time’, document.location.pathname);
+}
+window.onload = getPageLoad;
+</script>
+[ ... 剩余head部分内容 ... ]
+</head>`
+time-tracker.js脚本将每个事件值（计算的下载时间）分组，以便于比较。图7.11所示为一个报告的例子。注意电脑报告的时间以毫秒计算。不将其转换为分钟或秒，而是在脚本中保持这个的格式，以便保持事件价值为一个整数——事件追踪价值所要求的。
+<!-- more -->
+
+[![](http://www.cloga.info/wp-content/uploads/2010/09/7-11.bmp)](http://www.cloga.info/wp-content/uploads/2010/09/7-11.bmp)
+
+
+
+
+图7.11  页面下载时间分组，并且被追踪为事件；时间以毫秒报告
+
+
+
+
+从你的事件追踪报告中你能确定个别页面的下载时间的分布、平均页面下载时间，并且如果你在全站实施，那么将看到你全站页面的平均载入时间。
+以上的例子适用于绝大多数用户。但是，你也许需要修改一下timeTracker._track行的内容。调用Google Analytics构建的事件追踪的常例如下：
+`timeTracker._track(tracker_obJect_name,envent_category,event_label)`
+如果你正在使用如图6.2所示的标准GATC，那么你的tracker_object_name将是pageTracker。因此，不需要修改。如果你使用的是自定义GATC，那么相应的修改<head>代码中的值。例如：
+`timeTracker._track(firstTracker,’Page load time’,document.location.pathname);`
+event_category和event_label可以是你想要使用任何文本标签。
+注：页面加载时间这个例子是Google Code网站：[http://code.google.com/apis/analytics/docs/tracking/eventTrackerWrappers.html](http://code.google.com/apis/analytics/docs/tracking/eventTrackerWrappers.html)上一个例子的修改。Google Code的使用非常灵活，能用来为用户的交互计时，比如，访问者再次点击需要的时间、用户完成表格登记的时间，或者用户观看视频文件的时间。请到Google Code网站上查看更详细的文档。
+Cloga：以上的例子仅适用于旧的ga.js，不适用于异步追踪代码。

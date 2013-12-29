@@ -1,0 +1,74 @@
+---
+author: cloga0216
+comments: true
+date: 2010-09-18 01:15:54+00:00
+layout: post
+slug: google%e4%bd%bf%e7%94%a8%e7%ac%ac%e4%b8%89%e6%96%b9%e6%94%af%e4%bb%98%e7%bd%91%e5%85%b3
+title: Google Analytics使用第三方支付网关
+wordpress_id: 424
+tags:
+- 第三方支付网关
+---
+
+如果你的网站在一个独立的商店网站（例如，如果你将顾客从www.mysie.com传送到一个交易网关，例如www.secure-site.com）发起购买结算过程，你需要在网页做出额外的改变。这是因为Google Analytics为了最佳实践的目的，使用第一方cookie。正如第2章中所讨论的，使用第一方cookie意味着只有设置cookie的域能够才能读取和修改——浏览器默认内置的安全特性。你能用下面的方法克服这一问题，并且将你的Google Analytics第一方cookie发送到第三方域。 首先，修改你所有页面上的GATC——主站和商店网站上的所有页面。这些页面中的两个页面上的GATC需要进一步修改：www.mysite.com上发生发生结账过程的最后一页以及访问者用来在www.secure-site.com完成结账过程的进入页。但是，我建议不单单是这两个页面有不同版本的GATC，所有的页面都应改为下面的GATC形式：
+旧的ga.js：
+`<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." :"http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-12345-1");
+**pageTracker._setDomainName("none");
+pageTracker._setAllowLinker(true);
+pageTracker._trackPageview();**
+} catch(err) {}</script>`
+异步代码：
+`<script>
+var _gaq = _gaq || [];
+**_gaq.push(['_setAccount', 'UA-12345-1']);
+_gaq.push(['_setDomainName','none']);
+_gaq.push(['_setAllowLinker',true]);
+_gaq.push(['_trackPageview']);**
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script> `
+严格来说，只有两个页面需要pageTracker._setAllowLinker(true)（旧的ga.js）_gaq.push([‘setAllowLinker’,true])（异步代码）——即发送和接受第一方cookie的页面。但是，在整个网站使用一样的GATC，能最小化潜在的错误——特别是，如果你在稍后在页面上添加更多的跨域链接的话，即，额外的路径让访问者通过第三方支付网关结账。通过定义惟一的GATC，为你提供了校验未来跟踪需求的便利条件。 GATC的修改做了两件事：pageTracker._setDomainName(“none”);（旧的ga.js）或_gaq.push([‘setDomainName’,’none’])（异步代码）将Google Analytics cookie中的域哈希设置为“1”，这使cookie能通用于相关的另一个域，并且将cookie的主机设置为当前URL的主机。用这种方法，cookie能从一个域“推送”到另一个域。为了完成这种推送，你必须也设置pageTrackviewn._setAllowLinker(true)（旧的ga.js）或gaq.push([‘setAllowLinker’,true])（异步代码）。 接着，以下面两种方式修改www.mysite.com上调用第三方网关的页面： 链接法 如果你的网站使用链接将访问者传递到第三方网站，那么向下面这样修改链接：
+旧的ga.js：
+`<a href=https://www.secure-site.com/?store=parameters onclick="javascript:pageTracker._link(this.href); return false; ">
+继续购买</a>`
+异步代码：
+`<a href=https://www.secure-site.com/?store=parameters onclick="javascript:_gaq.push(['_link',this.href]); return false; ">
+继续购买</a>`
+这种方法，通过将Google Analytics cookie信息添加到URL字符串，将它们传递到接受域。如果你在第三方着陆页URL看到_utma、_utmb、_utmc，那么这种方法是可行的。
+**注：**请注意这里使用了return false。这确保了对于浏览器禁用JavaScript的访问者，随后的href不会出错。当然，如果禁用JavaScript，Google Analytics不会跟踪。但是修改的链接仍然有效。
+**表单法**** **如果你的网站使用表单将访问者传递到第三方网站，那么像下面这样修改表单：
+旧的ga.js：
+`<form method="post" action="http://www.secure-site.com/process.cgi" onSubmit="pageTracker._linkByPost(this)">`
+异步代码：
+`<form method="post" action="http://www.secure-site.com/process.cgi" onSubmit="_gaq.push(['_linkByPost',this])">`
+这种方法通过HTTP标题将Google Analytics cookie传递给接受域。这种方法甚至在那些method="GET"的表单中也是有效的。你能通过通过使用插件（IE可以使用HttpWatch，Firefox可以用LiveHTTPheaders，）来查看发送的HTTP标题，以确定这种方法是否有效。
+我建议适用第一种_link方法来检查你的设置是否正确，即，你能在第三方着陆页URL中看到你的cookie值。如果需要的话再改成_linkByPost方法。
+**当第三方网关不允许跟踪的时候该怎么办
+**如果你的第三方支付网关不允许你修改他们的付款页面——即，添加你的GATC——那么你无法直接捕捉交易的完成。但是，有两种间接的方法，接下来的部分将详细讨论。
+**使用****onClick****或****onSubmit
+**在访问者刚好点击跳转到支付网关的地方使用onClick或onSubmit事件处理程序。使用下列的方法之一，调用_trackTrans()函数并且捕捉交易详情。addTrans和addItem数组也必须设置在这一页。
+通过链接调用的例子如下：
+旧的ga.js：
+`<a href=https://www.secure-site.com/?store=parameters onclick="javascript:pageTracker._trackTrans(); return false; ">
+继续购买</a>`
+异步代码：
+`<a href=https://www.secure-site.com/?store=parameters onclick="javascript:_gaq.push(['_trackTrans']); return false; ">
+继续购买</a>`
+表单调用的例子：
+旧的ga.js：
+`<form action="http://www.secure-site.com/process.cgi" onSubmit="pageTracker._trackTrans()">`
+异步代码：
+`<form action="http://www.secure-site.com/process.cgi" onSubmit="_gaq.push(['_trackTrans'])">`
+需要说明的是，这种方法不是跟踪交易的完成，而仅仅是想要完成。访问者信用卡信息可能被拒绝或他们可能在完成支付前的最后一分钟改变了主意。无论什么原因，Google Analytics电子商务报告都将只是交易活动的参考，而不可能与第三方支付网关公司所提供的报告完全吻合。
+**使用页面回调（****Callback****）
+**如果可能的话，一个更好的方法是使页面从第三方网关回调到你的网站。回调是当访问者成功完成交易后返回到你的网站的页面。许多交易网关都提供这种功能。
+假如这个页面对访问者是不可见的，而不是通过一个回调，你依然可以在这一页上放置你的电子商务变量。即，它们是在你的掌握中，因为，这些回调页在你的网站上托管。这样，电子商务数据将以第三方网关公司较好的吻合。同样，你也能用回调的方法跟踪失败的交易。

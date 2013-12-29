@@ -1,0 +1,24 @@
+---
+author: cloga0216
+comments: true
+date: 2010-09-14 14:41:26+00:00
+layout: post
+slug: '%e7%94%a8%e8%99%9a%e6%8b%9f%e7%bb%bc%e5%90%88%e6%b5%8f%e8%a7%88%e9%87%8f%e8%b7%9f%e8%b8%aa%e6%96%87%e4%bb%b6%e4%b8%8b%e8%bd%bd'
+title: 用虚拟综合浏览量跟踪文件下载
+wordpress_id: 389
+tags:
+- 虚拟综合浏览量
+---
+
+默认情况下，Google Analytics将不会跟踪你的文件下载（例如PDF、EXE、DOC、XLS和ZIP），因为，这些页面并不能用GATC标记。但是，用上面提到的虚拟综合浏览量技术，修改页面上的下载链接可以轻松的这些。
+下面是一个例子，修改的是你页面中的链接，而不是GATC。这是一个不能被跟踪的原始的HTML：
+`<a href="mydoc.pdf">下载PDF</a>`
+这是在虚拟的/download目录跟踪的新页面：
+旧的ga.js：
+`<a href="mydoc.pdf"
+onclick="pageTracker._trackPageview('/downloads/mydoc.pdf');">
+下载PDF</a>`
+异步代码：
+`< a href="mydoc.pdf"
+onclick="_gaq.push(['_trackPageview','/downloads/pdfs/corporateBrief.pdf']);">
+下载PDF</a>`

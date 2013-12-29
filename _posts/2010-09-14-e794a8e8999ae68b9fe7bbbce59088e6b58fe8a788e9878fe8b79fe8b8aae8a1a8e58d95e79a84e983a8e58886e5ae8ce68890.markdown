@@ -1,0 +1,44 @@
+---
+author: cloga0216
+comments: true
+date: 2010-09-14 14:51:45+00:00
+layout: post
+slug: '%e7%94%a8%e8%99%9a%e6%8b%9f%e7%bb%bc%e5%90%88%e6%b5%8f%e8%a7%88%e9%87%8f%e8%b7%9f%e8%b8%aa%e8%a1%a8%e5%8d%95%e7%9a%84%e9%83%a8%e5%88%86%e5%ae%8c%e6%88%90'
+title: 用虚拟综合浏览量跟踪表单的部分完成
+wordpress_id: 391
+tags:
+- 虚拟综合浏览量
+---
+
+也能用虚拟综合浏览量来跟踪表格的部分完成。特别是你有一个特别长（十多个域）或多页的表格时，这非常有用，比如，一个注册表或者反馈调查表。用虚拟综合浏览量你能看到访问者在到达提交按钮前在哪里退出了。通过渠道可视化可以做到这一点，如第5章“报告解释”的“目标与渠道报告”部分所述。
+为了达到这一目的，用下面onblur事件处理程序来修改你的HTML表单域：
+旧的ga.js：
+`<form action="cgi-bin/formhandler.pl" method="post" name="theForm">
+<input type="text" name="firstname" onBlur="if(document.theForm.firstname.value !='');
+pageTracker._trackPageview('/forms/signup/firstname')">
+<input type="text" name="lastname" onBlur="if(document.theForm.lastname.value !='');
+pageTracker._trackPageview('/forms/signup/lastname')">
+<input type="text" name="dob" onBlur="if(document.theForm.dob.value != '');
+pageTracker._trackPageview('/forms/signup/dob')">
+<input type="text" name="address1" onBlur="if(document.theForm.address1.value != '');
+pageTracker._trackPageview('/forms/signup/address1')">
+.
+.
+.
+</form>`
+异步代码：
+`<form action="cgi-bin/formhandler.pl" method="post" name="theForm">
+<input type="text" name="firstname" onBlur="if(document.theForm.firstname.value != '');
+_gaq.push(['_trackPageview','/forms/signup/firstname'])">
+<input type="text" name="lastname" onBlur="if(document.theForm.lastname.value != '');
+_gaq.push(['_trackPageview','/forms/signup/lastname'])”>
+<input type="text" name="dob" onBlur="if(document.theForm.dob.value != '');
+_gaq.push(['_trackPageview','/forms/signup/dob'])">
+<input type="text" name="address1" onBlur="if(document.theForm.address1.value != '');
+_gaq.push(['_trackPageview','/forms/signup/address1'])">
+.
+.
+.
+</form>`
+包含If()!=''语句是为了在创建一个事件之前，确定每一表单域都有内容。当然，并不是每一个表单域都是必填的，请恰当的使用if语句。
+**警告：**在这个例子中的虚拟综合浏览量跟踪的是确定一个域是否完成标签——并不是访问者提交的信息。跟踪个人可识别信息违反Google Analytics的服务条款。更多的信息请看：[www.google.com/analytics/tos.html](http://www.google.com/analytics/tos.html)。

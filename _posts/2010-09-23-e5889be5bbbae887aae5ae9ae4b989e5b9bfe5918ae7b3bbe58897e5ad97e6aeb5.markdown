@@ -1,0 +1,46 @@
+---
+author: cloga0216
+comments: true
+date: 2010-09-23 12:24:03+00:00
+layout: post
+slug: '%e5%88%9b%e5%bb%ba%e8%87%aa%e5%ae%9a%e4%b9%89%e5%b9%bf%e5%91%8a%e7%b3%bb%e5%88%97%e5%ad%97%e6%ae%b5'
+title: 创建自定义广告系列字段
+wordpress_id: 465
+tags:
+- 广告系列
+---
+
+如果你在使用另一种跟踪方法或工具，那么你可能已经为付费广告系列、banner、email和数字抵押品手动标记了着陆页的URL。与其不管这些标记或者额外再添加Google Analytics变量，不如，设置Google Analytics识别你现有的标记，这是可行的。如前所述，AdWords跟踪不需要这样。
+添加下面高亮的代码到你的GATC，用你正在使用的变量名代替orig_name。如果初始值不存在，那么在你的GATC中忽略那一行。
+旧的ga.js：
+`<script type=”text/javascript”>
+var gaJsHost = ((“https: “ == document.location.protocol) ? “https://ssl.” : “http://www. “);
+document.write(unescape(“%3Cscript src=’” + gaJsHost + “google-analytics.com/ga.js’ type=’text/javascript’%3E%3C/script%3E”));
+</script>
+<script type=”text/javascript”>
+try{
+var pageTracker = _gat._getTracker(“UA-12345-1”);
+**pageTracker._setCampNameKey(“orig_campaign”);        // 默认: utm_campaign
+pageTracker._setCampMediumKey(“orig_medium”);        // 默认: utm_medium
+pageTracker._setCampSourceKey(“orig_source”);        // 默认: utm_source
+pageTracker._setCampTermKey(“orig_term”);            // 默认: utm_term
+pageTracker._setCampContentKey(“orig_content”);        // 默认: utm_content**``
+pageTracker._trackPageview();
+}catch(err) {}</script>`
+异步代码：
+`<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-12345-1']);
+**_gaq.push([‘_setCampNameKey’,’ orig_campaign’]);        // 默认: utm_campaign
+_gaq.push([‘_setCampMediumKey’,’orig_medium’]);        // 默认: utm_medium
+_gaq.push([‘_setCampSourceKey’,’orig_source’]);        // 默认: utm_source
+_gaq.push([‘_setCampTermKey’,’orig_term’]);            // 默认: utm_term
+_gaq.push([‘_setCampContentKey’,’orig_content’]);        // 默认: utm_content**
+_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElemen•t('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>`
+至少，需要orig_source和orig_medium。（Cloga：这与工具网站构建器一样。）如果你的着陆页URL没有这些变量，那么你需要包含相应的Google Analytics变量。

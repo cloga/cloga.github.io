@@ -1,0 +1,16 @@
+---
+author: cloga0216
+comments: true
+date: 2011-09-12 11:16:03+00:00
+layout: post
+slug: '%e8%87%aa%e5%ae%9a%e4%b9%89%e6%8a%a5%e5%91%8a-gaiq%e5%9c%a8%e7%ba%bf%e8%af%be%e7%a8%8b%e4%b8%ad%e6%96%87%e5%ad%97%e5%b9%95'
+title: 自定义报告-GAIQ在线课程中文字幕
+wordpress_id: 1289
+categories:
+- GAIQ在线课程中文字幕
+tags:
+- GAIQ
+- 自定义报告
+---
+
+

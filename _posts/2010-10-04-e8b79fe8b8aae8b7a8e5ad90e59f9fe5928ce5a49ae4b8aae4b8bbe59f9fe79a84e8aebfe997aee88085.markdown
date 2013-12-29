@@ -1,0 +1,122 @@
+---
+author: cloga0216
+comments: true
+date: 2010-10-04 11:10:38+00:00
+layout: post
+slug: '%e8%b7%9f%e8%b8%aa%e8%b7%a8%e5%ad%90%e5%9f%9f%e5%92%8c%e5%a4%9a%e4%b8%aa%e4%b8%bb%e5%9f%9f%e7%9a%84%e8%ae%bf%e9%97%ae%e8%80%85'
+title: 跟踪跨子域和多个主域的访问者
+wordpress_id: 539
+tags:
+- 二级域名
+- 多域
+---
+
+有这样一种特殊情况，访问者在访问中跨越了子域及第三方域。请看下面的例子：
+•访问者来到www.mysite.com。
+•接着访问者点击了到blog.mysite.com。
+•然后，访问者决定购买一个产品，因此，点击了购物车链接，这个链接将它们发送到www.shoppingcart.com/widgets。
+正确跟踪这种情况需要两个不同的GATC——一个是包含子域的“主”站，另一个是第三方网站。在你的主站中，使用下列修改过的GATC：
+旧的ga.js：
+`<script type=”test/javascript”>
+var gaJsHost=((“https:”==document.location.protocol)? https://ssl”:”http://www.”);
+document.write(unescape(%3Cscript src=’”+gaJsHost+”google-analytics.com/ga.js’ type=’test/javascript’%3E%3C/script%3E”));
+</script>
+<script type=”test/javascript”>
+try{
+var pageTracker=_gat._getTracker(“UA-12345-1”);
+**pageTracker._setDomainName(“.mysite.com”);
+pageTracker._setAllowLinker(true);
+pageTracker._setAllowHash(false);**
+pageTracker._trackPageview();
+} catch(err) {}</script>`
+<!-- more -->异步代码：
+`<script type=”test/javascript”>
+var _gaq=_gaq || [];
+_gaq.push([‘_setAccount’,UA-12345-1’]);
+**_gaq.push([‘_setDomainName’,'.mysite.com’]);
+_gaq.push([‘_setAllowLinker’,true]);
+_gaq.push([‘_setAllowHash’,false]);**
+_gaq.push([‘_trackPageview’]);
+(function() {
+Var ga=document.createElement(‘script’);ga.type=’test/javascript’;ga.async=true;
+ga.src=(‘http:’==document.location.protocol?’https://ssl’:’http://www’)+’.googal-analytics.com/ga.js’;
+var s=document.getElementByTagName(‘script’)[0];
+s.parentNode.insertBefore(ga,s);
+})();`
+请注意使用_setAllowHash(false)是为了cookie在这种情况下是通用的。
+在第三方网站www.shoppingcart.com/widgets上，像跨域跟踪一样修改GATC。这在前面给出过，为了保持一致性，下面再给出一次：
+旧的ga.js：
+`<script type=”test/javascript”>
+Var gaJsHost=((“https:”==document.location.protocol)?”https://ssl.”:”http://www.”);
+Document.write(unescape(“%3Cscript src=’”+gaJsHost+”google-analytics.com/ga.js’ type=’test/Javascript’ %3E%3C/script%3E”));
+</script>
+<script type=”test/javascript”>
+try{
+var pageTracker=_gat.getTracker(“UA-12345-1”);
+**pageTracker._setDomainName(“none”);
+pageTracker._setAllowLinker(true);**
+pageTracker._trackPageview();
+}catch(err) {}</script>
+`异步代码：
+`<scripr type=”test/javascript”>
+var _gaq=_gaq || [];
+**_gaq.push([‘_setDomainName’,’none’]);
+_gaq.push([‘_setAllowLinker’,true]);**
+_gaq.push([‘_trackPageview’]);
+(function() {
+var ga=document.creatElement(‘script’;ga.type=’test/javascript’;ga.async=true;
+ga.src=(’https:’==document.location.protocol ? ‘https://ssl’ : ‘http://www’) + ’.google-analytics.com/ga.js’;
+var s=document.getElementByTagName(‘script’)[0];
+s.paretNode.insertBefore(ga,s);
+})();
+</script>`
+**将cookie数据限制在一个子目录**
+在默认情况下，你的域中的所有页都能查看Google Analytics的第一方cookie。如果你想要在一个子目录使用这些cookie——例如，当你只拥有一个主域的一个子目录时——你能用_setCookiePath()函数在GATC中设置首选的路径。
+旧的ga.js：
+`<script type=”text/javascript”>
+var gaJsHost = ((“https:” == document.location.protocol) ? “https://ssl.” : “http://www. “);
+document.write(unescape(“%3Cscript src=’” + gaJsHost + “google-analytics.com/ga.js’ type=’text/javascript’%3E%3C/script%3E”));
+</script>
+<script type=”text/javascript”>
+try {
+var pageTracker = _gat._getTracker(“UA-12345-1”);
+**pageTracker._setCookiePath(“/path/of/cookie/”);**
+pageTracker._trackPageview();
+} catch(err) {}</script>`
+异步代码：
+`<scripr type=”test/javascript”>
+var _gaq=_gaq || [];
+**_gaq.push([‘_setCookiePath’,'/path/of/cookie/’]);**
+_gaq.push([‘_trackPageciew’]);
+(function() {
+var ga=document.creatElement(‘script’;ga.type=’test/javascript’;ga.async=true;
+ga.src=(’https:’==document.location.protocol ? ‘https://ssl’ : ‘http://www’) + ’.google-analytics.com/ga.js’;
+var s=document.getElementByTagName(‘script’)[0];
+s.paretNode.insertBefore(ga,s);
+})();
+</script>`
+将现有的cookie复制到其他子目录，可以使用_cookiePathCopy()函数，如下所示：
+旧的ga.js：
+`<script type=”text/javascript”>
+var gaJsHost = ((“https:” == document.location.protocol) ? “https://ssl.”: “http://www. “);
+document.write(unescape(“%3Cscript src=’” + gaJsHost + “google-analytics.com/ga.js’ type=’text/javascript’%3E%3C/script%3E”));
+</script>
+<script type=”text/javascript”>
+try {
+var pageTracker = _gat._getTracker(“UA-12345-1”);
+pageTracker._trackPageview();
+**pageTracker._cookiePathCopy(“/new/path/for/cookies/”);**
+} catch(err) {}</script>`
+异步代码：
+`<scripr type=”test/javascript”>
+var _gaq=_gaq || [];
+_gaq.push([‘_setDomainName’,’none’]);
+**_gaq.push([‘_cookiePathCopy’,'/new/path/for/cookie/’]);**
+_gaq.push([‘_trackPageciew’]);
+(function() {
+var ga=document.creatElement(‘script’;ga.type=’test/javascript’;ga.async=true;
+ga.src=(’https:’==document.location.protocol ? ‘https://ssl’ : ‘http://www’) + ’.google-analytics.com/ga.js’;
+var s=document.getElementByTagName(‘script’)[0];
+s.paretNode.insertBefore(ga,s);
+})();
+</script>`

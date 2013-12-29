@@ -1,0 +1,40 @@
+---
+author: cloga0216
+comments: true
+date: 2011-07-03 09:42:20+00:00
+layout: post
+slug: ga-v5%e5%b0%8f%e6%8a%80%e5%b7%a7-%e4%bb%8e%e7%95%8c%e9%9d%a2%e4%b8%ad%e5%af%bc%e5%87%ba%e8%b6%85%e8%bf%87500%e6%9d%a1%e8%ae%b0%e5%bd%95
+title: GA V5小技巧-从界面中导出超过500条记录
+wordpress_id: 1222
+categories:
+- Digital分析
+tags:
+- GA
+- V5
+---
+
+在旧版的GA中导出超过500条记录，大家应该都比较熟悉了：在报告的url后面添加limit参数指定需要导出的数据量。其实V5也提供类似的功能，或许应该说是更强大的功能。
+
+从这个功能上的对比，我们可以看到 V5版的GA在性能上也有很大的提升，在旧版的GA中，即使通过limit参数，单次能导出的数据上限是20000，而在V5版中，单次可以导出数据的上限扩展为50000。
+
+与旧版的GA修改导出数据的上限的方式一致，我们需要修改URL代表数据上限的参数。
+
+首先，进入你希望导出数据的报告，这里我使用的报告是内容>网站内容>页面，我们得到了这样的URL：https://www.google.com/analytics/web/?hl=zh_cn#report/content-pages/a18159656w36598318p36050032/
+
+这个URL没有我们需要的参数，只是标识了我们所在的位置report/content-pages/，让我们选择一下，报告表单右下角的显示行数，比如说改为25行。<!-- more -->
+
+我们得到了这样一个URL：https://www.google.com/analytics/web/?hl=zh_cn#report/content-pages/a7874902w16105261p41476608/%3Fexplorer-table.rowStart%3D0%26explorer-table.rowCount%3D25/
+
+注意这个URL中的explorer-table.rowCount%3D25，这个参数就代表了当前页面中显示的数据的上限，我们可以将它改为50000
+
+https://www.google.com/analytics/web/?hl=zh_cn#report/content-pages/a7874902w16105261p41476608/%3Fexplorer-table.rowStart%3D0%26explorer-table.rowCount%3D50000/
+
+敲一下回车，页面将重新加载。这个时间会比较长，想一下，50000条数据可能有几M，比如3M，如果你是1M的宽带的话，满负载下载的速度是125K/s，这个过程需要24S。
+
+数据显示出来后，点击左上的导出标签中的csv，导出csv格式的数据。这里有一个小技巧是，导出的csv文件无法直接用excel打开，直接打开会显示为乱码。请先用记事本打开，另存一下，另存的时候，编码选择ANSI。再用excel打开就是正常的中文了。
+
+这里显示了V5版本与旧版的一个改进，通过这种方式改变的不仅是导出数据的量，界面上显示的数据上限也发生了改变，即你在界面上看到的数据量也会变成50000。
+
+如果你需要的数据超过50000条的话，怎么办？（尽管很少有网站有这么大的数据量。）一种方式是在报告界面的右下方的转到输入50001；还有一种方式是修改URL中的explorer-table.rowStart这个参数，这个参数代表的是页面开始显示的记录序号，如果你需要显示50001条之后的数据，请将这个数据修改为50000，因此，这个序列号是从0开始的。
+
+这个小技巧就介绍到这里，如果您有什么疑问，欢迎给我留言~

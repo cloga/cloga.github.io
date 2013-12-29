@@ -1,0 +1,96 @@
+---
+author: cloga0216
+comments: true
+date: 2012-06-27 16:29:41+00:00
+layout: post
+slug: '%e8%87%aa%e5%8a%a8%e6%a0%87%e8%ae%b0%e6%89%80%e9%9c%80%e8%a6%81%e7%9a%84%e4%ba%92%e5%8a%a8-%e5%82%bb%e7%93%9c%e7%ba%a7ga%e8%87%aa%e5%8a%a8%e6%a0%87%e8%ae%b0%e6%9c%8d%e5%8a%a1skyglue'
+title: 自动标记所需要的互动-傻瓜级GA自动标记服务SKYGLUE
+wordpress_id: 1564
+categories:
+- GA的JS扩展
+tags:
+- skyglue
+- tag management
+---
+
+作为一名Digital分析师，相信你遇到过以下这些情景：
+
+
+
+	
+  * 制作好的Tracking Plan，由于Campaign Site Layout的变化，要临时加班修改
+
+	
+  * 客户关心的一些交互数据，由于Tracking Plan的不完善而无法提供
+
+	
+  * 一些很小的tag修改，却被技术告知要等到下周更新新版本时才能上线
+
+
+有了自助式自动标记服务以上的问题都迎刃而解。
+
+网站分析工具的实施即标记页面是Digital分析师的主要工作之一。页面标签方式的网站分析工具（比如GA）的出现使分析师只需要在页面上添加简单的几行JS就可以捕捉到基本的网站分析数据（Visit、PV、Avg. Time On Site等），但是，对于一些自定义的交互还是需要分析师进行一些自定义标记，比如监测站内Banner的click数据，表单的填写情况，外链的点击情况，白皮书的下载情况等等。Tag Management System（比如[Tag Man](http://www.tagman.com/ )、[Tealium Universal Tag](http://www.tealium.com/)）进一步提升了分析师对Tag的掌控能力，分析师可以通过统一的后台对不同的页面使用不同的Tracking Code，而不需要麻烦IT同学，但是对于页面上一些自定义交互事件的标记还没很好的一个解决方案。
+
+一次偶然的机会我在Yahoo 的WAW Group里，看到有同学提到SkyGlue，它提供了GA的自动标记服务。其实GA的自动标记服务有很多，比如[![](http://cdnwebsite.skyglue.com/wp-content/uploads/2012/05/pyramid_0501_trans.png)](www.skyglue.com)[Brian大叔](http://www.advanced-web-metrics.com/blog/auto-tracking-file-downloads-outbound-links/)就提供过免费和付费的GA 自动标记脚本，[Justin同学](http://cutroni.com/blog/)也有类似的解决方案，甚至Google也有类似的脚本提供，感兴趣的同学可以看一下[AdWords Campaign Landing Page](https://www.google.com/appserve/fb/forms/cnawcoupon1000/)中的[autotrack.js](https://www.google.com/js/gweb/analytics/autotrack.js)，这里要感谢[肖庆同学](http://xiaoq.in/)，提供了这个非常有价值的信息。总的来说，这些自动跟踪的脚本都是很优秀的。但是，这些脚本基本上都是针对a标签的左键click事件进行跟踪，Google提供的autotrack还会额外记录HeatMap数据，只是目前目前还无法利用这些热图数据，同时要使用或修改这些脚本需要有一定JS基础，比如增加对button、img或者input事件的支持等。
+
+而SkyGlue则很好的解决了易用性问题，只需要在页面上添加一段JS，即可以自动的跟踪页面上对几乎是任意Dom元素的跟踪，Iframe、Flash都可以跟踪。同时，可以在他们的后台中对页面可跟踪的Dom指定名称，即使你是一个JS小白，也可以方便的完成对页面上复杂交互的GA部署。其实对页面上交互所有Dom元素的click事件都已经自动标记，你所需做的是在后台为重要的交互起一个有<!-- more -->意义的名字。
+
+下面让我们一起来了解一下这个傻瓜级产品，看看它能为我们的工作提供哪些帮助。
+
+在他们的官网上www.skyglue.com，可以看到这款产品的卖点被归结为4点：自动标记、个体行为跟踪、Dashboard（看截图很漂亮，只是在国内因为众所周知的原因无法使用）、智能分组。
+
+账号的注册比较简单，可以直接使用Google账号，产品的价格是按照PV来收费，有一个月的试用期。对于国内的用户来说，一个比较麻烦的地方时需要使用Master或者Visa的信用卡才可以支付。
+
+后台的界面比较简洁主要有这个部分：Dashboard、安装SkyGlue、自定义跟踪事件、用户行为报告。
+
+下面我们来看一下标签自定义设置的截图。
+
+[caption id="attachment_1564" align="aligncenter" width="681"][![SnapShot](http://www.cloga.info/wp-content/uploads/2012/06/123.png)](http://www.cloga.info/wp-content/uploads/2012/06/123.png) 页面标签设置截图[/caption]
+
+
+其中绿色虚线的部分为可以自动标记的元素，比如页面上的所有链接，页面上的所有图片，页面上输入框，甚至页面上的Iframe以及嵌入的Flash都是可以自动标记。你可以点击任意一个元素，弹出框中会显示这个元素能否被自动跟踪，以及跟踪的名称，同时可以修改这个默认的名称，比如在上例中，我将对新浪微博这个Iframe的点击事情命名为MicroBlog，自定义之后的元素会有绿色实线标注，以便与自动标记区分开。**温馨提示：监测在线客服点击事件的需求，可以很方便的实现。**
+
+
+
+
+目前实现自定义跟踪流程还是有一些繁琐，用户需要在setup页面找到要修改名称的元素，如果元素有id或name，则只需填入id或name即可修改名称，如果没有的话，则需要根据tag和其一个唯一的属性来定义这个元素。我使用过[Adgrok](http://adgrok.com/grok-o-matic/)（已经被Tweeter收购）的服务，他们提供AdWords投放自助服务，也是使用类似浮层来提高易用性，给用户以所见即所得的用户体验。我想如果SkyGlue能够将自定义跟踪的部分就在Setup模式下完成，而不是Setup模式只是一个查看标签属性的地方。
+
+
+
+
+也许有一天大的WA工具提供商也会提供类似的标记方式，那么也许广大的WA实施工程师将面临失业的可能。
+
+
+
+
+目前SkyGlue只支持将Click事件跟踪为Event，无法指定为虚拟的页面浏览，同时也不支持自定义变量的设置，目前，GA的Event还是有一定的局限性，无法用于渠道可视化和目标流，从这个意义上来说一些click事件跟踪为虚拟页面浏览还是有一定意义的。相信，在不远的将来GA会将事件与页面浏览整合为交互。
+
+
+
+
+当然在目前想要完全实现自动标记还不太现实，毕竟国内大部分交互的Campaign site还是使用Flash进行制作，让我们一起祈祷那些老掉牙的浏览器早日在国内消亡吧~
+
+
+
+
+看完了部署，我们再来看一下实际的跟踪数据：
+
+
+
+
+[caption id="attachment_1565" align="aligncenter" width="705"][![Tracking Data](http://www.cloga.info/wp-content/uploads/2012/06/23333.png)](http://www.cloga.info/wp-content/uploads/2012/06/23333.png) 跟踪数据[/caption]
+
+
+从上面数据可以看到，数据的层次非常清晰，区分了URL、Click这些事件，同时可以发现对于图片和Flash都可以监测到数据。
+
+
+
+
+下面我们再来看一下用户报告，这个功能是可以查看单个访问者的点击流数据。访问者的UID是由SkyGlue生成的，不同于utma cookie中存储的UID，通过GA的自定义变量5来存储，因此，在使用之前，你需要将自定义变量5空出来。这对于研究用户行为（正常行为与作弊行为）有重要的意义。
+
+
+
+
+[caption id="" align="aligncenter" width="760"]![UserReport](http://cdnwebsite.skyglue.com/wp-content/uploads/2012/06/smart_segment_760.png) 用户报告的数据[/caption]
+
+好了，以上就是自助式GA自动标记服务SkyGlue的一个简单介绍，如果你想要体验这个功能，那么马上访问[www.skyglue.com](http://www.skyglue.com)开始试用吧！

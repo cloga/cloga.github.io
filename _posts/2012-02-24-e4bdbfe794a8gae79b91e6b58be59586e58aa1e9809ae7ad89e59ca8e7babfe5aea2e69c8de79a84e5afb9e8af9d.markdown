@@ -1,0 +1,129 @@
+---
+author: cloga0216
+comments: true
+date: 2012-02-24 05:35:57+00:00
+layout: post
+slug: '%e4%bd%bf%e7%94%a8ga%e7%9b%91%e6%b5%8b%e5%95%86%e5%8a%a1%e9%80%9a%e7%ad%89%e5%9c%a8%e7%ba%bf%e5%ae%a2%e6%9c%8d%e7%9a%84%e5%af%b9%e8%af%9d'
+title: 使用GA监测商务通等在线客服的对话
+wordpress_id: 1446
+categories:
+- GA的JS扩展
+tags:
+- GA
+- 在线客服
+---
+
+[caption id="" align="alignright" width="260" caption="在线客服"]![](http://www.hqzxt.com/uploadfile/2009/0701/20090701102057314.jpg)[/caption]
+
+**一、为什么要使用GA监测商务通等在线客服的对话数？**
+
+主要是为了有效的区分对话的来源。本来呢，这个事情应该是在线客服服系统去做。如果想要有效的区分一个流量的来源，需要Landing page URL和referer配合才可以。目前大部分在线客服系统对这方面的支持都不是那么好，而对于GA等网站分析工具，在区分流量来源这方面做的则比较好。因此，产生了这样的需求，用GA来跟踪在线客服的对话数。
+
+**二、跟踪的基本思路**
+
+这个的跟踪思路其实与出站点击、文件下载的思路一致，就是在点击对话窗口时运行[_trackPageview](http://www.cloga.info/archives/1392.html)或者_trackEvent记录下来就可以了。但是，有一点不同是，对话窗口一般都是通过JS动态输出的，因此，我们需要通过在Dom树上查找到对应的元素，并添加事件监听，当用户点击对话按钮时，则调用_trackPageview或者_trackEvent记录。
+
+这里比较麻烦的是从Dom树里找到要监听onclick事件的对象。<!-- more -->
+
+**三、具体的跟踪实例**
+
+先介绍一个函数，这个是在[Justin](http://cutroni.com/blog/)那里看来的。
+
+    
+    function startListening (obj,evnt,func) {
+    　　if (obj.addEventListener) {
+    　　　　obj.addEventListener(evnt,func,false);
+    　　} else if (obj.attachEvent) {
+    　　　　obj.attachEvent("on" + evnt,func);
+    　　}
+    }
+
+
+这个主要是用来搞定浏览器兼容性。
+
+这里有三个参数：
+
+obj：要添加事件监听的对象。
+
+event：要监听的事件，不需要写on。
+
+func：捕捉到事件后要运行的函数。这里要注意的是，func只需要写函数名，而不需要()，其含义是当对应事件发生了，运行函数，而不是函数的结果。
+
+这个函数还有许多用途，比如监测页面内所有链接的点击情况，跟踪出站链接等等。
+
+接下来首先是找到要监听的事件对象。
+
+这里我以商务通为例。我们要做的是监测[![](http://evercare.zoosnet.net/js/qx_Orange/a_cn.gif)](javascript:void(0)) [![](http://evercare.zoosnet.net/js/qx_Orange/r_cn.gif)](javascript:void(0)) 这两个按钮的点击，首先，我用firebug查看输出的对话窗口，找到这两个图片所在的位置。<table id="LR_Tb4" align="center" cellspacing="0" cellpadding="0" style="WIDTH: 400px; HEIGHT: 104px;border:0;margin:0; padding:0;">，输入这个table下面的两个a标签。
+`var table1=document.getElementById("LR_Tb4")
+var links=table1.getElementsByTagName("a")`
+通过ID和tagName我们定位了这两个a标签。
+
+接下来就是定义要运行的函数。
+
+    
+    function textacc(){
+    　　alert("接受")
+    　　_gaq.push(['_trackPageview','/商务通/接受']);
+    }
+    function textre(){
+    　　alert("拒绝")
+    　　_gaq.push(['_trackPageview','/商务通/拒绝']);
+    }
+
+
+为了测试，我添加了两个alert。
+
+最后，是为这两个按钮添加事件监听，当按钮发生点击事件时，调用对应的函数。
+
+    
+    startListening(links[0],"click",textacc);
+    startListening(links[1],"click",textre);
+
+
+至此，基本的监测代码就完整了。
+
+最后一步就是在GA中定义对应目标了。关于[目标的相关文章](http://www.cloga.info/archives/tag/goal)
+
+**四、一些注意事项**
+
+1、在线客服系统提供多种咨询图标，不同的咨询图标，需要监听的对象不同，比如，我看到的商务通，有两种图标。
+
+2、商务通系统的加载比较慢，为避免由于商务通加载未成功而造成的错误，可以将这些监测代码作为一个函数，在window onload完成的时候去运行。
+
+3、这种方式只能监测用户是否点击咨询按钮，但是，无法确定是否是有效咨询。
+
+4、如果在线客服使用的是Flash形式，这种方法无效。
+
+**五、完整的代码示例**
+
+    
+    function trackChat(){
+    　　if (document.getElementById("LR_Tb4")){
+    　　　　var table1=document.getElementById("LR_Tb4")
+    　　　　var links=table1.getElementsByTagName("a")
+    　　　　startListening(links[0],"click",textacc);
+    　　　　startListening(links[1],"click",textre);
+    　　}
+    　　if (document.getElementById("LRfloater0")){
+    　　　　var _divchat=document.getElementById("LRfloater0")
+    　　　　var _imgchat=_divchat.getElementsByTagName("img")
+    　　　　startListening(_imgchat[1],"click",textacc);
+    　　}
+    }
+    startListening(window,"load",trackChat);
+    function startListening (obj,evnt,func) {
+    　　if (obj.addEventListener) {
+    　　　　obj.addEventListener(evnt,func,false);
+    　　} else if (obj.attachEvent) {
+    　　　　obj.attachEvent("on" + evnt,func);
+    　　}
+    }
+    function textacc(){
+    　　_gaq.push(['_trackPageview','/商务通/接受']);
+    }
+    function textre(){
+    　　_gaq.push(['_trackPageview','/商务通/拒绝']);
+    }
+
+
+关于用GA监测在线客服的对话量就介绍到这里，如果您有关于这方面的问题欢迎给我留言。

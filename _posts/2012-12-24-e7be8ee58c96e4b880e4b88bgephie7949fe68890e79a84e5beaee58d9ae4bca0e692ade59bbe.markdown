@@ -1,0 +1,65 @@
+---
+author: admin
+comments: true
+date: 2012-12-24 03:20:30+00:00
+layout: post
+slug: '%e7%be%8e%e5%8c%96%e4%b8%80%e4%b8%8bgephi%e7%94%9f%e6%88%90%e7%9a%84%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e5%9b%be'
+title: 美化一下Gephi生成的微博传播图
+wordpress_id: 1809
+categories:
+- SNA
+tags:
+- gephi
+---
+
+在[新浪微博传播路径图的制作](http://www.cloga.info/2012/11/25/%e6%96%b0%e6%b5%aa%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e8%b7%af%e5%be%84%e5%9b%be%e7%9a%84%e5%88%b6%e4%bd%9c/)中介绍了微博传播图的制作。
+
+[caption id="attachment_1812" align="aligncenter" width="300"][![微博传播图-未美化前](http://www.cloga.info/wp-content/uploads/2012/12/Untitled-300x300.png)](http://www.cloga.info/2012/12/24/%e7%be%8e%e5%8c%96%e4%b8%80%e4%b8%8bgephi%e7%94%9f%e6%88%90%e7%9a%84%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e5%9b%be/untitled-2/) 微博传播图-未美化前[/caption]
+
+直接将DOT文件导入Gephi中并使用Yifan Hu Layout进行计算后会得出上面的图。在Gephi中进行一些简单的操作可以得到如下的图。
+
+[caption id="attachment_1813" align="aligncenter" width="300"][![微博传播图-美化后](http://www.cloga.info/wp-content/uploads/2012/12/Untitled1111-300x300.png)](http://www.cloga.info/2012/12/24/%e7%be%8e%e5%8c%96%e4%b8%80%e4%b8%8bgephi%e7%94%9f%e6%88%90%e7%9a%84%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e5%9b%be/untitled1111/) 微博传播图-美化后[/caption]
+
+<!-- more -->
+
+这里主要进行了以下几个操作：
+
+1、根据模块度将节点分组
+
+Overview的右侧的Statistics>Network Overview>Modularity
+
+计算完成后会显示这个网络的Modularty，比如这个网络的模块度是0.591，其中共有四个团体。
+
+[caption id="attachment_1816" align="aligncenter" width="173"][![Modularity](http://www.cloga.info/wp-content/uploads/2012/12/Modularity-173x300.png)](http://www.cloga.info/2012/12/24/%e7%be%8e%e5%8c%96%e4%b8%80%e4%b8%8bgephi%e7%94%9f%e6%88%90%e7%9a%84%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e5%9b%be/modularity/) Modularity[/caption]
+
+这时在左侧的Partition部分中选择Nodes，刷新Partition参数前的按钮，会出现Modularity，之前这个部分是空的。
+
+[caption id="attachment_1817" align="aligncenter" width="220"][![Partition](http://www.cloga.info/wp-content/uploads/2012/12/Partition-220x300.png)](http://www.cloga.info/2012/12/24/%e7%be%8e%e5%8c%96%e4%b8%80%e4%b8%8bgephi%e7%94%9f%e6%88%90%e7%9a%84%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e5%9b%be/partition/) Partition[/caption]
+
+点击Apply就可以为四个团体分配不同的颜色。如果对系统分配的颜色不满意，可以点击颜色进行自定义设置。
+
+2、为节点的标签分配不同权重以便安排不同的字体大小
+
+[caption id="attachment_1818" align="aligncenter" width="219"][![Ranking](http://www.cloga.info/wp-content/uploads/2012/12/Ranking-219x300.png)](http://www.cloga.info/2012/12/24/%e7%be%8e%e5%8c%96%e4%b8%80%e4%b8%8bgephi%e7%94%9f%e6%88%90%e7%9a%84%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e5%9b%be/ranking/) Ranking[/caption]
+
+选择Ranking>Nodes，Rank的参数选择OutDegree（即这个节点发出的边有多少）。Min size和Max size是指标签可以使用的字体范围。Range显示的是这个Graph中OutDegree的范围，即图中的节点最小的OutDegree是0，最大的OutDegree是11。点击Apply，刷新Preview即可查看对应的效果。
+
+3、选择背景的颜色
+
+在Preview右侧界面的左下选择Background，就可以指定你需要的背景颜色。
+
+[caption id="attachment_1819" align="aligncenter" width="148"][![Background](http://www.cloga.info/wp-content/uploads/2012/12/Background.png)](http://www.cloga.info/2012/12/24/%e7%be%8e%e5%8c%96%e4%b8%80%e4%b8%8bgephi%e7%94%9f%e6%88%90%e7%9a%84%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e5%9b%be/background/) Background[/caption]
+
+其他一些说明：
+
+[![Preview Settings](http://www.cloga.info/wp-content/uploads/2012/12/Preview-Settings.png)](http://www.cloga.info/2012/12/24/%e7%be%8e%e5%8c%96%e4%b8%80%e4%b8%8bgephi%e7%94%9f%e6%88%90%e7%9a%84%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e5%9b%be/preview-settings/)
+
+opacity是指不透明度，默认的透明度为100，如果字体较小或与节点的圆圈重合的比较严重可以将不透明度减小，甚至降至0。
+
+Noda Labels中的Show Labels是指显示节点的标签，在这个图中即是发微博的人的名称
+
+Noda Labels中的Font是指节点标签的字体，如果是中文标签请选择中文字体，不然会是乱码。
+
+Noda Labels中的Proportional size是指节点标签是否成比例，我们在前面选择了节点按照OutDegree分配大小，因此要勾选这一项。
+
+好了，快动手美化自己的Gephi图吧~

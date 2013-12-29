@@ -1,0 +1,52 @@
+---
+author: cloga0216
+comments: true
+date: 2010-09-08 13:29:55+00:00
+layout: post
+slug: '%e9%83%a8%e7%bd%b2gatc'
+title: 部署GATC
+wordpress_id: 339
+categories:
+- 默认
+tags:
+- 部署
+---
+
+接下来，你需要做的是在页面上放置GATC。如果你有一个只有为数不多页面相对较小的网站，那么，你可以将GATC复制粘贴到HTML中。或者，如果你使用模板或内容管理系统（CMS）建立自己的网站，那么你只需将GATC复制到主模板或顶部文件中。最佳位置是部分的底部，刚好在标签的前面。（Cloga：老版的ga.js的建议位置是刚好在</body>标签的前面）。
+标记好页面之后，你应该能在4个小时内看到你的数据。但是，对于一个新账户，可能需要等24小时，因此，请保持耐心！
+部署GATC的一个重要方面是必须将其粘贴到所有页面中。如第2章 “现有的方法及其准确性”中所述，遗漏页面标签是令人怀疑你的数据准确性的主要原因。除了不正确的访问者及综合浏览量之外，你还会发现，你的网站自身成为了引荐网站，完全丢失引荐网站信息，有一个明显过长或过短的网站停留时间和页面停留时间，不正常的跳出率及其他奇怪的现象。
+遗漏页面标签的比率越大，准确性越差。作为指南，我以98%的GATC部署率为目标。即，你的页面的98%应有GATC，以保证报告的效度。低于这一指标就需要研究。如果你的部署率低于90%，那么不要用你的报告打扰我——先解决这个问题。表6.1，列出了可用于GATC部署问题的工具。附录B列出了其他的问题排查工具。
+
+
+
+
+[![](http://www.cloga.info/wp-content/uploads/2010/09/6.1.bmp)](http://www.cloga.info/wp-content/uploads/2010/09/6.1.bmp)
+
+
+
+
+尽管拥有CMS是插入GATC的可靠方法，你仍需要确定GATC包含在所有新建页面中——不要经常认为这些是默认的——以及那些没有使用标准模板的页面。如果你没有内容管理系统，有许多替代的方法可以自动标记页面。这些方法中的两个是Apache的mod_layout及PHP的auto_append_file。
+mod_layout是Apache web服务器加载的一个模块（原则上与插件类似）。如果你使用Apache，那么让你开发团队或托管业务提供商从http://tangent.org安装mod_layout的可加载模块。实施成功后，Apache web服务器将自动在它所服务的每一个页面插入GATC。注意，这意味着每一个页面都实施了GATC，因此，你应该将那些不需要GATC的页面添加到排除规则中，比如robots.txt, cgi-bin文件等。
+mod_layout的完整介绍超出了本书的范畴，但是，下面的代码段给出了一个httpd.conf文件的设置例子。在这个例子中，忽略了两个文件类型（*.cgl和*.txt）,utm_GA.htm（GATC的内容——如图6.2）的文件内容将被插入在HTML页面中</head>标签的前面：
+
+
+`#mod_layout directives
+LayoutMergeBeginTag</head>
+LayoutIgnoreURI *.cgi
+LayoutIgnoreURI *.txt
+LayoutHeader /var/www/html/mysite.com/utm_GA.html
+LayoutMerge On`
+
+
+提醒：如果你的页面使用CAPTCHA方法（Cloga：学名叫全自动区分计算机和人类的图灵测试，超长超拗口，简称验证码，见[http://baike.baidu.com/view/538168.htm?fr=ala0_1_1](http://baike.baidu.com/view/538168.htm?fr=ala0_1_1)）产生的安全图片来保护网站避免自动表格提交，请检查你的安全图片仍能加载。如果无法加载，你可能需要从mod_layout排除调用安全图片的嵌入文件。
+如果你的页面是由PHP产生的（文件名以.php结束）,那么,你能使用auto_append_file指令。这个指令自动指定在主文件后解析的文件名。该文件就像调用了irequire()函数一样。这个指令能被包含在php.ini配置文件中（因此，应用到所有文件，并且保存在服务器上），或者更具体的说，在网站服务器根目录的.htaccess文件中，如下：
+
+
+`<IfModule mod_php5.c>
+php_value include_path “.:/usr/local/lib/php”
+php_value auto_append_file “/home/www/utm_GA.html”
+</IfModule>`
+
+用这种方法，文件utm_GA.html，包含GATC的文件，将被自动添加到PHP网站所有页面的标签的前面。请注意，定义utm_GA.html位置使用了完整路径。使用这种方法，没有其他设置的话所有的子目录也将受到GATC。如果你希望避免这种情况，请设置相对路径。
+注:因为auto_append_file仅适用于PHP文件，所有你不需要排除非PHP文件比如robots.txt。如果其他的文件类型需要GATC，你需要手动添加。你也没必要担心其他include的PHP文件收到两个页面标签。例如<?include(“/includes/navigation.php”);?>，如果你在页面中使用来构建你的导航栏，这些页面不会被标记。
+如果你是一个Wordpress用户，有一些可用的插件能帮你在页面中自动插入GATC。见：http://wordpress.org/extend/plugins/search.php?q=google+analytics。

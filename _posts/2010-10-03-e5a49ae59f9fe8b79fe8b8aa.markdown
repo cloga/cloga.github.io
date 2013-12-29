@@ -1,0 +1,92 @@
+---
+author: cloga0216
+comments: true
+date: 2010-10-03 15:41:55+00:00
+layout: post
+slug: '%e5%a4%9a%e5%9f%9f%e8%b7%9f%e8%b8%aa'
+title: 多域跟踪
+wordpress_id: 534
+tags:
+- 多域
+---
+
+前面的部分讨论了网络浏览器的内在安全机制禁止了与其他域共享第一方cookie。如果你的网站把访问者传到不同的主域，那么需要进行特殊的考虑。
+考虑下面的例子：你的主网站是www.mysite.com，你在不同的主域上托管地区变量（语言、货币等等），比如www.mysite.co.uk。两个网站都需要标记你的GATC。比方说，一个访问者通过点击[www.google.com](http://www.google.com)的搜索结果页的一个链接到达www.mysite.com。接着，他点击选择地域版本的选项来到了www.mysite.co.uk。然后在这个网站上完成了一次转化。
+**注：**Google Analytics不能跟踪在网络中的不相关的域跟踪访问者。只能跟踪那些你所拥有或掌管并能能够添加GATC的域。
+默认情况下，在www.mysite.co.uk转化的访问者将被报告为从www.mysite.com引入的访问者。丢失了最初的推介信息（[www.google.com](http://www.google.com)搜索及相关关键词），因为，cookie信息并能跟着访问者到第三方域。这种情况与前面对子域跟踪的所描述的情况类似。<!-- more -->
+如果这两个网站有单独的Google Analytics配置文件，那么所有的页面指标（网站停留时间、浏览深度、跳出率等等）将分开计算——在这个例子中，www.mysite.com有一个单页访问（跳出），www.mysite.co.uk有一个x-1页的访问。又或者说，如果你在将两个网站的数据收集到一个配置文件中（即，你在两个域使用一个GATC），那么，www.mysite.com上被夸大的单一页面访问将歪曲你的页面指标。很显然，这种结果不是你想要的。
+跟踪跨越多个网站的访问者的解决方案是通过在多个域之间传递cookies来保留session。有两种方法可以达到这一目的，这取决于你的如何把访问者传递到其他域——通过连接还是表格提交。这些与前面所讨论的相同（见“电子商务跟踪——使用第三方支付网关”），因为，在这两种情况下，第一方cookies都需要传递到第三方域。
+无论你使用什么方法，你都需要修改访问者在一个域的离开页以及另一个域的进入页。在给出的例子中，分别是www.mysite.com和www.mysite.co.uk的主页。但是，在这种情境中，在多个页面间发生这种情况是很常见的。因此，我建议修改所有域的所有页面的GATC，以确保访问者跟踪的一致性。所需要的修改如下面突出显示的代码所示：
+旧的ga.js：
+`<script type=”text/javascript”>
+var gaJsHost = ((“https: “ == document.location.protocol) ? “https://ssl.” : “http://www. “);
+document.write(unescape(“%3Cscript src=’” + gaJsHost + “google-analytics.com/ga.js’ type=’text/javascript’%3E%3C/script%3E”));
+</script>
+<script type=”text/javascript”>
+try {
+var pageTracker = _gat._getTracker(“UA-12345-1”);
+**pageTracker._setDomainName(“none”);
+pageTracker._setAllowLinker(true);**
+pageTracker._trackPageview();
+} catch(err) {}</script>
+`异步代码：
+`<script type="text/javascript">
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-12345-1']);
+**_gaq.push([‘_setDomainName’,‘none’]);
+_gaq.push([‘_setAllowLinker’,true]);
+**_gaq.push(['_trackPageview']);
+(function() {
+var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') +'.google-analytics.com/ga.js';
+var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+})();
+</script>`
+pageTracker._setDomainName(“none”)（旧的ga.js）或_gaq.push([‘_setDomainName’,’none’])（异步代码）强行将域_utm cookie的哈希值设置为“1”，是它能通用于相关的任何域，并且将cookie的主机设置为当前的URL主机。接下来的一行，pageTracker._setAllowLinker(true)（旧ga.js）或_gaq.push([‘_setDomainName’,true])（异步代码），允许cookie名值对被传送或接收。
+与子域跟踪相似，通过从配置文件的“检查状态”区域选择“多个顶级域”可以自动做出这些详细的GATC修改，如图7.14所示。
+
+
+[![](http://www.cloga.info/wp-content/uploads/2010/10/7-14.bmp)](http://www.cloga.info/wp-content/uploads/2010/10/7-14.bmp)
+
+
+
+
+ 图7.14  跨域跟踪的GATC
+
+
+修改完你的页面后，接着需要修改访问者用来在多个域之间穿梭的链接或表格，如下面所述。
+**方法一：跟踪使用链接的跨域访问者**
+当你使用标准的超链接将一个访问者从一个域传递到另一个域时，使用这种方法。在你的网页内，修改所有到其他域的链接如下：
+旧的ga.js：
+`<a href=”http://www.mysite.co.uk” onClick=”pageTrack._link(‘http://www.mysite.con.uk/’);return false;”>
+到我们的英国站</a>
+`异步代码：
+`<a href=”http://www.mysite.co.uk” onClick=”_gaq.push([‘_link’,’http://www.mysite.com’])”;return false;”>
+到我们的英国站</a>`
+这种方法通过在URL字符串后添加Google Analytics cookies，将它们“推送到”接受域。如果你在着陆页的URL中看到_utma、_utmb和_utmc等参数，那么这种方法奏效了。
+**注：**请注意这里使用了return false;。这确保对于禁用JavaScript的访问者浏览器，href链接将不会出错。当然，如果禁用JavaScript，Google Analytics跟踪不会发生，但是，所修改的链接仍将有效。
+**方法二：跟踪使用表格的跨域访问者**
+当你使用表格将访问者从一个域传送到另一个域时，使用这种方法。在你的网页中，如下修改你到其他域的所有表格提交：
+旧的ga.js：
+`<form method=”post” onSubmit=”pageTracker._linkByPost(this)”>
+…
+</form>`
+异步代码：
+`<form method=”post” onSubmit=”_gaq.push([‘_linkByPost’,this])”>
+…
+</form>`
+如果你已经有一个onSubmit validation routine，为现有的函数调用添加如下的跨域修改：
+旧的ga.js：
+`<form method=”post” onSubmit=”validate_routine(this);pageTracker._linkByPost(this)”>
+…
+</form>`
+异步代码：
+`<form method=”post” onSubmit=”validate_routine(this);_gaq.push([‘_linkByPost’,this])”>
+…
+</form>`
+这种方法通过HTTP标题（HTTP POST）将Google Analytics cookie“推送到”接受域。这种方法在method=”GET”的表格中仍有效。你可以使用Firefox的组件LiveHTTP headers（[http://livehttpheaders.mozdev.org](http://livehttpheaders.mozdev.org)）查看HTTP headers发送，来确定这种方法是否有效。
+**GATC安装向导**
+图7.12和图7.14所举出的变化是GATC安装向导的例子。也就是说，Google Analytics自动提供你的跟踪代码所需要的变化——不需要你手动编辑页面代码。
+在这一部分，如何跟踪跨越子域或多个域的访问者所需要的变化都包含在GATC安装向导的“标准”选项卡中。你可能已经注意到，这里还有“高级”和自定义菜单选项卡。
+高级菜单提供了影响你的GATC的其他说明。例如，如何从AdWords导入数据、如何跟踪非AdWords PPC账户的付费广告系列、如何用Urchin与Google Analytics结合等等。无论标记标准还是高级GATC都能在向导中修改。
+自定义菜单是向导中一个你能手动编辑GATC的区域，并且可以保存修改，以便稍后的使用。对于所有的菜单选项卡，你都能通过email分发需要的代码。通过选择“可选：通过电子邮件发送这些说明”来获得所需要的文字。

@@ -1,6 +1,6 @@
 ---
 layout: page
-title: 网站首页
+title: Cloga的互联网笔记
 tagline: 
 ---
 

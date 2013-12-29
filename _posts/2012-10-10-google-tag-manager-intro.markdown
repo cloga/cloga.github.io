@@ -3,7 +3,7 @@ author: admin
 comments: true
 date: 2012-10-10 06:19:06+00:00
 layout: post
-slug: google-tag-manager%e7%ae%80%e4%bb%8b
+slug: 'google-tag-manager-intro'
 title: Google Tag Manager简介
 wordpress_id: 1662
 categories:

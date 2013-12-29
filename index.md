@@ -4,7 +4,7 @@ title: 网站首页
 tagline: index page
 ---
 
-文章列表
+
 
 <ul class="posts">
   {% for post in site.posts %}

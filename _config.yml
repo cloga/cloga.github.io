@@ -8,8 +8,8 @@ pygments: true
 # Themes are encouraged to use these universal variables 
 # so be sure to set them if your theme uses them.
 #
-title : Cloga与数据科学
-tagline: Data Science
+title : Cloga的互联网笔记
+tagline: Note of Internet
 author :
   name : Cloga Chen
   email : cloga0216@gmail.com

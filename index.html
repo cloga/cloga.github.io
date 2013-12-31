@@ -1,23 +1,24 @@
 ---
-layout: default
-title: home
+layout: page
+title: Cloga的互联网笔记
+tagline: 
 ---
+{% include JB/setup %}
 
-<div class="header">
-  <ul class="nav">
-    <li><h1 class="site-title"><a href="/">{{ site.name }}</a></h1></li>
-    <li><h1 class="site-title"><a href="/" class="selected">archive</a></h1></li>
-    <li><h1 class="site-title"><a href="/about.html">about</a></h1></li>
-</div>
-<div class="home">
-  <ul class="posts">
-    {% for post in site.posts %}
-      {% capture y %}{{post.date | date:"%Y"}}{% endcapture %}
-        {% if year != y %}
-        {% assign year = y %}
-        <li class="year">{{ y }}</li>
-      {% endif %}
-      <li><span>{{ post.date | date:"%Y-%m-%d" }}</span><a href="{{ post.url }}">{{ post.title }}</a></li>
-    {% endfor %}
-  </ul>
-</div>
+花了点时间将Blog从Wordpress切换到Jekyll，用markdown和github写文章感觉还不错，不过就是以前老文章中的图片整理出来比较麻烦，⊙﹏⊙b汗
+
+<!-- Show last 5 posts here -->
+{% for post in site.posts limit: 5  %}
+        <article>
+
+        <header>
+            <h2><a href="{{BASE_PATH}}{{post.url}}">{{ post.title }}</a></h2>
+            <span class="date"><i class="icon-clock"></i><time datetime="{{post.date|date:"%F"}}">{{post.date|date:"%b %d, %Y"}}</time></span><br/>
+            <span class="category"><i class="icon-tag"></i> {{ post.categories | category_links }}</span><br/>
+            <span class="author"><i class="icon-user"></i> {% if post.author %}{{post.author}}{% else %}{{site.author}}{% endif%}</span>
+        </header>
+        
+                <div class="entry">{{ post.excerpt }}</div>
+
+        </article>
+{% endfor %}

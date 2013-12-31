@@ -26,11 +26,11 @@ Python提供了许多Module，通过这些Module，可以很简单的做一些�
 
 可以看到url的信息存储在span标签中，要获取其中的信息可以用正则式。
 
-    
+```    
     import re
     urls_pat=re.compile(r'<span class="g">(.*?)</span>')
     siteUrls=re.findall(results_pat,content)
-
+```
 
 <!-- more -->
 re.compile是将字符串编译为用于python正则式的模式，字符前的r表示是纯字符，这样就不需要对元字符进行两次转义。re.findall返回的是字符串中符合results_pat的列表，由于在results_pat中使用了子表达式，所以results存储的就是子表达式所匹配的内容，即<span>与</span>之间的内容。

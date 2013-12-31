@@ -1,5 +1,9 @@
 ---
 layout: default
 ---
-{% include JB/setup %}
-{% include themes/hooligan/post.html %}
+<h1 class="post-title">{{ page.title }}</h1>
+<p class="meta">{{ page.date | date:"%Y-%m-%d" }}</p>
+
+<div class="post">
+{{ content }}
+</div>

@@ -35,4 +35,4 @@ Markdown Extended使用GitHub Flavored Markdown(GFM)"fenced" code blocks的方�
 ```python
 print 'hello world!'
 ```
-需要注意的是代码块的前后需要有空格，才能正确识别代码块。
+需要注意的是代码块的前需要有空格，才能正确识别代码块。

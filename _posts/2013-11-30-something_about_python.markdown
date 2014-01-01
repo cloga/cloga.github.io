@@ -68,13 +68,11 @@ Pandas的底层是Numpy是用于多维数组运算的科学计算Python包，此
 
 Python提供了lambda函数，可以用于那些只使用一次的临时函数的定义，其基本的语法形式为：
 
-{% highlight python %}
-
 ```python    
-    lambda augs : return values
+lambda augs : return values
 ```
   * Map和Reduce方法
-{% endhighlight %}
+
 
 map方法对一个序列的每个元素运行一个函数，并将结果作为一个列表返回。比如，下面的两行代码结合Lambda函数与map方法将l中的每个元素都增加了1。
 

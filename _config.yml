@@ -2,9 +2,9 @@
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title 
 
-markdown: redcarpet2
-#redcarpet:
-#  extensions: ["fenced_code_blocks"]
+markdown: redcarpet
+redcarpet:
+  extensions: ["fenced_code_blocks"]
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 pygments: true

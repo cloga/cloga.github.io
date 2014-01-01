@@ -38,21 +38,23 @@ tags:
 
 1. 引导需要授权的用户到如下地址：
 
-    
-    https://api.weibo.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REGISTERED_REDIRECT_URI
-
+```html
+https://api.weibo.com/oauth2/authorize?client_id=YOUR_CLIENT_ID&response_type=code&redirect_uri=YOUR_REGISTERED_REDIRECT_URI
+```
 
 2. 如果用户同意授权,页面跳转至 YOUR_REGISTERED_REDIRECT_URI/?code=CODE
 3. 换取Access Token
 
-    
-    https://api.weibo.com/oauth2/access_token?client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&grant_type=authorization_code&redirect_uri=YOUR_REGISTERED_REDIRECT_URI&code=CODE
-
+```html
+https://api.weibo.com/oauth2/access_token?client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET&grant_type=authorization_code&redirect_uri=YOUR_REGISTERED_REDIRECT_URI&code=CODE
+```
 
 （其中client_id=YOUR_CLIENT_ID&client_secret=YOUR_CLIENT_SECRET可以使用basic方式加入header中）
 返回值
 
+```json
 { "access_token":"SlAV32hkKG", "remind_in ":3600, "expires_in":3600 }
+```
 4. 使用获得的OAuth2.0 Access Token调用API
 
 其中client_id和client_secret对应的是应用基本信息中的App_key和App_secret。redirect_url就是授权回调页的URL，如果URL没有填写调用时会报错。
@@ -61,33 +63,33 @@ tags:
 
 这个流程是不是听起来很复杂，不知道如何下手？不过不用担心，廖雪峰同学提供了[新浪微博AP](http://michaelliao.github.com/sinaweibopy/)[I](http://michaelliao.github.com/sinaweibopy/)[Python版SDK](http://michaelliao.github.com/sinaweibopy/)，可以帮我们简化这个过程，同时我在另外的一个文章中看到了如何获得code参数（链接找不到），这样，其实我们只需要一个Python函数就能完成认证流程，不需要再手动登陆认证。
 
-    
-    def access_client(app_index):
-        APP_KEY= APP_KEYS_SECRETS[app_index][0] #app key
-        APP_SECRET = APP_KEYS_SECRETS[app_index][1] # app secret
-        CALLBACK_URL = 'http://www.cloga.info' # callback url
-        username='XXXXX'
-        password='YYYYY'
-        client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
-        url = client.get_authorize_url()
-        conn = httplib.HTTPSConnection('api.weibo.com')
-        postdata = urllib.urlencode({'client_id':APP_KEY,'response_type':'code','redirect_uri':CALLBACK_URL,'action':'submit','userId':username,'passwd':password,'isLoginSina':0,'from':'','regCallback':'','state':'','ticket':'','withOfficalFlag':0})
-        conn.request('POST','/oauth2/authorize',postdata,{'Referer':url, 'Content-Type': 'application/x-www-form-urlencoded'})
-        res = conn.getresponse()
-        page = res.read()
-        conn.close()##拿新浪给的code
-        code = urlparse.parse_qs(urlparse.urlparse(res.msg['location']).query)['code'][0]
-        token = client.request_access_token(code)
-        access_token = token.access_token # 新浪返回的token，类似abc123xyz456
-        expires_in = token.expires_in # token过期的UNIX时间：http://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4
-        # TODO: 在此可保存access token
-        client.set_access_token(access_token, expires_in)##生成token
-        return client
-
+```python
+def access_client(app_index):
+    APP_KEY= APP_KEYS_SECRETS[app_index][0] #app key
+    APP_SECRET = APP_KEYS_SECRETS[app_index][1] # app secret
+    CALLBACK_URL = 'http://www.cloga.info' # callback url
+    username='XXXXX'
+    password='YYYYY'
+    client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+    url = client.get_authorize_url()
+    conn = httplib.HTTPSConnection('api.weibo.com')
+    postdata = urllib.urlencode({'client_id':APP_KEY,'response_type':'code','redirect_uri':CALLBACK_URL,'action':'submit','userId':username,'passwd':password,'isLoginSina':0,'from':'','regCallback':'','state':'','ticket':'','withOfficalFlag':0})
+    conn.request('POST','/oauth2/authorize',postdata,{'Referer':url, 'Content-Type': 'application/x-www-form-urlencoded'})
+    res = conn.getresponse()
+    page = res.read()
+    conn.close()##拿新浪给的code
+    code = urlparse.parse_qs(urlparse.urlparse(res.msg['location']).query)['code'][0]
+    token = client.request_access_token(code)
+    access_token = token.access_token # 新浪返回的token，类似abc123xyz456
+    expires_in = token.expires_in # token过期的UNIX时间：http://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4
+    # TODO: 在此可保存access token
+    client.set_access_token(access_token, expires_in)##生成token
+    return client
+```
 
 这个函数的参数是app_index，这个参数是用来获得app_key和app_secret，前面已经提到，新浪对测试版的app的调用限制为单用户一个小时150次请求，这个请求数对于转发数比较多的帖子是远远不够的，所以我将申请的10个App放在一个列表中，每次一个app的quota不足，则自动切换到下一个app。
 
-    
+```python    
     #定义供替换的APP Key和Secret
     APP_KEYS_SECRETS=[['KKKKK','SSSSS'],\
                       ['KKKKK','SSSSS'],\
@@ -95,7 +97,7 @@ tags:
     
     ##随机取出一个app index
     current_index=int(random.random()*100 % len(APP_KEYS_SECRETS))
-
+```
 
 这样，通过client=access_client(current_index)就能获得token。
 
@@ -111,40 +113,37 @@ id就是指定的微博id，count是指一页显示的结果数，page是页数�
 
 刚才提到，新浪微博API的调用每个小时都有限制，如果一个app_key quota不足我们就应该用另一个去重新认证。因此，我把client.statuses.repost_timeline.get和client.statuses.show.get的外面包了一层，加了个try，except，因为quota不足会抛异常出来，因此只要捕捉到这个异常，就重新授权，保证程序的连贯性（不过转发太多的帖子依然会超，这个没办法，只能申请更高的权限）。
 
-    
-    def get_repost_timeline(id,count=200,page=1,max_id=0):
-        try:
-            return client.statuses.repost_timeline.get(id=id,count=count,page=page,max_id=max_id)
-        except Exception,e:
-            print e
-            global client
-            global current_index
-            global next_index
-            print 'current_index',current_index
-            next_index=get_app_index(current_index)
-            print 'next_index',next_index
-            client=access_client(next_index)
-            current_index=next_index
-            return get_repost_timeline(id=id,count=count,page=page,max_id=max_id)
+```python    
+def get_repost_timeline(id,count=200,page=1,max_id=0):
+    try:
+        return client.statuses.repost_timeline.get(id=id,count=count,page=page,max_id=max_id)
+    except Exception,e:
+        print e
+        global client
+        global current_index
+        global next_index
+        print 'current_index',current_index
+        next_index=get_app_index(current_index)
+        print 'next_index',next_index
+        client=access_client(next_index)
+        current_index=next_index
+        return get_repost_timeline(id=id,count=count,page=page,max_id=max_id)
 
-
-
-    
-    def get_show(id):
-        try:
-            return client.statuses.show.get(id=id)
-        except Exception,e:
-            print e
-            global client
-            global current_index
-            global next_index
-            print 'current_index',current_index
-            next_index=get_app_index(current_index)
-            client=access_client(next_index)
-            current_index=next_index
-            print 'next_index',next_index
-            return get_show(id=id)
-
+def get_show(id):
+    try:
+        return client.statuses.show.get(id=id)
+    except Exception,e:
+        print e
+        global client
+        global current_index
+        global next_index
+        print 'current_index',current_index
+        next_index=get_app_index(current_index)
+        client=access_client(next_index)
+        current_index=next_index
+        print 'next_index',next_index
+        return get_show(id=id)
+```
 
 这里有一点要说明的是，由于采用翻页的方式以及新浪api返回数据的限制（有的微博转发被大量的删除，这部分数据会被过滤掉），这种方式实际获得的转发数可能与页面上看到的不同。
 
@@ -172,98 +171,50 @@ id就是指定的微博id，count是指一页显示的结果数，page是页数�
 
 举一个最简单的例子来说明一下这个过程：
 
-
 真实的传播路径：
-
-
-
 
 用户A发出微博a
 
-
-
-
-
-
-
 用户B转发了微博a，发出微博b，b：A>B
-
-
-
 
 用户C转发了微博b，发出微博c，c：B>C
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 获得真实传播路径的过程：
-
-
-
 
 第一次：传给新浪a(发出者是A)，新浪返回a的转发b(发出者为B)和c(发出者为C)，这时b：A>B，c：A>C
 
-
-
-
 第二次：发现b有转发，把b(发出者为B)传给新浪，新浪返回b的转发c(发出者为C)，这时c：B>C
-
-
-
-
-
-
-
-
-
 
 下面是代码样例：
 
-
-
-
-
-
-    
-    def get_edges(post_id,edeges={}):
-        total_number=get_repost_timeline(id=post_id,count=200)['total_number']
-    ##    print 'Total Number:',total_number
-        reposts=[]
-        page_reposts=get_repost_timeline(id=post_id,count=200)['reposts']
-        reposts+=page_reposts
-        page_number=int(math.ceil(total_number/200))
-    ##    print 'Total Page Number:',page_number
-        if page_number>1:
-            for i in range(page_number):
-    ##            print 'page_number:',i
-                reposts+=get_repost_timeline(id=post_id,count=200,page=i+2)['reposts']
-        reposts=[repost for repost in reposts if repost.has_key('reposts_count')]##有些微博是删除的
-    ##    print 'Total Reposts:',len(reposts)
-        reposted=get_show(id=post_id)['user']['screen_name']
-        if reposted=='':
-            reposted=str(get_show(id=post_id)['user']['id'])##存在Screen_name为空的情况
-        for repost in reposts:
-            if repost['user']['screen_name']=='':
-                edges[repost['id']]={'poster':str(repost['user']['id']),'reposted':reposted,'content':repost['text'],'created_at':repost['created_at'],'reposts':repost['reposts_count'],'comments':repost['comments_count']}
-            else:
-                edges[repost['id']]={'poster':repost['user']['screen_name'],'reposted':reposted,'content':repost['text'],'created_at':repost['created_at'],'reposts':repost['reposts_count'],'comments':repost['comments_count']}##存在Screen_name为空的情况
-        reposts=[repost for repost in reposts if repost['reposts_count']>0]
-        for repost in reposts:
-            get_edges(repost['id'])
-        return edges
-
+```python    
+def get_edges(post_id,edeges={}):
+    total_number=get_repost_timeline(id=post_id,count=200)['total_number']
+##    print 'Total Number:',total_number
+    reposts=[]
+    page_reposts=get_repost_timeline(id=post_id,count=200)['reposts']
+    reposts+=page_reposts
+    page_number=int(math.ceil(total_number/200))
+##    print 'Total Page Number:',page_number
+    if page_number>1:
+        for i in range(page_number):
+##            print 'page_number:',i
+            reposts+=get_repost_timeline(id=post_id,count=200,page=i+2)['reposts']
+    reposts=[repost for repost in reposts if repost.has_key('reposts_count')]##有些微博是删除的
+##    print 'Total Reposts:',len(reposts)
+    reposted=get_show(id=post_id)['user']['screen_name']
+    if reposted=='':
+        reposted=str(get_show(id=post_id)['user']['id'])##存在Screen_name为空的情况
+    for repost in reposts:
+        if repost['user']['screen_name']=='':
+            edges[repost['id']]={'poster':str(repost['user']['id']),'reposted':reposted,'content':repost['text'],'created_at':repost['created_at'],'reposts':repost['reposts_count'],'comments':repost['comments_count']}
+        else:
+            edges[repost['id']]={'poster':repost['user']['screen_name'],'reposted':reposted,'content':repost['text'],'created_at':repost['created_at'],'reposts':repost['reposts_count'],'comments':repost['comments_count']}##存在Screen_name为空的情况
+    reposts=[repost for repost in reposts if repost['reposts_count']>0]
+    for repost in reposts:
+        get_edges(repost['id'])
+    return edges
+```
 
 这样就将每一条微博转化为了一个边，其实是edges的一个Item，key是微博的ID，Value是个字典，其中的成员依次是转发的用户名，被转发的用户名，转发微博的内容，微博发布的事件，转发数，评论数。
 
@@ -271,14 +222,14 @@ id就是指定的微博id，count是指一页显示的结果数，page是页数�
 
 接下来，将edges输出为.dot文件。
 
-    
-    def generate_dot(file_name,data):
-        OUT = file_name+".dot"
-        dot = ['"%s" -> "%s" [weibo_id=%s]' % ( edges[weibo_id]['reposted'].encode('gbk','ignore'),edges[weibo_id]['poster'].encode('gbk','ignore'), weibo_id) for weibo_id in edges.keys()]
-        with open(OUT,'w') as f:
-            f.write('strict digraph {\nnode [fontname="FangSong"]\n%s\n}' % (';\n'.join(dot),))
-            print 'dot file export'
-
+```python 
+def generate_dot(file_name,data):
+    OUT = file_name+".dot"
+    dot = ['"%s" -> "%s" [weibo_id=%s]' % ( edges[weibo_id]['reposted'].encode('gbk','ignore'),edges[weibo_id]['poster'].encode('gbk','ignore'), weibo_id)for weibo_id in edges.keys()]
+    with open(OUT,'w') as f:
+        f.write('strict digraph {\nnode [fontname="FangSong"]\n%s\n}' % (';\n'.join(dot),))
+        print 'dot file export'
+```
 
 strict digraph是用来指定图形的类型为有向图，[fontname="FangSong"]则是指定中文的仿宋字体，不然会是乱码。
 

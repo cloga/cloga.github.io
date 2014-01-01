@@ -1,5 +1,5 @@
 ---
-author: admin
+author: 'Cloga'
 comments: true
 date: 2013-09-03 00:24:03+00:00
 layout: post

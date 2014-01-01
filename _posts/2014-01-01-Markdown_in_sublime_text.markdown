@@ -2,6 +2,7 @@
 author: admin
 comments: true
 layout: post
+slug: 'Markdown_in_sublime_text'
 title: sublime text中的markdown
 categories:
 - 工具技巧

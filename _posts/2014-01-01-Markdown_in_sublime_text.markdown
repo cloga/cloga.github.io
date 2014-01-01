@@ -12,7 +12,7 @@ tags:
 - markdown
 ---
 
-经过[徐爷](http://weibo.com/placeless)推荐，我也开始用sublime text作为文本编辑器使用，之前用TextMate其实也不错，不过TextMate读取大文本文件时的速度实在不能忍受，而sublime text则完全无压力。不过，sublime text在处理中文编码的txt文件方面就没有texemate给力了。不过安装了convertToUTF8和了EncodeingHelper以后，问题也不是很大了。好了闲话就到这里，来说一下Markdown的语法高亮。
+经过[徐爷](http://weibo.com/placeless)推荐，我也开始用sublime text作为文本编辑器使用，之前用TextMate其实也不错，不过TextMate读取大文本文件时的速度实在不能忍受，而sublime text则完全无压力。不过，sublime text在处理中文编码的txt文件方面就没有texemate给力了。不过安装了convertToUTF8和了EncodeingHelper以后，问题基本上解决了。好了闲话就到这里，来说一下在Sublime text中的Markdown。
 
 由于我将blog从wordpress改成了jekyll，写文章的环境也自然变成了用Markdown，文本编辑器仍然是sublime text，为了更方便的在sublime text中使用Markdown自然少不了各种package的安装。
 

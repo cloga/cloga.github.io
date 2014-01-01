@@ -64,7 +64,7 @@ import numpy as np
 1、以字典的字典或Series的字典的结构构建DataFrame，这时候的最外面字典对应的是DataFrame的列，内嵌的字典及Series则是其中每个值。
 
 {% highlight python %}
-d = {'one'' : Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
+d = {'one' : Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
 df=pd.DataFrame(d)
 {% endhighlight %}
 

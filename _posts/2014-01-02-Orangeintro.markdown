@@ -1,5 +1,5 @@
 ---
-author: Cloga
+author: admin
 comments: true
 layout: post
 slug: 'orangeintro'
@@ -263,7 +263,7 @@ Orange.clustering.hierarchical.dendrogram_draw(
     "hclust-dendrogram.png", root, labels=labels) 
 ```
 
-<img src="/files/hclust-dendrogram.png">
+![iris的层次聚类结果]("/files/hclust-dendrogram.png")
 
 上面是官方给到的层次聚类的样例代码，通过这段代码可以将Iris进行聚类。代码中抽取了20个sample，如果分为三组的话，可以看到其中有3个数据的分类有误。
 ###K-Means聚类
@@ -303,6 +303,6 @@ versicolor，依然会有分组错误的情况。
 
 在前面已经提到除了作为一个python模块外，Orange也提供了GUI进行数据挖掘，下图为层次聚类的一个工作流截图。
 
-<img src="/files/Orange.png">
+![Orange GUI]("/files/Orange.png")
 
 可以看到看到层次聚类的过程被分解为数据读取，计算距离，聚类，输出结果这几个步骤。通过在GUI中选取数据调整参数就可以进行层次聚类。

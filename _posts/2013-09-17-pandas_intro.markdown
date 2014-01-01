@@ -64,8 +64,8 @@ import numpy as np
 1、以字典的字典或Series的字典的结构构建DataFrame，这时候的最外面字典对应的是DataFrame的列，内嵌的字典及Series则是其中每个值。
 
 {% highlight python %}
-    d = {'one'' : Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
-    df=pd.DataFrame(d)
+d = {'one'' : Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
+df=pd.DataFrame(d)
 {% endhighlight %}
 
 输出：
@@ -86,9 +86,9 @@ ValueError: arrays must all be same length
 3、从字典的列表构建DataFrame，其中每个字典代表的是每条记录（DataFrame中的一行），字典中每个值对应的是这条记录的相关属性。
 
 {% highlight python %}
-    d = [{'one' : 1,'two':1},{'one' : 2,'two' : 2},{'one' : 3,'two' : 3},{'two' : 4}]
-    df = pd.DataFrame(d,index=['a','b','c','d'],columns=['one','two'])
-    df.index.name='index'
+d = [{'one' : 1,'two':1},{'one' : 2,'two' : 2},{'one' : 3,'two' : 3},{'two' : 4}]
+df = pd.DataFrame(d,index=['a','b','c','d'],columns=['one','two'])
+df.index.name='index'
 {% endhighlight %}
 
 

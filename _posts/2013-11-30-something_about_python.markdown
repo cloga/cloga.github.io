@@ -54,9 +54,9 @@ Pandas的底层是Numpy是用于多维数组运算的科学计算Python包，此
 
 如果我们有一个列表（一组元素），想要对这个列表中的元素进行一定的操作生成新的列表，这个过程就是列表推导（在python2.7中dict和set也支持推导）。其基本的语法形式为：
 
-{% highlight python %}
+```python
 [expr for val in collection if condition]
-{% endhighlight %}
+```
 
   * 匿名函数
 

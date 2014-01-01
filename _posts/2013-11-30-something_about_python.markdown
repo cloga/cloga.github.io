@@ -49,9 +49,6 @@ Pandas的底层是Numpy是用于多维数组运算的科学计算Python包，此
 
 8、Python的一些便捷语法
 
-
-
-	
   * list comprehension（列表推导）
 
 
@@ -74,15 +71,15 @@ lambda augs : return values
 
 map方法对一个序列的每个元素运行一个函数，并将结果作为一个列表返回。比如，下面的两行代码结合Lambda函数与map方法将l中的每个元素都增加了1。
 
-    
-    l = [1,2,3]
-    l_add_1 = map(lambda x : x+1,l)
-
+```python    
+l = [1,2,3]
+l_add_1 = map(lambda x : x+1,l)
+```
 
 Reduce方法对一个序列的每个元素顺序运行一个函数，前一次运行的结果会作为后一次运行结果的输入，返回的单一一个结果。比如，下面这一行代码就可以将计算l中元素的连加和。
 
-    
-     l_sum = reduce(lambda x,y : x+ y,l)
-
+```python
+l_sum = reduce(lambda x,y : x+ y,l)
+```
 
 希望有更多的非技术出身的小伙伴可以了解并投入Python编程的行列。

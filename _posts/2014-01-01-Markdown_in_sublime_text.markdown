@@ -26,9 +26,9 @@ tags:
 
 + 为markdown文件中引用的其他语法也添加语法高亮效果
 
-Monokai extended对于代码的处理使用的是markdown的默认高亮，即缩进的内容处理为代码，但是代码部分则是没有针对不同的语言处理语法高亮的。经过Google之后，我又发现了[Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended#examples)，也是通过sublime text的Package install搜索Monokai Extended进行安装。安装后，打开一个markdown文件在右下角的语言栏选择Markdown Extended激活这种语言高亮，也可以在ctrl + shift + p启用set syntax:markdown extended。
+Monokai extended对于代码的处理使用的是markdown的默认高亮，即缩进的内容处理为代码，但是代码部分则是没有针对不同的语言处理语法高亮的。经过Google之后，我又发现了[Markdown Extended](https://github.com/jonschlinkert/sublime-markdown-extended#examples)，也是通过sublime text的Package install搜索Markdown Extended进行安装。安装后，打开一个markdown文件在右下角的语言栏选择Markdown Extended激活这种语言高亮，也可以在ctrl + shift + p启用set syntax:markdown extended。
 
-将Monokai extended作为markdown文件的默认语言。通过导航栏，View -> Syntax -> Open all with current extension as... -> Markdown Extended。
+将Markdown Extended作为markdown文件的默认语言。通过导航栏，View -> Syntax -> Open all with current extension as... -> Markdown Extended。
 
 Markdown Extended使用GitHub Flavored Markdown(GFM)"fenced" code blocks的方式进行语法高亮。
 比如如下的python代码。

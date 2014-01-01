@@ -1,5 +1,17 @@
+---
+author: Cloga
+comments: true
+layout: post
+slug: 'orangeintro'
+title: 开源数据挖掘工具Orange简介
+categories:
+- python
 
-#开源数据挖掘工具Orange简介
+tags:
+- Orange
+- Python
+---
+
 [Orange](http://orange.biolab.si/)是一款底层基于C++，提供了Python接口的开源数据挖掘工具。与Sklearn，pyml这
 类数据挖掘包相比，Orange的历史更加悠久，在上面实现的算法也更加丰富，此外，除了以python模块的形式使用之外，Orange还提供了GUI，可以用通过预先
 定义好的多种模块组成工作流来完成复杂的数据挖掘工作。

@@ -1,5 +1,5 @@
 ---
-author: admin
+author: 'Cloga'
 comments: true
 layout: post
 slug: 'orangeintro'

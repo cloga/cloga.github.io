@@ -38,3 +38,9 @@ Markdown Extended使用GitHub Flavored Markdown(GFM)"fenced" code blocks的方�
 	```
 	
 需要注意的是代码块的前需要有空格，才能正确识别代码块。
+
+最后不要忘记在你的Jekyll中开启对fenced code的高亮支持，只需要在_config.yml中，增加
+
+```
+markdown: redcarpet
+```

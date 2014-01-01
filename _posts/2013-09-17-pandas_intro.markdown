@@ -49,28 +49,13 @@ Panel ：三维的数组，可以理解为DataFrame的容器。<!-- more -->
 ### 创建DataFrame
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 首先引入Pandas及Numpy：
 
-    
-    import pandas as pd
-    import numpy as np
 
-
-
-
-
+```python
+import pandas as pd
+import numpy as np
+```
 官方推荐的缩写形式为pd，你可以选择其他任意的名称。 DataFrame是二维的数据结构，其本质是Series的容器，因此，DataFrame可以包含一个索引以及与这些索引联合在一起的Series，由于一个Series中的数据类型是相同的，而不同Series的数据结构可以不同。因此对于DataFrame来说，每一列的数据结构都是相同的，而不同的列之间则可以是不同的数据结构。或者以数据库进行类比，DataFrame中的每一行是一个记录，名称为Index的一个元素，而每一列则为一个字段，是这个记录的一个属性。 创建DataFrame有多种方式：
 
 
@@ -78,32 +63,10 @@ Panel ：三维的数组，可以理解为DataFrame的容器。<!-- more -->
 
 1、以字典的字典或Series的字典的结构构建DataFrame，这时候的最外面字典对应的是DataFrame的列，内嵌的字典及Series则是其中每个值。
 
-
-
-
-
-
-
-
-
-
-    
+{% highlight python %}
     d = {’one’ : Series([1., 2., 3.], index=[’a’, ’b’, ’c’]),’two’ : Series([1., 2., 3., 4.], index=[’a’, ’b’, ’c’, ’d’])}
     df=pd.DataFrame(d)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% endhighlight %}
 
 输出：
 
@@ -116,17 +79,20 @@ Panel ：三维的数组，可以理解为DataFrame的容器。<!-- more -->
 
 2、从列表的字典构建DataFrame，其中嵌套的每个列表（List）代表的是一个列，字典的名字则是列标签。这里要注意的是每个列表中的元素数量应该相同。否则会报错：
 
-    
-    ValueError: arrays must all be same length
-
+{% highlight python %}
+ValueError: arrays must all be same length
+{% endhighlight %}
 
 3、从字典的列表构建DataFrame，其中每个字典代表的是每条记录（DataFrame中的一行），字典中每个值对应的是这条记录的相关属性。
 
-    
-    d = [{'one' : 1,'two':1},{'one' : 2,'two' : 2},{'one' : 3,'two' : 3},{'two' : 4}]
-    df = pd.DataFrame(d,index=['a','b','c','d'],columns=['one','two'])
-    df.index.name='index'
+{% highlight python %}
 
+```python
+d = [{'one' : 1,'two':1},{'one' : 2,'two' : 2},{'one' : 3,'two' : 3},{'two' : 4}]
+df = pd.DataFrame(d,index=['a','b','c','d'],columns=['one','two'])
+df.index.name='index'
+```
+{% endhighlight %}
 
 
 

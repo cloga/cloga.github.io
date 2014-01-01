@@ -33,7 +33,8 @@ Monokai extended对于代码的处理使用的是markdown的默认高亮，即�
 Markdown Extended使用GitHub Flavored Markdown(GFM)"fenced" code blocks的方式进行语法高亮。
 比如如下的python代码。
 
-```python
-print 'hello world!'
-```
+	```python
+	print 'hello world!'
+	```
+	
 需要注意的是代码块的前需要有空格，才能正确识别代码块。

@@ -65,26 +65,26 @@ https://api.weibo.com/oauth2/access_token?client_id=YOUR_CLIENT_ID&client_secret
 
 ```python
 def access_client(app_index):
-    APP_KEY= APP_KEYS_SECRETS[app_index][0] #app key
-    APP_SECRET = APP_KEYS_SECRETS[app_index][1] # app secret
-    CALLBACK_URL = 'http://www.cloga.info' # callback url
-    username='XXXXX'
-    password='YYYYY'
-    client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
-    url = client.get_authorize_url()
-    conn = httplib.HTTPSConnection('api.weibo.com')
-    postdata = urllib.urlencode({'client_id':APP_KEY,'response_type':'code','redirect_uri':CALLBACK_URL,'action':'submit','userId':username,'passwd':password,'isLoginSina':0,'from':'','regCallback':'','state':'','ticket':'','withOfficalFlag':0})
-    conn.request('POST','/oauth2/authorize',postdata,{'Referer':url, 'Content-Type': 'application/x-www-form-urlencoded'})
-    res = conn.getresponse()
-    page = res.read()
-    conn.close()##拿新浪给的code
-    code = urlparse.parse_qs(urlparse.urlparse(res.msg['location']).query)['code'][0]
-    token = client.request_access_token(code)
-    access_token = token.access_token # 新浪返回的token，类似abc123xyz456
-    expires_in = token.expires_in # token过期的UNIX时间：http://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4
-    # TODO: 在此可保存access token
-    client.set_access_token(access_token, expires_in)##生成token
-    return client
+    APP_KEY= APP_KEYS_SECRETS[app_index][0] #app key
+    APP_SECRET = APP_KEYS_SECRETS[app_index][1] # app secret
+    CALLBACK_URL = 'http://www.cloga.info' # callback url
+    username='XXXXX'
+    password='YYYYY'
+    client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
+    url = client.get_authorize_url()
+    conn = httplib.HTTPSConnection('api.weibo.com')
+    postdata = urllib.urlencode({'client_id':APP_KEY,'response_type':'code','redirect_uri':CALLBACK_URL,'action':'submit','userId':username,'passwd':password,'isLoginSina':0,'from':'','regCallback':'','state':'','ticket':'','withOfficalFlag':0})
+    conn.request('POST','/oauth2/authorize',postdata,{'Referer':url, 'Content-Type': 'application/x-www-form-urlencoded'})
+    res = conn.getresponse()
+    page = res.read()
+    conn.close()##拿新浪给的code
+    code = urlparse.parse_qs(urlparse.urlparse(res.msg['location']).query)['code'][0]
+    token = client.request_access_token(code)
+    access_token = token.access_token # 新浪返回的token，类似abc123xyz456
+    expires_in = token.expires_in # token过期的UNIX时间：http://zh.wikipedia.org/wiki/UNIX%E6%97%B6%E9%97%B4
+    # TODO: 在此可保存access token
+    client.set_access_token(access_token, expires_in)##生成token
+    return client
 ```
 
 这个函数的参数是app_index，这个参数是用来获得app_key和app_secret，前面已经提到，新浪对测试版的app的调用限制为单用户一个小时150次请求，这个请求数对于转发数比较多的帖子是远远不够的，所以我将申请的10个App放在一个列表中，每次一个app的quota不足，则自动切换到下一个app。
@@ -119,15 +119,15 @@ def get_repost_timeline(id,count=200,page=1,max_id=0):
         return client.statuses.repost_timeline.get(id=id,count=count,page=page,max_id=max_id)
     except Exception,e:
         print e
-        global client
-        global current_index
-        global next_index
-        print 'current_index',current_index
-        next_index=get_app_index(current_index)
-        print 'next_index',next_index
-        client=access_client(next_index)
-        current_index=next_index
-        return get_repost_timeline(id=id,count=count,page=page,max_id=max_id)
+    global client
+    global current_index
+    global next_index
+    print 'current_index',current_index
+    next_index=get_app_index(current_index)
+    print 'next_index',next_index
+    client=access_client(next_index)
+    current_index=next_index
+    return get_repost_timeline(id=id,count=count,page=page,max_id=max_id)
 
 def get_show(id):
     try:

@@ -46,7 +46,7 @@ data = Orange.data.Table("iris.csv")
 data.domain.variables
 ```
 
-```python
+```
 <Orange.feature.Continuous 'sepal length', Orange.feature.Continuous 'sepal width', Orange.feature.Continuous 'petal length', Orange.feature.Continuous 'petal width', Orange.feature.Discrete 'iris'>
 ```
 
@@ -58,7 +58,7 @@ data.domain.features
 ```
 
 
-```python
+```
 <Orange.feature.Continuous 'sepal length', Orange.feature.Continuous 'sepal width', Orange.feature.Continuous 'petal length', Orange.feature.Continuous 'petal width'>
 ```
 
@@ -125,7 +125,7 @@ data[0][0]
 ```
 
 
-```python
+```
 <orange.Value 'sepal length'='5.1'>
 ```
 
@@ -135,7 +135,7 @@ data[0][0].value
 ```
 
 
-```python
+```
 5.099999904632568
 ```
 
@@ -154,7 +154,7 @@ data[0].get_class()
 ```
 
 
-```python
+```
 <orange.Value 'iris'='Iris-setosa'>
 ```
 
@@ -172,7 +172,7 @@ classifier(data[50])
 ```
 
 
-```python
+```
 <orange.Value 'iris'='Iris-virginica'>
 ```
 
@@ -184,7 +184,7 @@ classifier(data[50],Orange.classification.Classifier.GetProbabilities)
 ```
 
 
-```python
+```
 <0.000, 0.493, 0.507>
 ```
 
@@ -194,7 +194,7 @@ classifier(data[0],Orange.classification.Classifier.GetProbabilities).variable.v
 ```
 
 
-```python
+```
 <Iris-setosa, Iris-versicolor, Iris-virginica>
 ```
 
@@ -222,7 +222,7 @@ CA = Orange.evaluation.scoring.CA(res)
 print CA[0]
 ```
 
-```python
+```
 0.92
 ```
 
@@ -242,7 +242,7 @@ for i,CA in enumerate(CAs):
     print "{:s} CA is {:2%}".format(learners[i].name, CAs[i])
 ```
 
-```python
+```
 naive CA is 92.000000%
 tree CA is 94.000000%
 NeuralNetwork CA is 96.000000%
@@ -275,7 +275,7 @@ sample = random.sample(range(150),  20)
 for i in sample:
     print km.clusters[i], data[i].get_class()
 ```
-```python
+```
 2 Iris-virginica
 2 Iris-versicolor
 0 Iris-setosa

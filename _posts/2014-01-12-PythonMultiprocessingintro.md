@@ -481,4 +481,4 @@ timeit get_post_reposts_para(3664072912104801,pool_num=1)
 1 loops, best of 3: 9.71 s per loop
 ```
 
-由于是非异步的形式，每个进程的任务完成后才会启动新的进程，不过从运行时间上来看，还是要比串行的形式时间要短。
+由于是非异步的形式，每个进程的任务完成后才会启动新的进程，不过从运行时间上来看，还是要比串行的形式时间要短。你也可以查看[这篇文章的ipython notebook版本](http://nbviewer.ipython.org/gist/cloga/8382454)。

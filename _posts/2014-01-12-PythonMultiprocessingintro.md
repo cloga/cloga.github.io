@@ -357,7 +357,7 @@ def get_post_reposts_para_async(mid, pool_num=None, pid=0):
 reposts = get_post_reposts_para_async(3664072912104801, pid=1)
 ```
 
-```python
+```
 pid 1687 start!
 pid 1689 start!
 pid 1688 start!
@@ -436,7 +436,7 @@ def get_post_reposts_para(mid, pool_num=None, pid=0):
 reposts = get_post_reposts_para(3664072912104801, pid=1)
 ```
 
-```python
+```
 pid 2206 start!
 pid 2206 finished!
 pid 2207 start!

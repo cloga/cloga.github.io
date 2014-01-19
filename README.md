@@ -1,1 +1,1 @@
-# CLoga Blog
+# Cloga Blog

@@ -232,9 +232,11 @@ vectorizer.fit_transform(corpus)
 - [Classification of text documents using sparse features](http://scikit-learn.org/stable/auto_examples/document_classification_20newsgroups.html#example-document-classification-20newsgroups-py)
 
 在无监督的环境下，可以通过应用聚类算法比如[K-means](http://scikit-learn.org/stable/modules/clustering.html#k-means)将相同的文档聚集成组：
+
 - [Clustering text documents using k-means](Clustering text documents using k-means)
 
 最后通过relaxing the hard assignment constraint of clustering可以发现语料库的主要主题，例如使用[Non-negative matrix factorization (NMF or NNMF)](http://scikit-learn.org/stable/modules/decomposition.html#nmf)：
+
 - [Topics extraction with Non-Negative Matrix Factorization](http://scikit-learn.org/stable/auto_examples/applications/topics_extraction_with_nmf.html#example-applications-topics-extraction-with-nmf-py)
 
 ## 词袋表征的局限

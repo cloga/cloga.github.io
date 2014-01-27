@@ -239,7 +239,7 @@ corpora.BleiCorpus.serialize('/tmp/corpus.lda-c', corpus)
 
 # 与Numpy和Scipy的兼容性
 
-Gensim也包含高效的实用函数来帮助从/向 numpy矩阵转换：
+Gensim也包含[高效的实用函数](http://radimrehurek.com/gensim/matutils.html)来帮助从/向 numpy矩阵转换：
 
 ```python
 corpus = gensim.matutils.Dense2Corpus(numpy_matrix)

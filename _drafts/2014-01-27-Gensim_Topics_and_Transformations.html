@@ -1,0 +1,284 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>html { font-size: 100%; overflow-y: scroll; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+
+body{
+  color:#444;
+  font-family:Georgia, Palatino, 'Palatino Linotype', Times, 'Times New Roman',
+              "Hiragino Sans GB", "STXihei", "微软雅黑", serif;
+  font-size:12px;
+  line-height:1.5em;
+  background:#fefefe;
+  width: 45em;
+  margin: 10px auto;
+  padding: 1em;
+  outline: 1300px solid #FAFAFA;
+}
+
+a{ color: #0645ad; text-decoration:none;}
+a:visited{ color: #0b0080; }
+a:hover{ color: #06e; }
+a:active{ color:#faa700; }
+a:focus{ outline: thin dotted; }
+a:hover, a:active{ outline: 0; }
+
+span.backtick {
+  border:1px solid #EAEAEA;
+  border-radius:3px;
+  background:#F8F8F8;
+  padding:0 3px 0 3px;
+}
+
+::-moz-selection{background:rgba(255,255,0,0.3);color:#000}
+::selection{background:rgba(255,255,0,0.3);color:#000}
+
+a::-moz-selection{background:rgba(255,255,0,0.3);color:#0645ad}
+a::selection{background:rgba(255,255,0,0.3);color:#0645ad}
+
+p{
+margin:1em 0;
+}
+
+img{
+max-width:100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+font-weight:normal;
+color:#111;
+line-height:1em;
+}
+h4,h5,h6{ font-weight: bold; }
+h1{ font-size:2.5em; }
+h2{ font-size:2em; border-bottom:1px solid silver; padding-bottom: 5px; }
+h3{ font-size:1.5em; }
+h4{ font-size:1.2em; }
+h5{ font-size:1em; }
+h6{ font-size:0.9em; }
+
+blockquote{
+color:#666666;
+margin:0;
+padding-left: 3em;
+border-left: 0.5em #EEE solid;
+}
+hr { display: block; height: 2px; border: 0; border-top: 1px solid #aaa;border-bottom: 1px solid #eee; margin: 1em 0; padding: 0; }
+
+
+pre , code, kbd, samp { 
+  color: #000; 
+  font-family: monospace; 
+  font-size: 0.88em; 
+  border-radius:3px;
+  background-color: #F8F8F8;
+  border: 1px solid #CCC; 
+}
+pre { white-space: pre; white-space: pre-wrap; word-wrap: break-word; padding: 5px 12px;}
+pre code { border: 0px !important; padding: 0;}
+code { padding: 0 3px 0 3px; }
+
+b, strong { font-weight: bold; }
+
+dfn { font-style: italic; }
+
+ins { background: #ff9; color: #000; text-decoration: none; }
+
+mark { background: #ff0; color: #000; font-style: italic; font-weight: bold; }
+
+sub, sup { font-size: 75%; line-height: 0; position: relative; vertical-align: baseline; }
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+ul, ol { margin: 1em 0; padding: 0 0 0 2em; }
+li p:last-child { margin:0 }
+dd { margin: 0 0 0 2em; }
+
+img { border: 0; -ms-interpolation-mode: bicubic; vertical-align: middle; }
+
+table { border-collapse: collapse; border-spacing: 0; }
+td { vertical-align: top; }
+
+@media only screen and (min-width: 480px) {
+body{font-size:14px;}
+}
+
+@media only screen and (min-width: 768px) {
+body{font-size:16px;}
+}
+
+@media print {
+  * { background: transparent !important; color: black !important; filter:none !important; -ms-filter: none !important; }
+  body{font-size:12pt; max-width:100%; outline:none;}
+  a, a:visited { text-decoration: underline; }
+  hr { height: 1px; border:0; border-bottom:1px solid black; }
+  a[href]:after { content: " (" attr(href) ")"; }
+  abbr[title]:after { content: " (" attr(title) ")"; }
+  .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after { content: ""; }
+  pre, blockquote { border: 1px solid #999; padding-right: 1em; page-break-inside: avoid; }
+  tr, img { page-break-inside: avoid; }
+  img { max-width: 100% !important; }
+  @page :left { margin: 15mm 20mm 15mm 10mm; }
+  @page :right { margin: 15mm 10mm 15mm 20mm; }
+  p, h2, h3 { orphans: 3; widows: 3; }
+  h2, h3 { page-break-after: avoid; }
+}
+</style><title>2014-01-27-Gensim_Topics_and_Transformations</title></head><body><hr />
+<p>author: cloga
+comments: true
+layout: post
+slug: gensim_Topics_and_Transformations
+title: gensim文档-主题与转换
+categories:
+- Python
+tags:
+- Python
+- gensim</p>
+<hr />
+<p><a href="http://radimrehurek.com/gensim/tut2.html">原文地址</a></p>
+<p>如果你想要查看logging事件不要忘记设置。</p>
+<pre><code class="python">import logging
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+</code></pre>
+
+<h1 id="_1">转化接口</h1>
+<p>在前面的<a href="http://cloga.info/python/2014/01/27/Gensim_Corpora_and_Vector_Spaces">语料和向量空间</a>的教程中，我们创建了一个文档语料，用向量流来表征。接下来，让我们发动 gensim使用那些语料：</p>
+<pre><code class="python">from gensim import corpora, models, similarities
+dictionary = corpora.Dictionary.load('/tmp/deerwester.dict')
+corpus = corpora.MmCorpus('/tmp/deerwester.mm')
+print corpus
+
+MmCorpus(9 documents, 12 features, 28 non-zero entries)
+</code></pre>
+
+<p>在这个教程中，我将展示如何从一个向量表征转化为另一个向量。这个过程服务于两个目的：</p>
+<ul>
+<li>
+<p>显示出语料中的隐藏结构，发现词的关系，用他们以一种新的（希望是）更语义的方式来描述文档。</p>
+</li>
+<li>
+<p>让文档表征更紧凑。这既可以改善效率（新表征消耗更少的资源）也可以改善效力（忽略边际数据趋势，降低噪音）。</p>
+</li>
+</ul>
+<h1 id="_2">创建转换</h1>
+<p>转换是标准的Python对象，通常用训练语料的平均数初始化：</p>
+<pre><code class="python">tfidf = models.TfidfModel(corpus) # 第一步--初始化一个模型
+</code></pre>
+
+<p>我们用教程1的旧语料来初始化（训练）转换模型。不同的转换需要不同的初始化参数；假如是TfIdf，“训练”包括简单过一次提供的语料以及文档所有特征的频率。训练其他模型，比如潜在语义分析(Latent Semantic Analysis，LSA)或Latent Dirichlet Allocation（LDA），更加复杂，因此也需要更多的时间。</p>
+<p>注意</p>
+<p>转换通常在两个具体的向量空间中转化。相同的向量空间（等于相同的特征ids）必须被用于训练和接下来的向量转换。不使用相同的输入特征空间，比如，应用一个不同的字符预处理，使用不同的特征 ids，或者在期望Tfidf向量时使用词袋作为输入向量，将导致转换调用时特征错配，因此，产生垃圾输出和或者运行异常。</p>
+<h1 id="_3">转换向量</h1>
+<p>从这里开始，tfidf被作为一个只读的对象，可以被用于将任意向量从旧表征（词袋整数计数）转化为新表征（TfIdf实值加权）：</p>
+<pre><code class="python">doc_bow = [(0, 1), (1, 1)]
+print tfidf[doc_bow] # 第二步--用模型转换向量
+
+[(0, 0.70710678), (1, 0.70710678)]
+</code></pre>
+
+<p>或者在整个语料上应用转换：</p>
+<pre><code class="python">corpus_tfidf = tfidf[corpus]
+for doc in corpus_tfidf:
+    print doc
+
+[(0, 0.57735026918962573), (1, 0.57735026918962573), (2, 0.57735026918962573)]
+[(0, 0.44424552527467476), (3, 0.44424552527467476), (4, 0.44424552527467476), (5, 0.32448702061385548), (6, 0.44424552527467476), (7, 0.32448702061385548)]
+[(2, 0.5710059809418182), (5, 0.41707573620227772), (7, 0.41707573620227772), (8, 0.5710059809418182)]
+[(1, 0.49182558987264147), (5, 0.71848116070837686), (8, 0.49182558987264147)]
+[(3, 0.62825804686700459), (6, 0.62825804686700459), (7, 0.45889394536615247)]
+[(9, 1.0)]
+[(9, 0.70710678118654746), (10, 0.70710678118654746)]
+[(9, 0.50804290089167492), (10, 0.50804290089167492), (11, 0.69554641952003704)]
+[(4, 0.62825804686700459), (10, 0.45889394536615247), (11, 0.62825804686700459)]
+</code></pre>
+
+<p>在这个特殊的案例中，我们转换了训练用的语料，但是，这只是偶然。一旦转化模型被初始化后，它可以被用于任何向量（当然，假如他们来自相同的向量空间），即使他们根本没有被用于训练语料。这在LSA中通过成为折叠的过程实现，在LDA通过主题推断等等。</p>
+<p>注意</p>
+<p>调用model[语料]只是在旧语料文档流创建了一个封装器 - 实际上转化是在文档迭代时即时完成的。我们不能在调用corpus_transformed = model[corpus]时转化整个语料库，因为，这意味着将结果存储在主内存中，这与gensim内存独立的目的相悖。如果你需要在转换后的corpus_transformed多次迭代，那么转换是代价昂贵的，<a href="http://radimrehurek.com/gensim/tut1.html#corpus-formats">先系列化结果语料库到硬盘</a>，然后继续使用。</p>
+<p>转换也能被序列化，一个叠一个，以一种链式：</p>
+<pre><code class="python">lsi = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=2) # 初始化一个LSI转换
+corpus_lsi = lsi[corpus_tfidf] # 在原始语料上创建一个双重封装器: bow-&gt;tfidf-&gt;fold-in-lsi
+</code></pre>
+
+<p>这里我们用潜在语义索引（<a href="http://en.wikipedia.org/wiki/Latent_semantic_indexing">Latent Semantic Indexing</a>）将我们的Tf-Idf语料库转换到潜在2-D空间（2-D因为我们设置 num_topics=2）。现在你可以觉得奇怪：这两个潜在维度是什么？让我们检查一下models.LsiModel.print_topics():</p>
+<pre><code class="python">lsi.print_topics(2)
+
+topic #0(1.594): -0.703*&quot;trees&quot; + -0.538*&quot;graph&quot; + -0.402*&quot;minors&quot; + -0.187*&quot;survey&quot; + -0.061*&quot;system&quot; + -0.060*&quot;response&quot; + -0.060*&quot;time&quot; + -0.058*&quot;user&quot; + -0.049*&quot;computer&quot; + -0.035*&quot;interface&quot;
+topic #1(1.476): -0.460*&quot;system&quot; + -0.373*&quot;user&quot; + -0.332*&quot;eps&quot; + -0.328*&quot;interface&quot; + -0.320*&quot;response&quot; + -0.320*&quot;time&quot; + -0.293*&quot;computer&quot; + -0.280*&quot;human&quot; + -0.171*&quot;survey&quot; + 0.161*&quot;trees&quot;
+</code></pre>
+
+<p>(主题被打印在log中-见本页顶部关于激活logging的说明)</p>
+<p>看起来根据LSI，“trees”，“graph” 和 “minors” 都是相关的词（对第一个主题的方向贡献最大），而第二个主题实际上关注自身及其他一些词。和预期类似，前五个文档与第二个主题的联系更近，而剩下的四个文档则更贴近第一个主题：</p>
+<pre><code class="python">for doc in corpus_lsi: # 在这里，bow-&gt;tfidf 和 tfidf-&gt;lsi 转换实际上都是即时执行的
+    print doc
+
+[(0, -0.066), (1, 0.520)] # &quot;Human machine interface for lab abc computer applications&quot;
+[(0, -0.197), (1, 0.761)] # &quot;A survey of user opinion of computer system response time&quot;
+[(0, -0.090), (1, 0.724)] # &quot;The EPS user interface management system&quot;
+[(0, -0.076), (1, 0.632)] # &quot;System and human system engineering testing of EPS&quot;
+[(0, -0.102), (1, 0.574)] # &quot;Relation of user perceived response time to error measurement&quot;
+[(0, -0.703), (1, -0.161)] # &quot;The generation of random binary unordered trees&quot;
+[(0, -0.877), (1, -0.168)] # &quot;The intersection graph of paths in trees&quot;
+[(0, -0.910), (1, -0.141)] # &quot;Graph minors IV Widths of trees and well quasi ordering&quot;
+[(0, -0.617), (1, 0.054)] # &quot;Graph minors A survey&quot;
+</code></pre>
+
+<p>模型的持久化通过save()和load()函数完成：</p>
+<pre><code class="python">lsi.save('/tmp/model.lsi') # tfidf，lda...也一样
+lsi = models.LsiModel.load('/tmp/model.lsi')
+</code></pre>
+
+<p>接下来的问题可能是：那些文档间的相似度究竟是怎么样的？是否有方法正态化相似度，以便，给定一个输入的文档，我们可以根据相似度排序其他文档？<a href="http://radimrehurek.com/gensim/tut3.html">下一篇教程</a>中将涵盖相似度查询。</p>
+<h1 id="_4">可用的转换</h1>
+<p>Gensim实现了一些流行的向量空间模型算法：</p>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Tf%E2%80%93idf">词频 * 逆向文本概率，Tf-Idf</a>在初始化时期望词袋（整型值）训练语料库。在转换中，它接收一个向量返回相同维度的另一个向量，只是增大了在训练语料库中罕见特征的值。因此，它将整值的向量转化为实值的向量，同时保持维度数不变。也可以视需要将产生的向量用（欧几里得）单位长度进行正态化。</li>
+</ul>
+<pre><code class="python">model = tfidfmodel.TfidfModel(bow_corpus, normalize=True)
+</code></pre>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Latent_semantic_indexing">潜在语义索引，LSI（有时也称为LSA）</a>从词袋或（优先）TfIdf加权的空间转换为低维的潜在空间。对于上面的样本语料库我们只使用了两个潜在的维度，但是，真正的语料库，200-500的目标微博被推荐为“黄金标准”。</li>
+</ul>
+<pre><code class="python">model = lsimodel.LsiModel(tfidf_corpus, id2word=dictionary, num_topics=300)
+</code></pre>
+
+<p>LSI的训练是唯一的，我们可以在任意时候继续“训练”，只需要提供更多的训练文档。这是通过为底层模型增加更新达到的，这个过程称为线上训练。因为这个，特征，数据的文档流可能几乎是无限的-只要在新文档到达时喂给LSI就行，同时，将计算完的转换模型作为只读来使用！</p>
+<pre><code class="python">model.add_documents(another_tfidf_corpus) # 现在 LSI 已经在 tfidf_corpus + another_tfidf_corpus 上进行训练
+lsi_vec = model[tfidf_vec] # 将新文档转化到LSI空间，而不影响模型
+...
+model.add_documents(more_documents) # tfidf_corpus + another_tfidf_corpus + more_documents
+lsi_vec = model[tfidf_vec]
+...
+</code></pre>
+
+<p>关于在无限流中，如何让LSI不断“忘记”旧的观察的细节，请参见<a href="http://radimrehurek.com/gensim/models/lsimodel.html#module-gensim.models.lsimodel">gensim.models.lsimodel</a>文档。如果你想要自己探索，你也可以调整参数，影响LSI算法的速度 vs. 内存占用 vs. 数值精度。</p>
+<p>gensim用一种新颖线上增量流式分布训练算法（好拗口！），我发布在<a href="http://radimrehurek.com/gensim/tut2.html#id10">5</a>。gensim在内部也执行来自Halko等等的随机多通道算法，以便加速核内计算部分。更多关于通过计算集群间的分布计算来进一步加速请见<a href="http://radimrehurek.com/gensim/wiki.html">Experiments on the English Wikipedia</a>。</p>
+<ul>
+<li><a href="http://www.cis.hut.fi/ella/publications/randproj_kdd.pdf">随机投影，RP</a>目的是减低向量空间的维数。通过引入一点随机性，这是一个非常高效（内存和CPU友好）的方法来逼近文档间的TfIdf距离，推荐的维数也是几百到几千，取决于你的数据集。</li>
+</ul>
+<pre><code class="python">model = rpmodel.RpModel(tfidf_corpus, num_topics=500)
+</code></pre>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Latent_Dirichlet_allocation">Latent Dirichlet Allocation, LDA</a>也是另一个从词袋计数到低维主题空间的转换。LDA是LSA（也称为多项PCA）的概率扩展，因此，LDA的主题可以被解释为词的概率分布。与LSA类似，这些分布是自动由训练语料库推断出来的。反过来，文档可以解释为这些主题的（软性）组合（又和LSA类似）。  </li>
+</ul>
+<pre><code class="python">model = ldamodel.LdaModel(bow_corpus, id2word=dictionary, num_topics=100)
+</code></pre>
+
+<p>gensim根据<a href="">2</a>
+gensim uses a fast implementation of online LDA parameter estimation based on [2], modified to run in distributed mode on a cluster of computers.</p>
+<p>Hierarchical Dirichlet Process, HDP is a non-parametric bayesian method (note the missing number of requested topics):</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>model = hdpmodel.HdpModel(bow_corpus, id2word=dictionary)
+gensim uses a fast, online implementation based on [3]. The HDP model is a new addition to gensim, and still rough around its academic edges – use with care.</p>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Adding new VSM transformations (such as different weighting schemes) is rather trivial; see the API reference or directly the Python code for more info and examples.</p>
+<p>It is worth repeating that these are all unique, incremental implementations, which do not require the whole training corpus to be present in main memory all at once. With memory taken care of, I am now improving Distributed Computing, to improve CPU efficiency, too. If you feel you could contribute (by testing, providing use-cases or code), please let me know.</p>
+<p>Continue on to the next tutorial on Similarity Queries.</p>
+<p>[1] Bradford. 2008. An empirical study of required dimensionality for large-scale latent semantic indexing applications.
+[2] Hoffman, Blei, Bach. 2010. Online learning for Latent Dirichlet Allocation.
+[3] Wang, Paisley, Blei. 2011. Online variational inference for the hierarchical Dirichlet process.
+[4] Halko, Martinsson, Tropp. 2009. Finding structure with randomness.
+[5] Řehůřek. 2011. Subspace tracking for Latent Semantic Analysis.</p></body></html>

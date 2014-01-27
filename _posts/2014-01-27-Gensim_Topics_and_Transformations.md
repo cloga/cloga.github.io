@@ -121,10 +121,10 @@ for doc in corpus_lsi: # 在这里，bow->tfidf 和 tfidf->lsi 转换实际上�
 [(0, -0.617), (1, 0.054)] # "Graph minors A survey"
 ```
 
-模型持久化通过save()和load()函数完成：
+模型的持久化通过save()和load()函数完成：
 
 ```python
-lsi.save('/tmp/model.lsi') # same for tfidf, lda, ...
+lsi.save('/tmp/model.lsi') # tfidf，lda...也一样
 lsi = models.LsiModel.load('/tmp/model.lsi')
 ```
 
@@ -134,48 +134,57 @@ lsi = models.LsiModel.load('/tmp/model.lsi')
 
 Gensim实现了一些流行的向量空间模型算法：
 
-- 词频 * 逆向文本概率
+- [词频 * 逆向文本概率，Tf-Idf](http://en.wikipedia.org/wiki/Tf%E2%80%93idf)在初始化时期望词袋（整型值）训练语料库。在转换中，它接收一个向量返回相同维度的另一个向量，只是增大了在训练语料库中罕见特征的值。因此，它将整值的向量转化为实值的向量，同时保持维度数不变。也可以视需要将产生的向量用（欧几里得）单位长度进行正态化。
 
+```python
+model = tfidfmodel.TfidfModel(bow_corpus, normalize=True)
+```
 
-Term Frequency * Inverse Document Frequency, Tf-Idf expects a bag-of-words (integer values) training corpus during initialization. During transformation, it will take a vector and return another vector of the same dimensionality, except that features which were rare in the training corpus will have their value increased. It therefore converts integer-valued vectors into real-valued ones, while leaving the number of dimensions intact. It can also optionally normalize the resulting vectors to (Euclidean) unit length.
+- [潜在语义索引，LSI（有时也称为LSA）](http://en.wikipedia.org/wiki/Latent_semantic_indexing)从词袋或（优先）TfIdf加权的空间转换为低维的潜在空间。对于上面的样本语料库我们只使用了两个潜在的维度，但是，真正的语料库，200-500的目标微博被推荐为“黄金标准”。
 
->>> model = tfidfmodel.TfidfModel(bow_corpus, normalize=True)
-Latent Semantic Indexing, LSI (or sometimes LSA) transforms documents from either bag-of-words or (preferrably) TfIdf-weighted space into a latent space of a lower dimensionality. For the toy corpus above we used only 2 latent dimensions, but on real corpora, target dimensionality of 200–500 is recommended as a “golden standard” [1].
+```python
+model = lsimodel.LsiModel(tfidf_corpus, id2word=dictionary, num_topics=300)
+```
 
->>> model = lsimodel.LsiModel(tfidf_corpus, id2word=dictionary, num_topics=300)
-LSI training is unique in that we can continue “training” at any point, simply by providing more training documents. This is done by incremental updates to the underlying model, in a process called online training. Because of this feature, the input document stream may even be infinite – just keep feeding LSI new documents as they arrive, while using the computed transformation model as read-only in the meanwhile!
+LSI的训练是唯一的，我们可以在任意时候继续“训练”，只需要提供更多的训练文档。这是通过为底层模型增加更新达到的，这个过程称为线上训练。因为这个，特征，数据的文档流可能几乎是无限的-只要在新文档到达时喂给LSI就行，同时，将计算完的转换模型作为只读来使用！
 
->>> model.add_documents(another_tfidf_corpus) # now LSI has been trained on tfidf_corpus + another_tfidf_corpus
->>> lsi_vec = model[tfidf_vec] # convert some new document into the LSI space, without affecting the model
->>> ...
->>> model.add_documents(more_documents) # tfidf_corpus + another_tfidf_corpus + more_documents
->>> lsi_vec = model[tfidf_vec]
->>> ...
-See the gensim.models.lsimodel documentation for details on how to make LSI gradually “forget” old observations in infinite streams. If you want to get dirty, there are also parameters you can tweak that affect speed vs. memory footprint vs. numerical precision of the LSI algorithm.
+```python
+model.add_documents(another_tfidf_corpus) # 现在 LSI 已经在 tfidf_corpus + another_tfidf_corpus 上进行训练
+lsi_vec = model[tfidf_vec] # 将新文档转化到LSI空间，而不影响模型
+...
+model.add_documents(more_documents) # tfidf_corpus + another_tfidf_corpus + more_documents
+lsi_vec = model[tfidf_vec]
+...
+```
 
-gensim uses a novel online incremental streamed distributed training algorithm (quite a mouthful!), which I published in [5]. gensim also executes a stochastic multi-pass algorithm from Halko et al. [4] internally, to accelerate in-core part of the computations. See also Experiments on the English Wikipedia for further speed-ups by distributing the computation across a cluster of computers.
+关于在无限流中，如何让LSI不断“忘记”旧的观察的细节，请参见[gensim.models.lsimodel](http://radimrehurek.com/gensim/models/lsimodel.html#module-gensim.models.lsimodel)文档。如果你想要自己探索，你也可以调整参数，影响LSI算法的速度 vs. 内存占用 vs. 数值精度。
 
-Random Projections, RP aim to reduce vector space dimensionality. This is a very efficient (both memory- and CPU-friendly) approach to approximating TfIdf distances between documents, by throwing in a little randomness. Recommended target dimensionality is again in the hundreds/thousands, depending on your dataset.
+gensim用一种新颖线上增量流式分布训练算法（好拗口！），我发布在[5](http://radimrehurek.com/gensim/tut2.html#id10)。gensim在内部也执行来自Halko等等的随机多通道算法，以便加速核内计算部分。更多关于通过计算集群间的分布计算来进一步加速请见[Experiments on the English Wikipedia](http://radimrehurek.com/gensim/wiki.html)。
 
->>> model = rpmodel.RpModel(tfidf_corpus, num_topics=500)
-Latent Dirichlet Allocation, LDA is yet another transformation from bag-of-words counts into a topic space of lower dimensionality. LDA is a probabilistic extension of LSA (also called multinomial PCA), so LDA’s topics can be interpreted as probability distributions over words. These distributions are, just like with LSA, inferred automatically from a training corpus. Documents are in turn interpreted as a (soft) mixture of these topics (again, just like with LSA).
+- [随机投影，RP](http://www.cis.hut.fi/ella/publications/randproj_kdd.pdf)目的是减低向量空间的维数。通过引入一点随机性，这是一个非常高效（内存和CPU友好）的方法来逼近文档间的TfIdf距离，推荐的维数也是几百到几千，取决于你的数据集。
 
->>> model = ldamodel.LdaModel(bow_corpus, id2word=dictionary, num_topics=100)
-gensim uses a fast implementation of online LDA parameter estimation based on [2], modified to run in distributed mode on a cluster of computers.
+```python
+model = rpmodel.RpModel(tfidf_corpus, num_topics=500)
+```
 
-Hierarchical Dirichlet Process, HDP is a non-parametric bayesian method (note the missing number of requested topics):
+- [Latent Dirichlet Allocation, LDA](http://en.wikipedia.org/wiki/Latent_Dirichlet_allocation)也是另一个从词袋计数到低维主题空间的转换。LDA是LSA（也称为多项PCA）的概率扩展，因此，LDA的主题可以被解释为词的概率分布。与LSA类似，这些分布是自动由训练语料库推断出来的。反过来，文档可以解释为这些主题的（软性）组合（又和LSA类似）。	
 
->>> model = hdpmodel.HdpModel(bow_corpus, id2word=dictionary)
-gensim uses a fast, online implementation based on [3]. The HDP model is a new addition to gensim, and still rough around its academic edges – use with care.
+```python
+model = ldamodel.LdaModel(bow_corpus, id2word=dictionary, num_topics=100)
+```
 
-Adding new VSM transformations (such as different weighting schemes) is rather trivial; see the API reference or directly the Python code for more info and examples.
+根据[[2](http://radimrehurek.com/gensim/tut2.html#id7)]gensim使用了线上LDA参数估计的一个快速实现，修改后可以在计算集群上以[分布模型](http://radimrehurek.com/gensim/distributed.html)运行。
 
-It is worth repeating that these are all unique, incremental implementations, which do not require the whole training corpus to be present in main memory all at once. With memory taken care of, I am now improving Distributed Computing, to improve CPU efficiency, too. If you feel you could contribute (by testing, providing use-cases or code), please let me know.
+- [Hierarchical Dirichlet Process, HDP](http://jmlr.csail.mit.edu/proceedings/papers/v15/wang11a/wang11a.pdf)是一个非参数贝叶斯方法（注意没有请求的主题数):
 
-Continue on to the next tutorial on Similarity Queries.
+```python
+model = hdpmodel.HdpModel(bow_corpus, id2word=dictionary)
+```
 
-[1]	Bradford. 2008. An empirical study of required dimensionality for large-scale latent semantic indexing applications.
-[2]	Hoffman, Blei, Bach. 2010. Online learning for Latent Dirichlet Allocation.
-[3]	Wang, Paisley, Blei. 2011. Online variational inference for the hierarchical Dirichlet process.
-[4]	Halko, Martinsson, Tropp. 2009. Finding structure with randomness.
-[5]	Řehůřek. 2011. Subspace tracking for Latent Semantic Analysis.
+gensim使用了基于[[3](http://radimrehurek.com/gensim/tut2.html#id8)]的快速线上实现。HDP模型是gensim一个新增部分，并且它的学术边界仍然较粗糙-小心使用。
+
+添加新的VSM转换（比如不同的加权方案）非常简单；更多的信息和例子请看一下[API参考](http://radimrehurek.com/gensim/apiref.html)或者直接看一下Python代码。
+
+有必要再重复一下，这些是特有的增量实施，不需要将全部语料库一次读入内存。通过小心处理内存，我正在改善[分布计算](http://radimrehurek.com/gensim/distributed.html)，也在改善CPU的效率。如果你可以出一份力（测试，提供使用案例或者代码），[请联系原作者](radimrehurek%40seznam.cz)。
+
+下一篇教程是关于[相似性查询](http://radimrehurek.com/gensim/tut3.html)。

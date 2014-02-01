@@ -3,7 +3,7 @@ author: cloga
 comments: true
 layout: post
 slug: classification
-title: 分类-Orange
+title: 分类-Orange文档
 categories:
 - Python
 tags:

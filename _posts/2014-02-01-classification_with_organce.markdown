@@ -104,10 +104,15 @@ AUC:      0.97
 # 一组分类器
 
 Orange包含广泛的分类算法，包含：
+
 - logistic回归（logistic regression）(Orange.classification.logreg)
+
 - k-nearest neighbors (Orange.classification.knn)
+
 - 支持向量机（support vector machines） (Orange.classification.svm)
+
 - 分类树 (Orange.classification.tree)
+
 - 分类规则 (Orange.classification.rules)
 
 这些算法中的一些包含在了下面的代码中，下面的代码预估了测试数据的目标类型的概率。这次，训练和测试数据集是分开的：

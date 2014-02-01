@@ -10,7 +10,6 @@ tags:
 - Python
 - gensim
 ---
-[原文地址](http://radimrehurek.com/gensim/tut2.html)
 
 如果你想要查看logging事件不要忘记设置。
 
@@ -188,3 +187,5 @@ gensim使用了基于[[3](http://radimrehurek.com/gensim/tut2.html#id8)]的快�
 有必要再重复一下，这些是特有的增量实施，不需要将全部语料库一次读入内存。通过小心处理内存，我正在改善[分布计算](http://radimrehurek.com/gensim/distributed.html)，也在改善CPU的效率。如果你可以出一份力（测试，提供使用案例或者代码），[请联系原作者](radimrehurek%40seznam.cz)。
 
 下一篇教程是关于[相似性查询](http://radimrehurek.com/gensim/tut3.html)。
+
+[原文地址](http://radimrehurek.com/gensim/tut2.html)

@@ -10,7 +10,6 @@ tags:
 - Python
 - gensim
 ---
-[原文地址](http://radimrehurek.com/gensim/tut1.html)
 
 如果你想要查看logging事件不要忘记设置。
 
@@ -254,3 +253,5 @@ scipy_csc_matrix = gensim.matutils.corpus2csc(corpus)
 ```
 
 完整的参考（想要将字典缩小为更小的大小？优化语料和Numpy/SciPy数组间的转换？），请见[API 文档](http://radimrehurek.com/gensim/apiref.html)，或者继续下一个教程[主题与转化](http://radimrehurek.com/gensim/tut2.html)。
+
+[原文地址](http://radimrehurek.com/gensim/tut1.html)

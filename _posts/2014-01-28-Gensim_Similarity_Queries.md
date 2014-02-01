@@ -10,7 +10,6 @@ tags:
 - Python
 - gensim
 ---
-[原文地址]
 
 如果你想要查看logging事件不要忘记设置。
 
@@ -125,6 +124,8 @@ Gensim是相当成熟的包，被许多个人和公司成功应用，无论是�
 - 非常欢迎和感激你的反馈（不仅仅是代码！）：贡献思想、报告bug或者[考虑共享用户故事和一般问题]
 
 Gensim没有野心称为一个无所不包的框架，涉及所有NLP（甚至机器学习）的领域。它的使命是帮助NLP从业者轻松在大数据集上尝试流行主题建模算法，并且帮助研究者设计算法原型。
+
+[原文地址]
 
 [原文地址]:http://radimrehurek.com/gensim/tut3.html
 [“Indexing by Latent Semantic Analysis” seminal 1990 article]:http://www.cs.bham.ac.uk/~pxt/IDA/lsa_ind.pdf

@@ -10,7 +10,7 @@ tags:
 - text feature extraction
 - feature extraction
 ---
-[原文地址](http://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction)
+
 # 文本特征提取
 ## 词袋（Bag of Words）表征
 文本分析是机器学习算法的主要应用领域。但是，文本分析的原始数据无法直接丢给算法，这些原始数据是一组符号，因为大多数算法期望的输入是固定长度的数值特征向量而不是不同长度的文本文件。为了解决这个问题，[scikit-learn](http://scikit-learn.org/)提供了一些实用工具可以用最常见的方式从文本内容中抽取数值特征，比如说：
@@ -343,3 +343,5 @@ HashingVectorizer也有以下的局限：
 实现核外扩展的一个策略是将数据以流的方式以一小批提交给评估器。每批的向量化都是用HashingVectorizer这样来保证评估器的输入空间的维度是相等的。因此任何时间使用的内存数都限定在小频次的大小。尽管用这种方法可以处理的数据没有限制，但是从实用角度学习时间受到想要在这个任务上花费的CPU时间的限制。
 
 一个核外扩展的文本分类任务的实例，请参见[Out-of-core classification of text documents](http://scikit-learn.org/stable/auto_examples/applications/plot_out_of_core_classification.html#example-applications-plot-out-of-core-classification-py).
+
+[原文地址](http://scikit-learn.org/stable/modules/feature_extraction.html#text-feature-extraction)

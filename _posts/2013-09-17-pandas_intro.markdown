@@ -41,7 +41,7 @@ import numpy as np
 - 以字典的字典或Series的字典的结构构建DataFrame，这时候的最外面字典对应的是DataFrame的列，内嵌的字典及Series则是其中每个值。
 
 ```python
-d = {'one' : Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
+d = {'one' : pd.Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : pd.Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
 df=pd.DataFrame(d)
 ```
 
@@ -51,12 +51,12 @@ df=pd.DataFrame(d)
 
 可以看到d是一个字典，其中one的值为Series有3个值，而two为Series有4个值。由d构建的为一个4行2列的DataFrame。其中one只有3个值，因此d行one列为NaN（Not a Number）--Pandas默认的缺失值标记。
 
-2、从列表的字典构建DataFrame，其中嵌套的每个列表（List）代表的是一个列，字典的名字则是列标签。这里要注意的是每个列表中的元素数量应该相同。否则会报错：
+- 从列表的字典构建DataFrame，其中嵌套的每个列表（List）代表的是一个列，字典的名字则是列标签。这里要注意的是每个列表中的元素数量应该相同。否则会报错：
 
 ```python
 ValueError: arrays must all be same length
 ```
-3、从字典的列表构建DataFrame，其中每个字典代表的是每条记录（DataFrame中的一行），字典中每个值对应的是这条记录的相关属性。
+- 从字典的列表构建DataFrame，其中每个字典代表的是每条记录（DataFrame中的一行），字典中每个值对应的是这条记录的相关属性。
 
 ```python
 d = [{'one' : 1,'two':1},{'one' : 2,'two' : 2},{'one' : 3,'two' : 3},{'two' : 4}]
@@ -67,6 +67,14 @@ df.index.name='index'
 以上的语句与以Series的字典形式创建的DataFrame相同，只是思路略有不同，一个是以列为单位构建，将所有记录的不同属性转化为多个Series，行标签冗余，另一个是以行为单位构建，将每条记录转化为一个字典，列标签冗余。使用这种方式，如果不通过columns指定列的顺序，那么列的顺序会是随机的。
 
 个人经验是对于从一些已经结构化的数据转化为DataFrame似乎前者更方便，而对于一些需要自己结构化的数据（比如解析Log文件，特别是针对较大数据量时），似乎后者更方便。创建了DataFrame后可以通过index.name属性为DataFrame的索引指定名称。
+
+### DataFrame转换为其他类型
+
+```python
+df.to_dict(outtype='dict')
+```
+outtype的参数为‘dict’、‘list’、‘series’和‘records’。
+dict返回的是dict of dict；list返回的是列表的字典；series返回的是序列的字典；records返回的是字典的列表
 
 ### 查看数据
 
@@ -212,7 +220,13 @@ df.set_index('one')
 ### 重命名列
 
 ```python
-enews_nov.rename(columns={u'one':'1'}, inplace=True)
+df.rename(columns={u'one':'1'}, inplace=True)
+```
+
+### 查看每个列的数据类型
+
+```python
+df.dtypes
 ```
 
 ### DataFrame的合并

@@ -298,5 +298,6 @@ for k in estimators.keys():
 ```
 
 好了，向Kaggle提交你的结果吧~
-[本文的ipython notebook版本]
+
+你可以查看[本文的ipython notebook版本]
 [本文的ipython notebook版本]:http://nbviewer.ipython.org/gist/cloga/8862733

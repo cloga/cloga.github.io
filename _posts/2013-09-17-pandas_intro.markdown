@@ -258,6 +258,13 @@ df.groupby('A').sum()#按照A列的值分组求和
 df.groupby(['A','B']).sum()##按照A、B两列的值分组求和
 ```
 
+默认会以groupby的值作为索引，如果不将这些值作为索引，则需要使用as_index=False
+
+```python
+df.groupby(['A','B'], as_index=False).sum()
+```
+
+
 ### 构建透视表
 
 ```python    

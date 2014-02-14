@@ -135,8 +135,8 @@ len(df)
 可以看到训练集中共有891条记录，有12个列（其中一列Survived是目标分类）。将数据集分为特征集和目标分类集，两个DataFrame。
 
 ```python
-cols = set(df.columns)
-cols.remove('Survived')
+exc_cols = [u'PassengerId', u'Survived', u'Name']
+cols = [c for c in df.columns if c not in exc_cols]
 x = df.ix[:,cols]
 y = df['Survived'].values
 ```

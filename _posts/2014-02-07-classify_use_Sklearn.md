@@ -16,12 +16,12 @@ tags:
 这里我使用pandas来加载数据集，数据集采用[kaggle的titanic的数据集](https://www.kaggle.com/c/titanic-
 gettingStarted/data)，下载train.csv。
 
-```python
+{% highlight python %}
 import pandas as pd
 df = pd.read_csv('train.csv')
 df = df.fillna(0) #将缺失值都替换为0
 df.head()
-```
+{% endhighlight %}
 
 <div style="max-height:1000px;max-width:1500px;overflow:auto;">
 <table border="1" class="dataframe">

@@ -1,0 +1,114 @@
+<html>
+<body>
+  <div class="container">
+    <div class="row">
+  <h2 class="span12" id="post-title">ForceAtlas2 on a random graph</h2>
+  
+  <div class="span12 buttons-container">
+    
+    <button class="btn" id="stop-layout">Stop Layout</button>
+    
+    <button class="btn" id="rescale-graph">Rescale Graph</button>
+    
+  </div>
+  
+  <div class="span12 sigma-parent" id="sigma-example-parent">
+    <div class="sigma-expand" id="graph"></div>
+  </div>
+</div>
+
+<br>
+
+<div class="row">
+  <h4 class="span12">Description</h4>
+  <div class="span12">
+    <p>This example will generate a random graphs organized by clusters, custom the display a bit, and then start the ForceAtlas2 algorithm.</p>
+  </div>
+</div>
+<script src="src/core/sigmapublic.js" type="text/javascript"></script>
+<script src="src/core/sigmapublic.js" type="text/javascript"></script>
+<script src="http://sigmajs.org/js/sigma.min.js" type="text/javascript"></script>
+<script src="http://sigmajs.org/js/prettify.js" type="text/javascript"></script>
+<script src="plugins/sigma.parseGexf.js" type="text/javascript"></script>
+<script src="plugins/sigma.forceatlas2.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+function init() {
+  // Instanciate sigma.js and customize rendering :
+   sigInst = sigma.init(document.getElementById('graph')).drawingProperties({
+    defaultLabelColor: '#fff',
+    defaultLabelSize: 14,
+    defaultLabelBGColor: '#fff',
+    defaultLabelHoverColor: '#000',
+    labelThreshold: 6,
+    defaultEdgeType: 'curve' 
+
+  }).graphProperties({
+    minNodeSize: 2,
+    maxNodeSize: 5,
+    minEdgeSize: 1,
+    maxEdgeSize: 1
+
+  }).mouseProperties({
+    maxRatio: 32
+  });
+
+  // Parse a GEXF encoded file to fill the graph
+  // (requires "sigma.parseGexf.js" to be included)
+  sigInst.parseGexf('3494834545042114.gexf');
+
+
+  sigInst.bind('downnodes',function(event){
+    var nodes = event.content;
+    var neighbors = {};
+    sigInst.iterEdges(function(e){
+      if(nodes.indexOf(e.source)>=0 || nodes.indexOf(e.target)>=0){
+        neighbors[e.source] = 1;
+        neighbors[e.target] = 1;
+
+      } 
+    }).iterNodes(function(n){
+      if(!neighbors[n.id]){
+        n.attr['temphidden'] = 1;
+        n.attr['oldcolor'] = n.color;
+        // var c = sigma.tools.getRGB(n.color);
+        n.color = "#eee"; // #ccc";
+
+        // n.color = "rgba("+c['r']+","+c['g']+","+c['b']+",0.2)";
+      }
+    }).draw(2,2,2);
+  }).bind('upnodes',function(){
+    sigInst.iterNodes(function(n){
+        if(n.attr['temphidden'] == 1) {
+            n.color = n.attr['oldcolor'];
+            n.attr['temphidden'] = 0;
+        }
+
+    }).draw(2,2,2);
+  });
+  // Draw the graph :
+  sigInst.draw(2,2,2);
+  sigInst.startForceAtlas2();
+  var isRunning = true;
+  document.getElementById('stop-layout').addEventListener('click',function(){
+    if(isRunning){
+      isRunning = false;
+      sigInst.stopForceAtlas2();
+      document.getElementById('stop-layout').childNodes[0].nodeValue = 'Start Layout';
+    }else{
+      isRunning = true;
+      sigInst.startForceAtlas2();
+      document.getElementById('stop-layout').childNodes[0].nodeValue = 'Stop Layout';
+    }
+  },true);
+
+}
+
+if (document.addEventListener) {
+  document.addEventListener("DOMContentLoaded", init, false);
+} else {
+  window.onload = init;
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="utf-8"?><gexf xmlns:ns0="http://www.gexf.net/1.1draft/viz" version="1.1" xmlns="http://www.gexf.net/1.1draft" xmlns:viz="http://www.gexf.net/1.1draft/viz" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/XMLSchema-instance">
+  <graph defaultedgetype="undirected" mode="static">
+    <attributes class="edge" mode="static">
+      <attribute id="0" title="weibo_id" type="string" />
+    </attributes>
+    <nodes>
+      <node id="3559702321337091" label="冰马蛹">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.408925446834" y="0.513247983605" z="None" />
+      </node>
+      <node id="3563485512113361" label="大姑娘鼠族圣女1983">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.0615366070657" y="0.826320197868" z="None" />
+      </node>
+      <node id="3559792726489730" label="乱世一飘零">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.241067351931" y="0.640828046255" z="None" />
+      </node>
+      <node id="3562597334882022" label="俊材Call">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.516101562967" y="0.863197796516" z="None" />
+      </node>
+      <node id="3560005217595196" label="楠楠-Cady">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.30808903211" y="1.0" z="None" />
+      </node>
+      <node id="3559720419853567" label="茜茜初晴">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.718318889212" y="0.272684870691" z="None" />
+      </node>
+      <node id="3559753713754516" label="Janson_zzh">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.319107046431" y="0.502549445238" z="None" />
+      </node>
+      <node id="3560173765071626" label="琼锅">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.105713196512" y="0.366784452419" z="None" />
+      </node>
+      <node id="3559719442111433" label="黄渤海GDC">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="4" />
+        <ns0:position x="0.636501051474" y="0.332674470926" z="None" />
+      </node>
+      <node id="3560392875793542" label="刘文杰-老搜">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.262355497958" y="0.500532788061" z="None" />
+      </node>
+      <node id="3559799226323831" label="zhulinzl">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="9" />
+        <ns0:position x="0.530247806363" y="0.765218475715" z="None" />
+      </node>
+      <node id="3559787855986253" label="唔Ming">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.256509116145" y="0.545115426988" z="None" />
+      </node>
+      <node id="3565223300499670" label="一号红太狼1981">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.595692008136" y="0.530493508313" z="None" />
+      </node>
+      <node id="3561181450986988" label="大叔控_王留美1991">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.0252129384625" y="0.811743867249" z="None" />
+      </node>
+      <node id="3560170598673715" label="刘文杰-老搜">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="3" />
+        <ns0:position x="0.199134148532" y="0.432979519959" z="None" />
+      </node>
+      <node id="3559707417127426" label="Jeff-AnalyticsKey">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.369314907214" y="0.508979129392" z="None" />
+      </node>
+      <node id="3559878926661264" label="孙化佳">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.061654928538" y="0.565416144863" z="None" />
+      </node>
+      <node id="3565223300175527" label="gogo雪姬">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.582982414559" y="0.481996184949" z="None" />
+      </node>
+      <node id="3559754502394686" label="九文鱼">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.400300249282" y="0.559812480511" z="None" />
+      </node>
+      <node id="3559792775784321" label="网站分析社区">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.37430401189" y="0.66168531807" z="None" />
+      </node>
+      <node id="3559818402509587" label="网站分析星期三">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.287727379724" y="0.671354434621" z="None" />
+      </node>
+      <node id="3560174142762291" label="爱就爱了不起">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.142480826832" y="0.337004360486" z="None" />
+      </node>
+      <node id="3559780267871806" label="Winnie86">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="2" />
+        <ns0:position x="0.188819494781" y="0.511883452799" z="None" />
+      </node>
+      <node id="3560027233180949" label="刘文杰-老搜">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.280487512287" y="0.623475207161" z="None" />
+      </node>
+      <node id="3563536229752733" label="1988518子美1981">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.0135723262859" y="0.716872980157" z="None" />
+      </node>
+      <node id="3561181450986731" label="20几年老处女秀艾1988">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.0348634331824" y="0.774297649326" z="None" />
+      </node>
+      <node id="3559816850677607" label="cwinux">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.359798353099" y="0.467677292044" z="None" />
+      </node>
+      <node id="3559792679302553" label="竞价分析-陈森">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.422737428962" y="0.595665537069" z="None" />
+      </node>
+      <node id="3559755030990598" label="张登宇_网站数据分析">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="3" />
+        <ns0:position x="0.492793732409" y="0.533436370416" z="None" />
+      </node>
+      <node id="3559697648749562" label="孤独天胜">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="7" />
+        <ns0:position x="0.114758186697" y="0.730491515343" z="None" />
+      </node>
+      <node id="3566086316098316" label="18岁的丹丹Gloria">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.623240283562" y="0.742859147813" z="None" />
+      </node>
+      <node id="3565716873654952" label="2919674000">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.604751917338" y="0.799037962422" z="None" />
+      </node>
+      <node id="3563485511866354" label="1995年10月09日采萱1980">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.0993247158954" y="0.826526381837" z="None" />
+      </node>
+      <node id="3560063715243684" label="云的影字">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.233905536286" y="0.587172392648" z="None" />
+      </node>
+      <node id="3560472684826690" label="双子雪代缘">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.562509394104" y="0.839043055706" z="None" />
+      </node>
+      <node id="3560034124703606" label="冯友成">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.395600073984" y="0.627281325873" z="None" />
+      </node>
+      <node id="3559781530526668" label="陈彦铭lc">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.0877656892688" y="0.466744486586" z="None" />
+      </node>
+      <node id="3562597334643629" label="11动医惜雪1993">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.604214246106" y="0.858323474314" z="None" />
+      </node>
+      <node id="3559686432959255" label="Cloga在路上">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="2" />
+        <ns0:position x="0.317401076085" y="0.753384496317" z="None" />
+      </node>
+      <node id="3559740967509463" label="洅等三分钟">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.680386933713" y="0.245365597775" z="None" />
+      </node>
+      <node id="3559755081291006" label="TrustXiao">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.301268476316" y="0.46875035149" z="None" />
+      </node>
+      <node id="3565716873383985" label="乐园霞影">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.645215878126" y="0.7811600677" z="None" />
+      </node>
+      <node id="3559728548372295" label="UEO-mark">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="2" />
+        <ns0:position x="0.302797279504" y="0.380664535463" z="None" />
+      </node>
+      <node id="3559721623872023" label="东星王">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="2" />
+        <ns0:position x="0.171124371247" y="0.573825559008" z="None" />
+      </node>
+      <node id="3559728988329978" label="UEO-mark">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="2" />
+        <ns0:position x="0.255266819878" y="0.0919853980708" z="None" />
+      </node>
+      <node id="3559880167863222" label="Clarke">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="2" />
+        <ns0:position x="0.311464010653" y="0.896141393634" z="None" />
+      </node>
+      <node id="3562989875414128" label="2到了境界霞文1985">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.561976018974" y="0.88086938377" z="None" />
+      </node>
+      <node id="3559728741340870" label="陈彦铭lc">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="2" />
+        <ns0:position x="0.278387124156" y="0.221165668545" z="None" />
+      </node>
+      <node id="3560168518315220" label="沧海云少">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.332614439265" y="0.665272786877" z="None" />
+      </node>
+      <node id="3559734223402119" label="叶峰有盏灯">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.239237425604" y="0.0" z="None" />
+      </node>
+      <node id="3559878121476380" label="dtedt">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.733118250997" y="0.315849550399" z="None" />
+      </node>
+      <node id="3559680125100449" label="刘文杰-老搜">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="25" />
+        <ns0:position x="0.323939180266" y="0.576179230175" z="None" />
+      </node>
+      <node id="3559704888342320" label="蓝鲸碎碎念">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="2" />
+        <ns0:position x="0.488276732844" y="0.441774470671" z="None" />
+      </node>
+      <node id="3560472684585780" label="coolboy工藤优作">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.634435835903" y="0.828761168122" z="None" />
+      </node>
+      <node id="3561553988777809" label="cs神珍">
+        <ns0:color b="51" g="255" r="255" />
+        <ns0:size value="1" />
+        <ns0:position x="0.0" y="0.757228523379" z="None" />
+      </node>
+    </nodes>
+    <edges>
+      <edge id="0" source="3559702321337091" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559702321337091" />
+        </attvalues>
+      </edge>
+      <edge id="1" source="3563485512113361" target="3559697648749562">
+        <attvalues>
+          <attvalue for="0" value="3563485512113361" />
+        </attvalues>
+      </edge>
+      <edge id="2" source="3559792726489730" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559792726489730" />
+        </attvalues>
+      </edge>
+      <edge id="3" source="3562597334882022" target="3559799226323831">
+        <attvalues>
+          <attvalue for="0" value="3562597334882022" />
+        </attvalues>
+      </edge>
+      <edge id="4" source="3560005217595196" target="3559880167863222">
+        <attvalues>
+          <attvalue for="0" value="3560005217595196" />
+        </attvalues>
+      </edge>
+      <edge id="5" source="3559720419853567" target="3559719442111433">
+        <attvalues>
+          <attvalue for="0" value="3559720419853567" />
+        </attvalues>
+      </edge>
+      <edge id="6" source="3559753713754516" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559753713754516" />
+        </attvalues>
+      </edge>
+      <edge id="7" source="3560173765071626" target="3560170598673715">
+        <attvalues>
+          <attvalue for="0" value="3560173765071626" />
+        </attvalues>
+      </edge>
+      <edge id="8" source="3559719442111433" target="3559878121476380">
+        <attvalues>
+          <attvalue for="0" value="3559878121476380" />
+        </attvalues>
+      </edge>
+      <edge id="9" source="3559719442111433" target="3559740967509463">
+        <attvalues>
+          <attvalue for="0" value="3559740967509463" />
+        </attvalues>
+      </edge>
+      <edge id="10" source="3559719442111433" target="3559704888342320">
+        <attvalues>
+          <attvalue for="0" value="3559719442111433" />
+        </attvalues>
+      </edge>
+      <edge id="11" source="3560392875793542" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3560392875793542" />
+        </attvalues>
+      </edge>
+      <edge id="12" source="3559799226323831" target="3562597334643629">
+        <attvalues>
+          <attvalue for="0" value="3562597334643629" />
+        </attvalues>
+      </edge>
+      <edge id="13" source="3559799226323831" target="3560472684585780">
+        <attvalues>
+          <attvalue for="0" value="3560472684585780" />
+        </attvalues>
+      </edge>
+      <edge id="14" source="3559799226323831" target="3565716873383985">
+        <attvalues>
+          <attvalue for="0" value="3565716873383985" />
+        </attvalues>
+      </edge>
+      <edge id="15" source="3559799226323831" target="3562989875414128">
+        <attvalues>
+          <attvalue for="0" value="3562989875414128" />
+        </attvalues>
+      </edge>
+      <edge id="16" source="3559799226323831" target="3566086316098316">
+        <attvalues>
+          <attvalue for="0" value="3566086316098316" />
+        </attvalues>
+      </edge>
+      <edge id="17" source="3559799226323831" target="3565716873654952">
+        <attvalues>
+          <attvalue for="0" value="3565716873654952" />
+        </attvalues>
+      </edge>
+      <edge id="18" source="3559799226323831" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559799226323831" />
+        </attvalues>
+      </edge>
+      <edge id="19" source="3559799226323831" target="3560472684826690">
+        <attvalues>
+          <attvalue for="0" value="3560472684826690" />
+        </attvalues>
+      </edge>
+      <edge id="20" source="3559787855986253" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559787855986253" />
+        </attvalues>
+      </edge>
+      <edge id="21" source="3565223300499670" target="3559755030990598">
+        <attvalues>
+          <attvalue for="0" value="3565223300499670" />
+        </attvalues>
+      </edge>
+      <edge id="22" source="3561181450986988" target="3559697648749562">
+        <attvalues>
+          <attvalue for="0" value="3561181450986988" />
+        </attvalues>
+      </edge>
+      <edge id="23" source="3560170598673715" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3560170598673715" />
+        </attvalues>
+      </edge>
+      <edge id="24" source="3560170598673715" target="3560174142762291">
+        <attvalues>
+          <attvalue for="0" value="3560174142762291" />
+        </attvalues>
+      </edge>
+      <edge id="25" source="3559707417127426" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559707417127426" />
+        </attvalues>
+      </edge>
+      <edge id="26" source="3559878926661264" target="3559721623872023">
+        <attvalues>
+          <attvalue for="0" value="3559878926661264" />
+        </attvalues>
+      </edge>
+      <edge id="27" source="3565223300175527" target="3559755030990598">
+        <attvalues>
+          <attvalue for="0" value="3565223300175527" />
+        </attvalues>
+      </edge>
+      <edge id="28" source="3559754502394686" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559754502394686" />
+        </attvalues>
+      </edge>
+      <edge id="29" source="3559792775784321" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559792775784321" />
+        </attvalues>
+      </edge>
+      <edge id="30" source="3559818402509587" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559818402509587" />
+        </attvalues>
+      </edge>
+      <edge id="31" source="3559780267871806" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559780267871806" />
+        </attvalues>
+      </edge>
+      <edge id="32" source="3559780267871806" target="3559781530526668">
+        <attvalues>
+          <attvalue for="0" value="3559781530526668" />
+        </attvalues>
+      </edge>
+      <edge id="33" source="3560027233180949" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3560027233180949" />
+        </attvalues>
+      </edge>
+      <edge id="34" source="3563536229752733" target="3559697648749562">
+        <attvalues>
+          <attvalue for="0" value="3563536229752733" />
+        </attvalues>
+      </edge>
+      <edge id="35" source="3561181450986731" target="3559697648749562">
+        <attvalues>
+          <attvalue for="0" value="3561181450986731" />
+        </attvalues>
+      </edge>
+      <edge id="36" source="3559816850677607" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559816850677607" />
+        </attvalues>
+      </edge>
+      <edge id="37" source="3559792679302553" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559792679302553" />
+        </attvalues>
+      </edge>
+      <edge id="38" source="3559755030990598" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559755030990598" />
+        </attvalues>
+      </edge>
+      <edge id="39" source="3559697648749562" target="3563485511866354">
+        <attvalues>
+          <attvalue for="0" value="3563485511866354" />
+        </attvalues>
+      </edge>
+      <edge id="40" source="3559697648749562" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559697648749562" />
+        </attvalues>
+      </edge>
+      <edge id="41" source="3559697648749562" target="3561553988777809">
+        <attvalues>
+          <attvalue for="0" value="3561553988777809" />
+        </attvalues>
+      </edge>
+      <edge id="42" source="3560063715243684" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3560063715243684" />
+        </attvalues>
+      </edge>
+      <edge id="43" source="3560034124703606" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3560034124703606" />
+        </attvalues>
+      </edge>
+      <edge id="44" source="3559686432959255" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559686432959255" />
+        </attvalues>
+      </edge>
+      <edge id="45" source="3559686432959255" target="3559880167863222">
+        <attvalues>
+          <attvalue for="0" value="3559880167863222" />
+        </attvalues>
+      </edge>
+      <edge id="46" source="3559755081291006" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559755081291006" />
+        </attvalues>
+      </edge>
+      <edge id="47" source="3559728548372295" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559728548372295" />
+        </attvalues>
+      </edge>
+      <edge id="48" source="3559728548372295" target="3559728741340870">
+        <attvalues>
+          <attvalue for="0" value="3559728741340870" />
+        </attvalues>
+      </edge>
+      <edge id="49" source="3559721623872023" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3559721623872023" />
+        </attvalues>
+      </edge>
+      <edge id="50" source="3559728988329978" target="3559728741340870">
+        <attvalues>
+          <attvalue for="0" value="3559728988329978" />
+        </attvalues>
+      </edge>
+      <edge id="51" source="3559728988329978" target="3559734223402119">
+        <attvalues>
+          <attvalue for="0" value="3559734223402119" />
+        </attvalues>
+      </edge>
+      <edge id="52" source="3560168518315220" target="3559680125100449">
+        <attvalues>
+          <attvalue for="0" value="3560168518315220" />
+        </attvalues>
+      </edge>
+      <edge id="53" source="3559680125100449" target="3559704888342320">
+        <attvalues>
+          <attvalue for="0" value="3559704888342320" />
+        </attvalues>
+      </edge>
+    </edges>
+  </graph>
+</gexf>

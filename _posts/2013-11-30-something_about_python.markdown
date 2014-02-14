@@ -31,7 +31,7 @@ Python目前有python3.3.4和python2.7.6（我印象中之前官网上的说明�
 
 安装Python的程序的最便捷方式就是使用Python的包管理器Pip或者Easy_install，二者之间可以互相替代，不过有的包可能只能用二者之一进行安装，如果安装失败，请尝试另一种方式。
 
-5、对于无法用pip或easy_install安装python包你有更多的选择
+5、对于无法用pip或easy_install安装的python包你可以尝试一下下面的方法
 
 Windows用户可以看一下[http://www.lfd.uci.edu/~gohlke/pythonlibs/](http://www.lfd.uci.edu/~gohlke/pythonlibs/)，页面的主人提供了大部分知名python包的exe版本，直接下载安装即可。
 

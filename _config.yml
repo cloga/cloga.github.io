@@ -3,8 +3,8 @@
 permalink: /:categories/:year/:month/:day/:title 
 
 redcarpet:
-  extensions: [fenced_code_blocks]
-  render_options:
+  extensions: ["fenced_code_blocks"]
+
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 pygments: true

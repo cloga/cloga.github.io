@@ -1,0 +1,59 @@
+---
+author: admin
+comments: true
+date: 2012-10-25 02:36:16+00:00
+layout: post
+slug: 'GTM&Tags'
+title: 在GTM中指定Tag的依存关系
+wordpress_id: 1704
+categories:
+- Digital分析
+tags:
+- GTM
+---
+
+Google Tag Manager便利了网站分析师的工作，我一直认为它有一个局限性：一个Container中的Tag是异步加载的，各个Tag之间没有顺序，因此，如果一些Tag之前有依存关系，即如果B tag必须要在A Tag执行之后执行才有效。比如GA触发Beacon的Tag（trackPageview，trackEvent等），必须要在定义了跟踪器对象及各种参数之后执行才有效，不然轻者造成数据丢失，重则造成数据异常。关于这一点[纪杨同学](http://jiyang.me/?p=441)的文章中也有提到，昨天我也有和[Rokie同学](http://rokie.ueuo.com)聊到这一点，并且在他那里找到了一个相对完美的解决方案（话说他的项目都有够复杂，Minisite用到虚拟电子商务跟踪有木有~）。
+
+解决方案的思路是这样利用GTM的Data layer为A Tag的触发指定一个Event，B Tag的触发条件定义为这个事件。OK，很精巧的一个逻辑，不需要很复杂的东西。
+
+以我的Blog为例，首先你需要在页面上放置GTM的Data Layer，很简单，只需要在页面的Body部分放置：
+
+    
+    <script>
+      dataLayer = [];
+    </script>
+
+
+我将定义GA跟踪器参数的那一堆Tag（不包含trackPageview等触发Beacon的Tag）定义为GAS-GTAC，我用的是cardinal path的插件，跟踪器名称有一些小小的差异。同时要在这个Tag的最底部指定一个Event：
+
+    
+    dataLayer.push({'event': 'gatc'});
+
+
+这样在这个tag执行之后就在data layer中产生一个event，而这个event可以用于其他tag的触发规则，这样就保证其他的tag是在这个tag执行后触发。 这个tag的触发规则为：
+
+[caption id="attachment_1705" align="aligncenter" width="658"][![All Pages Rule](http://www.cloga.info/wp-content/uploads/2012/10/All-Pages.jpg)](http://www.cloga.info/wp-content/uploads/2012/10/All-Pages.jpg) All Pages Rule[/caption]
+
+
+<!-- more -->
+
+
+最后再将触发beacon的tag放在一个tag里面，比如trackPageview等，定义为GAS-trackPageview，GAS还提供了一些其他的功能比如form监测，outbound监测。
+
+这个tag的触发规则为：
+
+[caption id="attachment_1706" align="aligncenter" width="651"][![GATC-Rule](http://www.cloga.info/wp-content/uploads/2012/10/GATC-Rule.jpg)](http://www.cloga.info/wp-content/uploads/2012/10/GATC-Rule.jpg) GATC-Rule[/caption]
+
+OK，这样就在两个Tag之间建立的依存关系，GAS-trackPageview的触发是在GAS-GATC之后。
+
+用GTM Preview结果如下：
+
+[caption id="attachment_1707" align="aligncenter" width="506"][![GTM preview](http://www.cloga.info/wp-content/uploads/2012/10/GTM-preview.jpg)](http://www.cloga.info/wp-content/uploads/2012/10/GTM-preview.jpg) GTM Preview[/caption]
+
+Tag触发正常。
+
+GA Debugger也显示GA的Beacon发送正常。
+
+[caption id="attachment_1709" align="aligncenter" width="742"][![GA Debugger](http://www.cloga.info/wp-content/uploads/2012/10/GA-Debugger.jpg)](http://www.cloga.info/wp-content/uploads/2012/10/GA-Debugger.jpg) GA Debugger[/caption]
+
+大功告成，Happy Analytics~

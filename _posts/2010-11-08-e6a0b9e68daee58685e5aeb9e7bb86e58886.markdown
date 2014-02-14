@@ -1,0 +1,27 @@
+---
+author: cloga0216
+comments: true
+date: 2010-11-08 15:30:12+00:00
+layout: post
+slug: '%e6%a0%b9%e6%8d%ae%e5%86%85%e5%ae%b9%e7%bb%86%e5%88%86'
+title: 根据内容细分
+wordpress_id: 691
+tags:
+- 细分
+---
+
+通常在一个网站中，你可能想要满足不同访问者的需求——例如，产品购买VS支持或者公司信息VS客户信息。这些不同需求的测量需要每个部分设置非常不同的目标——因此，有必要使用过滤器创建不同的配置文件。图8.21是根据内容细分的过滤器的例子——在这种情况下，博客读者。
+
+[![](http://www.cloga.info/wp-content/uploads/2010/11/8-21.png)](http://www.cloga.info/wp-content/uploads/2010/11/8-21.png)
+
+
+ 图8.21  仅包括blog访问者的过滤器
+
+
+当然这个过滤器的成功依赖于你有一个秩序井然的网站目录结构。如果你的网站目录结果比较混乱，那么你可以用虚拟页面浏览量构建虚拟结果，如[第7章“trackPageview()：Google Analytics主力”](http://www.cloga.info/archives/category/web-metrics/chater7)所述。<!-- more -->
+**指定过滤器顺序
+**默认情况下，配置文件的过滤器以添加的顺序应用于进入的数据。但是，你能在你的配置文件设置页面方便的修改这个顺序，从你的账户的配置文件中的指定过滤器顺序链接（见图8.22）。如果这两个过滤器结合使用，那么过滤器顺序对图8.18和图8.19所描述的过滤器非常重要。
+
+
+[![](http://www.cloga.info/wp-content/uploads/2010/11/8-22.png)](http://www.cloga.info/wp-content/uploads/2010/11/8-22.png)
+图8.22  指定过滤器顺序（Cloga：订单！囧~）

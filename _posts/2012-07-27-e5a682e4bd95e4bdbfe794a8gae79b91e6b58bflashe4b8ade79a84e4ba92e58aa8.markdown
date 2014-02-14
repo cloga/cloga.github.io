@@ -1,0 +1,71 @@
+---
+author: admin
+comments: true
+date: 2012-07-27 23:48:01+00:00
+layout: post
+slug: '%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8ga%e7%9b%91%e6%b5%8bflash%e4%b8%ad%e7%9a%84%e4%ba%92%e5%8a%a8'
+title: 使用GA监测Flash中的互动
+wordpress_id: 1614
+categories:
+- Digital分析
+tags:
+- Flash
+---
+
+由于国内IE6的“普及”，限制了HTML5的广泛应用，国内的互动广告形式仍然是以Flash为主。而Flash互动的监测也就成为Flash Builder和Digital Analyst的标配技能。下面以GA为例，讲一下Flash互动监测基本方法论。
+
+监测的基本原理很简单：通过AS调用页面上的JS方法。
+
+AS调用页面的JS有两种方式：
+
+1、ExternalInterface类的call方法
+
+    
+    ExternalInterface.call(functionName:String,...arguments):*
+
+
+fuctionName:要调用的JavaScript函数名
+
+arguments:参数，可选<!-- more -->
+
+**不带参数的情况**
+
+    
+    JavaScript：function Show() {　 alert("I am a func!");}
+
+
+
+    
+    ActionScript：ExternalInterface.call("Show");
+
+
+**带参数的情况**
+
+JavaScript：function Show(message) {　　alert(message);}
+
+    
+    ActionScript：ExternalInterface.call("Show","I am a message from AS");
+
+
+2、用getURL方法来调用
+
+    
+    getURL("javascript:show('i am a message from as)","_self");
+
+
+**几点说明如下：**
+
+1、不要忘记在HTML源码中调用GATC，以及封装的JS方法
+
+2、遇到同时调用多个方法（比如，一个交互要使用多种监测工具跟踪，GA、DC、Webtrends、Admaster，相信我确实有的项目要这样做，至于产生的数据垃圾在分析时会不会用则是另外的事情）时，可以这几个方法封装在一个JS了，再在AS中调用这个方法。
+
+    
+    function trackinter(argument){
+        GA function
+        DC Floodlight function
+        Webtrends function
+        Admaster function
+    }
+
+
+GA提供专门针对Flash跟踪的gaforflash：[https://developers.google.com/analytics/devguides/collection/other/flashTrackingIntro?hl=zh-CN](https://developers.google.com/analytics/devguides/collection/other/flashTrackingIntro?hl=zh-CN)，这个是要在Flash开发过程中调用GA的组件，这是另外一个故事了。使用AS调用JS即可以完成Flash的互动监测。

@@ -1,0 +1,20 @@
+---
+author: cloga0216
+comments: true
+date: 2011-02-01 05:51:18+00:00
+layout: post
+slug: '%e8%b7%b3%e5%87%ba%e7%8e%87%e8%a7%a3%e5%af%86'
+title: 跳出率解密
+wordpress_id: 859
+categories:
+- 他山之石
+tags:
+- bounce-rate
+---
+
+原文地址：[http://blog.kissmetrics.com/bounce-rate/](http://blog.kissmetrics.com/bounce-rate/)
+
+如果你在网络上运行业务，并且在网站安装了Google Analytics，你很可能知道网站的跳出率。但是，你知道它是如何计算的吗？行业的平均跳出率是多少？哪些因素影响跳出率？下面的内容将给你答案，并且给你一些建议帮你改善跳出率。<!-- more -->
+
+
+[![](http://www.cloga.info/wp-content/uploads/2011/02/bounce-rate-dmsy.png)](http://www.cloga.info/wp-content/uploads/2011/02/bounce-rate-dmsy.png)[](http://www.cloga.info/wp-content/uploads/2011/02/bounce-rate-dmsy.png)

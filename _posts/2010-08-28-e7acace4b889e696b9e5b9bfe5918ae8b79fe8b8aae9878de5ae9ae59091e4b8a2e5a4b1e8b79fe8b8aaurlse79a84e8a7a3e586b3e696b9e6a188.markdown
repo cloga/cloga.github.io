@@ -1,0 +1,32 @@
+---
+author: cloga0216
+comments: true
+date: 2010-08-28 15:21:05+00:00
+layout: post
+slug: '%e7%ac%ac%e4%b8%89%e6%96%b9%e5%b9%bf%e5%91%8a%e8%b7%9f%e8%b8%aa%e9%87%8d%e5%ae%9a%e5%90%91%e4%b8%a2%e5%a4%b1%e8%b7%9f%e8%b8%aaurls%e7%9a%84%e8%a7%a3%e5%86%b3%e6%96%b9%e6%a1%88'
+title: 第三方广告跟踪重定向丢失跟踪URLs的解决方案
+wordpress_id: 108
+tags:
+- Google Analytics
+- web metrics
+---
+
+使用第三方广告跟踪系统，比如99click、ADform、Atlas Search、Blue Streak、DoubleClick、Efficient Frontier、以及SEM Director（甚至客户自己的跟踪系统），来跟踪你的网站的点击进入意味着你的访问者来自URL重定向。这使先前在你的广告公司登记的点击自动重定向访问者到你的网站的实际目标页面。这种两步跳的目的是用独立于你公司之外的跟踪网站收集访问者统计数据，通常是为了计费。因为，这一过程有短暂的延迟，这阻止了一些访问者登录到你的页面。结果是少量数据损失，因此，数据无法一致。
+
+更重要也更普遍的的是，URL重定向会破坏网站分析工具添加到目标页面的跟踪参数。例如，你的目标页面可能看起来是这样：[http://www.mysite.com/?source=google&medium=ppc&campaign=Jan10](http://www.mysite.com/?source=google&medium=ppc&campaign=Jan10)。当添加第三方跟踪系统的重定向，应该是这样：[http://www.redirect.com?url=http://www.mywebsite.com?source=google&medium=ppc&campaign=Jan10](http://www.redirect.com/?url=http:/www.mywebsite.com?source=google&medium=ppc&campaign=Jan10)。问题出现在第二个链接的第二个问号，因为，在任何有效的URL中不应多于一个问号。一些第三方跟踪系统能检测这种错误，并且去掉第二个问号及接下来的跟踪参数，导致广告系列数据的丢失。
+
+一些第三方广告跟踪系统用#代替第二个问号，因此，URL能被正确处理。如果你不确定该怎么做，你能通过在第三方广告跟踪系统中编码目标页面URL来完全避免问题，比如，前面例子的最终Landing Page应该是：
+
+[http://www.redirect.com?url=http%3A%2F%2Fwww.mywebsite.com%3Fsource%3Dgoogle%26medium%3Dppc%26campaign%3DJan10](http://www.redirect.com/?url=http%3A%2F%2Fwww.mywebsite.com%3Fsource%3Dgoogle%26medium%3Dppc%26campaign%3DJan10)。
+
+[URLEncode批量修改的Excel文档下载](http://www.cloga.info/wp-content/uploads/2010/08/URLEncode.xlsm)，在文档中调用URLEncode函数就可以。
+
+正如下面描述的：[http://www.w3schools.com/tags/ref_urlencode.asp](http://www.w3schools.com/tags/ref_urlencode.asp)。
+
+**注：**根据我的经验，PPC服务提供商报告与网站分析工具出现差异的主要原因是这一部分讨论的第一个、第二个和最后一个问题。
+
+·跟踪URLs不能识别付费与免费访问者
+
+·页面加载缓慢
+
+·由于第三方广告跟踪重定向丢失数据

@@ -1,0 +1,35 @@
+---
+author: cloga0216
+comments: true
+date: 2010-11-06 12:18:31+00:00
+layout: post
+slug: '%e6%a0%b9%e6%8d%ae%e5%b9%bf%e5%91%8a%e7%b3%bb%e5%88%97%e3%80%81%e5%aa%92%e4%bb%8b%e5%92%8c%e6%8e%a8%e8%8d%90%e6%9d%a5%e6%ba%90%e7%bb%86%e5%88%86'
+title: 根据广告系列、媒介和推荐来源细分
+wordpress_id: 684
+tags:
+- 过滤器
+---
+
+正如这一部分所讨论的其他过滤器一样，Google Analytics已经在显示不同的广告系列、媒介和推荐来源上做到很好了。但是，在一些情况下，对这些有一个配置文件，有专门的报告是非常有用的，这可以帮助你更好的优化这些。例如，如果有一个搜索营销代理正在管理你的付费搜索，那么你可能希望仅分离你的付费搜索给他们查看。同样的，如果你雇佣了一个email营销代理，那么你也能仅分离email引入。有一个单独的配置文件为你提供了对报告访问的控制，允许你过滤出噪音并且保护其他潜在的机密数据。如何构建这个过滤器取决于你如何标记着陆页URL（见[第7章“广告系列跟踪”](http://www.cloga.info/archives/category/web-metrics/chater7)）。你为utm_source、utm_medium和utm_campaign分配的值必须与下列的过滤器字段相匹配：
+•广告系列名称
+•广告系列来源
+•广告系列媒介
+为了将仅来自Google的访问者，既包括付费与非付费，过滤到一个配置文件中，这个过滤器的应用如图8.18所示。
+
+
+[![](http://www.cloga.info/wp-content/uploads/2010/11/8-18-300x176.png)](http://www.cloga.info/wp-content/uploads/2010/11/8-18.png) 图8.18  仅包含Google访问者
+
+<!-- more -->
+如果你想要仅跟踪AdWords的访问者，并且这是你正在使用的惟一的付费搜索网络；应用图8.19所示的过滤器。（我假设你在AdWords账户中开启了自动标记。）
+如果你进行了其他的付费搜索网络（百度凤巢、Microsoft adCenter、Yahoo Search Marketing等等。），并且这些用utm_medium=cpc标记，那么你将需要按顺序应用图8.18和图8.19两个过滤器。
+
+
+[![](http://www.cloga.info/wp-content/uploads/2010/11/8-19.png)](http://www.cloga.info/wp-content/uploads/2010/11/8-19.png)图8.19  仅包含AdWords访问者的过滤器
+
+
+**注：**如果你用utm_medium=ppc标记所有其他的PPC广告系列，例如Yahoo Search Marketing、Microsoft adCenter、Miva等等，那么图8.19中所示的过滤器将是Google AdWords访问者与其他付费搜索网络的重要细分。我使用这种技术是因为Google AdWords在网络营销领域相当普遍。将AdWords访问者与其他的PPC网络整体进行比较是非常有用的。
+图8.20显示了如何让细分email访问者——即，点击email信息中的链接来到你的网站的访问者，假设你将这些链接标记为utm_medium=email。
+正如你所看到的，根据广告系列、来源或媒介是非常简单的，你只需要知道在相应的着陆页URL中这些值是什么，然后，应用这些值作为包含或排除过滤器的字段值。
+
+
+[![](http://www.cloga.info/wp-content/uploads/2010/11/8-20.png)](http://www.cloga.info/wp-content/uploads/2010/11/8-20.png)图8.20  仅包含email访问者的过滤器

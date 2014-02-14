@@ -2,7 +2,7 @@
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title 
 
-redcarpet:
+markdown: redcarpet
   extensions: ["fenced_code_blocks"]
 
 

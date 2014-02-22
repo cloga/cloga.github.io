@@ -1,0 +1,8 @@
+       one  two
+index          
+a        1    1
+b        2    2
+c        3    3
+d      NaN    4
+
+[4 rows x 2 columns]

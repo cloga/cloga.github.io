@@ -80,19 +80,210 @@ dict返回的是dict of dict；list返回的是列表的字典；series返回的
 
 head和tail方法可以显示DataFrame前N条和后N条记录，N为对应的参数，默认值为5。这通常是拿到DataFrame后的第一个命令，可以方便的了解数据内容和含义。
 
-[caption id="attachment_2048" align="aligncenter" width="125"][![Pandas_101_02](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-6.07.22-PM.png)](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-6.07.22-PM.png) Pandas_101_02[/caption]
+```python
+df.head()
+```
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>index</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>  1</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>  2</td>
+      <td> 2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>  3</td>
+      <td> 3</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>NaN</td>
+      <td> 4</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 2 columns</p>
+</div>
+
+```python
+df.tail()
+```
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>index</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>  1</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>  2</td>
+      <td> 2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>  3</td>
+      <td> 3</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>NaN</td>
+      <td> 4</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 2 columns</p>
+</div>
 
 index（行）和columns（列）属性，可以获得DataFrame的行和列的标签。这也是了解数据内容和含义的重要步骤。
 
-[caption id="" align="aligncenter" width="394"][![Pandas_101_03](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-10.46.38-AM.png)](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-10.46.38-AM.png) Pandas_101_03[/caption]
+```python
+df.index
+```
+
+```
+Index([u'a', u'b', u'c', u'd'], dtype='object')
+```
+
+```python
+df.columns
+```
+
+```
+Index([u'one', u'two'], dtype='object')
+```
 
 decribe方法可以计算各个列的基本描述统计值。包含计数，平均数，标准差，最大值，最小值及4分位差。
 
-[caption id="attachment_2052" align="aligncenter" width="173"]![Pandas_101_04](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-7.22.35-PM.png) Pandas_101_04[/caption]
+```python
+df.describe()
+```
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td> 3.0</td>
+      <td> 4.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td> 2.0</td>
+      <td> 2.500000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td> 1.0</td>
+      <td> 1.290994</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td> 1.0</td>
+      <td> 1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td> 1.5</td>
+      <td> 1.750000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td> 2.0</td>
+      <td> 2.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td> 2.5</td>
+      <td> 3.250000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td> 3.0</td>
+      <td> 4.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 2 columns</p>
+</div>
+
 
 ### 行列转置
 
-[caption id="attachment_2055" align="aligncenter" width="145"][![Pandas_101_05](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-7.48.29-PM.png)](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-7.48.29-PM.png) Pandas_101_05[/caption]
+```python
+df.T
+```
+
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>index</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>one</th>
+      <td> 1</td>
+      <td> 2</td>
+      <td> 3</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td> 1</td>
+      <td> 2</td>
+      <td> 3</td>
+      <td>  4</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 4 columns</p>
+</div>
 
 DataFrame提供了多种排序方式。
 

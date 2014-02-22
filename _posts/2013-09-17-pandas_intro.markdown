@@ -45,10 +45,6 @@ d = {'one' : pd.Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : pd.Series([1
 df=pd.DataFrame(d)
 ```
 
-输出：
-
-[caption id="attachment_2039" align="aligncenter" width="111"][![pandas_101_01](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-10.23.09-AM.png)](http://www.cloga.info/wp-content/uploads/2013/09/Screen-Shot-2013-09-08-at-10.23.09-AM.png) pandas_101_01[/caption]
-
 可以看到d是一个字典，其中one的值为Series有3个值，而two为Series有4个值。由d构建的为一个4行2列的DataFrame。其中one只有3个值，因此d行one列为NaN（Not a Number）--Pandas默认的缺失值标记。
 
 - 从列表的字典构建DataFrame，其中嵌套的每个列表（List）代表的是一个列，字典的名字则是列标签。这里要注意的是每个列表中的元素数量应该相同。否则会报错：

@@ -281,6 +281,8 @@ df.T
 <p>2 rows × 4 columns</p>
 </div>
 
+### 排序
+
 DataFrame提供了多种排序方式。
 
 ```python    

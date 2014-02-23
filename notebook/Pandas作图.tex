@@ -1,0 +1,627 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass{article}
+
+    
+    
+    \usepackage{graphicx} % Used to insert images
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{color} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage[utf8]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    
+
+    
+    
+    \definecolor{orange}{cmyk}{0,0.4,0.8,0.2}
+    \definecolor{darkorange}{rgb}{.71,0.21,0.01}
+    \definecolor{darkgreen}{rgb}{.12,.54,.11}
+    \definecolor{myteal}{rgb}{.26, .44, .56}
+    \definecolor{gray}{gray}{0.45}
+    \definecolor{lightgray}{gray}{.95}
+    \definecolor{mediumgray}{gray}{.8}
+    \definecolor{inputbackground}{rgb}{.95, .95, .85}
+    \definecolor{outputbackground}{rgb}{.95, .95, .95}
+    \definecolor{traceback}{rgb}{1, .95, .95}
+    % ansi colors
+    \definecolor{red}{rgb}{.6,0,0}
+    \definecolor{green}{rgb}{0,.65,0}
+    \definecolor{brown}{rgb}{0.6,0.6,0}
+    \definecolor{blue}{rgb}{0,.145,.698}
+    \definecolor{purple}{rgb}{.698,.145,.698}
+    \definecolor{cyan}{rgb}{0,.698,.698}
+    \definecolor{lightgray}{gray}{0.5}
+    
+    % bright ansi colors
+    \definecolor{darkgray}{gray}{0.25}
+    \definecolor{lightred}{rgb}{1.0,0.39,0.28}
+    \definecolor{lightgreen}{rgb}{0.48,0.99,0.0}
+    \definecolor{lightblue}{rgb}{0.53,0.81,0.92}
+    \definecolor{lightpurple}{rgb}{0.87,0.63,0.87}
+    \definecolor{lightcyan}{rgb}{0.5,1.0,0.83}
+    
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    
+    \DefineShortVerb[commandchars=\\\{\}]{\|}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{使用Pandas作图}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=blue,
+      linkcolor=darkorange,
+      citecolor=darkgreen,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    推荐使用ipython的pylab模式，如果要在ipython
+notebook中嵌入图片，则还需要指定pylab=inline。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}54}]:} \PY{n}{ipython} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{pylab} \PY{c}{\PYZsh{}\PYZsh{}ipython的pylab模式}
+         \PY{n}{ipython} \PY{n}{notebook} \PY{o}{\PYZhy{}}\PY{o}{\PYZhy{}}\PY{n}{pylab}\PY{o}{=}\PY{n}{inline} \PY{c}{\PYZsh{}\PYZsh{}notebook的inline模式}
+         \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k+kn}{as} \PY{n+nn}{pd}
+\end{Verbatim}
+
+    \subsection{基本画图命令}\label{ux57faux672cux753bux56feux547dux4ee4}
+
+Pandas通过整合\href{http://matplotlib.sourceforge.net/}{matplotlib}的相关功能实现了基于DataFrame的一些作图功能。下面的数据是每年美国男女出生数据：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{url\PYZus{}1} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{http://s3.amazonaws.com/assets.datacamp.com/course/dasi/present.txt}\PY{l+s}{\PYZsq{}}
+          \PY{n}{present} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}table}\PY{p}{(}\PY{n}{url}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{ }\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{present}\PY{o}{.}\PY{n}{shape}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:} (63, 3)
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{present}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}8}]:} Index([u'year', u'boys', u'girls'], dtype='object')
+\end{Verbatim}
+        
+    可以看到这个数据集共有63条记录，共有三个字段：Year，boys，girls。为了简化计算将year作为索引。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{present\PYZus{}year} \PY{o}{=} \PY{n}{present}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{l+s}{\PYZsq{}}\PY{l+s}{year}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    plot是画图的最主要方法，Series和DataFrame都有plot方法。
+
+我们可以这样看一下男生出生比例的趋势图：
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{present\PYZus{}year}\PY{p}{[}\PY{l+s}{\PYZsq{}}\PY{l+s}{boys}\PY{l+s}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{best}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}92}]:} <matplotlib.legend.Legend at 0x10b9c7610>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    这是Series上的plot方法，通过DataFrame的plot方法，你可以将男生和女生出生数量的趋势图画在一起。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{present\PYZus{}year}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} <matplotlib.axes.AxesSubplot at 0x108ce4910>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_11_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}53}]:} \PY{n}{present\PYZus{}year}\PY{o}{.}\PY{n}{girls}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{g}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{present\PYZus{}year}\PY{o}{.}\PY{n}{boys}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{color}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{b}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{loc}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{best}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}53}]:} <matplotlib.legend.Legend at 0x10999e510>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_12_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    可以看到DataFrame提供plot方法与在多个Series调用多次plot方法的效果是一致。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{present\PYZus{}year}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{bar}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}71}]:} <matplotlib.axes.AxesSubplot at 0x10ab31390>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_14_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    plot默认生成是曲线图，你可以通过kind参数生成其他的图形，可选的值为：line,
+bar, barh, kde, density, scatter。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{present\PYZus{}year}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{bar}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}83}]:} <matplotlib.axes.AxesSubplot at 0x10bb35890>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_16_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}84}]:} \PY{n}{present\PYZus{}year}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{barh}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}84}]:} <matplotlib.axes.AxesSubplot at 0x10eb01890>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_17_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    如果你需要累积的柱状图，则只需要指定stacked=True。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}85}]:} \PY{n}{present\PYZus{}year}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{bar}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{stacked}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}85}]:} <matplotlib.axes.AxesSubplot at 0x10bbdb3d0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_19_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    制作相对的累积柱状图，需要一点小技巧。
+
+首先需要计算每一行的汇总值，可以在DataFrame上直接调用sum方法，参数为1，表示计算行的汇总。默认为0，表示计算列的汇总。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{n}{present\PYZus{}year}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{5}\PY{p}{]}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}119}]:} year
+          1940    2360399
+          1941    2513427
+          1942    2808996
+          1943    2936860
+          1944    2794800
+          dtype: int64
+\end{Verbatim}
+        
+    有了每一行的汇总值之后，再用每个元素除以对应行的汇总值就可以得出需要的数据。这里可以使用DataFrame的div函数，同样要指定axis的值为0。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{present\PYZus{}year}\PY{o}{.}\PY{n}{div}\PY{p}{(}\PY{n}{present\PYZus{}year}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,}\PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{l+m+mi}{10}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{barh}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{stacked}\PY{o}{=}\PY{n+nb+bp}{True}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}124}]:} <matplotlib.axes.AxesSubplot at 0x113223290>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_23_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{散点图和相关}\label{ux6563ux70b9ux56feux548cux76f8ux5173}
+
+plot也可以画出散点图。使用kind=`scatter', x和y指定x轴和y轴使用的字段。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{n}{present\PYZus{}year}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{x}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{boys}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{y}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{girls}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{scatter}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}138}]:} <matplotlib.axes.AxesSubplot at 0x1141c9810>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_25_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    我们再来载入一下鸢尾花数据。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{url\PYZus{}2} \PY{o}{=} \PY{l+s}{\PYZsq{}}\PY{l+s}{https://raw.github.com/pydata/pandas/master/pandas/tests/data/iris.csv}\PY{l+s}{\PYZsq{}}
+          \PY{n}{iris} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{n}{url\PYZus{}2}\PY{p}{)}
+          \PY{n}{iris}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{5}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}137}]:}    SepalLength  SepalWidth  PetalLength  PetalWidth         Name
+          0          5.1         3.5          1.4         0.2  Iris-setosa
+          1          4.9         3.0          1.4         0.2  Iris-setosa
+          2          4.7         3.2          1.3         0.2  Iris-setosa
+          3          4.6         3.1          1.5         0.2  Iris-setosa
+          4          5.0         3.6          1.4         0.2  Iris-setosa
+          
+          [5 rows x 5 columns]
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{n}{iris}\PY{o}{.}\PY{n}{corr}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}141}]:}              SepalLength  SepalWidth  PetalLength  PetalWidth
+          SepalLength     1.000000   -0.109369     0.871754    0.817954
+          SepalWidth     -0.109369    1.000000    -0.420516   -0.356544
+          PetalLength     0.871754   -0.420516     1.000000    0.962757
+          PetalWidth      0.817954   -0.356544     0.962757    1.000000
+          
+          [4 rows x 4 columns]
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{k+kn}{from} \PY{n+nn}{pandas.tools.plotting} \PY{k+kn}{import} \PY{n}{scatter\PYZus{}matrix}
+          \PY{n}{scatter\PYZus{}matrix}\PY{p}{(}\PY{n}{iris}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{l+m+mf}{0.2}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}\PY{p}{,} \PY{n}{diagonal}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{kde}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}143}]:} array([[<matplotlib.axes.AxesSubplot object at 0x1141e5290>,
+                  <matplotlib.axes.AxesSubplot object at 0x114313610>,
+                  <matplotlib.axes.AxesSubplot object at 0x11433fbd0>,
+                  <matplotlib.axes.AxesSubplot object at 0x114328e10>],
+                 [<matplotlib.axes.AxesSubplot object at 0x11411f350>,
+                  <matplotlib.axes.AxesSubplot object at 0x114198690>,
+                  <matplotlib.axes.AxesSubplot object at 0x114181b90>,
+                  <matplotlib.axes.AxesSubplot object at 0x11436eb90>],
+                 [<matplotlib.axes.AxesSubplot object at 0x11438ced0>,
+                  <matplotlib.axes.AxesSubplot object at 0x114378310>,
+                  <matplotlib.axes.AxesSubplot object at 0x1143e34d0>,
+                  <matplotlib.axes.AxesSubplot object at 0x114d0a810>],
+                 [<matplotlib.axes.AxesSubplot object at 0x1143ecd50>,
+                  <matplotlib.axes.AxesSubplot object at 0x114d40e90>,
+                  <matplotlib.axes.AxesSubplot object at 0x114d63210>,
+                  <matplotlib.axes.AxesSubplot object at 0x114d4a2d0>]], dtype=object)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_29_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{箱图}\label{ux7bb1ux56fe}
+
+DataFrame提供了boxplot方法可以用来画箱图。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{n}{iris}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}139}]:} \{'boxes': [<matplotlib.lines.Line2D at 0x1141439d0>,
+            <matplotlib.lines.Line2D at 0x11416c1d0>,
+            <matplotlib.lines.Line2D at 0x1141559d0>,
+            <matplotlib.lines.Line2D at 0x11414b210>],
+           'caps': [<matplotlib.lines.Line2D at 0x11416af90>,
+            <matplotlib.lines.Line2D at 0x1141434d0>,
+            <matplotlib.lines.Line2D at 0x114172790>,
+            <matplotlib.lines.Line2D at 0x114172c90>,
+            <matplotlib.lines.Line2D at 0x114153f90>,
+            <matplotlib.lines.Line2D at 0x1141554d0>,
+            <matplotlib.lines.Line2D at 0x11414f7d0>,
+            <matplotlib.lines.Line2D at 0x11414fcd0>],
+           'fliers': [<matplotlib.lines.Line2D at 0x114145410>,
+            <matplotlib.lines.Line2D at 0x114145b50>,
+            <matplotlib.lines.Line2D at 0x11416cbd0>,
+            <matplotlib.lines.Line2D at 0x1141530d0>,
+            <matplotlib.lines.Line2D at 0x114151410>,
+            <matplotlib.lines.Line2D at 0x114151b90>,
+            <matplotlib.lines.Line2D at 0x11414bc10>,
+            <matplotlib.lines.Line2D at 0x1141743d0>],
+           'medians': [<matplotlib.lines.Line2D at 0x114143ed0>,
+            <matplotlib.lines.Line2D at 0x11416c6d0>,
+            <matplotlib.lines.Line2D at 0x114155ed0>,
+            <matplotlib.lines.Line2D at 0x11414b710>],
+           'whiskers': [<matplotlib.lines.Line2D at 0x11416a7d0>,
+            <matplotlib.lines.Line2D at 0x11416aa10>,
+            <matplotlib.lines.Line2D at 0x114172050>,
+            <matplotlib.lines.Line2D at 0x114172290>,
+            <matplotlib.lines.Line2D at 0x114153590>,
+            <matplotlib.lines.Line2D at 0x114153a90>,
+            <matplotlib.lines.Line2D at 0x11414f090>,
+            <matplotlib.lines.Line2D at 0x11414f2d0>]\}
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_31_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    通过by参数可以计算不同分组情况下，各个字段的箱图。
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}171}]:} \PY{n}{iris}\PY{o}{.}\PY{n}{boxplot}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{Name}\PY{l+s}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,} \PY{l+m+mi}{8}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}171}]:} array([[<matplotlib.axes.AxesSubplot object at 0x120dd8f50>,
+                  <matplotlib.axes.AxesSubplot object at 0x1218d3410>],
+                 [<matplotlib.axes.AxesSubplot object at 0x1218f47d0>,
+                  <matplotlib.axes.AxesSubplot object at 0x1218de490>]], dtype=object)
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_33_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{直方图和概率密度分布}\label{ux76f4ux65b9ux56feux548cux6982ux7387ux5bc6ux5ea6ux5206ux5e03}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{n}{iris}\PY{o}{.}\PY{n}{ix}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{p}{)}
+          \PY{n}{iris}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s}{\PYZsq{}}\PY{l+s}{kde}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}150}]:} <matplotlib.axes.AxesSubplot at 0x117263890>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_35_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_35_2.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{多变量的可视化}\label{ux591aux53d8ux91cfux7684ux53efux89c6ux5316}
+
+    Radviz
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{k+kn}{from} \PY{n+nn}{pandas.tools.plotting} \PY{k+kn}{import} \PY{n}{radviz}
+          \PY{n}{radviz}\PY{p}{(}\PY{n}{iris}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Name}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}146}]:} <matplotlib.axes.AxesSubplot at 0x11412e550>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_38_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Andrews Curves
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}173}]:} \PY{k+kn}{from} \PY{n+nn}{pandas.tools.plotting} \PY{k+kn}{import} \PY{n}{andrews\PYZus{}curves}
+          \PY{n}{andrews\PYZus{}curves}\PY{p}{(}\PY{n}{iris}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Name}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}173}]:} <matplotlib.axes.AxesSubplot at 0x1218e2d50>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_40_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Parallel Coordinates
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{k+kn}{from} \PY{n+nn}{pandas.tools.plotting} \PY{k+kn}{import} \PY{n}{parallel\PYZus{}coordinates}
+          \PY{n}{parallel\PYZus{}coordinates}\PY{p}{(}\PY{n}{iris}\PY{p}{,} \PY{l+s}{\PYZsq{}}\PY{l+s}{Name}\PY{l+s}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}174}]:} <matplotlib.axes.AxesSubplot at 0x1224b36d0>
+\end{Verbatim}
+        
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{使用Pandas作图_files/使用Pandas作图_42_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

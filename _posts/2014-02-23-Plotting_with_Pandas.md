@@ -5,7 +5,7 @@ layout: post
 slug: 'plotting_with_pandas'
 title: 用Pandas作图
 categories:
-- python
+- Python
 
 tags:
 - Pandas
@@ -13,6 +13,7 @@ tags:
 - Ploting
 ---
 
+关于Pandas的基本使用介绍，请查看另一篇博文：[Python中的结构化数据分析利器-Pandas简介](http://cloga.info/python/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/2013/09/17/pandas_intro/)
 
 推荐使用ipython的pylab模式，如果要在ipython notebook中嵌入图片，则还需要指定pylab=inline。
 

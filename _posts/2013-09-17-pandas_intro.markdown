@@ -11,7 +11,7 @@ categories:
 - 数据科学
 tags:
 - dataframe
-- pandas
+- Pandas
 - 数据分析
 - 时间序列分析
 ---
@@ -500,5 +500,7 @@ ts_h=ts.resample('H', how='count')#M,5Min,1s
 Pandas也支持一定的绘图功能，需要安装matplot模块。
 
 比如前面创建的时间序列，通过plot()就可以绘制出折线图，也可以使用hist()命令绘制频率分布的直方图。
+
+关于Panda作图，请查看另一篇博文：[用Pandas作图](http://cloga.info/python/2014/02/23/Plotting_with_Pandas/)
 
 以上是关于Pandas的简单介绍，其实除了Pandas之外，Python还提供了多个科学计算包，比如Numpy，Scipy，以及数据挖掘的包：Scikit Learn，Orage，NLTK等，感兴趣的同学可以了解一下。

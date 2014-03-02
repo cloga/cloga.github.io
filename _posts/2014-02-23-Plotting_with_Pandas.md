@@ -29,7 +29,7 @@ Pandas通过整合[matplotlib](http://matplotlib.sourceforge.net/)的相关功�
 作图功能。下面的数据是每年美国男女出生数据：
 
 ```python
-url_1 = 'http://s3.amazonaws.com/assets.datacamp.com/course/dasi/present.txt'
+url = 'http://s3.amazonaws.com/assets.datacamp.com/course/dasi/present.txt'
 present = pd.read_table(url, sep=' ')
 present.shape
 ```

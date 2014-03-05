@@ -447,6 +447,14 @@ df.groupby('A').sum()#按照A列的值分组求和
 df.groupby(['A','B']).sum()##按照A、B两列的值分组求和
 ```
 
+在实际应用中，先定义groups，然后再对不同的指标指定不同计算方式。
+
+```python
+groups = df.groupby('A')#按照A列的值分组求和
+groups['B'].sum()##按照A列的值分组求B组和
+groups['B'].count()##按照A列的值分组B组计数
+```
+
 默认会以groupby的值作为索引，如果不将这些值作为索引，则需要使用as_index=False
 
 ```python

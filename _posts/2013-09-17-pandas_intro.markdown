@@ -547,28 +547,3 @@ df.groupby(['A','B'], as_index=False).sum()
 ```
 
 
-### 构建透视表
-使用pivot_table和crosstab都可以创建数据透视表
-
-```python    
-df = pd.DataFrame({'A' : ['one', 'one', 'two', 'three'] * 3,'B' : ['A', 'B', 'C'] * 4, 
-                'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2, 
-                'D' : np.random.randn(12), 'E' : np.random.randn(12)})
-pd.pivot_table(df, values = 'D', rows = ['A', 'B'], cols = ['C'])#以A、B为行标签，以C为列标签将D列的值汇总求和
-pd.crosstab(rows = ['A', 'B'], cols = ['C'], values = 'D')#以A、B为行标签，以C为列标签将D列的值汇总求和
-```
-
-
-
-###  时间序列分析
-
-时间序列也是Pandas的一个特色。时间序列在Pandas中就是以Timestamp为索引的Series。
-
-pandas提供to_datetime方法将代表时间的字符转化为Timestamp对象：
-
-```python
-s = '2013-09-16 21:00:00'
-ts = pd.to_datetime(s)
-```
-
-有时我们需要处理时区问题：

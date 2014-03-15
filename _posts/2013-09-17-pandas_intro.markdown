@@ -122,7 +122,7 @@ df.head()
 
 R中的对应函数：
 
-```R
+```
 head(df)
 ```
 
@@ -253,7 +253,7 @@ df.describe()
 
 R中的对应函数：
 
-```R
+```
 summary(df)
 ```
 
@@ -322,7 +322,7 @@ df = pd.read_csv('foo.csv')
 ```
 R中的对应函数：
 
-```R
+```
 df = read.csv('foo.csv')
 ```
 
@@ -334,7 +334,7 @@ df.to_csv('foo.csv')
 
 R中的对应函数：
 
-```R
+```
 df.to.csv('foo.csv')
 ```
 
@@ -452,7 +452,7 @@ df.dtypes
 
 R中的对应函数：
 
-```R
+```
 str(df)
 ```
 

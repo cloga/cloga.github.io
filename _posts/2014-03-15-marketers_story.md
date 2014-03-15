@@ -14,7 +14,7 @@ tags:
 
 其实RobotCop最初是来自于Pope卖给大Boss的提高销售额的一个Idea：将机器人的应用到国内警察市场可以每年获得6000亿美元的收入，利润率上升60%。（感兴趣的同学可以等高清版出来后，研究一下背景中的数据，看一下Pope是如何将这个Idea兜售给Boss的。）
 
-< img src="/files/idea1.png" alt="idea1" width="400px"/>
+![idea1](/files/idea1.png)
 
 ![idea2](/files/idea2.png)
 

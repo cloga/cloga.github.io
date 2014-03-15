@@ -42,7 +42,7 @@ import numpy as np
 
 ```python
 d = {'one' : pd.Series([1., 2., 3.], index=['a', 'b', 'c']),'two' : pd.Series([1., 2., 3., 4.], index=['a', 'b', 'c', 'd'])}
-df=pd.DataFrame(d)
+df = pd.DataFrame(d)
 ```
 
 可以看到d是一个字典，其中one的值为Series有3个值，而two为Series有4个值。由d构建的为一个4行2列的DataFrame。其中one只有3个值，因此d行one列为NaN（Not a Number）--Pandas默认的缺失值标记。
@@ -120,6 +120,12 @@ df.head()
 <p>4 rows × 2 columns</p>
 </div>
 
+R中的对应函数：
+
+```R
+head(df)
+```
+
 ```python
 df.tail()
 ```
@@ -173,6 +179,8 @@ df.index
 ```
 Index([u'a', u'b', u'c', u'd'], dtype='object')
 ```
+
+查看字段名
 
 ```python
 df.columns
@@ -243,6 +251,11 @@ df.describe()
 <p>8 rows × 2 columns</p>
 </div>
 
+R中的对应函数：
+
+```R
+summary(df)
+```
 
 ### 行列转置
 
@@ -305,7 +318,12 @@ DataFrame可以方便的读写数据文件，最常见的文件为CSV或Excel。
 从CSV中读取数据：
 
 ```python
-df=pd.read_csv('foo.csv')
+df = pd.read_csv('foo.csv')
+```
+R中的对应函数：
+
+```R
+df = read.csv('foo.csv')
 ```
 
 将DataFrame写入CSV：
@@ -313,6 +331,13 @@ df=pd.read_csv('foo.csv')
 ```python 
 df.to_csv('foo.csv')
 ```
+
+R中的对应函数：
+
+```R
+df.to.csv('foo.csv')
+```
+
 
 从Excel中读取数据：
 
@@ -380,6 +405,13 @@ df.iloc[1,:]#选取第一行数据，返回的为一个Series
 
 PS：loc为location的缩写，iloc则为integer & location的缩写
 
+更广义的切片方式是使用.ix，它自动根据你给到的索引类型判断是使用位置还是标签进行切片
+
+```python
+df.ix[1,1]
+df.ix['a':'b']
+```
+
 通过逻辑指针进行数据切片：
 
 ```python
@@ -418,6 +450,55 @@ df.rename(columns={u'one':'1'}, inplace=True)
 df.dtypes
 ```
 
+R中的对应函数：
+
+```R
+str(df)
+```
+
+### 查看最大值/最小值
+
+```python
+pd.Series.max()
+pd.Series.idxmax()
+```
+
+### 重设索引
+
+```python
+df.reset_index(inplace=True)
+```
+
+### 改变数据类型
+
+```python
+df['A'].astype(float)
+```
+
+
+### 计算Series每个值的频率
+
+```python
+df['A'].count_values()
+```
+
+R的对应函数：
+
+```R
+table(df['A'])
+```
+
+
+### 字符方法
+
+pandas提供许多向量化的字符操作，你可以在str属性中找到它们
+
+```python
+s.str.lower()
+s.str.len()
+s.str.contains(pattern)
+```
+
 ### DataFrame的合并
 
 Contact：
@@ -447,6 +528,12 @@ df.groupby('A').sum()#按照A列的值分组求和
 df.groupby(['A','B']).sum()##按照A、B两列的值分组求和
 ```
 
+对应R函数：
+
+```R
+tapply()
+```
+
 在实际应用中，先定义groups，然后再对不同的指标指定不同计算方式。
 
 ```python
@@ -463,13 +550,17 @@ df.groupby(['A','B'], as_index=False).sum()
 
 
 ### 构建透视表
+使用pivot_table和crosstab都可以创建数据透视表
 
 ```python    
 df = pd.DataFrame({'A' : ['one', 'one', 'two', 'three'] * 3,'B' : ['A', 'B', 'C'] * 4, 
                 'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2, 
                 'D' : np.random.randn(12), 'E' : np.random.randn(12)})
 pd.pivot_table(df, values = 'D', rows = ['A', 'B'], cols = ['C'])#以A、B为行标签，以C为列标签将D列的值汇总求和
+pd.crosstab(rows = ['A', 'B'], cols = ['C'], values = 'D')#以A、B为行标签，以C为列标签将D列的值汇总求和
 ```
+
+
 
 ###  时间序列分析
 

@@ -1,11 +1,9 @@
 ---
 author: 'Cloga'
 comments: true
-date: 2013-09-17 04:58:44+00:00
 layout: post
 slug: 'pandasintro'
 title: Python中的结构化数据分析利器-Pandas简介
-wordpress_id: 2034
 categories:
 - Python
 - 数据科学

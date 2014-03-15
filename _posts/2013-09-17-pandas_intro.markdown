@@ -447,3 +447,128 @@ df.rename(columns={u'one':'1'}, inplace=True)
 ```python
 df.dtypes
 ```
+
+R中的对应函数：
+
+```
+str(df)
+```
+
+### 查看最大值/最小值
+
+```python
+pd.Series.max()
+pd.Series.idxmax()
+```
+
+### 重设索引
+
+```python
+df.reset_index(inplace=True)
+```
+
+### 改变数据类型
+
+```python
+df['A'].astype(float)
+```
+
+
+### 计算Series每个值的频率
+
+```python
+df['A'].count_values()
+```
+
+R的对应函数：
+
+```R
+table(df['A'])
+```
+
+
+### 字符方法
+
+pandas提供许多向量化的字符操作，你可以在str属性中找到它们
+
+```python
+s.str.lower()
+s.str.len()
+s.str.contains(pattern)
+```
+
+### DataFrame的合并
+
+Contact：
+
+```python
+ds = [{'one' : 4,'two':2},{'one' : 5,'two' : 3},{'one' : 6,'two' : 4},{'two' : 7,'three':10}]
+dfs = pd.DataFrame(ds,index=['e','f','g','h'])
+##构建一个新的DataFrame，dfs
+df_t=pd.concat([df,dfs])#合并两个DataFrame
+```
+
+Merge（类似SQL中的Join操作）：
+
+```python 
+left = pd.DataFrame({'key': ['foo1', 'foo2'], 'lval': [1, 2]})
+right = pd.DataFrame({'key': ['foo1', 'foo2'], 'rval': [4, 5]})
+#构建了两个DataFrame
+pd.merge(left, right, on='key')#按照key列将两个DataFrame join在一起
+```
+DataFrame中的Group by：
+
+```python
+df = pd.DataFrame({'A' : ['foo', 'bar', 'foo', 'bar','foo', 'bar', 'foo', 'foo'],
+                    'B' : ['one', 'one', 'two', 'three','two', 'two', 'one', 'three'],
+                    'C' :randn(8), 'D' : randn(8)});
+df.groupby('A').sum()#按照A列的值分组求和
+df.groupby(['A','B']).sum()##按照A、B两列的值分组求和
+```
+
+对应R函数：
+
+```R
+tapply()
+```
+
+在实际应用中，先定义groups，然后再对不同的指标指定不同计算方式。
+
+```python
+groups = df.groupby('A')#按照A列的值分组求和
+groups['B'].sum()##按照A列的值分组求B组和
+groups['B'].count()##按照A列的值分组B组计数
+```
+
+默认会以groupby的值作为索引，如果不将这些值作为索引，则需要使用as_index=False
+
+```python
+df.groupby(['A','B'], as_index=False).sum()
+```
+
+
+### 构建透视表
+使用pivot_table和crosstab都可以创建数据透视表
+
+```python    
+df = pd.DataFrame({'A' : ['one', 'one', 'two', 'three'] * 3,'B' : ['A', 'B', 'C'] * 4, 
+                'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2, 
+                'D' : np.random.randn(12), 'E' : np.random.randn(12)})
+pd.pivot_table(df, values = 'D', rows = ['A', 'B'], cols = ['C'])#以A、B为行标签，以C为列标签将D列的值汇总求和
+pd.crosstab(rows = ['A', 'B'], cols = ['C'], values = 'D')#以A、B为行标签，以C为列标签将D列的值汇总求和
+```
+
+
+
+###  时间序列分析
+
+时间序列也是Pandas的一个特色。时间序列在Pandas中就是以Timestamp为索引的Series。
+
+pandas提供to_datetime方法将代表时间的字符转化为Timestamp对象：
+
+```python
+s = '2013-09-16 21:00:00'
+ts = pd.to_datetime(s)
+```
+
+有时我们需要处理时区问题：

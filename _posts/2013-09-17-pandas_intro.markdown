@@ -528,7 +528,7 @@ df.groupby(['A','B']).sum()##按照A、B两列的值分组求和
 
 对应R函数：
 
-```R
+```
 tapply()
 ```
 
@@ -547,3 +547,57 @@ df.groupby(['A','B'], as_index=False).sum()
 ```
 
 
+### 构建透视表
+使用pivot_table和crosstab都可以创建数据透视表
+
+```python    
+df = pd.DataFrame({'A' : ['one', 'one', 'two', 'three'] * 3,'B' : ['A', 'B', 'C'] * 4, 
+                'C' : ['foo', 'foo', 'foo', 'bar', 'bar', 'bar'] * 2, 
+                'D' : np.random.randn(12), 'E' : np.random.randn(12)})
+pd.pivot_table(df, values = 'D', rows = ['A', 'B'], cols = ['C'])#以A、B为行标签，以C为列标签将D列的值汇总求和
+pd.crosstab(rows = ['A', 'B'], cols = ['C'], values = 'D')#以A、B为行标签，以C为列标签将D列的值汇总求和
+```
+
+
+
+###  时间序列分析
+
+时间序列也是Pandas的一个特色。时间序列在Pandas中就是以Timestamp为索引的Series。
+
+pandas提供to_datetime方法将代表时间的字符转化为Timestamp对象：
+
+```python
+s = '2013-09-16 21:00:00'
+ts = pd.to_datetime(s)
+```
+
+有时我们需要处理时区问题：
+
+```python
+ts=pd.to_datetime(s,utc=True).tz_convert('Asia/Shanghai')
+```
+
+构建一个时间序列：
+
+```python
+rng = pd.date_range('1/1/2012', periods=5, freq='M')
+ts = pd.Series(randn(len(rng)), index=rng)
+```
+
+Pandas提供resample方法对时间序列的时间粒度进行调整：
+
+```python    
+ts_h=ts.resample('H', how='count')#M,5Min,1s
+```
+
+以上是将时间序列调整为小时，还可以支持月（M），分钟（Min）甚至秒（s）等。
+
+### 画图
+
+Pandas也支持一定的绘图功能，需要安装matplot模块。
+
+比如前面创建的时间序列，通过plot()就可以绘制出折线图，也可以使用hist()命令绘制频率分布的直方图。
+
+关于Panda作图，请查看另一篇博文：[用Pandas作图](http://cloga.info/python/2014/02/23/Plotting_with_Pandas/)
+
+以上是关于Pandas的简单介绍，其实除了Pandas之外，Python还提供了多个科学计算包，比如Numpy，Scipy，以及数据挖掘的包：Scikit Learn，Orage，NLTK等，感兴趣的同学可以了解一下。

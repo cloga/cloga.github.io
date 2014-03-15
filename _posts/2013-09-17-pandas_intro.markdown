@@ -299,3 +299,151 @@ DataFrame提供了多种排序方式。
 ```python    
 df.sort_index(axis=1, ascending=False)
 ```
+
+sort_index可以以轴的标签进行排序。axis是指用于排序的轴，可选的值有0和1，默认为0即行标签（Y轴），1为按照列标签排序。 ascending是排序方式，默认为True即降序排列。
+
+```python 
+df.sort(columns='two')
+df.sort(columns=['one','two'],ascending=[0,1])
+```
+
+DataFrame也提供按照指定列进行排序，可以仅指定一个列作为排序标准（以单独列名作为columns的参数），也可以进行多重排序（columns的参数为一个列名的List，列名的出现顺序决定排序中的优先级），在多重排序中ascending参数也为一个List，分别与columns中的List元素对应。
+
+### 读写数据
+
+DataFrame可以方便的读写数据文件，最常见的文件为CSV或Excel。Pandas读写Excel文件需要[openpyxl](http://pythonhosted.org/openpyxl/)（Excel 2007）, [xlrd/xlwt](http://www.python-excel.org/)（Excel 2003）。
+
+从CSV中读取数据：
+
+```python
+df = pd.read_csv('foo.csv')
+```
+R中的对应函数：
+
+```
+df = read.csv('foo.csv')
+```
+
+将DataFrame写入CSV：
+
+```python 
+df.to_csv('foo.csv')
+```
+
+R中的对应函数：
+
+```
+df.to.csv('foo.csv')
+```
+
+
+从Excel中读取数据：
+
+```python
+xls = ExcelFile('foo.xlsx')
+xls.parse('sheet1', index_col=None, na_values=['NA'])
+```
+
+先定义一个Excel文件，用xls.parse解析sheet1的内容，index_col用于指定index列，na_values定义缺失值的标识。
+
+将DataFrame写入Excel文件：
+
+```python
+df.to_excel('foo.xlsx', sheet_name='sheet1')
+```
+
+默认的sheet为sheet1，也可以指定其他sheet名。
+
+
+### 数据切片
+
+
+通过下标选取数据：
+
+```python
+df['one']
+df.one
+```
+
+以上两个语句是等效的，都是返回df名称为one列的数据，返回的为一个Series。
+
+```python
+df[0:3]
+df[0]
+```
+
+下标索引选取的是DataFrame的记录，与List相同DataFrame的下标也是从0开始，区间索引的话，为一个左闭右开的区间，即[0：3]选取的为1-3三条记录。与此等价，还可以用起始的索引名称和结束索引名称选取数据：
+
+```python
+df['a':'b']
+```
+
+有一点需要注意的是使用起始索引名称和结束索引名称时，也会包含结束索引的数据。以上两种方式返回的都是DataFrame。
+
+使用标签选取数据：
+
+```python    
+df.loc[行标签,列标签]
+df.loc['a':'b']#选取ab两行数据
+df.loc[:,'one']#选取one列的数据
+```
+
+df.loc的第一个参数是行标签，第二个参数为列标签（可选参数，默认为所有列标签），两个参数既可以是列表也可以是单个字符，如果两个参数都为列表则返回的是DataFrame，否则，则为Series。
+
+使用位置选取数据：
+
+```python
+df.iloc[行位置,列位置]
+df.iloc[1,1]#选取第二行，第二列的值，返回的为单个值
+df.iloc[0,2],:]#选取第一行及第三行的数据
+df.iloc[0:2,:]#选取第一行到第三行（不包含）的数据
+df.iloc[:,1]#选取所有记录的第一列的值，返回的为一个Series
+df.iloc[1,:]#选取第一行数据，返回的为一个Series
+```
+
+PS：loc为location的缩写，iloc则为integer & location的缩写
+
+更广义的切片方式是使用.ix，它自动根据你给到的索引类型判断是使用位置还是标签进行切片
+
+```python
+df.ix[1,1]
+df.ix['a':'b']
+```
+
+通过逻辑指针进行数据切片：
+
+```python
+df[逻辑条件]
+df[df.one >= 2]#单个逻辑条件
+df[(df.one >=1 ) & (df.one < 3) ]#多个逻辑条件组合
+```
+
+这种方式获得的数据切片都是DataFrame。
+
+### 基本运算
+
+Pandas支持基本的运算及向量化运算。
+
+```python
+df.mean()#计算列的平均值，参数为轴，可选值为0或1.默认为0，即按照列运算
+df.sum(1)#计算行的和
+df.apply(lambda x: x.max() - x.min())#将一个函数应用到DataFrame的每一列，这里使用的是匿名lambda函数，与R中apply函数类似
+```
+
+### 设置索引
+
+```python
+df.set_index('one')
+```
+
+### 重命名列
+
+```python
+df.rename(columns={u'one':'1'}, inplace=True)
+```
+
+### 查看每个列的数据类型
+
+```python
+df.dtypes
+```

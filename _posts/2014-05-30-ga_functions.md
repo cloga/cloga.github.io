@@ -175,16 +175,20 @@ function 函数名 (参数) {
 
 ####UA代码
 
-有了上面的JS函数基础知识，我们再来看一下UA代码。
+有了上面的JS函数基础知识，我们再来看一下UA代码，为了便于理解我整理了一下代码：
 
 ```javascript
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+(function(i,s,o,g,r,a,m){
+    i['GoogleAnalyticsObject']=r;
+    i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+    a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+    a.async=1; a.src=g;
+    m.parentNode.insertBefore(a,m)
+})
+(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 ```
 
-可以看到这一个也是一个匿名函数，所不同的是这个匿名函数是有参数的。
+可以看到这段JS最外层也是匿名函数，所不同的是这个匿名函数是有参数的。
 
 i：window
 
@@ -196,6 +200,77 @@ g：'//www.google-analytics.com/analytics.js'
 
 r：'ga'
 
-To Be Continued~
+函数体的第一句是定义了i的GoogleAnalyticsObject属性等于r，这里的i是window，window是一个对象代表的使整个页面。获取对象属性的方式可以使用下标的数字（前面提到过获取数组第一个元素是通过下标0，好吧，数组也是对象），也可以使用对应属性的字符串。这里是使用后者。翻译过来后第一行变成：window['GoogleAnalyticsObject']='ga'
 
+函数体的第二句这里是用一个逻辑或二元操作对i[r]进行，其实就是对window['ga']进行赋值，||表示的是逻辑与，如果表达式前面为真，则返回前一个表达式，否则返回后一个表达式的值。这种表达方式其实JS的小技巧，为函数指定默认值。||右侧的表达式其实就是默认值。a ＝ a||表达式，这种表达式翻译过来就是如果a不存在就给定义一个a＝表达式。
 
+正如你注意到的逻辑或表达式的右侧即参数的默认值又是一个匿名函数，函数体里面还有默认值赋值的方式。看起来有一些小复杂，还好我们有上面的基础。function(){(i[r].q=i[r].q||[]).push(arguments)}这里也是定义匿名函数，不过没有马上调用，实际上是将i[r]定义为了一个函数。函数体中i[r].q=i[r].q||[]是i[r].q默认值定义一个数组（[]代表的是空数组）。push方式是以先进先出的方式向数组中添加元素。后面的是将当前时间转化为数字赋值给i[r]的r属性。
+
+这里其实定义了一个ga对象，其实是一个方法，其的作用就是向i[r].q（window['ga'].q）中添加元素。
+
+后面的三句与前面的GA代码功能一致，找到script的对象的第一个元素，在其前面插入一个src为analtics.js的script。
+
+###定义GA账号及其他初始的代码状态，并触发一个页面跟踪（trackPageview）
+
+引入了GA|UA的JS库后，一些基本的对象方法函数就都定义好了。下一步就是实例化跟踪对象，监测网站数据。
+
+####GA同步代码
+
+```javascript
+try{
+var pageTracker = _gat._getTracker("UA-xxxxxx-x");
+pageTracker._trackPageview();
+} catch(err) {}
+```
+
+首先介绍一下JS里面的try，catch机制。其基本的语法形式为:
+
+```javascript
+try{
+    要运行的语句
+}
+catch (错误变量)
+{}
+```
+
+其作用是运行try语法块中的语句，如果报错则，将作为记录在错误变量中，同时也可以运行catch语法块的语句。
+
+GA使用这个语句主要是为了容错处理，也没有后续做任何的处理。
+
+对于同步代码做这个容错处理，主要是因为使用document.write这种同步方式加载js，如果GA JS加载较慢，GA的基本对象方法还没有加载就调用跟踪对象的实例化代码会报错。
+
+```
+ReferenceError: _gat is not defined
+```
+try中的第一行语句是实例化了一个跟踪对象，并且定义GA账号为UA-xxxxxx-x，跟踪对象的名称为pageTracker。这里要说一下一个页面上如果使用多个GA账号，则需要为每个跟踪对象指定不同的名称，否则，调用数据只会收集到最后定义的跟踪对象中。
+
+try中的第二行语句触发一个PV计数。
+
+####GA异步代码
+
+```javascript
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-xxxxxx-x']);
+_gaq.push(['_trackPageview']);
+```
+
+可以看到异步代码没有使用try catch做错误处理。因为在GA异步代码中做了一些特殊的处理，如果ga.js没有加载成功，定义的ga方法只会是_gaq这个数组的一个元素而已。
+
+第一行代码是验证_gaq这个数组是否存在，如果不存在则初始化为一个数组。
+
+第二行代码是将定义收集数据的GA账号的方法作为数组元素添加到_gaq中。
+
+第三行代码是将收集PV数据的方法作为数组元素添加到_gaq中。
+
+如果需要部署多个GA代码的话，同样也需要定义不同跟踪器名称，默认的跟踪器为匿名的。
+
+####UA代码
+
+```javascript
+  ga('create', 'UA-xxxxxx-x');
+  ga('send', 'pageview');
+```
+
+通过前面对UA代码加载UA JS库对分析我们已经知道ga已经是一个方法其作用就是向window['ga'].q中添加元素，也就是说其实UA与GA的异步代码没有本质上的差别，都是在JS库未加载前，用数组的元素在存储相关的跟踪方法及参数，等到JS库加载完毕，就转化为实际的方法向GA服务器提交数据。
+
+关于Google Analytics不同版本的方法介绍就到这里，想要对各位的工作有所帮助，如果你觉得哪里还有问题，欢迎给我留言，也可以通过cloga在路上@新浪微博找到我。

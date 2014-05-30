@@ -3,11 +3,11 @@ author: cloga
 comments: true
 layout: post
 slug: ga function
-title: Google Analytics 不同版本的方法介绍
+title: Google Analytics 不同版本的JS方法介绍
 categories:
-- ga function
+- GA JS function
 tags:
-- ga function
+- GA JS function
 ---
 
 经常有同学会问GA几个版本的方法有什么不同?为什么感觉差异很大?其实这个问题只要了解一点点JS编程基础知识就可以解答。可能有的同学会说我是做网站分析的，了解这些JS编程知识有用吗？我的观点是在没有认知负担的情况下，适当了解一下网站分析的工作原理对职业发展大有裨益。

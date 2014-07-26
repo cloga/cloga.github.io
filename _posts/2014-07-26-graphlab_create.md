@@ -3,7 +3,7 @@
 author: cloga
 comments: true
 layout: post
-slug: ga function
+slug: Graphlab Create
 title: 用Graphlab Create构建简易的推荐引擎
 categories:
 - Graphlab Create

@@ -1,4 +1,3 @@
-
 ---
 author: cloga
 comments: true
@@ -8,8 +7,9 @@ title: 用Graphlab Create构建简易的推荐引擎
 categories:
 - Graphlab Create
 tags:
-- Graphlab Create, recommendation system
-
+- Graphlab Create
+- recommendation system
+---
 # Graphlab Create简介
 [Graphlab Create](http://graphlab.com/products/create/)是基于图形数据库的数据挖掘工具，底层是由C++编写
 以保证最佳性能，同时提供了一个Python接口。

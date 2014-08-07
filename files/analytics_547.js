@@ -175,11 +175,15 @@ function TriggerEvent(url, is_multimedia_click, next_url,oid) {
     //Action: Use "uid" from Cookies
     uid = GetCookie('uid');
   }
-   if (!IsEmpty(oid)) {
-      
-      SetCookie('uid', oid, COOKIES_EXPIRE_DAYS, '/', COOKIES_DOMAIN, '');
-        uid = GetCookie('uid');
-    }
+     if (!typeof(oid) == "undefined") {
+        if (!IsEmpty(oid)) {
+
+            SetCookie('uid', oid, COOKIES_EXPIRE_DAYS, '/', COOKIES_DOMAIN, '');
+            uid = GetCookie('uid');
+        }
+    }  
+  
+  
   
   if ((!IsEmpty(QueryString("ctpath"))) ||
       (!IsEmpty(QueryString("cid"))) ||

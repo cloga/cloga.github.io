@@ -477,7 +477,7 @@ df['A'].astype(float)
 ### 计算Series每个值的频率
 
 ```python
-df['A'].count_values()
+df['A'].value_counts()
 ```
 
 R的对应函数：

@@ -109,4 +109,4 @@ for entry in feed.entry:
 pd.DataFrame(results).to_excel('ga_data.xlsx', index=False)
 ```
 
-以上就是用python调用GA API，并将结果存入了excel，通过改变data_query部分的参数就可以查询自定义的数据。
+这样就实现了用python调用GA API，并将结果存入了excel，通过改变data_query部分的参数来查询你自己的数据吧～

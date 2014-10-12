@@ -50,9 +50,10 @@ tags:
 # 安装需要的module
 读取GA的数据，这里使用的是Google提供的[gdata](http://code.google.com/p/gdata-python-client/)，此外，需要将GA数据保存为excel，这里使用的是Pandas。
 
+```
 sudo  pip install --upgrade gdata
-
 sudo pip install --upgrade pandas
+```
 
 在http://pandas.pydata.org/ 可以找到pandas的信息
 

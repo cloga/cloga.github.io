@@ -3,7 +3,7 @@ author: cloga
 comments: true
 layout: post
 slug: retriving ga data with python
-title: 使用python获取GA数据
+title: 使用Python获取GA数据
 categories:
 - python
 tags:

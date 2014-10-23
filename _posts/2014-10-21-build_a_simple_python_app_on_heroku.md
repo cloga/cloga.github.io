@@ -3,7 +3,7 @@ author: cloga
 comments: true
 layout: post
 slug: build_a_simple_python_app_on_heroku
-title: 在heroku上搭建简单的python应用
+title: 在Heroku上搭建简单的Python Web 应用
 categories:
 - python
 tags:
@@ -154,6 +154,16 @@ Profile是一个在应用根目录的文本文件，用于声明用于启动应�
 pip install gunicorn
 pip freeze > requirements.txt
 ```
+
+* 登陆Heroku
+
+```
+heroku login
+```
+
+输入用户名和密码
+
+
 * 在Heroku上创建一个App
 
 ```

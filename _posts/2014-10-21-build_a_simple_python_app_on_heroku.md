@@ -185,8 +185,10 @@ heroku open
 ```
 
 PS:我在Heroku上放了两个小项目：
-生成页面标签云：http://app.cloga.info/
-对应分析：http://app.cloga.info/ca
+
+[生成页面标签云](http://app.cloga.info/)
+
+[对应分析](http://app.cloga.info/ca)
 
 
 

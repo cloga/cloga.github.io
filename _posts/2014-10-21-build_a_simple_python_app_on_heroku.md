@@ -178,6 +178,16 @@ git commot -m 'init'
 git push heroku master
 ```
 
+* 你也可以为这个git库同时绑定一个github仓库
+
+假设你创建了一个名字为test的github仓库，那么你可以通过下面的代码将本地的代码库与远程的Github库关联
+
+```
+git remote add origin https://github.com/cloga/test.git
+```
+通过`git push orgin master`，就可以将本地的代码库推送到github。
+
+
 * enjoy你的第一个web app吧
 
 ```

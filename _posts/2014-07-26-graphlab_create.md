@@ -9,6 +9,7 @@ categories:
 tags:
 - Graphlab Create
 - recommendation system
+
 ---
 # Graphlab Create简介
 [Graphlab Create](http://graphlab.com/products/create/)是基于图形数据库的数据挖掘工具，底层是由C++编写
@@ -20,7 +21,7 @@ tags:
 - SArray：与Pandas的Series类似的数组结构
 - SGraph：Graphlab特有的数据结构，类似于NetWorkx的Graph，由节点和边构成
 
-此外，Graphlab Create对Pandas，可以直接读取Pandas的DataFrame来构建模型。
+此外，Graphlab Create对Pandas提供了很好的支持，可以直接读取Pandas的DataFrame来构建模型。
 
 ##支持的数据挖掘算法
 

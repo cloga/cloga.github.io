@@ -10,7 +10,7 @@ tags:
 - Python
 
 ---
-Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。英文版地址为：[http://scipy-lectures.github.io/](http://scipy-lectures.github.io/)，是学习Python科学计算生态体系很好的资料，因此，我会陆续将它翻译为中文，相关Gitbub地址为：[https://github.com/cloga/scipy-lecture-notes_cn](https://github.com/cloga/scipy-lecture-notes_cn)，完整的中文目录：[http://cloga.info/python%20scientific%20lecture%20notes/2014/12/14/python_scientific%20lecture_notes_cn/](http://cloga.info/python%20scientific%20lecture%20notes/2014/12/14/python_scientific%20lecture_notes_cn/)
+Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。英文版地址为：[http://scipy-lectures.github.io/](http://scipy-lectures.github.io/)，是学习Python科学计算生态体系很好的资料，因此，我会陆续将它翻译为中文，相关Gitbub地址为：[https://github.com/cloga/scipy-lecture-notes_cn](https://github.com/cloga/scipy-lecture-notes_cn)，完整的中文目录：[http://cloga.info/python_scientific_lecture_notes/2014/12/14/python_scientific_lecture_notes_cn/](http://cloga.info/python_scientific_lecture_notes/2014/12/14/python_scientific_lecture_notes_cn/)
 
 ---
 

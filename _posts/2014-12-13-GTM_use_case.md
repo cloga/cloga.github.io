@@ -88,15 +88,9 @@ GTM提供了许多的element的属性可以作为条件，比如id，url，text�
 
 ![png](http://cloga.info/files/element_conditions.png)
 
-#### 监测表单填写
-
-- 代码
-
-- 触发器
-
 # Google Tag Manager测试
 
-加好了代码之后接下来就要进行测试并发布，GTM提供了完整的测试和发布流程，首先点击previe>debug，进入测试模式
+加好了代码之后接下来就要进行测试并发布，GTM提供了完整的测试和发布流程，首先点击preview>debug，进入测试模式
 
 ![png](http://cloga.info/files/gtm_debug.png)
 
@@ -112,7 +106,7 @@ GTM提供了许多的element的属性可以作为条件，比如id，url，text�
 
 可以看到我们新建的右上注册butoon点击已经触发了
 
-在选中这个点击事件时，点击一下debug里面宏看一下：
+在选中这个点击事件时，点击一下debug窗口中的宏看一下：
 
 ![png](http://cloga.info/files/gtm_debug3.png)
 

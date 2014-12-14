@@ -10,14 +10,14 @@ tags:
 - Python
 
 ---
-Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。英文版地址为：http://scipy-lectures.github.io/，是学习Python科学计算生态体系很好的资料，因此，我会陆续将它翻译为中文，相关Gitbub地址为：https://github.com/cloga/scipy-lecture-notes_cn
+Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。英文版地址为：[http://scipy-lectures.github.io/](http://scipy-lectures.github.io/)，是学习Python科学计算生态体系很好的资料，因此，我会陆续将它翻译为中文，相关Gitbub地址为：[https://github.com/cloga/scipy-lecture-notes_cn](https://github.com/cloga/scipy-lecture-notes_cn)
 
 ***
 
-这份分档是关于Python科学生态体系的教学资料，关于Python科学计算的核心工具及技术的快速入门。每章包含1到2小时的课程，专业难度从新手到专家不断提升。
+这份文档是关于Python科学生态体系的教学资料，关于Python科学计算的核心工具及技术的快速入门。每章包含1到2小时的课程，专业难度从新手到专家不断提升。
 
 1. Python科学计算入门
-	1. 科学计算工具及流程
+	1. [科学计算工具及流程]()
 	2. Python语言
 	3. NumPy：创建和操作数值数据
 	4. Matplotlib：作图

@@ -3,7 +3,7 @@ author: cloga
 comments: true
 layout: post
 slug: Python Scientific Lecture Notes
-title: 0.0Python科学讲座笔记目录
+title: Python科学讲座笔记目录
 categories:
 - Python_Scientific_Lecture_Notes
 tags:

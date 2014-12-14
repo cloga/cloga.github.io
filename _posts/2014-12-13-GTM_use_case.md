@@ -20,7 +20,7 @@ tags:
 - [Dynamic Tag Management](https://dtm.adobe.com/)：Adobe的代码管理器
 - [Universal Tag Management System](http://www.signal.co/products/tag/)：Signal的产品
 - [Open Tag](http://www.qubitproducts.com/tag-management)：Qubit的代码管理器，应该是这个领域里面比较早的产品，同时他们还有A/B Test的产品
-- [代码管家](http://web.tagmanager.cn/)
+- [代码管家](http://web.tagmanager.cn/)：本地化的代码管理工具
 
 # Google Tag Manager的组成元素
 

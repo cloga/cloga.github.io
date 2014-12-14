@@ -33,7 +33,7 @@ tags:
 - text：文本挖掘模型，目前支持主题模型
 
 这里主要为大家介绍一下如何用Graphlab
-Create构建一个推荐引擎，其他的算法其实在其他的Python包里都有很好的支持。比如聚类回归判别这类常规的Sklearn提供了丰富的方法，Graphlab
+Create构建一个推荐引擎，其他的算法其实在其他的Python包里都有很好的支持。比如聚类回归判别这类常规的数据挖掘算法Sklearn也提供了丰富的方法，Graphlab
 Create的优势在于性能及可扩展性；对于Graph Analytics而言，networkx也已经给出了全面的算法支持；而主题模型则有gensim。
 
 #用Graphlab Create创建推荐引擎

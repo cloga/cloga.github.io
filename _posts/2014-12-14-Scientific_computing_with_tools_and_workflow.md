@@ -279,3 +279,5 @@ x.real.bit_length x.real.denominator x.real.numerator x.real.conjugate
 x.real.imag x.real.real
 In [4]: x.real.
 ```
+
+[本文的IPython版本](http://nbviewer.ipython.org/github/cloga/scipy-lecture-notes_cn/blob/master/1.1%E7%A7%91%E5%AD%A6%E8%AE%A1%E7%AE%97%E5%B7%A5%E5%85%B7%E5%8F%8A%E6%B5%81%E7%A8%8B.ipynb)

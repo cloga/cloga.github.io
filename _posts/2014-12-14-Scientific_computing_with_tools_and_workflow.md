@@ -2,10 +2,10 @@
 author: cloga
 comments: true
 layout: post
-slug: Python Scientific Lecture Notes
+slug: Python Scientific Lecture Notes 1.1
 title: 1.1科学计算工具及流程-Python科学讲座笔记目录
 categories:
-- Python Scientific Lecture Notes
+- Python_Scientific_Lecture_Notes
 tags:
 - Python
 
@@ -91,6 +91,7 @@ Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。
     - 开发工具（自动测试，文档生成）
 
 - **IPython**, 高级的**Python Shell** [http://ipython.org/](http://ipython.org/)
+
 ![ipython](http://scipy-lectures.github.io/_images/snapshot_ipython.png)
 
 - **Numpy** :
@@ -98,16 +99,17 @@ Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。
 - **Scipy** : 高级的数据处理程序。优化、回归插值等[http://www.scipy.org/](http://www.scipy.org/)
 - **Matplotlib** : 2D可视化，“出版级”的图表[http://matplotlib.sourceforge.net/](http://mat
 plotlib.sourceforge.net/)
+
 ![Matplotlib](http://scipy-lectures.github.io/_images/random_c.jpg)
 
 - **Mayavi** : 3D可视化[http://code.enthought.com/projects/mayavi/](http://code.ent
 hought.com/projects/mayavi/)
-![Mayavi](http://scipy-
-lectures.github.io/_images/example_surface_from_irregular_data.jpg)
+
+![Mayavi](http://scipy-lectures.github.io/_images/example_surface_from_irregular_data.jpg)
 
 # 1.3 交互工作流：IPython和文本编辑器
 
-** 测试和理解算法的交互工作**：在这个部分我们描述一下用[IPython](http://ipython.org/)的交互工作流来方便的研究和理解算法。
+**测试和理解算法的交互工作**：在这个部分我们描述一下用[IPython](http://ipython.org/)的交互工作流来方便的研究和理解算法。
 
 Python是一门通用语言。与其他的通用语言一样，没有一个绝对权威的工作环境，也不止一种方法使用它。尽管这对新人来说不太好找到适合自己的方式，但是，这使得Pyt
 hon被用于在网站服务器或嵌入设备中编写程序。
@@ -121,11 +123,10 @@ doc/dev/index.html](http://ipython.org/ipython-doc/dev/index.html)
 
 启动ipython:
 
-
-    print('Hello world')
-
-    Hello world
-
+```python
+print('Hello world')
+Hello world
+```
 
 在对象后使用？运算符获得帮助:
 ```python
@@ -155,29 +156,16 @@ print(s)
 ```
 
 现在，你可以在IPython中运行它，并研究产生的变量：
-
-
-    %run my_file.py
-
-    Hello world
-
-
-
-    s
-
-
-
-
-    'Hello world'
-
-
-
-
-    %whos
-
-    Variable   Type    Data/Info
-    ----------------------------
-    s          str     Hello world
+```python
+%run my_file.py
+Hello world
+s
+'Hello world'
+%whos
+Variable   Type    Data/Info
+----------------------------
+s          str     Hello world
+```
 
 
 >**从脚本到函数**
@@ -190,8 +178,7 @@ print(s)
 
 ## 1.3.3 IPython提示与技巧
 
-IPython用户手册包含关于使用IPython的大量信息，但是，为了帮你你更快的入门，这里快速介绍三个有用的功能：*历史*，*魔法函数*，*别称*和*tab完
-成*。
+IPython用户手册包含关于使用IPython的大量信息，但是，为了帮你你更快的入门，这里快速介绍三个有用的功能：*历史*，*魔法函数*，*别称*和*tab完成*。
 
 与Unix Shell相似，IPython支持命令历史。按上下在之前输入的命令间切换：
 ```python
@@ -206,20 +193,16 @@ IPython通过在命令前加*%*字符的前缀，支持所谓魔法函数。例�
 其他有用的魔法函数：
 
 - **%cd** 改变当前目录
-
-
-    cd ..
-
-    /Users/cloga/Documents
-
+```python
+cd ..
+/Users/cloga/Documents
+```
 
 - **%timeit** 允许你使用来自标准库中的timeit模块来记录执行短代码端的运行时间
-
-
-    timeit x = 10
-
-    10000000 loops, best of 3: 26.7 ns per loop
-
+```python
+timeit x = 10
+10000000 loops, best of 3: 26.7 ns per loop
+```
 
 - **%cpaste** 允许你粘贴代码，特别是来自网站的代码，前面带有标准的Python提示符 (即 >>>) 或ipython提示符的代码(即 in
 [3])：
@@ -262,29 +245,22 @@ PyCF_ONLY_AST, 1)
 
 而且IPython提供了大量的*别称*来模拟常见的UNIX命令行工具比如*ls*等于list files，*cp*等于copy
 files以及*rm*等于remove files。输入*alias*可以显示所有的别称的列表：
-
-
-    alias
-
-    Total number of aliases: 12
-
-
-
-
-
-    [('cat', 'cat'),
-     ('cp', 'cp'),
-     ('ldir', 'ls -F -G -l %l | grep /$'),
-     ('lf', 'ls -F -l -G %l | grep ^-'),
-     ('lk', 'ls -F -l -G %l | grep ^l'),
-     ('ll', 'ls -F -l -G'),
-     ('ls', 'ls -F -G'),
-     ('lx', 'ls -F -l -G %l | grep ^-..x'),
-     ('mkdir', 'mkdir'),
-     ('mv', 'mv'),
-     ('rm', 'rm'),
-     ('rmdir', 'rmdir')]
-
+```python
+alias
+Total number of aliases: 12
+[('cat', 'cat'),
+ ('cp', 'cp'),
+ ('ldir', 'ls -F -G -l %l | grep /$'),
+ ('lf', 'ls -F -l -G %l | grep ^-'),
+ ('lk', 'ls -F -l -G %l | grep ^l'),
+ ('ll', 'ls -F -l -G'),
+ ('ls', 'ls -F -G'),
+ ('lx', 'ls -F -l -G %l | grep ^-..x'),
+ ('mkdir', 'mkdir'),
+ ('mv', 'mv'),
+ ('rm', 'rm'),
+ ('rmdir', 'rmdir')]
+```
 
 
 最后，提一下*tab完成*功能，我们从IPython手册引用它的描述：

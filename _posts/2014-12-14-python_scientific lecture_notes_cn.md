@@ -5,7 +5,7 @@ layout: post
 slug: Python Scientific Lecture Notes
 title: Python科学讲座笔记目录
 categories:
-- Python Scientific Lecture Notes
+- Python_Scientific_Lecture_Notes
 tags:
 - Python
 

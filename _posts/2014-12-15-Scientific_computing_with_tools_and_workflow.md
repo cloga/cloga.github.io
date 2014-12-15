@@ -152,23 +152,27 @@ Docstring:
 ght.com/products/epd/)）中，你可以从开始按钮使用*Scite*。在[Python(x,y)](https://code.google.co
 m/p/pythonxy/)中, 你可以使用Spyder。在Ubuntu中, 如果你还没有最喜欢的编辑器，我们建议你安装[Stani’s Python
 editor](http://sourceforge.net/projects/spe/)。在这个文件中，输入如下行：
+
 ```python
 s = 'Hello world'
 print(s)
 ```
 
 现在，你可以在IPython中运行它，并研究产生的变量：
+
 ```python
 %run my_file.py
 Hello world
 s
 'Hello world'
+```
+
+```
 %whos
 Variable   Type    Data/Info
 ----------------------------
 s          str     Hello world
 ```
-
 
 >**从脚本到函数**
 

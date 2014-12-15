@@ -131,6 +131,7 @@ Hello world
 ```
 
 在对象后使用？运算符获得帮助:
+
 ```python
 In [2]: print
 Type:          builtin_function_or_method
@@ -187,6 +188,7 @@ s          str     Hello world
 IPython用户手册包含关于使用IPython的大量信息，但是，为了帮你你更快的入门，这里快速介绍三个有用的功能：*历史*，*魔法函数*，*别称*和*tab完成*。
 
 与Unix Shell相似，IPython支持命令历史。按上下在之前输入的命令间切换：
+
 ```python
 In [1]: x = 10
 In [2]: <UP>
@@ -199,12 +201,15 @@ IPython通过在命令前加*%*字符的前缀，支持所谓魔法函数。例�
 其他有用的魔法函数：
 
 - **%cd** 改变当前目录
+
 ```python
 cd ..
 /Users/cloga/Documents
 ```
 
 - **%timeit** 允许你使用来自标准库中的timeit模块来记录执行短代码端的运行时间
+
+
 ```python
 timeit x = 10
 10000000 loops, best of 3: 26.7 ns per loop
@@ -212,6 +217,7 @@ timeit x = 10
 
 - **%cpaste** 允许你粘贴代码，特别是来自网站的代码，前面带有标准的Python提示符 (即 >>>) 或ipython提示符的代码(即 in
 [3])：
+
 ```python
 In [5]: cpaste
 Pasting code; enter ’--’ alone on the line to stop or use Ctrl-D. :In [3]:
@@ -251,6 +257,7 @@ PyCF_ONLY_AST, 1)
 
 而且IPython提供了大量的*别称*来模拟常见的UNIX命令行工具比如*ls*等于list files，*cp*等于copy
 files以及*rm*等于remove files。输入*alias*可以显示所有的别称的列表：
+
 ```python
 alias
 Total number of aliases: 12
@@ -284,4 +291,4 @@ In [3]: x.real.
 x.real.bit_length x.real.denominator x.real.numerator x.real.conjugate
 x.real.imag x.real.real
 In [4]: x.real.
-``
+```

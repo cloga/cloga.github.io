@@ -3,7 +3,7 @@ author: cloga
 comments: true
 layout: post
 slug: Python Scientific Lecture Notes 1.1
-title: 1.1科学计算工具及流程-Python科学讲座笔记目录
+title: 1.1科学计算工具及流程-Python科学讲座笔记
 categories:
 - Python_Scientific_Lecture_Notes
 tags:

@@ -33,6 +33,13 @@ sudo pip install Virtualenv
 sudo pip install Virtualenvwrapper
 ```
 
+* 安装之后需要在.bash_profile中添加如下两行代码：
+
+```
+export WORKON_HOME=$HOME/.virtualenvs
+source /Library/Frameworks/Python.framework/Versions/2.7/bin/virtualenvwrapper.sh
+```
+这里source的路径可以通过：```which virtualenvwrapper.sh```来确定
 
 * 创建一个叫做toyapp的文件夹，用于存放这个项目相关的文件
 

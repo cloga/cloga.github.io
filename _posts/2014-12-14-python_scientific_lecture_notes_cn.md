@@ -17,7 +17,7 @@ Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。
 这份文档是关于Python科学生态体系的教学资料，关于Python科学计算的核心工具及技术的快速入门。每章包含1到2小时的课程，专业难度从新手到专家不断提升。
 
 1. Python科学计算入门
-	1. [科学计算工具及流程](http://cloga.info/python_scientific_lecture_notes/2014/12/14/Scientific_computing_with_tools_and_workflow/)
+	1. [科学计算工具及流程](http://cloga.info/python_scientific_lecture_notes/2014/12/15/Scientific_computing_with_tools_and_workflow/)
 	2. Python语言
 	3. NumPy：创建和操作数值数据
 	4. Matplotlib：作图

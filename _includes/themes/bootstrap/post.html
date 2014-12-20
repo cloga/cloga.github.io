@@ -1,7 +1,10 @@
 <div class="page-header">
   <h1>{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
 </div>
-
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     {% include JB/sharing %}
+    </div>
 <div class="row post-full">
   <div class="col-md-12">
     <div class="date">
@@ -43,6 +46,8 @@
       {% endif %}
     </ul>
     <hr>
+    <div class="post-comments">
     {% include JB/comments %}
+    </div>
   </div>
 </div>

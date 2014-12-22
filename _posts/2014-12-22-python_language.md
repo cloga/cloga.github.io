@@ -314,7 +314,6 @@ r2
 
 ```python
 r + L
-
 ['white',
  'black',
  'green',
@@ -325,9 +324,7 @@ r + L
  'green',
  'black',
  'white']
-
 r * 2
-
 ['white',
  'black',
  'green',
@@ -343,35 +340,15 @@ r * 2
 
 排序：
 
-
-    sorted(r) # 新对象
-
-
-
-
-    ['black', 'blue', 'green', 'red', 'white']
-
-
-
-
-    r
-
-
-
-
-    ['white', 'black', 'green', 'blue', 'red']
-
-
-
-
-    r.sort() # 原对象
-    r
-
-
-
-
-    ['black', 'blue', 'green', 'red', 'white']
-
+```python
+sorted(r) # 新对象
+['black', 'blue', 'green', 'red', 'white']
+r
+['white', 'black', 'green', 'blue', 'red']
+r.sort() # 原对象
+r
+['black', 'blue', 'green', 'red', 'white']
+```
 
 
 ---
@@ -405,48 +382,23 @@ r.__hash__          r.__rmul__        r.sort
 ```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #### 1.2.2.2.2 字符
 
 不同的字符语法（单引号、双引号或三个引号）：
 
-
-    s = 'Hello, how are you?'
-    s = "Hi, what's up"
-    s = '''Hello,                 
-           how are you'''         # 三个引号可以允许字符跨行
-    s = """Hi,
-    what's up?"""
+```python
+s = 'Hello, how are you?'
+s = "Hi, what's up"
+s = '''Hello,                 
+       how are you'''         # 三个引号可以允许字符跨行
+s = """Hi,
+what's up?"""
+'Hi, what's up?'
+File "<ipython-input-58-dfe00f996c26>", line 7
     'Hi, what's up?'
-
-
-      File "<ipython-input-58-dfe00f996c26>", line 7
-        'Hi, what's up?'
-                  ^
-    SyntaxError: invalid syntax
-
+              ^
+SyntaxError: invalid syntax
+```
 
 
 如果在字符中要是使用引号，那么应该嵌套使用，或者使用"\"进行转义，否则会报错。
@@ -457,112 +409,48 @@ r.__hash__          r.__rmul__        r.sort
 
 索引：
 
-
-    a = "hello"
-    a[0]
-
-
-
-
-    'h'
-
-
-
-
-    a[1]
-
-
-
-
-    'e'
-
-
-
-
-    a[-1]
-
-
-
-
-    'o'
-
+```python
+a = "hello"
+a[0]
+'h'
+a[1]
+'e'
+a[-1]
+'o'
+```
 
 
 （记住负索引从右侧开始计数。）
 
 切片：
 
-
-    a = "hello, world!"
-    a[3:6] # 第三到第六个（不包含）元素：元素3、4、5
-
-
-
-
-    'lo,'
-
-
-
-
-    a[2:10:2] # 语法：a[开始：结束：步幅]
+```python
+a = "hello, world!"
+a[3:6] # 第三到第六个（不包含）元素：元素3、4、5
+'lo,'
+a[2:10:2] # 语法：a[开始：结束：步幅]
+'lo o'
+a[::3] # 从开始到结尾，每隔3个字母
+'hl r!'
+```
 
 
-
-
-    'lo o'
-
-
-
-
-    a[::3] # 从开始到结尾，每隔3个字母
-
-
-
-
-    'hl r!'
-
-
-
-重音符号和特殊字符也可以被处理为Unicode字符（请见 http://docs.python.org/tutorial/introduction.html
-#unicode-strings）。
+重音符号和特殊字符也可以被处理为Unicode字符（请见 http://docs.python.org/tutorial/introduction.html#unicode-strings）。
 
 字符是**不可变**对象，不可能修改内容。不过可以从原始的字符中创建一个新的字符。
 
-
-    a = "hello, world!"
-    a[2] = 'z'
-
-
-    ---------------------------------------------------------------------------
+	a = "hello, world!"
+	a[2] = 'z'
+	-----------------------------------------------------	----------------------
     TypeError                                 Traceback (most recent call last)
-
     <ipython-input-68-8f124c87c8cf> in <module>()
           1 a = "hello, world!"
     ----> 2 a[2] = 'z'
-    
-
     TypeError: 'str' object does not support item assignment
-
-
-
     a.replace('l', 'z', 1)
-
-
-
-
     'hezlo, world!'
-
-
-
-
     a.replace('l', 'z')
-
-
-
-
     'hezzo, worzd!'
-
-
 
 字符有许多有用的方法，比如上面的a.replace。回忆一下a.面向对象的符号，并且使用tab完成或者help(str)来搜索新的方法。and use tab
 completion or
@@ -576,21 +464,12 @@ string-formatting。
 
     'An integer: %i; a float: %f; another string: %s' % (1, 0.1, 'string')
 
-
-
-
     'An integer: 1; a float: 0.100000; another string: string'
-
-
-
 
     i = 102
     filename = 'processing_of_dataset_%d.txt' % i
     filename
-
-
-
-
+    
     'processing_of_dataset_102.txt'
 
 
@@ -599,63 +478,33 @@ string-formatting。
 
 字典本质上是一个**映射键值**的高效表格。它是一个**无序**的容器
 
-
     tel = {'emmanuelle': 5752, 'sebastian': 5578}
     tel['francis'] = 5915
     tel
 
-
-
-
     {'emmanuelle': 5752, 'francis': 5915, 'sebastian': 5578}
 
-
-
-
     tel['sebastian']
-
-
-
-
+    
     5578
-
-
-
 
     tel.keys()
 
-
-
-
     ['sebastian', 'francis', 'emmanuelle']
-
-
-
 
     tel.values()
 
-
-
-
     [5578, 5915, 5752]
-
-
 
 它可以方便的以名字（日期的字符和名称等）存储和获取值。更多信息见
 http://docs.python.org/tutorial/datastructures.html#dictionaries。
 
 一个字典的键（代表值）可以有不同的类型：
 
-
     d = {'a':1, 'b':2, 3:'hello'}
     d
 
-
-
-
     {3: 'hello', 'a': 1, 'b': 2}
-
-
 
 #### 1.2.2.2.4. More container types
 
@@ -663,52 +512,27 @@ http://docs.python.org/tutorial/datastructures.html#dictionaries。
 
 元组本质上是不可变列表。元组的元素用括号包起来，或者只是用逗号分割：
 
-
     t = 12345, 54321, 'hello!'
     t[0]
 
-
-
-
     12345
-
-
-
 
     t
 
-
-
-
     (12345, 54321, 'hello!')
-
-
-
 
     u = (0, 2)
 
 **集合**：无序，惟一项目：
 
-
     s = set(('a', 'b', 'c', 'a'))
     s
 
-
-
-
     {'a', 'b', 'c'}
-
-
-
 
     s.difference(('a', 'b'))
 
-
-
-
     {'c'}
-
-
 
 #### 1.2.2.3. 赋值运算
 
@@ -727,103 +551,49 @@ statements)
 
 - 单个对象可以有多个绑定的名称：
 
+	    a = [1, 2, 3]
+    	b = a
+	    a
 
-    a = [1, 2, 3]
-    b = a
-    a
+    	[1, 2, 3]
 
+    	b
 
+	    [1, 2, 3]
 
+	    a is b
 
-    [1, 2, 3]
+    	True
 
+	    b[1] = 'hi!'
+	    a
 
-
-
-    b
-
-
-
-
-    [1, 2, 3]
-
-
-
-
-    a is b
-
-
-
-
-    True
-
-
-
-
-    b[1] = 'hi!'
-    a
-
-
-
-
-    [1, 'hi!', 3]
-
-
+    	[1, 'hi!', 3]
 
 - 要在**原地**改变列表，请使用索引或切片：
 
+	    a = [1, 2, 3]
+    	a
 
-    a = [1, 2, 3]
-    a
+	    [1, 2, 3]
 
+	    a = ['a', 'b', 'c'] # 创建另一个对象
+    	a
 
+	    ['a', 'b', 'c']
 
+	    id(a)
 
-    [1, 2, 3]
+	    4394695640
 
+	    a[:] = [1, 2, 3] # 在原地修改对象
+    	a
 
+	    [1, 2, 3]
 
+	    id(a)
 
-    a = ['a', 'b', 'c'] # 创建另一个对象
-    a
-
-
-
-
-    ['a', 'b', 'c']
-
-
-
-
-    id(a)
-
-
-
-
-    4394695640
-
-
-
-
-    a[:] = [1, 2, 3] # 在原地修改对象
-    a
-
-
-
-
-    [1, 2, 3]
-
-
-
-
-    id(a)
-
-
-
-
-    4394695640
-
-
+	    4394695640
 
 与上一个id相同，你的可能有所不同...
 
@@ -840,12 +610,10 @@ icle.aspx?p=453682)中也可以找到关于以上问题非常不错的详尽解�
 
 ### 1.2.3.1 if/elif/else
 
-
     if 2**2 == 4:
         print 'Obvious!'
 
     Obvious!
-
 
 **代码块用缩进限定**
 
@@ -855,7 +623,6 @@ icle.aspx?p=453682)中也可以找到关于以上问题非常不错的详尽解�
 符号后自动增加缩进，如果要减少缩进，向左侧移动4个空格使用后退键。按两次回车键离开逻辑块。
 
 ---
-
 
     a = 10
     if a == 1:
@@ -867,14 +634,12 @@ icle.aspx?p=453682)中也可以找到关于以上问题非常不错的详尽解�
 
     A lot
 
-
 在脚本中也是强制缩进的。作为练习，在condition.py脚本中以相同的缩进重新输入之前几行，并在IPython中用```run
 condition.py```执行脚本。
 
 ### 1.2.3.2 for/range
 
 在索引上迭代：
-
 
     for i in range(4):
         print(i)
@@ -884,9 +649,7 @@ condition.py```执行脚本。
     2
     3
 
-
 但是最经常使用，也更易读的是在值上迭代：
-
 
     for word in ('cool', 'powerful', 'readable'):
         print('Python is %s' % word)
@@ -895,28 +658,20 @@ condition.py```执行脚本。
     Python is powerful
     Python is readable
 
-
 ### 1.2.3.3 while/break/continue
 
 典型的C式While循环（Mandelbrot问题）：
-
 
     z = 1 + 1j
     while abs(z) < 100: 
         z = z**2 + 1
     z
 
-
-
-
     (-134+352j)
-
-
 
 **更高级的功能**
 
 bread 跳出for/while循环：
-
 
     z = 1 + 1j
     while abs(z) < 100:
@@ -930,9 +685,7 @@ bread 跳出for/while循环：
     (-11-16j)
     (-134+352j)
 
-
 continue 继续下一个循环迭代：
-
 
     a = [1, 0, 2, 4]
     for element in a:
@@ -943,7 +696,6 @@ continue 继续下一个循环迭代：
     1.0
     0.5
     0.25
-
 
 ### 1.2.3.4 条件表达式
 
@@ -961,66 +713,35 @@ continue 继续下一个循环迭代：
 
 判断逻辑是否相等：
 
-
     1 == 1
 
-
-
-
     True
-
-
 
 **a is b：**
 
 测试同一性：两边是相同的对象：
 
-
     1 is 1
-
-
-
-
     True
-
-
-
-
+    
     a = 1
     b = 1
     a is b
 
-
-
-
     True
-
-
 
 **a in b：**
 
 对于任何集合b：b包含a
 
-
     b = [1, 2, 3]
     2 in b
 
-
-
-
     True
-
-
-
 
     5 in b
 
-
-
-
     False
-
-
 
 如果b是字典，这个语法测试a是否是b的一个键。
 
@@ -1030,26 +751,17 @@ continue 继续下一个循环迭代：
 
 你可以在任何序列上进行循环（字符、列表、字典的键，文件的行...）：
 
-
     vowels = 'aeiouy'
     for i in 'powerful':
         if i in vowels:
             print(i),
-
+            
     o e u
-
-
 
     message = "Hello how are you?"
     message.split() # 返回一个列表
 
-
-
-
     ['Hello', 'how', 'are', 'you?']
-
-
-
 
     for word in message.split():
         print word
@@ -1058,7 +770,6 @@ continue 继续下一个循环迭代：
     how
     are
     you?
-
 
 很少有语言（特别是科学计算语言）允许在整数或索引之外的循环。在Python中，可以在感兴趣的对象上循环，而不用担心你通常不关心的索引。这个功能通常用来让代码更易
 读。
@@ -1070,7 +781,6 @@ continue 继续下一个循环迭代：
 通常任务是在一个序列上循环，同时跟踪项目数。
     - 可以像上面，使用带有计数器的while循环。或者一个for循环：
 
-
     words = ('cool', 'powerful', 'readable')
     for i in range(0, len(words)):
         print i, words[i]
@@ -1079,9 +789,7 @@ continue 继续下一个循环迭代：
     1 powerful
     2 readable
 
-
 但是，Python为这种情况提供了enumerate关键词：
-
 
     for index, item in enumerate(words):
         print index, item
@@ -1090,11 +798,9 @@ continue 继续下一个循环迭代：
     1 powerful
     2 readable
 
-
 #### 1.2.3.5.3 字典循环
 
 使用**iteritems**：
-
 
     d = {'a': 1, 'b':1.2, 'c':1j}
     for key, val in d.iteritems():
@@ -1104,18 +810,11 @@ continue 继续下一个循环迭代：
     Key: c has value: 1j
     Key: b has value: 1.2
 
-
 #### 1.2.3.5.4 列表理解
-
 
     [i**2 for i in range(4)]
 
-
-
-
     [0, 1, 4, 9]
-
-
 
 ---
 **练习**
@@ -1131,7 +830,6 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 
 ### 1.2.4.1 函数的定义
 
-
     def test():
         print('in test function')
     
@@ -1139,24 +837,18 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 
     in test function
 
-
 **注意**：函数块必须像其他流程控制块一样缩进
 
 ### 1.2.4.2 返回语句
 
 函数**可以选择**返回值。
 
-
     def disk_area(radius):
         return 3.14 * radius * radius
     
     disk_area(1.5)
 
-
-
-
     7.0649999999999995
-
 
 
 **注意**：默认函数返回`None`。
@@ -1173,57 +865,35 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 
 必选参数（位置参数）
 
-
     def double_it(x):
         return x * 2
     
     double_it(3)
 
-
-
-
     6
 
-
-
-
     double_it()
-
-
     ---------------------------------------------------------------------------
     TypeError                                 Traceback (most recent call last)
 
     <ipython-input-25-51cdedbb81b0> in <module>()
     ----> 1 double_it()
-    
 
     TypeError: double_it() takes exactly 1 argument (0 given)
 
 
 可选参数（关键词和命名参数）
 
-
     def double_it(x=2):
         return x * 2
     
     double_it()
 
-
-
-
     4
 
-
-
-
     double_it(3)
-
-
-
-
+    
     6
-
-
 
 关键词参数允许你设置特定默认值。
 
@@ -1232,22 +902,15 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 
 在关键词参数中使用不可变类型：
 
-
     bigx = 10
     def double_it(x=bigx):
         return x * 2
     bigx = 1e9  # 现在真的非常大
     double_it()
 
-
-
-
     20
 
-
-
 在关键词参数中使用可变类型（并且在函数体内修改它）：
-
 
     def add_to_dict(args={'a': 1, 'b': 2}):
         for i in args.keys():
@@ -1256,33 +919,21 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
     
     add_to_dict
 
-
-
-
     <function __main__.add_to_dict>
-
-
-
 
     add_to_dict()
 
     {'a': 2, 'b': 3}
 
-
-
     add_to_dict()
 
     {'a': 3, 'b': 4}
-
-
 
     add_to_dict()
 
     {'a': 4, 'b': 5}
 
-
 更复杂的例子，实现Python的切片：
-
 
     def slicer(seq, start=None, stop=None, step=None):
         """Implement basic python slicing."""
@@ -1292,64 +943,29 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
     
     rhyme
 
-
-
-
     ['one', 'fish,', 'two', 'fish,', 'red', 'fish,', 'blue', 'fish']
-
-
-
-
+    
     slicer(rhyme)
 
-
-
-
     ['one', 'fish,', 'two', 'fish,', 'red', 'fish,', 'blue', 'fish']
-
-
-
 
     slicer(rhyme, step=2)
 
-
-
-
     ['one', 'two', 'red', 'blue']
-
-
-
 
     slicer(rhyme, 1, step=2)
 
-
-
-
     ['fish,', 'fish,', 'fish,', 'fish']
-
-
-
 
     slicer(rhyme, start=1, stop=4, step=2)
 
-
-
-
     ['fish,', 'fish,']
-
-
 
 关键词参数的顺序**不**重要：
 
-
     slicer(rhyme, step=2, start=1, stop=4)
 
-
-
-
     ['fish,', 'fish,']
-
-
 
 但是，最好是使用与函数定义相同的顺序。
 
@@ -1363,7 +979,6 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 函数的参数是对象的引用，传递的是值。当你像一个函数传递了一个变量，Python传递的是对象的引用，这个对象引用的变量（值）。而不是变量本身。
 
 如果**值**传递给函数的值是不可变的，那么这个函数并不会改变调用者的变量。如果**值**是可变的，那么函数将可能在原地修改调用者的变量。
-
 
     def try_to_modify(x, y, z):
         x = 23
@@ -1382,24 +997,17 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
     [99, 42]
     [99]
 
-
-
     print(a)
 
     77
-
-
 
     print(b)
 
     [99, 42]
 
-
-
     print(c)
 
     [28]
-
 
 函数有名为*local namespace*的本地变量表。
 
@@ -1409,24 +1017,18 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 
 在函数外定义的变量可以在函数内引用：
 
-
     x = 5
     def addx(y):
         return x + y
     
     addx(10)
 
-
-
-
     15
-
 
 
 但是，这些全局变量不能在函数内修改，除非在函数内声明**global**。
 
 这样没用：
-
 
     def setx(y):
         x = y
@@ -1436,19 +1038,11 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 
     x is 10
 
-
-
     x
-
-
-
 
     5
 
-
-
 这样可以：
-
 
     def setx(y):
         global x
@@ -1459,23 +1053,15 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 
     x is 10
 
-
-
     x
 
-
-
-
     10
-
-
 
 ### 1.2.4.6 可变数量参数
 
 函数的特殊形式：
     - *args：封装成元组的任意数量的位置参数
     - **kwargs：封装成字典的任意数量的关键词参数
-
 
     def variable_args(*args, **kwargs):
         print 'args is', args
@@ -1486,11 +1072,9 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
     args is ('one', 'two')
     kwargs is {'y': 2, 'x': 1, 'z': 3}
 
-
 ### 1.2.4.7 Docstrings
 
 关于函数作用及参数的文档。通常惯例：
-
 
     def funcname(params):
         """Concise one-line sentence describing the function.
@@ -1501,7 +1085,7 @@ lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
     
     funcname?
 
-```
+```python
 Type:           function
 Base Class:     type 'function'>
 String Form:    <function funcname at 0xeaa0f0>
@@ -1510,7 +1094,6 @@ File:           <ipython console>
 Definition:     funcname(params)
 Docstring:
     Concise one-line sentence describing the function.
-
     Extended summary which can contain multiple paragraphs.
 ```
 
@@ -1526,19 +1109,16 @@ http://projects.scipy.org/numpy/browser/trunk/doc/example.py#L37
 
 函数是一级对象，这意味着他们可以是：
 
-    - 可以被赋值给变量
-    - 列表的一个项目（或任何集合）
-    - 作为参数传递给另一个函数
+- 可以被赋值给变量
+- 列表的一个项目（或任何集合）
+- 作为参数传递给另一个函数
 
-
-
-    va = variable_args
+	    va = variable_args
     
-    va('three', x=1, y=2)
+	    va('three', x=1, y=2)
 
-    args is ('three',)
-    kwargs is {'y': 2, 'x': 1}
-
+	    args is ('three',)
+	    kwargs is {'y': 2, 'x': 1}
 
 ### 1.2.4.9 方法
 
@@ -1550,20 +1130,17 @@ http://projects.scipy.org/numpy/browser/trunk/doc/example.py#L37
 
 写一个函数来展示斐波那契数列的前n个项目，定义如下：
     - u_0 = 1; u_1 = 1
-    - u_(n+2) = u_(n+1) + u_n
+    - u\_(n+2) = u_(n+1) + u_n
 
 **练习：快速排序**
 
 实现快速排序算法，定义来自wikipedia：
 
+```python
 function quicksort(array)
-
     var list less, greater if length(array) < 2
-
         return array
-
     select and remove a pivot value pivot from array for each x in array
-
         if x < pivot + 1 then append x to less else append x to greater
-
     return concatenate(quicksort(less), pivot, quicksort(greater))
+```

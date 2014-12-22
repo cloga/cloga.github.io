@@ -312,42 +312,33 @@ r2
 
 串联和重复列表：
 
+```python
+r + L
 
-    r + L
+['white',
+ 'black',
+ 'green',
+ 'blue',
+ 'red',
+ 'red',
+ 'blue',
+ 'green',
+ 'black',
+ 'white']
 
+r * 2
 
-
-
-    ['white',
-     'black',
-     'green',
-     'blue',
-     'red',
-     'red',
-     'blue',
-     'green',
-     'black',
-     'white']
-
-
-
-
-    r * 2
-
-
-
-
-    ['white',
-     'black',
-     'green',
-     'blue',
-     'red',
-     'white',
-     'black',
-     'green',
-     'blue',
-     'red']
-
+['white',
+ 'black',
+ 'green',
+ 'blue',
+ 'red',
+ 'white',
+ 'black',
+ 'green',
+ 'blue',
+ 'red']
+```
 
 
 排序：

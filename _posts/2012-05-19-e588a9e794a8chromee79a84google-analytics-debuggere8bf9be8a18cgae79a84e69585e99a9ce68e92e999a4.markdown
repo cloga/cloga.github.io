@@ -20,13 +20,13 @@ GA代码初次部署或代码修改后的故障排除是一件比较麻烦的事
 
 这是一个Chrome浏览器的扩展程序，因此，首先需要安装Chrome。然后进入Chrome网上应用商城，安装[Google Analytics Debugger](https://chrome.google.com/extensions/detail/jnkmfdileelhofjcijamephohjechhna)。
 
-安装完成后会在Chrome地址栏右侧出现[![](http://www.cloga.info/wp-content/uploads/2012/05/111.jpg)](http://www.cloga.info/wp-content/uploads/2012/05/111.jpg)，点击一下这个图标，图标会点亮[![](http://www.cloga.info/wp-content/uploads/2012/05/Icon2.jpg)](http://www.cloga.info/wp-content/uploads/2012/05/Icon2.jpg)。
+安装完成后会在Chrome地址栏右侧出现![bugger_icon1](http://www.cloga.info/files/debugger_icon1.png)，点击一下这个图标，图标会点亮![bugger_icon2](http://www.cloga.info/files/debugger_icon1.png)。
 
 点击F12，或Ctrl+Shift+J，调出Chrome的Javascript控制台。
 
-[caption id="attachment_1527" align="aligncenter" width="600"][![](http://www.cloga.info/wp-content/uploads/2012/05/console-1024x283.jpg)](http://www.cloga.info/wp-content/uploads/2012/05/console.jpg) GA Debugger[/caption]
+![console](http://www.cloga.info/files/console.png)
 
-点击Console，你会看到类似上面的界面。下面我们再来看一下如何进行GATC的故障排除。<!-- more -->
+点击Console，你会看到类似上面的界面。下面我们再来看一下如何进行GATC的故障排除。
 
 
 ## GA跟踪代码的故障排除的基本步骤
@@ -80,15 +80,12 @@ PS：如果注意观察的话，经常会发现GA的版本会经常升级，有�
 
 页面加载
 
-[caption id="attachment_1651" align="aligncenter" width="600"][![GA Method](http://www.cloga.info/wp-content/uploads/2012/05/GA-Method-1024x334.jpg)](http://www.cloga.info/wp-content/uploads/2012/05/GA-Method.jpg) GA Method[/caption]
+![GA Method](http://www.cloga.info/files/GA_Method.png)
 
 上图是我的Blog加载后页面上的GATC加载的的一个截图。我们可以在里面看到我的GATC中一共定义了几个方法。Track Pageview，Tracking beacon sent!表明当前是发送的Pageview请求，发送成功。如果你是用的了Event或者电子商务的Track trans，那么也会有对应的提示。但是，请注意不代表有Track Pageview的方法就一定会发送数据，如果页面上定义了抽样的话，那么有可能你被排除了就不会发送beacon。
 
-[caption id="attachment_1652" align="aligncenter" width="600"][![GA Parameter](http://www.cloga.info/wp-content/uploads/2012/05/GA-Parameter-1024x348.jpg)](http://www.cloga.info/wp-content/uploads/2012/05/GA-Parameter.jpg) GA Parameter[/caption]
 
 接下来是beacon具体的参数信息，我们可以看到这个请求中包含的所有信息，比如对应的GA账户，URL，Referrer、VisitorID等。
-
-[caption id="attachment_1653" align="aligncenter" width="600"][![GA Event](http://www.cloga.info/wp-content/uploads/2012/05/GA-Event-1024x262.jpg)](http://www.cloga.info/wp-content/uploads/2012/05/GA-Event.jpg) GA Event[/caption]
 
 除了基本的Pageview以外，GA debugger也可以补抓到其他的GA方法请求。上图是我点击了页面的搜索框后发送的Event，由于我使用了GAS自动标记这些交互，因此，这个过程是自动的。我们可以看到GAS自动产生的事件类别是Form Tracking（不知道为啥写的的是Event Name），事件动作是form (none)（同样无厘头的写着Event Type），事件标签是s (change)。通过这些信息，我就可以事件与对应的GA标签对应起来，比如我要将这个事件设置为目标的话，那么就指定事件目标，其类型为Form Tracking，动作为form (none)，标签为form (none)。
 

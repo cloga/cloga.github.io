@@ -821,8 +821,7 @@ continue 继续下一个循环迭代：
 
 用Wallis公式，计算π的小数
 
-![Wallis公式](http://scipy-
-lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
+![Wallis公式](http://scipy-lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png)
 
 ---
 

@@ -13,12 +13,13 @@ tags:
 为了创建配置文件过滤器，与管理员身份登录你的Google Analytics，点击你想要添加新过滤器的配置文件名旁的修改，然后向下滚动，点击添加过滤器链接。创建新过滤器对话框如图8.13所示。注意一旦你创建过滤器，你能将它应用到账户中的其他配置文件。
 
 
-[![](http://www.cloga.info/wp-content/uploads/2010/11/8-13.png)](http://www.cloga.info/wp-content/uploads/2010/11/8-13.png)图8.13  添加一个新的过滤器
-
+图8.13  添加一个新的过滤器
 
 Google Analytics为你提供了预定义过滤器及自定义过滤器：
-•预定义过滤器是完成最常用的过滤任务的方便、快捷的方式，如表8.3所示。[http://www.google.hk/support/googleanalytics/bin/answer.py?answer=55496](http://www.google.hk/support/googleanalytics/bin/answer.py?answer=55496)介绍了“如何创建预定义过滤器”。
-•自定义过滤器允许对数据的更高级操作，表8.4列出这些过滤器。[http://www.google.hk/support/googleanalytics/bin/answer.py?answer=55492](http://www.google.hk/support/googleanalytics/bin/answer.py?answer=55492)介绍了“如何创建自定义过滤器”。下面大部分的过滤器例子是使用自定义过滤器。
+
+• 预定义过滤器是完成最常用的过滤任务的方便、快捷的方式，如表8.3所示。[http://www.google.hk/support/googleanalytics/bin/answer.py?answer=55496](http://www.google.hk/support/googleanalytics/bin/answer.py?answer=55496)介绍了“如何创建预定义过滤器”。
+
+• 自定义过滤器允许对数据的更高级操作，表8.4列出这些过滤器。[http://www.google.hk/support/googleanalytics/bin/answer.py?answer=55492](http://www.google.hk/support/googleanalytics/bin/answer.py?answer=55492)介绍了“如何创建自定义过滤器”。下面大部分的过滤器例子是使用自定义过滤器。
 <!-- more -->
 
 表8.3  预定义过滤器

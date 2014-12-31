@@ -18,8 +18,8 @@ Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。
 
 1. Python科学计算入门
 	1. [科学计算工具及流程](http://cloga.info/python_scientific_lecture_notes/2014/12/15/Scientific_computing_with_tools_and_workflow/)
-	2. Python语言
-	3. NumPy：创建和操作数值数据
+	2. [Python语言](http://cloga.info/python_scientific_lecture_notes/2014/12/22/python_language/)
+	3. [NumPy：创建和操作数值数据](http://cloga.info/python_scientific_lecture_notes/2014/12/31/NumPy_creating_and_manipulating_numerical_data/)
 	4. Matplotlib：作图
 	5. Scipy：高级科学计算
 	6. 获取帮助及寻找文档

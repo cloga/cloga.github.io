@@ -2008,7 +2008,7 @@ np.iinfo(np.int64).max, 2**63 - 1
 无符号整数:
 
 类型|字节数
--|-
+----|----
 uint8|8 bits
 uint16|16 bits
 uint32|32 bits
@@ -2029,7 +2029,7 @@ np.iinfo(np.uint64).max, 2**64 - 1
 浮点数据：
 
 类型|字节数
--|-
+----|----
 float16|16 bits
 float32|32 bits
 float64|64 bits (与浮点相同)
@@ -2063,7 +2063,7 @@ np.float64(1e-8) + np.float64(1) == 1
 浮点复数：
 
 类型|字节数
--|-
+----|---
 complex64|两个 32-bit 浮点
 complex128|两个 64-bit 浮点
 complex192|两个 96-bit 浮点, 平台依赖

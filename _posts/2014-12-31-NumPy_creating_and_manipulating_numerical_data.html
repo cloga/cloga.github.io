@@ -1,0 +1,3506 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
+  width: 45em;
+  border: 1px solid #ddd;
+  outline: 1300px solid #fff;
+  margin: 16px auto;
+}
+
+body .markdown-body
+{
+  padding: 30px;
+}
+
+@font-face {
+  font-family: octicons-anchor;
+  src: url(data:font/woff;charset=utf-8;base64,d09GRgABAAAAAAYcAA0AAAAACjQAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABGRlRNAAABMAAAABwAAAAca8vGTk9TLzIAAAFMAAAARAAAAFZG1VHVY21hcAAAAZAAAAA+AAABQgAP9AdjdnQgAAAB0AAAAAQAAAAEACICiGdhc3AAAAHUAAAACAAAAAj//wADZ2x5ZgAAAdwAAADRAAABEKyikaNoZWFkAAACsAAAAC0AAAA2AtXoA2hoZWEAAALgAAAAHAAAACQHngNFaG10eAAAAvwAAAAQAAAAEAwAACJsb2NhAAADDAAAAAoAAAAKALIAVG1heHAAAAMYAAAAHwAAACABEAB2bmFtZQAAAzgAAALBAAAFu3I9x/Nwb3N0AAAF/AAAAB0AAAAvaoFvbwAAAAEAAAAAzBdyYwAAAADP2IQvAAAAAM/bz7t4nGNgZGFgnMDAysDB1Ml0hoGBoR9CM75mMGLkYGBgYmBlZsAKAtJcUxgcPsR8iGF2+O/AEMPsznAYKMwIkgMA5REMOXicY2BgYGaAYBkGRgYQsAHyGMF8FgYFIM0ChED+h5j//yEk/3KoSgZGNgYYk4GRCUgwMaACRoZhDwCs7QgGAAAAIgKIAAAAAf//AAJ4nHWMMQrCQBBF/0zWrCCIKUQsTDCL2EXMohYGSSmorScInsRGL2DOYJe0Ntp7BK+gJ1BxF1stZvjz/v8DRghQzEc4kIgKwiAppcA9LtzKLSkdNhKFY3HF4lK69ExKslx7Xa+vPRVS43G98vG1DnkDMIBUgFN0MDXflU8tbaZOUkXUH0+U27RoRpOIyCKjbMCVejwypzJJG4jIwb43rfl6wbwanocrJm9XFYfskuVC5K/TPyczNU7b84CXcbxks1Un6H6tLH9vf2LRnn8Ax7A5WQAAAHicY2BkYGAA4teL1+yI57f5ysDNwgAC529f0kOmWRiYVgEpDgYmEA8AUzEKsQAAAHicY2BkYGB2+O/AEMPCAAJAkpEBFbAAADgKAe0EAAAiAAAAAAQAAAAEAAAAAAAAKgAqACoAiAAAeJxjYGRgYGBhsGFgYgABEMkFhAwM/xn0QAIAD6YBhwB4nI1Ty07cMBS9QwKlQapQW3VXySvEqDCZGbGaHULiIQ1FKgjWMxknMfLEke2A+IJu+wntrt/QbVf9gG75jK577Lg8K1qQPCfnnnt8fX1NRC/pmjrk/zprC+8D7tBy9DHgBXoWfQ44Av8t4Bj4Z8CLtBL9CniJluPXASf0Lm4CXqFX8Q84dOLnMB17N4c7tBo1AS/Qi+hTwBH4rwHHwN8DXqQ30XXAS7QaLwSc0Gn8NuAVWou/gFmnjLrEaEh9GmDdDGgL3B4JsrRPDU2hTOiMSuJUIdKQQayiAth69r6akSSFqIJuA19TrzCIaY8sIoxyrNIrL//pw7A2iMygkX5vDj+G+kuoLdX4GlGK/8Lnlz6/h9MpmoO9rafrz7ILXEHHaAx95s9lsI7AHNMBWEZHULnfAXwG9/ZqdzLI08iuwRloXE8kfhXYAvE23+23DU3t626rbs8/8adv+9DWknsHp3E17oCf+Z48rvEQNZ78paYM38qfk3v/u3l3u3GXN2Dmvmvpf1Srwk3pB/VSsp512bA/GG5i2WJ7wu430yQ5K3nFGiOqgtmSB5pJVSizwaacmUZzZhXLlZTq8qGGFY2YcSkqbth6aW1tRmlaCFs2016m5qn36SbJrqosG4uMV4aP2PHBmB3tjtmgN2izkGQyLWprekbIntJFing32a5rKWCN/SdSoga45EJykyQ7asZvHQ8PTm6cslIpwyeyjbVltNikc2HTR7YKh9LBl9DADC0U/jLcBZDKrMhUBfQBvXRzLtFtjU9eNHKin0x5InTqb8lNpfKv1s1xHzTXRqgKzek/mb7nB8RZTCDhGEX3kK/8Q75AmUM/eLkfA+0Hi908Kx4eNsMgudg5GLdRD7a84npi+YxNr5i5KIbW5izXas7cHXIMAau1OueZhfj+cOcP3P8MNIWLyYOBuxL6DRylJ4cAAAB4nGNgYoAALjDJyIAOWMCiTIxMLDmZedkABtIBygAAAA==) format('woff');
+}
+
+.markdown-body {
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  color: #333;
+  overflow: hidden;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+
+.markdown-body a {
+  background: transparent;
+}
+
+.markdown-body a:active,
+.markdown-body a:hover {
+  outline: 0;
+}
+
+.markdown-body strong {
+  font-weight: bold;
+}
+
+.markdown-body h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+.markdown-body img {
+  border: 0;
+}
+
+.markdown-body hr {
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  height: 0;
+}
+
+.markdown-body pre {
+  overflow: auto;
+}
+
+.markdown-body code,
+.markdown-body kbd,
+.markdown-body pre {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+.markdown-body input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+
+.markdown-body html input[disabled] {
+  cursor: default;
+}
+
+.markdown-body input {
+  line-height: normal;
+}
+
+.markdown-body input[type="checkbox"] {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.markdown-body table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.markdown-body td,
+.markdown-body th {
+  padding: 0;
+}
+
+.markdown-body * {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body input {
+  font: 13px/1.4 Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+.markdown-body a {
+  color: #4183c4;
+  text-decoration: none;
+}
+
+.markdown-body a:hover,
+.markdown-body a:focus,
+.markdown-body a:active {
+  text-decoration: underline;
+}
+
+.markdown-body hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+
+.markdown-body hr:before {
+  display: table;
+  content: "";
+}
+
+.markdown-body hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.markdown-body h1 {
+  font-size: 30px;
+}
+
+.markdown-body h2 {
+  font-size: 21px;
+}
+
+.markdown-body h3 {
+  font-size: 16px;
+}
+
+.markdown-body h4 {
+  font-size: 14px;
+}
+
+.markdown-body h5 {
+  font-size: 12px;
+}
+
+.markdown-body h6 {
+  font-size: 11px;
+}
+
+.markdown-body blockquote {
+  margin: 0;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body ol ol,
+.markdown-body ul ol {
+  list-style-type: lower-roman;
+}
+
+.markdown-body ul ul ol,
+.markdown-body ul ol ol,
+.markdown-body ol ul ol,
+.markdown-body ol ol ol {
+  list-style-type: lower-alpha;
+}
+
+.markdown-body dd {
+  margin-left: 0;
+}
+
+.markdown-body code {
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font: 12px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+}
+
+.markdown-body .octicon {
+  font: normal normal 16px octicons-anchor;
+  line-height: 1;
+  display: inline-block;
+  text-decoration: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.markdown-body .octicon-link:before {
+  content: '\f05c';
+}
+
+.markdown-body>*:first-child {
+  margin-top: 0 !important;
+}
+
+.markdown-body>*:last-child {
+  margin-bottom: 0 !important;
+}
+
+.markdown-body .anchor {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  display: block;
+  padding-right: 6px;
+  padding-left: 30px;
+  margin-left: -30px;
+}
+
+.markdown-body .anchor:focus {
+  outline: none;
+}
+
+.markdown-body h1,
+.markdown-body h2,
+.markdown-body h3,
+.markdown-body h4,
+.markdown-body h5,
+.markdown-body h6 {
+  position: relative;
+  margin-top: 1em;
+  margin-bottom: 16px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.markdown-body h1 .octicon-link,
+.markdown-body h2 .octicon-link,
+.markdown-body h3 .octicon-link,
+.markdown-body h4 .octicon-link,
+.markdown-body h5 .octicon-link,
+.markdown-body h6 .octicon-link {
+  display: none;
+  color: #000;
+  vertical-align: middle;
+}
+
+.markdown-body h1:hover .anchor,
+.markdown-body h2:hover .anchor,
+.markdown-body h3:hover .anchor,
+.markdown-body h4:hover .anchor,
+.markdown-body h5:hover .anchor,
+.markdown-body h6:hover .anchor {
+  padding-left: 8px;
+  margin-left: -30px;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.markdown-body h1:hover .anchor .octicon-link,
+.markdown-body h2:hover .anchor .octicon-link,
+.markdown-body h3:hover .anchor .octicon-link,
+.markdown-body h4:hover .anchor .octicon-link,
+.markdown-body h5:hover .anchor .octicon-link,
+.markdown-body h6:hover .anchor .octicon-link {
+  display: inline-block;
+}
+
+.markdown-body h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+
+.markdown-body h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+
+.markdown-body h4 {
+  font-size: 1.25em;
+}
+
+.markdown-body h5 {
+  font-size: 1em;
+}
+
+.markdown-body h6 {
+  font-size: 1em;
+  color: #777;
+}
+
+.markdown-body p,
+.markdown-body blockquote,
+.markdown-body ul,
+.markdown-body ol,
+.markdown-body dl,
+.markdown-body table,
+.markdown-body pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+.markdown-body hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+
+.markdown-body ul,
+.markdown-body ol {
+  padding-left: 2em;
+}
+
+.markdown-body ul ul,
+.markdown-body ul ol,
+.markdown-body ol ol,
+.markdown-body ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.markdown-body li>p {
+  margin-top: 16px;
+}
+
+.markdown-body dl {
+  padding: 0;
+}
+
+.markdown-body dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.markdown-body dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+
+.markdown-body blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+
+.markdown-body blockquote>:first-child {
+  margin-top: 0;
+}
+
+.markdown-body blockquote>:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: normal;
+  word-break: keep-all;
+}
+
+.markdown-body table th {
+  font-weight: bold;
+}
+
+.markdown-body table th,
+.markdown-body table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+.markdown-body table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+
+.markdown-body table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+
+.markdown-body img {
+  max-width: 100%;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.markdown-body code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0,0,0,0.04);
+  border-radius: 3px;
+}
+
+.markdown-body code:before,
+.markdown-body code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+
+.markdown-body pre>code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+
+.markdown-body .highlight {
+  margin-bottom: 16px;
+}
+
+.markdown-body .highlight pre,
+.markdown-body pre {
+  padding: 16px;
+  overflow: auto;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+
+.markdown-body .highlight pre {
+  margin-bottom: 0;
+  word-break: normal;
+}
+
+.markdown-body pre {
+  word-wrap: normal;
+}
+
+.markdown-body pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+
+.markdown-body pre code:before,
+.markdown-body pre code:after {
+  content: normal;
+}
+
+.markdown-body .highlight {
+  background: #fff;
+}
+
+.markdown-body .highlight .h {
+  color: #333;
+  font-style: normal;
+  font-weight: normal;
+}
+
+.markdown-body .highlight .mf,
+.markdown-body .highlight .mh,
+.markdown-body .highlight .mi,
+.markdown-body .highlight .mo,
+.markdown-body .highlight .il,
+.markdown-body .highlight .m {
+  color: #945277;
+}
+
+.markdown-body .highlight .s,
+.markdown-body .highlight .sb,
+.markdown-body .highlight .sc,
+.markdown-body .highlight .sd,
+.markdown-body .highlight .s2,
+.markdown-body .highlight .se,
+.markdown-body .highlight .sh,
+.markdown-body .highlight .si,
+.markdown-body .highlight .sx,
+.markdown-body .highlight .s1 {
+  color: #df5000;
+}
+
+.markdown-body .highlight .kc,
+.markdown-body .highlight .kd,
+.markdown-body .highlight .kn,
+.markdown-body .highlight .kp,
+.markdown-body .highlight .kr,
+.markdown-body .highlight .kt,
+.markdown-body .highlight .k,
+.markdown-body .highlight .o {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .kt {
+  color: #458;
+}
+
+.markdown-body .highlight .c,
+.markdown-body .highlight .cm,
+.markdown-body .highlight .c1 {
+  color: #998;
+  font-style: italic;
+}
+
+.markdown-body .highlight .cp,
+.markdown-body .highlight .cs,
+.markdown-body .highlight .cp .h {
+  color: #999;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .cs {
+  font-style: italic;
+}
+
+.markdown-body .highlight .n {
+  color: #333;
+}
+
+.markdown-body .highlight .na,
+.markdown-body .highlight .nv,
+.markdown-body .highlight .vc,
+.markdown-body .highlight .vg,
+.markdown-body .highlight .vi {
+  color: #008080;
+}
+
+.markdown-body .highlight .nb {
+  color: #0086B3;
+}
+
+.markdown-body .highlight .nc {
+  color: #458;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .no {
+  color: #094e99;
+}
+
+.markdown-body .highlight .ni {
+  color: #800080;
+}
+
+.markdown-body .highlight .ne {
+  color: #990000;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .nf {
+  color: #945277;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .nn {
+  color: #555;
+}
+
+.markdown-body .highlight .nt {
+  color: #000080;
+}
+
+.markdown-body .highlight .err {
+  color: #a61717;
+  background-color: #e3d2d2;
+}
+
+.markdown-body .highlight .gd {
+  color: #000;
+  background-color: #fdd;
+}
+
+.markdown-body .highlight .gd .x {
+  color: #000;
+  background-color: #faa;
+}
+
+.markdown-body .highlight .ge {
+  font-style: italic;
+}
+
+.markdown-body .highlight .gr {
+  color: #aa0000;
+}
+
+.markdown-body .highlight .gh {
+  color: #999;
+}
+
+.markdown-body .highlight .gi {
+  color: #000;
+  background-color: #dfd;
+}
+
+.markdown-body .highlight .gi .x {
+  color: #000;
+  background-color: #afa;
+}
+
+.markdown-body .highlight .go {
+  color: #888;
+}
+
+.markdown-body .highlight .gp {
+  color: #555;
+}
+
+.markdown-body .highlight .gs {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .gu {
+  color: #800080;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .gt {
+  color: #aa0000;
+}
+
+.markdown-body .highlight .ow {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .w {
+  color: #bbb;
+}
+
+.markdown-body .highlight .sr {
+  color: #017936;
+}
+
+.markdown-body .highlight .ss {
+  color: #8b467f;
+}
+
+.markdown-body .highlight .bp {
+  color: #999;
+}
+
+.markdown-body .highlight .gc {
+  color: #999;
+  background-color: #EAF2F5;
+}
+
+.markdown-body kbd {
+  background-color: #e7e7e7;
+  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
+  background-image: linear-gradient(#fefefe, #e7e7e7);
+  background-repeat: repeat-x;
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  line-height: 10px;
+  color: #000;
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+}
+
+.markdown-body .highlight .pl-coc,
+.markdown-body .highlight .pl-entm,
+.markdown-body .highlight .pl-eoa,
+.markdown-body .highlight .pl-mai .pl-sf,
+.markdown-body .highlight .pl-pdv,
+.markdown-body .highlight .pl-sc,
+.markdown-body .highlight .pl-sr,
+.markdown-body .highlight .pl-v,
+.markdown-body .highlight .pl-vpf {
+  color: #0086b3;
+}
+
+.markdown-body .highlight .pl-eoac,
+.markdown-body .highlight .pl-mdht,
+.markdown-body .highlight .pl-mi1,
+.markdown-body .highlight .pl-mri,
+.markdown-body .highlight .pl-va,
+.markdown-body .highlight .pl-vpu {
+  color: #008080;
+}
+
+.markdown-body .highlight .pl-c,
+.markdown-body .highlight .pl-pdc {
+  color: #b4b7b4;
+  font-style: italic;
+}
+
+.markdown-body .highlight .pl-k,
+.markdown-body .highlight .pl-ko,
+.markdown-body .highlight .pl-kolp,
+.markdown-body .highlight .pl-mc,
+.markdown-body .highlight .pl-mr,
+.markdown-body .highlight .pl-ms,
+.markdown-body .highlight .pl-s,
+.markdown-body .highlight .pl-sok,
+.markdown-body .highlight .pl-st {
+  color: #6e5494;
+}
+
+.markdown-body .highlight .pl-ef,
+.markdown-body .highlight .pl-enf,
+.markdown-body .highlight .pl-enm,
+.markdown-body .highlight .pl-entc,
+.markdown-body .highlight .pl-eoi,
+.markdown-body .highlight .pl-sf,
+.markdown-body .highlight .pl-smc {
+  color: #d12089;
+}
+
+.markdown-body .highlight .pl-ens,
+.markdown-body .highlight .pl-eoai,
+.markdown-body .highlight .pl-kos,
+.markdown-body .highlight .pl-mh .pl-pdh,
+.markdown-body .highlight .pl-mp,
+.markdown-body .highlight .pl-pde,
+.markdown-body .highlight .pl-stp {
+  color: #458;
+}
+
+.markdown-body .highlight .pl-enti {
+  color: #d12089;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-cce,
+.markdown-body .highlight .pl-enc,
+.markdown-body .highlight .pl-kou,
+.markdown-body .highlight .pl-mq {
+  color: #f93;
+}
+
+.markdown-body .highlight .pl-mp1 .pl-sf {
+  color: #458;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-cos,
+.markdown-body .highlight .pl-ent,
+.markdown-body .highlight .pl-md,
+.markdown-body .highlight .pl-mdhf,
+.markdown-body .highlight .pl-ml,
+.markdown-body .highlight .pl-pdc1,
+.markdown-body .highlight .pl-pds,
+.markdown-body .highlight .pl-s1,
+.markdown-body .highlight .pl-scp,
+.markdown-body .highlight .pl-sol {
+  color: #df5000;
+}
+
+.markdown-body .highlight .pl-c1,
+.markdown-body .highlight .pl-cn,
+.markdown-body .highlight .pl-pse,
+.markdown-body .highlight .pl-pse .pl-s2,
+.markdown-body .highlight .pl-vi {
+  color: #a31515;
+}
+
+.markdown-body .highlight .pl-mb,
+.markdown-body .highlight .pl-pdb {
+  color: #df5000;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-mi,
+.markdown-body .highlight .pl-pdi {
+  color: #6e5494;
+  font-style: italic;
+}
+
+.markdown-body .highlight .pl-ms1 {
+  background-color: #f5f5f5;
+}
+
+.markdown-body .highlight .pl-mdh,
+.markdown-body .highlight .pl-mdi {
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-mdr {
+  color: #0086b3;
+  font-weight: bold;
+}
+
+.markdown-body .highlight .pl-s2 {
+  color: #333;
+}
+
+.markdown-body .highlight .pl-ii {
+  background-color: #df5000;
+  color: #fff;
+}
+
+.markdown-body .highlight .pl-ib {
+  background-color: #f93;
+}
+
+.markdown-body .highlight .pl-id {
+  background-color: #a31515;
+  color: #fff;
+}
+
+.markdown-body .highlight .pl-iu {
+  background-color: #b4b7b4;
+}
+
+.markdown-body .highlight .pl-mo {
+  color: #969896;
+}
+
+.markdown-body .task-list-item {
+  list-style-type: none;
+}
+
+.markdown-body .task-list-item+.task-list-item {
+  margin-top: 3px;
+}
+
+.markdown-body .task-list-item input {
+  float: left;
+  margin: 0.3em 0 0.25em -1.6em;
+  vertical-align: middle;
+}</style><title>2014-12-31-NumPy_creating_and_manipulating_numerical_data</title></head><body><article class="markdown-body"><hr>
+
+<p>author: cloga
+comments: true
+layout: post
+slug: Python Scientific Lecture Notes 1.3
+title: 1.3NumPy：创建和操作数值数据
+categories:</p>
+
+<ul>
+<li>Python_Scientific_Lecture_Notes
+tags:</li>
+<li>Python</li>
+</ul>
+
+<hr>
+
+<p>Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。英文版地址为：<a href="http://scipy-lectures.github.io/">http://scipy-lectures.github.io/</a>，是学习Python科学计算生态体系很好的资料，因此，我会陆续将它翻译为中文，相关Gitbub地址为：<a href="https://github.com/cloga/scipy-lecture-notes_cn">https://github.com/cloga/scipy-lecture-notes_cn</a>，<a href="http://cloga.info/python_scientific_lecture_notes/2014/12/14/python_scientific_lecture_notes_cn/">完整的中文目录</a></p>
+
+<hr>
+
+<p><a href="http://nbviewer.ipython.org/github/cloga/scipy-lecture-notes_cn/blob/master/1.3NumPy%EF%BC%9A%E5%88%9B%E5%BB%BA%E5%92%8C%E6%93%8D%E4%BD%9C%E6%95%B0%E5%80%BC%E6%95%B0%E6%8D%AE.ipynb">本文的IPython版本</a></p>
+
+<blockquote>
+<p>作者：Emmanuelle Gouillart、Didrik Pinte、Gaël Varoquaux 和 Pauli Virtanen</p>
+</blockquote>
+
+<p>本章给出关于Numpy概述，Numpy是Python中高效数值计算的核心工具。</p>
+
+<h2>
+<a id="user-content-131-numpy-数组对象" class="anchor" href="#131-numpy-%E6%95%B0%E7%BB%84%E5%AF%B9%E8%B1%A1" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1 Numpy 数组对象</h2>
+
+<h3>
+<a id="user-content-1311-什么是numpy以及numpy数组" class="anchor" href="#1311-%E4%BB%80%E4%B9%88%E6%98%AFnumpy%E4%BB%A5%E5%8F%8Anumpy%E6%95%B0%E7%BB%84" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.1 什么是Numpy以及Numpy数组？</h3>
+
+<h4>
+<a id="user-content-13111-numpy数组" class="anchor" href="#13111-numpy%E6%95%B0%E7%BB%84" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.1.1 Numpy数组</h4>
+
+<p><strong>Python对象：</strong></p>
+
+<ul>
+<li>高级数值对象：整数、浮点</li>
+<li>容器：列表（无成本插入和附加），字典（快速查找）</li>
+</ul>
+
+<p><strong>Numpy提供：</strong></p>
+
+<ul>
+<li>对于多维度数组的Python扩展包</li>
+<li>更贴近硬件（高效）</li>
+<li>为科学计算设计（方便）</li>
+<li>也称为<em>面向数组计算</em>
+</li>
+</ul>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> numpy <span class="pl-k">as</span> np
+a <span class="pl-k">=</span> np.array([<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>])
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3])
+</code></pre>
+
+<p>例如，数组包含：</p>
+
+<ul>
+<li>实验或模拟在离散时间阶段的值</li>
+<li>测量设备记录的信号，比如声波</li>
+<li>图像的像素、灰度或颜色</li>
+<li>用不同X-Y-Z位置测量的3-D数据，例如MRI扫描</li>
+</ul>
+
+<p>...</p>
+
+<p><strong>为什么有用：</strong>提供了高速数值操作的节省内存的容器。</p>
+
+<div class="highlight highlight-python"><pre>L <span class="pl-k">=</span> <span class="pl-s3">range</span>(<span class="pl-c1">1000</span>)
+<span class="pl-k">%</span>timeit [i<span class="pl-k">**</span><span class="pl-c1">2</span> <span class="pl-k">for</span> i <span class="pl-k">in</span> L]</pre></div>
+
+<pre><code>10000 loops, best of 3: 93.7 µs per loop
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">1000</span>)
+<span class="pl-k">%</span>timeit a<span class="pl-k">**</span><span class="pl-c1">2</span></pre></div>
+
+<pre><code>100000 loops, best of 3: 2.16 µs per loop
+</code></pre>
+
+<h4>
+<a id="user-content-13112-numpy参考文档" class="anchor" href="#13112-numpy%E5%8F%82%E8%80%83%E6%96%87%E6%A1%A3" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.1.2 Numpy参考文档</h4>
+
+<ul>
+<li>线上: <a href="http://docs.scipy.org/">http://docs.scipy.org/</a>
+</li>
+<li>交互帮助:</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>np.array?
+String Form:<span class="pl-k">&lt;</span>built<span class="pl-k">-</span><span class="pl-k">in</span> function array<span class="pl-k">&gt;</span>
+Docstring:
+array(<span class="pl-s3">object</span>, <span class="pl-vpf">dtype</span><span class="pl-k">=</span><span class="pl-c1">None</span>, <span class="pl-vpf">copy</span><span class="pl-k">=</span><span class="pl-c1">True</span>, <span class="pl-vpf">order</span><span class="pl-k">=</span><span class="pl-c1">None</span>, <span class="pl-vpf">subok</span><span class="pl-k">=</span><span class="pl-c1">False</span>, <span class="pl-vpf">ndmin</span><span class="pl-k">=</span><span class="pl-c1">0</span>, ...</pre></div>
+
+<p>查找东西：</p>
+
+<div class="highlight highlight-python"><pre>np.lookfor(<span class="pl-s1"><span class="pl-pds">'</span>create array<span class="pl-pds">'</span></span>)</pre></div>
+
+<pre><code>Search results for 'create array'
+---------------------------------
+numpy.array
+    Create an array.
+numpy.memmap
+    Create a memory-map to an array stored in a *binary* file on disk.
+numpy.diagflat
+    Create a two-dimensional array with the flattened input as a diagonal.
+numpy.fromiter
+    Create a new 1-dimensional array from an iterable object.
+numpy.partition
+    Return a partitioned copy of an array.
+numpy.ma.diagflat
+    Create a two-dimensional array with the flattened input as a diagonal.
+numpy.ctypeslib.as_array
+    Create a numpy array from a ctypes array or a ctypes POINTER.
+numpy.ma.make_mask
+    Create a boolean mask from an array.
+numpy.ctypeslib.as_ctypes
+    Create and return a ctypes object from a numpy array.  Actually
+numpy.ma.mrecords.fromarrays
+    Creates a mrecarray from a (flat) list of masked arrays.
+numpy.lib.format.open_memmap
+    Open a .npy file as a memory-mapped array.
+numpy.ma.MaskedArray.__new__
+    Create a new masked array from scratch.
+numpy.lib.arrayterator.Arrayterator
+    Buffered iterator for big arrays.
+numpy.ma.mrecords.fromtextfile
+    Creates a mrecarray from data stored in the file `filename`.
+numpy.asarray
+    Convert the input to an array.
+numpy.ndarray
+    ndarray(shape, dtype=float, buffer=None, offset=0,
+numpy.recarray
+    Construct an ndarray that allows field access using attributes.
+numpy.chararray
+    chararray(shape, itemsize=1, unicode=False, buffer=None, offset=0,
+numpy.pad
+    Pads an array.
+numpy.sum
+    Sum of array elements over a given axis.
+numpy.asanyarray
+    Convert the input to an ndarray, but pass ndarray subclasses through.
+numpy.copy
+    Return an array copy of the given object.
+numpy.diag
+    Extract a diagonal or construct a diagonal array.
+numpy.load
+    Load arrays or pickled objects from ``.npy``, ``.npz`` or pickled files.
+numpy.sort
+    Return a sorted copy of an array.
+numpy.array_equiv
+    Returns True if input arrays are shape consistent and all elements equal.
+numpy.dtype
+    Create a data type object.
+numpy.choose
+    Construct an array from an index array and a set of arrays to choose from.
+numpy.nditer
+    Efficient multi-dimensional iterator object to iterate over arrays.
+numpy.swapaxes
+    Interchange two axes of an array.
+numpy.full_like
+    Return a full array with the same shape and type as a given array.
+numpy.ones_like
+    Return an array of ones with the same shape and type as a given array.
+numpy.empty_like
+    Return a new array with the same shape and type as a given array.
+numpy.zeros_like
+    Return an array of zeros with the same shape and type as a given array.
+numpy.asarray_chkfinite
+    Convert the input to an array, checking for NaNs or Infs.
+numpy.diag_indices
+    Return the indices to access the main diagonal of an array.
+numpy.ma.choose
+    Use an index array to construct a new array from a set of choices.
+numpy.chararray.tolist
+    a.tolist()
+numpy.matlib.rand
+    Return a matrix of random values with given shape.
+numpy.savez_compressed
+    Save several arrays into a single file in compressed ``.npz`` format.
+numpy.ma.empty_like
+    Return a new array with the same shape and type as a given array.
+numpy.ma.make_mask_none
+    Return a boolean mask of the given shape, filled with False.
+numpy.ma.mrecords.fromrecords
+    Creates a MaskedRecords from a list of records.
+numpy.around
+    Evenly round to the given number of decimals.
+numpy.source
+    Print or write to a file the source code for a Numpy object.
+numpy.diagonal
+    Return specified diagonals.
+numpy.histogram2d
+    Compute the bi-dimensional histogram of two data samples.
+numpy.fft.ifft
+    Compute the one-dimensional inverse discrete Fourier Transform.
+numpy.fft.ifftn
+    Compute the N-dimensional inverse discrete Fourier Transform.
+numpy.busdaycalendar
+    A business day calendar object that efficiently stores information
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.con<span class="pl-k">*</span>?
+np.concatenate
+np.conj
+np.conjugate
+np.convolve</pre></div>
+
+<h4>
+<a id="user-content-13113-导入惯例" class="anchor" href="#13113-%E5%AF%BC%E5%85%A5%E6%83%AF%E4%BE%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.1.3 导入惯例</h4>
+
+<p>导入numpy的推荐惯例是：</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> numpy <span class="pl-k">as</span> np</pre></div>
+
+<h3>
+<a id="user-content-1312-创建数组" class="anchor" href="#1312-%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.2 创建数组</h3>
+
+<h4>
+<a id="user-content-13121-手动构建数组" class="anchor" href="#13121-%E6%89%8B%E5%8A%A8%E6%9E%84%E5%BB%BA%E6%95%B0%E7%BB%84" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.2.1 手动构建数组</h4>
+
+<ul>
+<li>1-D：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>])
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a.ndim</pre></div>
+
+<pre><code>1
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a.shape</pre></div>
+
+<pre><code>(4,)
+</code></pre>
+
+<div class="highlight highlight-python"><pre><span class="pl-s3">len</span>(a)</pre></div>
+
+<pre><code>4
+</code></pre>
+
+<ul>
+<li>2-D，3-D，...：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> np.array([[<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>], [<span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">5</span>]])    <span class="pl-c"># 2 x 3 数组</span>
+b</pre></div>
+
+<pre><code>array([[0, 1, 2],
+       [3, 4, 5]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b.ndim</pre></div>
+
+<pre><code>2
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b.shape</pre></div>
+
+<pre><code>(2, 3)
+</code></pre>
+
+<div class="highlight highlight-python"><pre><span class="pl-s3">len</span>(b)     <span class="pl-c"># 返回一个纬度的大小</span></pre></div>
+
+<pre><code>2
+</code></pre>
+
+<div class="highlight highlight-python"><pre>c <span class="pl-k">=</span> np.array([[[<span class="pl-c1">1</span>], [<span class="pl-c1">2</span>]], [[<span class="pl-c1">3</span>], [<span class="pl-c1">4</span>]]])
+c</pre></div>
+
+<pre><code>array([[[1],
+        [2]],
+
+       [[3],
+        [4]]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>c.shape</pre></div>
+
+<pre><code>(2, 2, 1)
+</code></pre>
+
+<p><strong>练习：简单数组</strong></p>
+
+<ul>
+<li>创建一个简单的二维数组。首先，重复上面的例子。然后接着你自己的：在第一行从后向前数奇数，接着第二行数偶数？</li>
+<li>在这些数组上使用函数<a href="http://docs.python.org/2.7/library/functions.html#len">len()</a>、numpy
+.shape()。他们有什么关系？与数组的<code>ndim</code>属性间呢？</li>
+</ul>
+
+<h4>
+<a id="user-content-13122-创建数组的函数" class="anchor" href="#13122-%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84%E7%9A%84%E5%87%BD%E6%95%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.2.2 创建数组的函数</h4>
+
+<p>实际上，我们很少一个项目接一个项目输入...</p>
+
+<ul>
+<li>均匀分布：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">10</span>) <span class="pl-c"># 0 .. n-1  (!)</span>
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> np.arange(<span class="pl-c1">1</span>, <span class="pl-c1">9</span>, <span class="pl-c1">2</span>) <span class="pl-c"># 开始，结束（不包含），步长</span>
+b</pre></div>
+
+<pre><code>array([1, 3, 5, 7])
+</code></pre>
+
+<ul>
+<li>或者通过一些数据点：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>c <span class="pl-k">=</span> np.linspace(<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">6</span>)   <span class="pl-c"># 起点、终点、数据点</span>
+c</pre></div>
+
+<pre><code>array([ 0. ,  0.2,  0.4,  0.6,  0.8,  1. ])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>d <span class="pl-k">=</span> np.linspace(<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">5</span>, <span class="pl-vpf">endpoint</span><span class="pl-k">=</span><span class="pl-c1">False</span>)
+d</pre></div>
+
+<pre><code>array([ 0. ,  0.2,  0.4,  0.6,  0.8])
+</code></pre>
+
+<ul>
+<li>普通数组：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.ones((<span class="pl-c1">3</span>, <span class="pl-c1">3</span>))  <span class="pl-c"># 提示: (3, 3) 是元组</span>
+a</pre></div>
+
+<pre><code>array([[ 1.,  1.,  1.],
+       [ 1.,  1.,  1.],
+       [ 1.,  1.,  1.]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> np.zeros((<span class="pl-c1">2</span>, <span class="pl-c1">2</span>))
+b</pre></div>
+
+<pre><code>array([[ 0.,  0.],
+       [ 0.,  0.]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>c <span class="pl-k">=</span> np.eye(<span class="pl-c1">3</span>)
+c</pre></div>
+
+<pre><code>array([[ 1.,  0.,  0.],
+       [ 0.,  1.,  0.],
+       [ 0.,  0.,  1.]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>d <span class="pl-k">=</span> np.diag(np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>]))
+d</pre></div>
+
+<pre><code>array([[1, 0, 0, 0],
+       [0, 2, 0, 0],
+       [0, 0, 3, 0],
+       [0, 0, 0, 4]])
+</code></pre>
+
+<ul>
+<li>
+<code>np.random</code>: 随机数 (Mersenne Twister PRNG) :</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.random.rand(<span class="pl-c1">4</span>)       <span class="pl-c"># [0, 1] 的均匀分布</span>
+a</pre></div>
+
+<pre><code>array([ 0.05504731,  0.38154156,  0.39639478,  0.22379146])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> np.random.randn(<span class="pl-c1">4</span>)      <span class="pl-c"># 高斯</span>
+b</pre></div>
+
+<pre><code>array([ 0.9895903 ,  1.85061188,  1.0021666 , -0.63782069])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.random.seed(<span class="pl-c1">1234</span>)        <span class="pl-c"># 设置随机种子</span></pre></div>
+
+<pre><code>np.random.rand?
+</code></pre>
+
+<p><strong>练习：用函数创建数组</strong></p>
+
+<ul>
+<li>实验用<code>arange</code>、<code>linspace</code>、<code>ones</code>、<code>zeros</code>、<code>eye</code>和<code>diag</code>。</li>
+<li>用随机数创建不同类型的数组。</li>
+<li>在创建带有随机数的数组前设定种子。</li>
+<li>看一下函数<code>np.empty</code>。它能做什么？什么时候会比较有用？</li>
+</ul>
+
+<h3>
+<a id="user-content-1313基础数据类型" class="anchor" href="#1313%E5%9F%BA%E7%A1%80%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.3基础数据类型</h3>
+
+<p>你可能已经发现，在一些情况下，数组元素显示带有点（即 2. VS 2）。这是因为所使用的数据类型不同：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>])
+a.dtype</pre></div>
+
+<pre><code>dtype('int64')
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> np.array([<span class="pl-c1">1.</span>, <span class="pl-c1">2.</span>, <span class="pl-c1">3.</span>])
+b</pre></div>
+
+<pre><code>array([ 1.,  2.,  3.])
+</code></pre>
+
+<p>不同的数据类型可以更紧凑的在内存中存储数据，但是大多数时候我们都只是操作浮点数据。注意，在上面的例子中，Numpy自动从输入中识别了数据类型。</p>
+
+<p>你可以明确的指定想要的类型：</p>
+
+<div class="highlight highlight-python"><pre>c <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>], <span class="pl-vpf">dtype</span><span class="pl-k">=</span><span class="pl-s3">float</span>)
+c.dtype</pre></div>
+
+<pre><code>dtype('float64')
+</code></pre>
+
+<p><strong>默认</strong>数据类型是浮点:</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.ones((<span class="pl-c1">3</span>, <span class="pl-c1">3</span>))
+a.dtype</pre></div>
+
+<pre><code>dtype('float64')
+</code></pre>
+
+<p>其他类型：</p>
+
+<p><strong>复数</strong>：</p>
+
+<div class="highlight highlight-python"><pre>d <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span><span class="pl-k">+</span><span class="pl-c1">2j</span>, <span class="pl-c1">3</span><span class="pl-k">+</span><span class="pl-c1">4j</span>, <span class="pl-c1">5</span><span class="pl-k">+</span><span class="pl-c1">6</span><span class="pl-k">*</span><span class="pl-c1">1j</span>])
+d.dtype</pre></div>
+
+<pre><code>dtype('complex128')
+</code></pre>
+
+<p><strong>布尔</strong>：</p>
+
+<div class="highlight highlight-python"><pre>e <span class="pl-k">=</span> np.array([<span class="pl-c1">True</span>, <span class="pl-c1">False</span>, <span class="pl-c1">False</span>, <span class="pl-c1">True</span>])
+e.dtype</pre></div>
+
+<pre><code>dtype('bool')
+</code></pre>
+
+<p><strong>字符</strong>：</p>
+
+<div class="highlight highlight-python"><pre>f <span class="pl-k">=</span> np.array([<span class="pl-s1"><span class="pl-pds">'</span>Bonjour<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Hello<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Hallo<span class="pl-pds">'</span></span>,])
+f.dtype     <span class="pl-c"># &lt;--- 包含最多7个字母的字符</span></pre></div>
+
+<pre><code>dtype('S7')
+</code></pre>
+
+<p><strong>更多</strong>：</p>
+
+<ul>
+<li>int32</li>
+<li>int64</li>
+<li>unit32</li>
+<li>unit64</li>
+</ul>
+
+<h3>
+<a id="user-content-1314基本可视化" class="anchor" href="#1314%E5%9F%BA%E6%9C%AC%E5%8F%AF%E8%A7%86%E5%8C%96" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.4基本可视化</h3>
+
+<p>现在我们有了第一个数组，我们将要进行可视化。</p>
+
+<p>从<em>pylab</em>模式启动IPython。</p>
+
+<pre><code>ipython --pylab
+</code></pre>
+
+<p>或notebook：</p>
+
+<pre><code>ipython notebook --pylab=inline
+</code></pre>
+
+<p>或者如果IPython已经启动，那么：</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">%</span>pylab</pre></div>
+
+<pre><code>Using matplotlib backend: MacOSX
+Populating the interactive namespace from numpy and matplotlib
+</code></pre>
+
+<p>或者从Notebook中：</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">%</span>pylab inline</pre></div>
+
+<pre><code>Populating the interactive namespace from numpy and matplotlib
+</code></pre>
+
+<p><code>inline</code> 对notebook来说很重要，以便绘制的图片在notebook中显示而不是在新窗口显示。</p>
+
+<p><em>Matplotlib</em>是2D制图包。我们可以像下面这样导入它的方法：</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> matplotlib.pyplot <span class="pl-k">as</span> plt  <span class="pl-c">#整洁形式</span></pre></div>
+
+<p>然后使用（注你需要显式的使用 <code>show</code> ）:</p>
+
+<div class="highlight highlight-python"><pre>plt.plot(x, y)       <span class="pl-c"># 线图</span>
+plt.show()           <span class="pl-c"># &lt;-- 显示图表（使用pylab的话不需要）</span></pre></div>
+
+<p>或者，如果你使用 <code>pylab</code>：</p>
+
+<div class="highlight highlight-python"><pre>plt.plot(x, y)       <span class="pl-c"># 线图</span></pre></div>
+
+<p>在脚本中推荐使用 <code>import matplotlib.pyplot as plt</code>。 而交互的探索性工作中用 <code>pylab</code>。</p>
+
+<ul>
+<li>1D作图：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.linspace(<span class="pl-c1">0</span>, <span class="pl-c1">3</span>, <span class="pl-c1">20</span>)
+y <span class="pl-k">=</span> np.linspace(<span class="pl-c1">0</span>, <span class="pl-c1">9</span>, <span class="pl-c1">20</span>)
+plt.plot(x, y)       <span class="pl-c"># 线图</span></pre></div>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x1068f38d0&gt;]
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/f93511ec6e04513b8291f44818ef1900ec102684/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f36335f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/f93511ec6e04513b8291f44818ef1900ec102684/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f36335f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_63_1.png" style="max-width:100%;"></a></p>
+
+<div class="highlight highlight-python"><pre>plt.plot(x, y, <span class="pl-s1"><span class="pl-pds">'</span>o<span class="pl-pds">'</span></span>)  <span class="pl-c"># 点图</span></pre></div>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x106b32090&gt;]
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/36795c843333194a46a5a989e7de4eca34d09499/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f36345f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/36795c843333194a46a5a989e7de4eca34d09499/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f36345f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_64_1.png" style="max-width:100%;"></a></p>
+
+<ul>
+<li>2D 作图:</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>image <span class="pl-k">=</span> np.random.rand(<span class="pl-c1">30</span>, <span class="pl-c1">30</span>)
+plt.imshow(image, <span class="pl-vpf">cmap</span><span class="pl-k">=</span>plt.cm.hot)    
+plt.colorbar()    </pre></div>
+
+<pre><code>&lt;matplotlib.colorbar.Colorbar instance at 0x106a095f0&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/391e8193b35a4bdb32b1df254cc092c03ab8ebc8/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f36365f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/391e8193b35a4bdb32b1df254cc092c03ab8ebc8/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f36365f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_66_1.png" style="max-width:100%;"></a></p>
+
+<p>更多请见matplotlib部分（暂缺）</p>
+
+<p><strong>练习</strong>：简单可视化</p>
+
+<p>画出简单的数组：cosine作为时间的一个函数以及2D矩阵。</p>
+
+<p>在2D矩阵上试试使用 <code>gray</code> colormap。</p>
+
+<h4>
+<a id="user-content-1315索引和切片" class="anchor" href="#1315%E7%B4%A2%E5%BC%95%E5%92%8C%E5%88%87%E7%89%87" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.5索引和切片</h4>
+
+<p>数组的项目可以用与其他Python序列（比如：列表）一样的方式访问和赋值：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">10</span>)
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">0</span>], a[<span class="pl-c1">2</span>], a[<span class="pl-k">-</span><span class="pl-c1">1</span>]</pre></div>
+
+<pre><code>(0, 2, 9)
+</code></pre>
+
+<p><strong>警告</strong>：索引从0开始与其他的Python序列（以及C/C++）一样。相反，在Fortran或者Matlab索引从1开始。</p>
+
+<p>使用常用的Python风格来反转一个序列也是支持的：</p>
+
+<div class="highlight highlight-python"><pre>a[::<span class="pl-k">-</span><span class="pl-c1">1</span>]</pre></div>
+
+<pre><code>array([9, 8, 7, 6, 5, 4, 3, 2, 1, 0])
+</code></pre>
+
+<p>对于多维数组，索引是整数的元组：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.diag(np.arange(<span class="pl-c1">3</span>))
+a</pre></div>
+
+<pre><code>array([[0, 0, 0],
+       [0, 1, 0],
+       [0, 0, 2]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">1</span>, <span class="pl-c1">1</span>]</pre></div>
+
+<pre><code>1
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">2</span>, <span class="pl-c1">1</span>] <span class="pl-k">=</span> <span class="pl-c1">10</span> <span class="pl-c"># 第三行，第二列</span>
+a</pre></div>
+
+<pre><code>array([[ 0,  0,  0],
+       [ 0,  1,  0],
+       [ 0, 10,  2]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">1</span>]</pre></div>
+
+<pre><code>array([0, 1, 0])
+</code></pre>
+
+<p><strong>注</strong>：</p>
+
+<ul>
+<li>在2D数组中，第一个纬度对应行，第二个纬度对应列。</li>
+<li>对于多维度数组 <code>a</code>，a[0]被解释为提取在指定纬度的所有元素</li>
+</ul>
+
+<p><strong>切片</strong>：数组与其他Python序列也可以被切片：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">10</span>)
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">2</span>:<span class="pl-c1">9</span>:<span class="pl-c1">3</span>] <span class="pl-c"># [开始:结束:步长]</span></pre></div>
+
+<pre><code>array([2, 5, 8])
+</code></pre>
+
+<p>注意最后一个索引是不包含的！：</p>
+
+<div class="highlight highlight-python"><pre>a[:<span class="pl-c1">4</span>]</pre></div>
+
+<pre><code>array([0, 1, 2, 3])
+</code></pre>
+
+<p>切片的三个元素都不是必选：默认情况下，起点是0，结束是最后一个，步长是1：</p>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">1</span>:<span class="pl-c1">3</span>]</pre></div>
+
+<pre><code>array([1, 2])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[::<span class="pl-c1">2</span>]</pre></div>
+
+<pre><code>array([0, 2, 4, 6, 8])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">3</span>:]</pre></div>
+
+<pre><code>array([3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+
+<p>Numpy索引和切片的一个小说明...</p>
+
+<p><a href="https://camo.githubusercontent.com/8b3d434555911d12c96c784ca4666cf82cd966af/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6e756d70795f696e646578696e672e706e67" target="_blank"><img src="https://camo.githubusercontent.com/8b3d434555911d12c96c784ca4666cf82cd966af/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6e756d70795f696e646578696e672e706e67" alt="numpy_indexing" data-canonical-src="http://scipy-lectures.github.io/_images/numpy_indexing.png" style="max-width:100%;"></a></p>
+
+<p>赋值和切片可以结合在一起：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">10</span>)
+a[<span class="pl-c1">5</span>:] <span class="pl-k">=</span> <span class="pl-c1">10</span>
+a</pre></div>
+
+<pre><code>array([ 0,  1,  2,  3,  4, 10, 10, 10, 10, 10])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> np.arange(<span class="pl-c1">5</span>)
+a[<span class="pl-c1">5</span>:] <span class="pl-k">=</span> b[::<span class="pl-k">-</span><span class="pl-c1">1</span>]
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3, 4, 4, 3, 2, 1, 0])
+</code></pre>
+
+<p><strong>练习：索引与切片</strong></p>
+
+<ul>
+<li>试试切片的特色，用起点、结束和步长：从linspace开始，试着从后往前获得奇数，从前往后获得偶数。
+重现上面示例中的切片。你需要使用下列表达式创建这个数组：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>np.arange(<span class="pl-c1">6</span>) <span class="pl-k">+</span> np.arange(<span class="pl-c1">0</span>, <span class="pl-c1">51</span>, <span class="pl-c1">10</span>)[:, np.newaxis]</pre></div>
+
+<pre><code>array([[ 0,  1,  2,  3,  4,  5],
+       [10, 11, 12, 13, 14, 15],
+       [20, 21, 22, 23, 24, 25],
+       [30, 31, 32, 33, 34, 35],
+       [40, 41, 42, 43, 44, 45],
+       [50, 51, 52, 53, 54, 55]])
+</code></pre>
+
+<p><strong>练习：数组创建</strong></p>
+
+<p>创建下列的数组（用正确的数据类型）：</p>
+
+<pre><code>[[1, 1, 1, 1],
+ [1, 1, 1, 1],
+ [1, 1, 1, 2],
+ [1, 6, 1, 1]]
+
+[[0., 0., 0., 0., 0.],
+ [2., 0., 0., 0., 0.],
+ [0., 3., 0., 0., 0.],
+ [0., 0., 4., 0., 0.],
+ [0., 0., 0., 5., 0.],
+ [0., 0., 0., 0., 6.]]
+</code></pre>
+
+<p>参考标准：每个数组</p>
+
+<p>提示：每个数组元素可以像列表一样访问，即a[1] 或 a[1, 2]。</p>
+
+<p>提示：看一下 <code>diag</code> 的文档字符串。</p>
+
+<p><strong>练习：创建平铺数组</strong></p>
+
+<p>看一下 <code>np.tile</code> 的文档，是用这个函数创建这个数组：</p>
+
+<div class="highlight highlight-python"><pre>[[<span class="pl-c1">4</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">3</span>],
+ [<span class="pl-c1">2</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">1</span>],
+ [<span class="pl-c1">4</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>, <span class="pl-c1">3</span>],
+ [<span class="pl-c1">2</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">1</span>]]</pre></div>
+
+<h3>
+<a id="user-content-1316-副本和视图" class="anchor" href="#1316-%E5%89%AF%E6%9C%AC%E5%92%8C%E8%A7%86%E5%9B%BE" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.6 副本和视图</h3>
+
+<p>切片操作创建原数组的一个<strong>视图</strong>，这只是访问数组数据一种方式。因此，原始的数组并不是在内存中复制。你可以用 <code>np.may_share_memory()</code>
+来确认两个数组是否共享相同的内存块。但是请注意，这种方式使用启发式，可能产生漏报。</p>
+
+<p>**当修改视图时，原始数据也被修改：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">10</span>)
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> a[::<span class="pl-c1">2</span>]
+b</pre></div>
+
+<pre><code>array([0, 2, 4, 6, 8])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.may_share_memory(a, b)</pre></div>
+
+<pre><code>True
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b[<span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">12</span>
+b</pre></div>
+
+<pre><code>array([12,  2,  4,  6,  8])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a   <span class="pl-c"># (!)</span></pre></div>
+
+<pre><code>array([12,  1,  2,  3,  4,  5,  6,  7,  8,  9])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">10</span>)
+c <span class="pl-k">=</span> a[::<span class="pl-c1">2</span>].copy()  <span class="pl-c"># 强制复制</span>
+c[<span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">12</span>
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.may_share_memory(a, c)</pre></div>
+
+<pre><code>False
+</code></pre>
+
+<p>乍看之下这种行为可能有些奇怪，但是这样做节省了内存和时间。</p>
+
+<p><strong>实例：素数筛选</strong></p>
+
+<p><a href="https://camo.githubusercontent.com/f39ee85114adff680fd468cfb313dc106ea24e97/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f7072696d652d73696576652e706e67" target="_blank"><img src="https://camo.githubusercontent.com/f39ee85114adff680fd468cfb313dc106ea24e97/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f7072696d652d73696576652e706e67" alt="prime" data-canonical-src="http://scipy-lectures.github.io/_images/prime-sieve.png" style="max-width:100%;"></a></p>
+
+<p>用筛选法计算0-99之间的素数</p>
+
+<ul>
+<li>构建一个名为 <code>_prime</code> 形状是 (100,) 的布尔数组，在初始将值都设为True：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>is_prime <span class="pl-k">=</span> np.ones((<span class="pl-c1">100</span>,), <span class="pl-vpf">dtype</span><span class="pl-k">=</span><span class="pl-s3">bool</span>)</pre></div>
+
+<ul>
+<li>将不属于素数的0，1去掉</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>is_prime[:<span class="pl-c1">2</span>] <span class="pl-k">=</span> <span class="pl-c1">0</span></pre></div>
+
+<p>对于从2开始的整数 <code>j</code> ，化掉它的倍数：</p>
+
+<div class="highlight highlight-python"><pre>N_max <span class="pl-k">=</span> <span class="pl-s3">int</span>(np.sqrt(<span class="pl-s3">len</span>(is_prime)))
+<span class="pl-k">for</span> j <span class="pl-k">in</span> <span class="pl-s3">range</span>(<span class="pl-c1">2</span>, N_max):
+    is_prime[<span class="pl-c1">2</span><span class="pl-k">*</span>j::j] <span class="pl-k">=</span> <span class="pl-c1">False</span></pre></div>
+
+<ul>
+<li>看一眼 <code>help(np.nonzero)</code>，然后打印素数</li>
+<li>接下来:
+
+<ul>
+<li>将上面的代码放入名为 <code>prime_sieve.py</code> 的脚本文件</li>
+<li>运行检查一下时候有效</li>
+<li>使用<a href="http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">埃拉托斯特尼筛法</a>的优化建议
+
+<ol>
+<li>跳过已知不是素数的 <code>j</code>
+</li>
+<li>第一个应该被划掉的数是$j^2$</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+<h4>
+<a id="user-content-1317象征索引" class="anchor" href="#1317%E8%B1%A1%E5%BE%81%E7%B4%A2%E5%BC%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.7象征索引</h4>
+
+<p>Numpy数组可以用切片索引，也可以用布尔或整形数组（面具）。这个方法也被称为象征索引。它创建一个副本而不是视图。</p>
+
+<h4>
+<a id="user-content-13171使用布尔面具" class="anchor" href="#13171%E4%BD%BF%E7%94%A8%E5%B8%83%E5%B0%94%E9%9D%A2%E5%85%B7" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.7.1使用布尔面具</h4>
+
+<div class="highlight highlight-python"><pre>np.random.seed(<span class="pl-c1">3</span>)
+a <span class="pl-k">=</span> np.random.random_integers(<span class="pl-c1">0</span>, <span class="pl-c1">20</span>, <span class="pl-c1">15</span>)
+a</pre></div>
+
+<pre><code>array([10,  3,  8,  0, 19, 10, 11,  9, 10,  6,  0, 20, 12,  7, 14])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>(a <span class="pl-k">%</span> <span class="pl-c1">3</span> <span class="pl-k">==</span> <span class="pl-c1">0</span>)</pre></div>
+
+<pre><code>array([False,  True, False,  True, False, False, False,  True, False,
+        True,  True, False,  True, False, False], dtype=bool)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>mask <span class="pl-k">=</span> (a <span class="pl-k">%</span> <span class="pl-c1">3</span> <span class="pl-k">==</span> <span class="pl-c1">0</span>)
+extract_from_a <span class="pl-k">=</span> a[mask] <span class="pl-c"># 或,  a[a%3==0]</span>
+extract_from_a           <span class="pl-c"># 用面具抽取一个子数组</span></pre></div>
+
+<pre><code>array([ 3,  0,  9,  6,  0, 12])
+</code></pre>
+
+<p>赋值给子数组时，用面具索引非常有用：</p>
+
+<div class="highlight highlight-python"><pre>a[a <span class="pl-k">%</span> <span class="pl-c1">3</span> <span class="pl-k">==</span> <span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-k">-</span><span class="pl-c1">1</span>
+a</pre></div>
+
+<pre><code>array([10, -1,  8, -1, 19, 10, 11, -1, 10, -1, -1, 20, -1,  7, 14])
+</code></pre>
+
+<h4>
+<a id="user-content-13172-用整型数组索引" class="anchor" href="#13172-%E7%94%A8%E6%95%B4%E5%9E%8B%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1.7.2 用整型数组索引</h4>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">0</span>, <span class="pl-c1">100</span>, <span class="pl-c1">10</span>)
+a</pre></div>
+
+<pre><code>array([ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90])
+</code></pre>
+
+<p>索引可以用整型数组完成，其中相同的索引重复了几次：</p>
+
+<div class="highlight highlight-python"><pre>a[[<span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">2</span>, <span class="pl-c1">4</span>, <span class="pl-c1">2</span>]]  <span class="pl-c"># 注：[2, 3, 2, 4, 2] 是Python列表</span></pre></div>
+
+<pre><code>array([20, 30, 20, 40, 20])
+</code></pre>
+
+<p>用这种类型的索引可以分配新值：</p>
+
+<div class="highlight highlight-python"><pre>a[[<span class="pl-c1">9</span>, <span class="pl-c1">7</span>]] <span class="pl-k">=</span> <span class="pl-k">-</span><span class="pl-c1">100</span>
+a</pre></div>
+
+<pre><code>array([   0,   10,   20,   30,   40,   50,   60, -100,   80, -100])
+</code></pre>
+
+<p>当一个新数组用整型数组索引创建时，新数组有相同的形状，而不是整数数组：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">10</span>)
+idx <span class="pl-k">=</span> np.array([[<span class="pl-c1">3</span>, <span class="pl-c1">4</span>], [<span class="pl-c1">9</span>, <span class="pl-c1">7</span>]])
+idx.shape</pre></div>
+
+<pre><code>(2, 2)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[idx]</pre></div>
+
+<pre><code>array([[3, 4],
+       [9, 7]])
+</code></pre>
+
+<p>下图展示了多种象征索引的应用
+<a href="https://camo.githubusercontent.com/0e5795a2e41b82c78a3fa0123d66c5784547e6a9/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6e756d70795f66616e63795f696e646578696e672e706e67" target="_blank"><img src="https://camo.githubusercontent.com/0e5795a2e41b82c78a3fa0123d66c5784547e6a9/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6e756d70795f66616e63795f696e646578696e672e706e67" alt="numpy_fancy_indexing" data-canonical-src="http://scipy-lectures.github.io/_images/numpy_fancy_indexing.png" style="max-width:100%;"></a></p>
+
+<p><strong>练习：象征索引</strong></p>
+
+<ul>
+<li>同样，重新生成上图中所示的象征索引</li>
+<li>用左侧的象征索引和右侧的数组创建在为一个数组赋值，例如，设置上图数组的一部分为0。</li>
+</ul>
+
+<h2>
+<a id="user-content-132-数组的数值操作" class="anchor" href="#132-%E6%95%B0%E7%BB%84%E7%9A%84%E6%95%B0%E5%80%BC%E6%93%8D%E4%BD%9C" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2 数组的数值操作</h2>
+
+<h3>
+<a id="user-content-1321-元素级操作" class="anchor" href="#1321-%E5%85%83%E7%B4%A0%E7%BA%A7%E6%93%8D%E4%BD%9C" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.1 元素级操作</h3>
+
+<h4>
+<a id="user-content-13211-基础操作" class="anchor" href="#13211-%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.1.1 基础操作</h4>
+
+<p>标量:</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>])
+a <span class="pl-k">+</span> <span class="pl-c1">1</span></pre></div>
+
+<pre><code>array([2, 3, 4, 5])
+</code></pre>
+
+<div class="highlight highlight-python"><pre><span class="pl-c1">2</span><span class="pl-k">**</span>a</pre></div>
+
+<pre><code>array([ 2,  4,  8, 16])
+</code></pre>
+
+<p>所有运算是在元素级别上操作：</p>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> np.ones(<span class="pl-c1">4</span>) <span class="pl-k">+</span> <span class="pl-c1">1</span>
+a <span class="pl-k">-</span> b</pre></div>
+
+<pre><code>array([-1.,  0.,  1.,  2.])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">*</span> b</pre></div>
+
+<pre><code>array([ 2.,  4.,  6.,  8.])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>j <span class="pl-k">=</span> np.arange(<span class="pl-c1">5</span>)
+<span class="pl-c1">2</span><span class="pl-k">**</span>(j <span class="pl-k">+</span> <span class="pl-c1">1</span>) <span class="pl-k">-</span> j</pre></div>
+
+<pre><code>array([ 2,  3,  6, 13, 28])
+</code></pre>
+
+<p>这些操作当然也比你用纯Python实现好快得多：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">10000</span>)
+<span class="pl-k">%</span>timeit a <span class="pl-k">+</span> <span class="pl-c1">1</span> </pre></div>
+
+<pre><code>100000 loops, best of 3: 11 µs per loop
+</code></pre>
+
+<div class="highlight highlight-python"><pre>l <span class="pl-k">=</span> <span class="pl-s3">range</span>(<span class="pl-c1">10000</span>)
+<span class="pl-k">%</span>timeit [i<span class="pl-k">+</span><span class="pl-c1">1</span> <span class="pl-k">for</span> i <span class="pl-k">in</span> l] </pre></div>
+
+<pre><code>1000 loops, best of 3: 560 µs per loop
+</code></pre>
+
+<p><strong>注意：数组相乘不是矩阵相乘：</strong></p>
+
+<div class="highlight highlight-python"><pre>c <span class="pl-k">=</span> np.ones((<span class="pl-c1">3</span>, <span class="pl-c1">3</span>))
+c <span class="pl-k">*</span> c                   <span class="pl-c"># 不是矩阵相乘！</span></pre></div>
+
+<pre><code>array([[ 1.,  1.,  1.],
+       [ 1.,  1.,  1.],
+       [ 1.,  1.,  1.]])
+</code></pre>
+
+<p><strong>注：矩阵相乘：</strong></p>
+
+<div class="highlight highlight-python"><pre>c.dot(c)</pre></div>
+
+<pre><code>array([[ 3.,  3.,  3.],
+       [ 3.,  3.,  3.],
+       [ 3.,  3.,  3.]])
+</code></pre>
+
+<p><strong>练习：元素级别的操作</strong></p>
+
+<ul>
+<li>试一下元素级别的简单算术操作</li>
+<li>用 <code>%timeit</code> 比一下他们与纯Python对等物的时间</li>
+<li>生成：
+
+<ul>
+<li><code>[2**0, 2**1, 2**2, 2**3, 2**4]</code></li>
+<li><code>a_j = 2^(3*j) - j</code></li>
+</ul>
+</li>
+</ul>
+
+<h4>
+<a id="user-content-13212其他操作" class="anchor" href="#13212%E5%85%B6%E4%BB%96%E6%93%8D%E4%BD%9C" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.1.2其他操作</h4>
+
+<p><strong>对比：</strong></p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>])
+b <span class="pl-k">=</span> np.array([<span class="pl-c1">4</span>, <span class="pl-c1">2</span>, <span class="pl-c1">2</span>, <span class="pl-c1">4</span>])
+a <span class="pl-k">==</span> b</pre></div>
+
+<pre><code>array([False,  True, False,  True], dtype=bool)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">&gt;</span> b</pre></div>
+
+<pre><code>array([False, False,  True, False], dtype=bool)
+</code></pre>
+
+<p>数组级别的对比：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>])
+b <span class="pl-k">=</span> np.array([<span class="pl-c1">4</span>, <span class="pl-c1">2</span>, <span class="pl-c1">2</span>, <span class="pl-c1">4</span>])
+c <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>])
+np.array_equal(a, b)</pre></div>
+
+<pre><code>False
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.array_equal(a, c)</pre></div>
+
+<pre><code>True
+</code></pre>
+
+<p><strong>逻辑操作</strong>：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">0</span>, <span class="pl-c1">0</span>], <span class="pl-vpf">dtype</span><span class="pl-k">=</span><span class="pl-s3">bool</span>)
+b <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">0</span>], <span class="pl-vpf">dtype</span><span class="pl-k">=</span><span class="pl-s3">bool</span>)
+np.logical_or(a, b)</pre></div>
+
+<pre><code>array([ True,  True,  True, False], dtype=bool)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.logical_and(a, b)</pre></div>
+
+<pre><code>array([ True, False, False, False], dtype=bool)
+</code></pre>
+
+<p><strong><a href="http://baike.baidu.com/link?url=3aAGiGcMZFhxRP7D1CWzajcHf-OVCM6L6J1Eaxv1rPxFyEYKRoHXHdcYqKfUIc0q-hcxB_UoE73B5O0GyH1mf_">超越函数</a></strong></p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">5</span>)
+np.sin(a)</pre></div>
+
+<pre><code>array([ 0.        ,  0.84147098,  0.90929743,  0.14112001, -0.7568025 ])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.log(a)</pre></div>
+
+<pre><code>-c:1: RuntimeWarning: divide by zero encountered in log
+array([       -inf,  0.        ,  0.69314718,  1.09861229,  1.38629436])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.exp(a)</pre></div>
+
+<pre><code>array([  1.        ,   2.71828183,   7.3890561 ,  20.08553692,  54.59815003])
+</code></pre>
+
+<p><strong>形状不匹配</strong></p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">4</span>)
+a <span class="pl-k">+</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>])  </pre></div>
+
+<pre><code>---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-74-82c1c1d5b8c1&gt; in &lt;module&gt;()
+      1 a = np.arange(4)
+----&gt; 2 a + np.array([1, 2])
+
+
+ValueError: operands could not be broadcast together with shapes (4,) (2,) 
+</code></pre>
+
+<p><em>广播</em>？我们将在<a href="#Broadcasting">稍后</a>讨论。</p>
+
+<p><strong>变换</strong></p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.triu(np.ones((<span class="pl-c1">3</span>, <span class="pl-c1">3</span>)), <span class="pl-c1">1</span>)   <span class="pl-c"># 看一下 help(np.triu)</span>
+a</pre></div>
+
+<pre><code>array([[ 0.,  1.,  1.],
+       [ 0.,  0.,  1.],
+       [ 0.,  0.,  0.]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a.T</pre></div>
+
+<pre><code>array([[ 0.,  0.,  0.],
+       [ 1.,  0.,  0.],
+       [ 1.,  1.,  0.]])
+</code></pre>
+
+<p><strong>警告：变换是视图</strong></p>
+
+<p>因此，下列的代码是错误的，将导致矩阵不对称：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">+=</span> a.T</pre></div>
+
+<p><strong>注：线性代数</strong></p>
+
+<p>子模块 <code>numpy.linalg</code> 实现了基础的线性代数，比如解开线性系统，奇异值分解等。但是，并不能保证以高效的方式编译，因此，建议使用
+<code>scipy.linalg</code>, 详细的内容见线性代数操作：<code>scipy.linalg</code>（暂缺）。</p>
+
+<p><strong>练习：其他操作</strong></p>
+
+<ul>
+<li>看一下 <code>np.allclose</code> 的帮助，什么时候这很有用？</li>
+<li>看一下 <code>np.triu</code>和 <code>np.tril</code>的帮助。</li>
+</ul>
+
+<h3>
+<a id="user-content-1322-基础简化" class="anchor" href="#1322-%E5%9F%BA%E7%A1%80%E7%AE%80%E5%8C%96" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.2 基础简化</h3>
+
+<h4>
+<a id="user-content-13221-计算求和" class="anchor" href="#13221-%E8%AE%A1%E7%AE%97%E6%B1%82%E5%92%8C" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.2.1 计算求和</h4>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>])
+np.sum(x)</pre></div>
+
+<pre><code>10
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x.sum()</pre></div>
+
+<pre><code>10
+</code></pre>
+
+<p>行求和和列求和：</p>
+
+<p><a href="https://camo.githubusercontent.com/dc7010d80d5330af7001d2daf8a47f0f524a09aa/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f726564756374696f6e732e706e67" target="_blank"><img src="https://camo.githubusercontent.com/dc7010d80d5330af7001d2daf8a47f0f524a09aa/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f726564756374696f6e732e706e67" alt="reductions" data-canonical-src="http://scipy-lectures.github.io/_images/reductions.png" style="max-width:100%;"></a></p>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.array([[<span class="pl-c1">1</span>, <span class="pl-c1">1</span>], [<span class="pl-c1">2</span>, <span class="pl-c1">2</span>]])
+x</pre></div>
+
+<pre><code>array([[1, 1],
+       [2, 2]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x.sum(<span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">0</span>)   <span class="pl-c"># 列 (第一纬度)</span></pre></div>
+
+<pre><code>array([3, 3])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x[:, <span class="pl-c1">0</span>].sum(), x[:, <span class="pl-c1">1</span>].sum()</pre></div>
+
+<pre><code>(3, 3)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x.sum(<span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">1</span>)   <span class="pl-c"># 行 (第二纬度)</span></pre></div>
+
+<pre><code>array([2, 4])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x[<span class="pl-c1">0</span>, :].sum(), x[<span class="pl-c1">1</span>, :].sum()</pre></div>
+
+<pre><code>(2, 4)
+</code></pre>
+
+<p>相同的思路在高维：</p>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.random.rand(<span class="pl-c1">2</span>, <span class="pl-c1">2</span>, <span class="pl-c1">2</span>)
+x.sum(<span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">2</span>)[<span class="pl-c1">0</span>, <span class="pl-c1">1</span>]</pre></div>
+
+<pre><code>1.2671177193964822
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x[<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, :].sum()     </pre></div>
+
+<pre><code>1.2671177193964822
+</code></pre>
+
+<h4>
+<a id="user-content-13222-其他简化" class="anchor" href="#13222-%E5%85%B6%E4%BB%96%E7%AE%80%E5%8C%96" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.2.2 其他简化</h4>
+
+<ul>
+<li>以相同方式运作（也可以使用 <code>axis=</code> ）</li>
+</ul>
+
+<p><strong>极值</strong></p>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">3</span>, <span class="pl-c1">2</span>])
+x.min()</pre></div>
+
+<pre><code>1
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x.max()</pre></div>
+
+<pre><code>3
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x.argmin()  <span class="pl-c"># 最小值的索引</span></pre></div>
+
+<pre><code>0
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x.argmax()  <span class="pl-c"># 最大值的索引</span></pre></div>
+
+<pre><code>1
+</code></pre>
+
+<p><strong>逻辑运算</strong>：</p>
+
+<div class="highlight highlight-python"><pre>np.all([<span class="pl-c1">True</span>, <span class="pl-c1">True</span>, <span class="pl-c1">False</span>])</pre></div>
+
+<pre><code>False
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.any([<span class="pl-c1">True</span>, <span class="pl-c1">True</span>, <span class="pl-c1">False</span>])</pre></div>
+
+<pre><code>True
+</code></pre>
+
+<p><strong>注</strong>：可以被应用数组对比：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.zeros((<span class="pl-c1">100</span>, <span class="pl-c1">100</span>))
+np.any(a <span class="pl-k">!=</span> <span class="pl-c1">0</span>)</pre></div>
+
+<pre><code>False
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.all(a <span class="pl-k">==</span> a)</pre></div>
+
+<pre><code>True
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">2</span>])
+b <span class="pl-k">=</span> np.array([<span class="pl-c1">2</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">2</span>])
+c <span class="pl-k">=</span> np.array([<span class="pl-c1">6</span>, <span class="pl-c1">4</span>, <span class="pl-c1">4</span>, <span class="pl-c1">5</span>])
+((a <span class="pl-k">&lt;=</span> b) <span class="pl-k">&amp;</span> (b <span class="pl-k">&lt;=</span> c)).all()</pre></div>
+
+<pre><code>True
+</code></pre>
+
+<p><strong>统计:</strong></p>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">1</span>])
+y <span class="pl-k">=</span> np.array([[<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>], [<span class="pl-c1">5</span>, <span class="pl-c1">6</span>, <span class="pl-c1">1</span>]])
+x.mean()</pre></div>
+
+<pre><code>1.75
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.median(x)</pre></div>
+
+<pre><code>1.5
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.median(y, <span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-k">-</span><span class="pl-c1">1</span>) <span class="pl-c"># 最后的坐标轴</span></pre></div>
+
+<pre><code>array([ 2.,  5.])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x.std()          <span class="pl-c"># 全体总体的标准差。</span></pre></div>
+
+<pre><code>0.82915619758884995
+</code></pre>
+
+<p>... 以及其他更多（随着你成长最好学习一下）。</p>
+
+<p><strong>练习：简化</strong></p>
+
+<ul>
+<li>假定有 <code>sum</code> ，你会期望看到哪些其他的函数？</li>
+<li>
+<code>sum</code> 和 <code>cumsum</code> 有什么区别？</li>
+</ul>
+
+<p><strong>实例: 数据统计</strong></p>
+
+<p><a href="http://scipy-lectures.github.io/_downloads/populations.txt">populations.txt</a>中的数据描述了过去20年加拿大北部野兔和猞猁的数量（以及胡萝卜）。</p>
+
+<p>你可以在编辑器或在IPython看一下数据（shell或者notebook都可以）：</p>
+
+<pre><code>cat data/populations.txt
+</code></pre>
+
+<pre><code># year  hare    lynx    carrot
+1900    30e3    4e3 48300
+1901    47.2e3  6.1e3   48200
+1902    70.2e3  9.8e3   41500
+1903    77.4e3  35.2e3  38200
+1904    36.3e3  59.4e3  40600
+1905    20.6e3  41.7e3  39800
+1906    18.1e3  19e3    38600
+1907    21.4e3  13e3    42300
+1908    22e3    8.3e3   44500
+1909    25.4e3  9.1e3   42100
+1910    27.1e3  7.4e3   46000
+1911    40.3e3  8e3 46800
+1912    57e3    12.3e3  43800
+1913    76.6e3  19.5e3  40900
+1914    52.3e3  45.7e3  39400
+1915    19.5e3  51.1e3  39000
+1916    11.2e3  29.7e3  36700
+1917    7.6e3   15.8e3  41800
+1918    14.6e3  9.7e3   43300
+1919    16.2e3  10.1e3  41300
+1920    24.7e3  8.6e3   47300
+</code></pre>
+
+<p>首先，将数据加载到Numpy数组：</p>
+
+<div class="highlight highlight-python"><pre>data <span class="pl-k">=</span> np.loadtxt(<span class="pl-s1"><span class="pl-pds">'</span>data/populations.txt<span class="pl-pds">'</span></span>)
+year, hares, lynxes, carrots <span class="pl-k">=</span> data.T  <span class="pl-c"># 技巧: 将列分配给变量</span></pre></div>
+
+<p>接下来作图：</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">from</span> matplotlib <span class="pl-k">import</span> pyplot <span class="pl-k">as</span> plt
+plt.axes([<span class="pl-c1">0.2</span>, <span class="pl-c1">0.1</span>, <span class="pl-c1">0.5</span>, <span class="pl-c1">0.8</span>]) 
+plt.plot(year, hares, year, lynxes, year, carrots) 
+plt.legend((<span class="pl-s1"><span class="pl-pds">'</span>Hare<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Lynx<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Carrot<span class="pl-pds">'</span></span>), <span class="pl-vpf">loc</span><span class="pl-k">=</span>(<span class="pl-c1">1.05</span>, <span class="pl-c1">0.5</span>)) </pre></div>
+
+<pre><code>&lt;matplotlib.legend.Legend at 0x1070407d0&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/bc7e60650ade4d6bd8fa03ac76d1e95d7b3da81a/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3230305f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/bc7e60650ade4d6bd8fa03ac76d1e95d7b3da81a/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3230305f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_200_1.png" style="max-width:100%;"></a></p>
+
+<p>随时间变化的人口平均数：</p>
+
+<div class="highlight highlight-python"><pre>populations <span class="pl-k">=</span> data[:, <span class="pl-c1">1</span>:]
+populations.mean(<span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">0</span>)</pre></div>
+
+<pre><code>array([ 34080.95238095,  20166.66666667,  42400.        ])
+</code></pre>
+
+<p>样本的标准差：</p>
+
+<div class="highlight highlight-python"><pre>populations.std(<span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">0</span>)</pre></div>
+
+<pre><code>array([ 20897.90645809,  16254.59153691,   3322.50622558])
+</code></pre>
+
+<p>每一年哪个物种有最高的人口？：</p>
+
+<div class="highlight highlight-python"><pre>np.argmax(populations, <span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">1</span>)</pre></div>
+
+<pre><code>array([2, 2, 0, 0, 1, 1, 2, 2, 2, 2, 2, 2, 0, 0, 0, 1, 2, 2, 2, 2, 2])
+</code></pre>
+
+<p><strong>实例：随机游走算法扩散</strong></p>
+
+<p><a href="http://scipy-lectures.github.io/_images/random_walk.png">random_walk</a></p>
+
+<p>让我们考虑一下简单的1维随机游走过程：在每个时间点，行走者以相等的可能性跳到左边或右边。我们感兴趣的是找到随机游走者在 <code>t</code> 次左跳或右跳后距离原点的典型距离
+？我们将模拟许多”行走者“来找到这个规律，并且我们将采用数组计算技巧来计算：我们将创建一个2D数组记录事实，一个方向是经历（每个行走者有一个经历），一个纬度是时间：</p>
+
+<p><a href="https://camo.githubusercontent.com/aaa920c0f35be0cdef8d1c1027035a70e661b7c4/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f72616e646f6d5f77616c6b5f736368656d612e706e67" target="_blank"><img src="https://camo.githubusercontent.com/aaa920c0f35be0cdef8d1c1027035a70e661b7c4/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f72616e646f6d5f77616c6b5f736368656d612e706e67" alt="random_walk_schema" data-canonical-src="http://scipy-lectures.github.io/_images/random_walk_schema.png" style="max-width:100%;"></a></p>
+
+<div class="highlight highlight-python"><pre>n_stories <span class="pl-k">=</span> <span class="pl-c1">1000</span> <span class="pl-c"># 行走者的数</span>
+t_max <span class="pl-k">=</span> <span class="pl-c1">200</span>      <span class="pl-c"># 我们跟踪行走者的时间</span></pre></div>
+
+<p>我们随机选择步长1或-1去行走：</p>
+
+<div class="highlight highlight-python"><pre>t <span class="pl-k">=</span> np.arange(t_max)
+steps <span class="pl-k">=</span> <span class="pl-c1">2</span> <span class="pl-k">*</span> np.random.random_integers(<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, (n_stories, t_max)) <span class="pl-k">-</span> <span class="pl-c1">1</span>
+np.unique(steps) <span class="pl-c"># 验证: 所有步长是1或-1</span></pre></div>
+
+<pre><code>array([-1,  1])
+</code></pre>
+
+<p>我们通过汇总随着时间的步骤来构建游走</p>
+
+<div class="highlight highlight-python"><pre>positions <span class="pl-k">=</span> np.cumsum(steps, <span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">1</span>) <span class="pl-c"># axis = 1: 纬度是时间</span>
+sq_distance <span class="pl-k">=</span> positions<span class="pl-k">**</span><span class="pl-c1">2</span></pre></div>
+
+<p>获得经历轴的平均数：</p>
+
+<div class="highlight highlight-python"><pre>mean_sq_distance <span class="pl-k">=</span> np.mean(sq_distance, <span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">0</span>)</pre></div>
+
+<p>画出结果：</p>
+
+<div class="highlight highlight-python"><pre>plt.figure(<span class="pl-vpf">figsize</span><span class="pl-k">=</span>(<span class="pl-c1">4</span>, <span class="pl-c1">3</span>)) 
+plt.plot(t, np.sqrt(mean_sq_distance), <span class="pl-s1"><span class="pl-pds">'</span>g.<span class="pl-pds">'</span></span>, t, np.sqrt(t), <span class="pl-s1"><span class="pl-pds">'</span>y-<span class="pl-pds">'</span></span>)
+plt.xlabel(<span class="pl-s1"><span class="pl-st">r</span><span class="pl-pds">"</span><span class="pl-k">$</span>t<span class="pl-k">$</span><span class="pl-pds">"</span></span>) 
+plt.ylabel(<span class="pl-s1"><span class="pl-st">r</span><span class="pl-pds">"</span><span class="pl-k">$</span><span class="pl-c1">\s</span>qrt{<span class="pl-cce">\l</span>angle (<span class="pl-c1">\d</span>elta x)<span class="pl-k">^</span>2 <span class="pl-cce">\r</span>angle}<span class="pl-k">$</span><span class="pl-pds">"</span></span>) </pre></div>
+
+<pre><code>&lt;matplotlib.text.Text at 0x10b529450&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/f14b355487b0e3c2847b4a4fe05224ce2704bb90/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3231365f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/f14b355487b0e3c2847b4a4fe05224ce2704bb90/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3231365f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_216_1.png" style="max-width:100%;"></a></p>
+
+<p>我们找到了物理学上一个著名的结果：均方差记录是时间的平方根！</p>
+
+<p><a id="user-content-Broadcasting"></a></p>
+
+<h3>
+<a id="user-content-1323-广播" class="anchor" href="#1323-%E5%B9%BF%E6%92%AD" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.3 广播</h3>
+
+<ul>
+<li>numpy数组的基本操作（相加等）是元素级别的</li>
+<li>在相同大小的数组上仍然适用。
+<strong>尽管如此</strong>, 也可能在不同大小的数组上进行这个操作，假如Numpy可以将这些数组转化为相同的大小：这种转化称为广播。</li>
+</ul>
+
+<p>下图给出了一个广播的例子：</p>
+
+<p><a href="https://camo.githubusercontent.com/a84549a8f1a03b11abdac9d0b00781dc6cf79596/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6e756d70795f62726f616463617374696e672e706e67" target="_blank"><img src="https://camo.githubusercontent.com/a84549a8f1a03b11abdac9d0b00781dc6cf79596/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6e756d70795f62726f616463617374696e672e706e67" alt="numpy_broadcasting" data-canonical-src="http://scipy-lectures.github.io/_images/numpy_broadcasting.png" style="max-width:100%;"></a></p>
+
+<p>让我们验证一下：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.tile(np.arange(<span class="pl-c1">0</span>, <span class="pl-c1">40</span>, <span class="pl-c1">10</span>), (<span class="pl-c1">3</span>, <span class="pl-c1">1</span>)).T
+a</pre></div>
+
+<pre><code>array([[ 0,  0,  0],
+       [10, 10, 10],
+       [20, 20, 20],
+       [30, 30, 30]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> np.array([<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>])
+a <span class="pl-k">+</span> b</pre></div>
+
+<pre><code>array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22],
+       [30, 31, 32]])
+</code></pre>
+
+<p>在不知道广播的时候已经使用过它！：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.ones((<span class="pl-c1">4</span>, <span class="pl-c1">5</span>))
+a[<span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">2</span>  <span class="pl-c"># 我们将一个数组的纬度0分配给另一个数组的纬度1</span>
+a</pre></div>
+
+<pre><code>array([[ 2.,  2.,  2.,  2.,  2.],
+       [ 1.,  1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.,  1.]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.ones((<span class="pl-c1">4</span>, <span class="pl-c1">5</span>))
+<span class="pl-k">print</span> a[<span class="pl-c1">0</span>]
+a[<span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">2</span>  <span class="pl-c"># 我们将一个数组的纬度0分配给另一个数组的纬度</span>
+a</pre></div>
+
+<pre><code>[ 1.  1.  1.  1.  1.]
+
+array([[ 2.,  2.,  2.,  2.,  2.],
+       [ 1.,  1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.,  1.],
+       [ 1.,  1.,  1.,  1.,  1.]])
+</code></pre>
+
+<p>一个有用的技巧：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">0</span>, <span class="pl-c1">40</span>, <span class="pl-c1">10</span>)
+a.shape</pre></div>
+
+<pre><code>(4,)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> a[:, np.newaxis]  <span class="pl-c"># 添加一个新的轴 -&gt; 2D 数组</span>
+a.shape</pre></div>
+
+<pre><code>(4, 1)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a</pre></div>
+
+<pre><code>array([[ 0],
+       [10],
+       [20],
+       [30]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">+</span> b</pre></div>
+
+<pre><code>array([[ 0,  1,  2],
+       [10, 11, 12],
+       [20, 21, 22],
+       [30, 31, 32]])
+</code></pre>
+
+<p>广播看起来很神奇，但是，当我们要解决的问题是输出数据比输入数据有更多纬度的数组时，使用它是非常自然的。</p>
+
+<p><strong>实例：广播</strong></p>
+
+<p>让我们创建一个66号公路上城市之间距离（用公里计算）的数组：芝加哥、斯普林菲尔德、圣路易斯、塔尔萨、俄克拉何马市、阿马里洛、圣塔菲、阿尔布开克、Flagstaff、洛杉矶。</p>
+
+<div class="highlight highlight-python"><pre>mileposts <span class="pl-k">=</span> np.array([<span class="pl-c1">0</span>, <span class="pl-c1">198</span>, <span class="pl-c1">303</span>, <span class="pl-c1">736</span>, <span class="pl-c1">871</span>, <span class="pl-c1">1175</span>, <span class="pl-c1">1475</span>, <span class="pl-c1">1544</span>, <span class="pl-c1">1913</span>, <span class="pl-c1">2448</span>])
+distance_array <span class="pl-k">=</span> np.abs(mileposts <span class="pl-k">-</span> mileposts[:, np.newaxis])
+distance_array</pre></div>
+
+<pre><code>array([[   0,  198,  303,  736,  871, 1175, 1475, 1544, 1913, 2448],
+       [ 198,    0,  105,  538,  673,  977, 1277, 1346, 1715, 2250],
+       [ 303,  105,    0,  433,  568,  872, 1172, 1241, 1610, 2145],
+       [ 736,  538,  433,    0,  135,  439,  739,  808, 1177, 1712],
+       [ 871,  673,  568,  135,    0,  304,  604,  673, 1042, 1577],
+       [1175,  977,  872,  439,  304,    0,  300,  369,  738, 1273],
+       [1475, 1277, 1172,  739,  604,  300,    0,   69,  438,  973],
+       [1544, 1346, 1241,  808,  673,  369,   69,    0,  369,  904],
+       [1913, 1715, 1610, 1177, 1042,  738,  438,  369,    0,  535],
+       [2448, 2250, 2145, 1712, 1577, 1273,  973,  904,  535,    0]])
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/8bf385b86318d6bbc38e47a12f37db708cdd208d/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f726f75746536362e706e67" target="_blank"><img src="https://camo.githubusercontent.com/8bf385b86318d6bbc38e47a12f37db708cdd208d/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f726f75746536362e706e67" alt="route66" data-canonical-src="http://scipy-lectures.github.io/_images/route66.png" style="max-width:100%;"></a></p>
+
+<p>许多基于网格或者基于网络的问题都需要使用广播。例如，如果要计算10X10网格中每个点到原点的数据，可以这样：</p>
+
+<div class="highlight highlight-python"><pre>x, y <span class="pl-k">=</span> np.arange(<span class="pl-c1">5</span>), np.arange(<span class="pl-c1">5</span>)[:, np.newaxis]
+distance <span class="pl-k">=</span> np.sqrt(x <span class="pl-k">**</span> <span class="pl-c1">2</span> <span class="pl-k">+</span> y <span class="pl-k">**</span> <span class="pl-c1">2</span>)
+distance</pre></div>
+
+<pre><code>array([[ 0.        ,  1.        ,  2.        ,  3.        ,  4.        ],
+       [ 1.        ,  1.41421356,  2.23606798,  3.16227766,  4.12310563],
+       [ 2.        ,  2.23606798,  2.82842712,  3.60555128,  4.47213595],
+       [ 3.        ,  3.16227766,  3.60555128,  4.24264069,  5.        ],
+       [ 4.        ,  4.12310563,  4.47213595,  5.        ,  5.65685425]])
+</code></pre>
+
+<p>或者用颜色：</p>
+
+<div class="highlight highlight-python"><pre>plt.pcolor(distance)    
+plt.colorbar()   </pre></div>
+
+<pre><code>&lt;matplotlib.colorbar.Colorbar instance at 0x10d8d7170&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/233902f26b8b8b713a83c749237f0870167dfbbe/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3233385f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/233902f26b8b8b713a83c749237f0870167dfbbe/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3233385f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_238_1.png" style="max-width:100%;"></a></p>
+
+<p><strong>评论</strong> : <code>numpy.ogrid</code> 函数允许直接创建上一个例子中两个<strong>重要纬度</strong>向量X和Y：</p>
+
+<div class="highlight highlight-python"><pre>x, y <span class="pl-k">=</span> np.ogrid[<span class="pl-c1">0</span>:<span class="pl-c1">5</span>, <span class="pl-c1">0</span>:<span class="pl-c1">5</span>]
+x, y</pre></div>
+
+<pre><code>(array([[0],
+        [1],
+        [2],
+        [3],
+        [4]]), array([[0, 1, 2, 3, 4]]))
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x.shape, y.shape</pre></div>
+
+<pre><code>((5, 1), (1, 5))
+</code></pre>
+
+<div class="highlight highlight-python"><pre>distance <span class="pl-k">=</span> np.sqrt(x <span class="pl-k">**</span> <span class="pl-c1">2</span> <span class="pl-k">+</span> y <span class="pl-k">**</span> <span class="pl-c1">2</span>)</pre></div>
+
+<p>因此， <code>np.ogrid</code> 就非常有用，只要我们是要处理网格计算。另一方面， 在一些无法（或者不想）从广播中收益的情况下，<code>np.mgrid</code>
+直接提供了由索引构成的矩阵：</p>
+
+<div class="highlight highlight-python"><pre>x, y <span class="pl-k">=</span> np.mgrid[<span class="pl-c1">0</span>:<span class="pl-c1">4</span>, <span class="pl-c1">0</span>:<span class="pl-c1">4</span>]
+x</pre></div>
+
+<pre><code>array([[0, 0, 0, 0],
+       [1, 1, 1, 1],
+       [2, 2, 2, 2],
+       [3, 3, 3, 3]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>y</pre></div>
+
+<pre><code>array([[0, 1, 2, 3],
+       [0, 1, 2, 3],
+       [0, 1, 2, 3],
+       [0, 1, 2, 3]])
+</code></pre>
+
+<h3>
+<a id="user-content-1324数组形状操作" class="anchor" href="#1324%E6%95%B0%E7%BB%84%E5%BD%A2%E7%8A%B6%E6%93%8D%E4%BD%9C" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.4数组形状操作</h3>
+
+<h4>
+<a id="user-content-13241-扁平" class="anchor" href="#13241-%E6%89%81%E5%B9%B3" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.4.1 扁平</h4>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([[<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>], [<span class="pl-c1">4</span>, <span class="pl-c1">5</span>, <span class="pl-c1">6</span>]])
+a.ravel()</pre></div>
+
+<pre><code>array([1, 2, 3, 4, 5, 6])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a.T</pre></div>
+
+<pre><code>array([[1, 4],
+       [2, 5],
+       [3, 6]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a.T.ravel()</pre></div>
+
+<pre><code>array([1, 4, 2, 5, 3, 6])
+</code></pre>
+
+<p>高维：后进先出。</p>
+
+<h4>
+<a id="user-content-13242-重排" class="anchor" href="#13242-%E9%87%8D%E6%8E%92" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.4.2 重排</h4>
+
+<p>扁平的相反操作：</p>
+
+<div class="highlight highlight-python"><pre>a.shape</pre></div>
+
+<pre><code>(2, 3)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> a.ravel()
+b <span class="pl-k">=</span> b.reshape((<span class="pl-c1">2</span>, <span class="pl-c1">3</span>))
+b</pre></div>
+
+<pre><code>array([[1, 2, 3],
+       [4, 5, 6]])
+</code></pre>
+
+<p>或者：</p>
+
+<div class="highlight highlight-python"><pre>a.reshape((<span class="pl-c1">2</span>, <span class="pl-k">-</span><span class="pl-c1">1</span>))    <span class="pl-c"># 不确定的值（-1）将被推导</span></pre></div>
+
+<pre><code>array([[1, 2, 3],
+       [4, 5, 6]])
+</code></pre>
+
+<p><strong>警告</strong>： <code>ndarray.reshape</code> 可以返回一个视图（参见 <code>help(np.reshape)</code>）, 也可以可以返回副本</p>
+
+<div class="highlight highlight-python"><pre>b[<span class="pl-c1">0</span>, <span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">99</span>
+a</pre></div>
+
+<pre><code>array([[99,  2,  3],
+       [ 4,  5,  6]])
+</code></pre>
+
+<p>当心：重排也可以返回一个副本！：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.zeros((<span class="pl-c1">3</span>, <span class="pl-c1">2</span>))
+b <span class="pl-k">=</span> a.T.reshape(<span class="pl-c1">3</span><span class="pl-k">*</span><span class="pl-c1">2</span>)
+b[<span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">9</span>
+a</pre></div>
+
+<pre><code>array([[ 0.,  0.],
+       [ 0.,  0.],
+       [ 0.,  0.]])
+</code></pre>
+
+<p>要理解这个现象，你需要了解更多关于numpy数组内存设计的知识。</p>
+
+<h4>
+<a id="user-content-13243-添加纬度" class="anchor" href="#13243-%E6%B7%BB%E5%8A%A0%E7%BA%AC%E5%BA%A6" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.4.3 添加纬度</h4>
+
+<p>用 <code>np.newaxis</code>对象进行索引可以为一个数组添加轴（在上面关于广播的部分你已经看到过了）：</p>
+
+<div class="highlight highlight-python"><pre>z <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>])
+z</pre></div>
+
+<pre><code>array([1, 2, 3])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>z[:, np.newaxis]</pre></div>
+
+<pre><code>array([[1],
+       [2],
+       [3]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>z[np.newaxis, :]</pre></div>
+
+<pre><code>array([[1, 2, 3]])
+</code></pre>
+
+<h4>
+<a id="user-content-13244-纬度重组" class="anchor" href="#13244-%E7%BA%AC%E5%BA%A6%E9%87%8D%E7%BB%84" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.4.4 纬度重组</h4>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">4</span><span class="pl-k">*</span><span class="pl-c1">3</span><span class="pl-k">*</span><span class="pl-c1">2</span>).reshape(<span class="pl-c1">4</span>, <span class="pl-c1">3</span>, <span class="pl-c1">2</span>)
+a.shape</pre></div>
+
+<pre><code>(4, 3, 2)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">0</span>, <span class="pl-c1">2</span>, <span class="pl-c1">1</span>]</pre></div>
+
+<pre><code>5
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> a.transpose(<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">0</span>)
+b.shape</pre></div>
+
+<pre><code>(3, 2, 4)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>b[<span class="pl-c1">2</span>, <span class="pl-c1">1</span>, <span class="pl-c1">0</span>]</pre></div>
+
+<pre><code>5
+</code></pre>
+
+<p>也是创建了一个视图：</p>
+
+<div class="highlight highlight-python"><pre>b[<span class="pl-c1">2</span>, <span class="pl-c1">1</span>, <span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-k">-</span><span class="pl-c1">1</span>
+a[<span class="pl-c1">0</span>, <span class="pl-c1">2</span>, <span class="pl-c1">1</span>]</pre></div>
+
+<pre><code>-1
+</code></pre>
+
+<h4>
+<a id="user-content-13245-改变大小" class="anchor" href="#13245-%E6%94%B9%E5%8F%98%E5%A4%A7%E5%B0%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.4.5 改变大小</h4>
+
+<p>可以用 <code>ndarray.resize</code> 改变数组的大小：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">4</span>)
+a.resize((<span class="pl-c1">8</span>,))
+a</pre></div>
+
+<pre><code>array([0, 1, 2, 3, 0, 0, 0, 0])
+</code></pre>
+
+<p>但是，它不能在其他地方引用：</p>
+
+<div class="highlight highlight-python"><pre>b <span class="pl-k">=</span> a
+a.resize((<span class="pl-c1">4</span>,))  </pre></div>
+
+<pre><code>---------------------------------------------------------------------------
+ValueError                                Traceback (most recent call last)
+
+&lt;ipython-input-168-59edd3107605&gt; in &lt;module&gt;()
+      1 b = a
+----&gt; 2 a.resize((4,))
+
+
+ValueError: cannot resize an array that references or is referenced
+by another array in this way.  Use the resize function
+</code></pre>
+
+<p><strong>练习：形状操作</strong></p>
+
+<ul>
+<li>看一下 <code>reshape</code> 的文档字符串，特别要注意其中关于副本和视图的内容。</li>
+<li>用 <code>flatten</code> 来替换 <code>ravel</code>。有什么区别？ (提示: 试一下哪个返回视图哪个返回副本)</li>
+<li>试一下用 <code>transpose</code> 来进行纬度变换。</li>
+</ul>
+
+<h3>
+<a id="user-content-1325-数据排序" class="anchor" href="#1325-%E6%95%B0%E6%8D%AE%E6%8E%92%E5%BA%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.5 数据排序</h3>
+
+<p>按一个轴排序：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([[<span class="pl-c1">4</span>, <span class="pl-c1">3</span>, <span class="pl-c1">5</span>], [<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">1</span>]])
+b <span class="pl-k">=</span> np.sort(a, <span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">1</span>)
+b</pre></div>
+
+<pre><code>array([[3, 4, 5],
+       [1, 1, 2]])
+</code></pre>
+
+<p><strong>注</strong>：每行分别排序！</p>
+
+<p>原地排序：</p>
+
+<div class="highlight highlight-python"><pre>a.sort(<span class="pl-vpf">axis</span><span class="pl-k">=</span><span class="pl-c1">1</span>)
+a</pre></div>
+
+<pre><code>array([[3, 4, 5],
+       [1, 1, 2]])
+</code></pre>
+
+<p>象征索引排序：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">4</span>, <span class="pl-c1">3</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>])
+j <span class="pl-k">=</span> np.argsort(a)
+j</pre></div>
+
+<pre><code>array([2, 3, 1, 0])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[j]</pre></div>
+
+<pre><code>array([1, 2, 3, 4])
+</code></pre>
+
+<p>找到最大值和最小值：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">4</span>, <span class="pl-c1">3</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2</span>])
+j_max <span class="pl-k">=</span> np.argmax(a)
+j_min <span class="pl-k">=</span> np.argmin(a)
+j_max, j_min</pre></div>
+
+<pre><code>(0, 2)
+</code></pre>
+
+<p><strong>练习：排序</strong></p>
+
+<ul>
+<li>试一下原地和非原地排序</li>
+<li>试一下用不同的数据类型创建数组并且排序。</li>
+<li>用 <code>all</code> 或者  <code>array_equal</code> 来检查一下结果。</li>
+<li>看一下 <code>np.random.shuffle</code>，一种更快创建可排序输入的方式。</li>
+<li>合并 <code>ravel</code> 、<code>sort</code> 和 <code>reshape</code>。</li>
+<li>看一下 <code>sort</code> 的 <code>axis</code> 关键字，重写一下这个练习。</li>
+</ul>
+
+<h3>
+<a id="user-content-1326-总结" class="anchor" href="#1326-%E6%80%BB%E7%BB%93" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2.6 总结</h3>
+
+<p><strong>入门你需要了解什么？</strong></p>
+
+<ul>
+<li>了解如何创建数组：<code>array</code>、<code>arange</code>、<code>ones</code>、<code>zeros</code>。</li>
+<li>了解用 <code>array.shape</code>数组的形状，然后使用切片来获得数组的不同视图：<code>array[::2]</code>等。用 <code>reshape</code>改变数组形状或者用
+<code>ravel</code>扁平化。</li>
+<li>获得数组元素的一个子集，和/或用面具修改他们的值ay and/or modify their values with masks</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>a[a <span class="pl-k">&lt;</span> <span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">0</span></pre></div>
+
+<ul>
+<li>了解数组上各式各样的操作，比如找到平均数或最大值
+(<code>array.max()</code>、<code>array.mean()</code>)。不需要记住所有东西，但是应该有条件反射去搜索文档 (线上文档, <code>help()</code>,<code>lookfor()</code>)!!</li>
+<li>更高级的用法：掌握用整型数组索引，以及广播。了解更多的Numpy函数以便处理多种数组操作。</li>
+</ul>
+
+<p><strong>快读阅读</strong></p>
+
+<p>如果你想要快速通过科学讲座笔记来学习生态系统，你可以直接跳到下一章：Matplotlib: 作图(暂缺)。</p>
+
+<p>本章剩下的内容对于学习介绍部分不是必须的。但是，记得回来完成本章并且完成更多的练习。</p>
+
+<h2>
+<a id="user-content-133-数据的更多内容" class="anchor" href="#133-%E6%95%B0%E6%8D%AE%E7%9A%84%E6%9B%B4%E5%A4%9A%E5%86%85%E5%AE%B9" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.3 数据的更多内容</h2>
+
+<h3>
+<a id="user-content-1331-更多的数据类型" class="anchor" href="#1331-%E6%9B%B4%E5%A4%9A%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.3.1 更多的数据类型</h3>
+
+<h4>
+<a id="user-content-13311-投射" class="anchor" href="#13311-%E6%8A%95%E5%B0%84" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.3.1.1 投射</h4>
+
+<p>“更大”的类型在混合类型操作中胜出：</p>
+
+<div class="highlight highlight-python"><pre>np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>]) <span class="pl-k">+</span> <span class="pl-c1">1.5</span></pre></div>
+
+<pre><code>array([ 2.5,  3.5,  4.5])
+</code></pre>
+
+<p>赋值不会改变类型！</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>])
+a.dtype</pre></div>
+
+<pre><code>dtype('int64')
+</code></pre>
+
+<div class="highlight highlight-python"><pre>a[<span class="pl-c1">0</span>] <span class="pl-k">=</span> <span class="pl-c1">1.9</span>     <span class="pl-c"># &lt;-- 浮点被截取为整数</span>
+a</pre></div>
+
+<pre><code>array([1, 2, 3])
+</code></pre>
+
+<p>强制投射：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1.7</span>, <span class="pl-c1">1.2</span>, <span class="pl-c1">1.6</span>])
+b <span class="pl-k">=</span> a.astype(<span class="pl-s3">int</span>)  <span class="pl-c"># &lt;-- 截取整数</span>
+b</pre></div>
+
+<pre><code>array([1, 1, 1])
+</code></pre>
+
+<p>四舍五入：</p>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.array([<span class="pl-c1">1.2</span>, <span class="pl-c1">1.5</span>, <span class="pl-c1">1.6</span>, <span class="pl-c1">2.5</span>, <span class="pl-c1">3.5</span>, <span class="pl-c1">4.5</span>])
+b <span class="pl-k">=</span> np.around(a)
+b                    <span class="pl-c"># 仍然是浮点</span></pre></div>
+
+<pre><code>array([ 1.,  2.,  2.,  2.,  4.,  4.])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>c <span class="pl-k">=</span> np.around(a).astype(<span class="pl-s3">int</span>)
+c</pre></div>
+
+<pre><code>array([1, 2, 2, 2, 4, 4])
+</code></pre>
+
+<h4>
+<a id="user-content-13312-不同数据类型的大小" class="anchor" href="#13312-%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%9A%84%E5%A4%A7%E5%B0%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.3.1.2 不同数据类型的大小</h4>
+
+<p>整数 (带有符号):</p>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>int8</td>
+<td>8 bits</td>
+</tr>
+<tr>
+<td>int16</td>
+<td>16 bits</td>
+</tr>
+<tr>
+<td>int32</td>
+<td>32 bits (与32位平台的int相同)</td>
+</tr>
+<tr>
+<td>int64</td>
+<td>64 bits (与64位平台的int相同)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight highlight-python"><pre>np.array([<span class="pl-c1">1</span>], <span class="pl-vpf">dtype</span><span class="pl-k">=</span><span class="pl-s3">int</span>).dtype</pre></div>
+
+<pre><code>dtype('int64')
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.iinfo(np.int32).max, <span class="pl-c1">2</span><span class="pl-k">**</span><span class="pl-c1">31</span> <span class="pl-k">-</span> <span class="pl-c1">1</span></pre></div>
+
+<pre><code>(2147483647, 2147483647)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.iinfo(np.int64).max, <span class="pl-c1">2</span><span class="pl-k">**</span><span class="pl-c1">63</span> <span class="pl-k">-</span> <span class="pl-c1">1</span></pre></div>
+
+<pre><code>(9223372036854775807, 9223372036854775807L)
+</code></pre>
+
+<p>无符号整数:</p>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>uint8</td>
+<td>8 bits</td>
+</tr>
+<tr>
+<td>uint16</td>
+<td>16 bits</td>
+</tr>
+<tr>
+<td>uint32</td>
+<td>32 bits</td>
+</tr>
+<tr>
+<td>uint64</td>
+<td>64 bits</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight highlight-python"><pre>np.iinfo(np.uint32).max, <span class="pl-c1">2</span><span class="pl-k">**</span><span class="pl-c1">32</span> <span class="pl-k">-</span> <span class="pl-c1">1</span></pre></div>
+
+<pre><code>(4294967295, 4294967295)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.iinfo(np.uint64).max, <span class="pl-c1">2</span><span class="pl-k">**</span><span class="pl-c1">64</span> <span class="pl-k">-</span> <span class="pl-c1">1</span></pre></div>
+
+<pre><code>(18446744073709551615L, 18446744073709551615L)
+</code></pre>
+
+<p>浮点数据：</p>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>float16</td>
+<td>16 bits</td>
+</tr>
+<tr>
+<td>float32</td>
+<td>32 bits</td>
+</tr>
+<tr>
+<td>float64</td>
+<td>64 bits (与浮点相同)</td>
+</tr>
+<tr>
+<td>float96</td>
+<td>96 bits, 平台依赖 (与 <code>np.longdouble</code> 相同)</td>
+</tr>
+<tr>
+<td>float128</td>
+<td>128 bits, 平台依赖 (与 <code>np.longdouble</code>相同)</td>
+</tr>
+</tbody>
+</table>
+
+<div class="highlight highlight-python"><pre>np.finfo(np.float32).eps</pre></div>
+
+<pre><code>1.1920929e-07
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.finfo(np.float64).eps</pre></div>
+
+<pre><code>2.2204460492503131e-16
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.float32(<span class="pl-c1">1e-8</span>) <span class="pl-k">+</span> np.float32(<span class="pl-c1">1</span>) <span class="pl-k">==</span> <span class="pl-c1">1</span></pre></div>
+
+<pre><code>True
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.float64(<span class="pl-c1">1e-8</span>) <span class="pl-k">+</span> np.float64(<span class="pl-c1">1</span>) <span class="pl-k">==</span> <span class="pl-c1">1</span></pre></div>
+
+<pre><code>False
+</code></pre>
+
+<p>浮点复数：</p>
+
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>字节数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>complex64</td>
+<td>两个 32-bit 浮点</td>
+</tr>
+<tr>
+<td>complex128</td>
+<td>两个 64-bit 浮点</td>
+</tr>
+<tr>
+<td>complex192</td>
+<td>两个 96-bit 浮点, 平台依赖</td>
+</tr>
+<tr>
+<td>complex256</td>
+<td>两个 128-bit 浮点, 平台依赖</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>更小的数据类型</strong></p>
+
+<p>如果你不知道需要特殊数据类型，那你可能就不需要。</p>
+
+<p>比较使用 <code>float32</code>代替 <code>float64</code>:</p>
+
+<ul>
+<li>一半的内存和硬盘大小</li>
+<li>需要一半的宽带（可能在一些操作中更快）</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.zeros((<span class="pl-c1">1e6</span>,), <span class="pl-vpf">dtype</span><span class="pl-k">=</span>np.float64)
+b <span class="pl-k">=</span> np.zeros((<span class="pl-c1">1e6</span>,), <span class="pl-vpf">dtype</span><span class="pl-k">=</span>np.float32)
+<span class="pl-k">%</span>timeit a<span class="pl-k">*</span>a</pre></div>
+
+<pre><code>1000 loops, best of 3: 1.41 ms per loop
+</code></pre>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">%</span>timeit b<span class="pl-k">*</span>b</pre></div>
+
+<pre><code>1000 loops, best of 3: 739 µs per loop
+</code></pre>
+
+<ul>
+<li>但是更大的四舍五入误差 - 有时在一些令人惊喜的地方（即，不要使用它们除非你真的需要）</li>
+</ul>
+
+<h3>
+<a id="user-content-1332-结构化的数据类型" class="anchor" href="#1332-%E7%BB%93%E6%9E%84%E5%8C%96%E7%9A%84%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.3.2 结构化的数据类型</h3>
+
+<p>名称|类型
+-|-
+sensor_code|(4个字母的字符)
+position|(浮点)
+value|(浮点)</p>
+
+<div class="highlight highlight-python"><pre>samples <span class="pl-k">=</span> np.zeros((<span class="pl-c1">6</span>,), <span class="pl-vpf">dtype</span><span class="pl-k">=</span>[(<span class="pl-s1"><span class="pl-pds">'</span>sensor_code<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>S4<span class="pl-pds">'</span></span>),(<span class="pl-s1"><span class="pl-pds">'</span>position<span class="pl-pds">'</span></span>, <span class="pl-s3">float</span>), (<span class="pl-s1"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>, <span class="pl-s3">float</span>)])
+samples.ndim</pre></div>
+
+<pre><code>1
+</code></pre>
+
+<div class="highlight highlight-python"><pre>samples.shape</pre></div>
+
+<pre><code>(6,)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>samples.dtype.names</pre></div>
+
+<pre><code>('sensor_code', 'position', 'value')
+</code></pre>
+
+<div class="highlight highlight-python"><pre>samples[:] <span class="pl-k">=</span> [(<span class="pl-s1"><span class="pl-pds">'</span>ALFA<span class="pl-pds">'</span></span>,   <span class="pl-c1">1</span>, <span class="pl-c1">0.37</span>), (<span class="pl-s1"><span class="pl-pds">'</span>BETA<span class="pl-pds">'</span></span>, <span class="pl-c1">1</span>, <span class="pl-c1">0.11</span>), (<span class="pl-s1"><span class="pl-pds">'</span>TAU<span class="pl-pds">'</span></span>, <span class="pl-c1">1</span>,   <span class="pl-c1">0.13</span>),(<span class="pl-s1"><span class="pl-pds">'</span>ALFA<span class="pl-pds">'</span></span>, <span class="pl-c1">1.5</span>, <span class="pl-c1">0.37</span>), (<span class="pl-s1"><span class="pl-pds">'</span>ALFA<span class="pl-pds">'</span></span>, <span class="pl-c1">3</span>, <span class="pl-c1">0.11</span>),
+                  (<span class="pl-s1"><span class="pl-pds">'</span>TAU<span class="pl-pds">'</span></span>, <span class="pl-c1">1.2</span>, <span class="pl-c1">0.13</span>)]
+samples</pre></div>
+
+<pre><code>array([('ALFA', 1.0, 0.37), ('BETA', 1.0, 0.11), ('TAU', 1.0, 0.13),
+       ('ALFA', 1.5, 0.37), ('ALFA', 3.0, 0.11), ('TAU', 1.2, 0.13)], 
+      dtype=[('sensor_code', 'S4'), ('position', '&lt;f8'), ('value', '&lt;f8')])
+</code></pre>
+
+<p>用字段名称索引也可以访问字段：</p>
+
+<div class="highlight highlight-python"><pre>samples[<span class="pl-s1"><span class="pl-pds">'</span>sensor_code<span class="pl-pds">'</span></span>]</pre></div>
+
+<pre><code>array(['ALFA', 'BETA', 'TAU', 'ALFA', 'ALFA', 'TAU'], 
+      dtype='|S4')
+</code></pre>
+
+<div class="highlight highlight-python"><pre>samples[<span class="pl-s1"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>]</pre></div>
+
+<pre><code>array([ 0.37,  0.11,  0.13,  0.37,  0.11,  0.13])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>samples[<span class="pl-c1">0</span>]</pre></div>
+
+<pre><code>('ALFA', 1.0, 0.37)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>samples[<span class="pl-c1">0</span>][<span class="pl-s1"><span class="pl-pds">'</span>sensor_code<span class="pl-pds">'</span></span>] <span class="pl-k">=</span> <span class="pl-s1"><span class="pl-pds">'</span>TAU<span class="pl-pds">'</span></span>
+samples[<span class="pl-c1">0</span>]</pre></div>
+
+<pre><code>('TAU', 1.0, 0.37)
+</code></pre>
+
+<p>一次多个字段：</p>
+
+<div class="highlight highlight-python"><pre>samples[[<span class="pl-s1"><span class="pl-pds">'</span>position<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>value<span class="pl-pds">'</span></span>]]</pre></div>
+
+<pre><code>array([(1.0, 0.37), (1.0, 0.11), (1.0, 0.13), (1.5, 0.37), (3.0, 0.11),
+       (1.2, 0.13)], 
+      dtype=[('position', '&lt;f8'), ('value', '&lt;f8')])
+</code></pre>
+
+<p>和普通情况一样，象征索引也有效：</p>
+
+<div class="highlight highlight-python"><pre>samples[samples[<span class="pl-s1"><span class="pl-pds">'</span>sensor_code<span class="pl-pds">'</span></span>] <span class="pl-k">==</span> <span class="pl-s1"><span class="pl-pds">'</span>ALFA<span class="pl-pds">'</span></span>]</pre></div>
+
+<pre><code>array([('ALFA', 1.5, 0.37), ('ALFA', 3.0, 0.11)], 
+      dtype=[('sensor_code', 'S4'), ('position', '&lt;f8'), ('value', '&lt;f8')])
+</code></pre>
+
+<p><strong>注</strong>：构建结构化数组有需要其他的语言，见<a href="http://docs.scipy.org/doc/numpy/user/basics.rec.html">这里</a>和<a href="http://docs.scipy.org/doc/numpy/reference/arrays.dtypes.html#specifying-and-constructing-data-types">这里</a>。</p>
+
+<h3>
+<a id="user-content-1333-面具数组maskedarray-处理缺失值的传播" class="anchor" href="#1333-%E9%9D%A2%E5%85%B7%E6%95%B0%E7%BB%84maskedarray-%E5%A4%84%E7%90%86%E7%BC%BA%E5%A4%B1%E5%80%BC%E7%9A%84%E4%BC%A0%E6%92%AD" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.3.3 面具数组（maskedarray）: 处理缺失值（的传播）</h3>
+
+<ul>
+<li>对于浮点不能用NaN，但是面具对所有类型都适用：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.ma.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>], <span class="pl-vpf">mask</span><span class="pl-k">=</span>[<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">0</span>, <span class="pl-c1">1</span>])
+x</pre></div>
+
+<pre><code>masked_array(data = [1 -- 3 --],
+             mask = [False  True False  True],
+       fill_value = 999999)
+</code></pre>
+
+<div class="highlight highlight-python"><pre>y <span class="pl-k">=</span> np.ma.array([<span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>, <span class="pl-c1">4</span>], <span class="pl-vpf">mask</span><span class="pl-k">=</span>[<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">1</span>])
+x <span class="pl-k">+</span> y</pre></div>
+
+<pre><code>masked_array(data = [2 -- -- --],
+             mask = [False  True  True  True],
+       fill_value = 999999)
+</code></pre>
+
+<ul>
+<li>通用函数的面具版本：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>np.ma.sqrt([<span class="pl-c1">1</span>, <span class="pl-k">-</span><span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-k">-</span><span class="pl-c1">2</span>])</pre></div>
+
+<pre><code>masked_array(data = [1.0 -- 1.4142135623730951 --],
+             mask = [False  True False  True],
+       fill_value = 1e+20)
+</code></pre>
+
+<p><strong>注</strong>：有许多其他数组的<a href="http://scipy-lectures.github.io/advanced/advanced_numpy/index.html#array-siblings">兄弟姐妹</a></p>
+
+<hr>
+
+<p>尽管这脱离了Numpy这章的主题，让我们花点时间回忆一下编写代码的最佳实践，从长远角度这绝对是值得的：</p>
+
+<p><strong>最佳实践</strong></p>
+
+<ul>
+<li>明确的变量名（不需要备注去解释变量里是什么）</li>
+<li>
+<p>风格：逗号后及＝周围有空格等。</p>
+
+<p>在<a href="http://www.python.org/dev/peps/pep-0008">Python代码风格指南</a>及<a href="http://www.python.org/dev/peps/pep-0257">文档字符串惯例</a>页面中给出了相当数据量如何书写“漂亮代码”的规则（并且，最重要的是，与其他人使用相同的惯例!）。</p>
+</li>
+<li><p>除非在一些及特殊的情况下，变量名及备注用英文。</p></li>
+</ul>
+
+<h2>
+<a id="user-content-134-高级操作" class="anchor" href="#134-%E9%AB%98%E7%BA%A7%E6%93%8D%E4%BD%9C" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.4 高级操作</h2>
+
+<p>1.3.4.1. 多项式</p>
+
+<p>Numpy也包含不同基的多项式：</p>
+
+<p>例如，$3x^2 + 2x - 1$:</p>
+
+<div class="highlight highlight-python"><pre>p <span class="pl-k">=</span> np.poly1d([<span class="pl-c1">3</span>, <span class="pl-c1">2</span>, <span class="pl-k">-</span><span class="pl-c1">1</span>])
+p(<span class="pl-c1">0</span>)</pre></div>
+
+<pre><code>-1
+</code></pre>
+
+<div class="highlight highlight-python"><pre>p.roots</pre></div>
+
+<pre><code>array([-1.        ,  0.33333333])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>p.order</pre></div>
+
+<pre><code>2
+</code></pre>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.linspace(<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">20</span>)
+y <span class="pl-k">=</span> np.cos(x) <span class="pl-k">+</span> <span class="pl-c1">0.3</span><span class="pl-k">*</span>np.random.rand(<span class="pl-c1">20</span>)
+p <span class="pl-k">=</span> np.poly1d(np.polyfit(x, y, <span class="pl-c1">3</span>))
+t <span class="pl-k">=</span> np.linspace(<span class="pl-c1">0</span>, <span class="pl-c1">1</span>, <span class="pl-c1">200</span>)
+plt.plot(x, y, <span class="pl-s1"><span class="pl-pds">'</span>o<span class="pl-pds">'</span></span>, t, p(t), <span class="pl-s1"><span class="pl-pds">'</span>-<span class="pl-pds">'</span></span>) </pre></div>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x10f40c2d0&gt;,
+ &lt;matplotlib.lines.Line2D at 0x10f40c510&gt;]
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/271ec5568b9a791a9ed067b7dbbcc3f0aed05c6e/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3334315f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/271ec5568b9a791a9ed067b7dbbcc3f0aed05c6e/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3334315f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_341_1.png" style="max-width:100%;"></a></p>
+
+<p>更多内容见<a href="http://docs.scipy.org/doc/numpy/reference/routines.polynomials.poly1d.html%E3%80%82">http://docs.scipy.org/doc/numpy/reference/routines.polynomials.poly1d.html。</a></p>
+
+<h4>
+<a id="user-content-13411-更多多项式有更多的基" class="anchor" href="#13411-%E6%9B%B4%E5%A4%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%9C%89%E6%9B%B4%E5%A4%9A%E7%9A%84%E5%9F%BA" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.4.1.1 更多多项式（有更多的基）</h4>
+
+<p>Numpy也有更复杂的多项式接口，支持比如切比雪夫基。</p>
+
+<p>$3x^2 + 2x - 1$:</p>
+
+<div class="highlight highlight-python"><pre>p <span class="pl-k">=</span> np.polynomial.Polynomial([<span class="pl-k">-</span><span class="pl-c1">1</span>, <span class="pl-c1">2</span>, <span class="pl-c1">3</span>]) <span class="pl-c"># 系数的顺序不同！</span>
+p(<span class="pl-c1">0</span>)</pre></div>
+
+<pre><code>-1.0
+</code></pre>
+
+<div class="highlight highlight-python"><pre>p.roots()</pre></div>
+
+<pre><code>array([-1.        ,  0.33333333])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>p.degree()  <span class="pl-c"># 在普通的多项式中通常不暴露'order'</span></pre></div>
+
+<pre><code>2
+</code></pre>
+
+<p>在切尔雪夫基中使用多项式的例子，多项式的范围在[-1,1]：</p>
+
+<div class="highlight highlight-python"><pre>x <span class="pl-k">=</span> np.linspace(<span class="pl-k">-</span><span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">2000</span>)
+y <span class="pl-k">=</span> np.cos(x) <span class="pl-k">+</span> <span class="pl-c1">0.3</span><span class="pl-k">*</span>np.random.rand(<span class="pl-c1">2000</span>)
+p <span class="pl-k">=</span> np.polynomial.Chebyshev.fit(x, y, <span class="pl-c1">90</span>)
+t <span class="pl-k">=</span> np.linspace(<span class="pl-k">-</span><span class="pl-c1">1</span>, <span class="pl-c1">1</span>, <span class="pl-c1">200</span>)
+plt.plot(x, y, <span class="pl-s1"><span class="pl-pds">'</span>r.<span class="pl-pds">'</span></span>)  
+plt.plot(t, p(t), <span class="pl-s1"><span class="pl-pds">'</span>k-<span class="pl-pds">'</span></span>, <span class="pl-vpf">lw</span><span class="pl-k">=</span><span class="pl-c1">3</span>) </pre></div>
+
+<pre><code>[&lt;matplotlib.lines.Line2D at 0x10f442d10&gt;]
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/cf1a14058486bb3451a36d5a3f6038a50c4d1e23/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3334375f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/cf1a14058486bb3451a36d5a3f6038a50c4d1e23/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3334375f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_347_1.png" style="max-width:100%;"></a></p>
+
+<p>切尔雪夫多项式在插入方面有很多优势。</p>
+
+<h3>
+<a id="user-content-1342-加载数据文件" class="anchor" href="#1342-%E5%8A%A0%E8%BD%BD%E6%95%B0%E6%8D%AE%E6%96%87%E4%BB%B6" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.4.2 加载数据文件</h3>
+
+<h4>
+<a id="user-content-13421-文本文件" class="anchor" href="#13421-%E6%96%87%E6%9C%AC%E6%96%87%E4%BB%B6" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.4.2.1 文本文件</h4>
+
+<p>例子: <a href="http://scipy-lectures.github.io/_downloads/populations.txt">populations.txt</a>:</p>
+
+<pre><code># year  hare    lynx    carrot
+1900    30e3    4e3     48300
+1901    47.2e3  6.1e3   48200
+1902    70.2e3  9.8e3   41500
+1903    77.4e3  35.2e3  38200
+</code></pre>
+
+<div class="highlight highlight-python"><pre>data <span class="pl-k">=</span> np.loadtxt(<span class="pl-s1"><span class="pl-pds">'</span>data/populations.txt<span class="pl-pds">'</span></span>)
+data</pre></div>
+
+<pre><code>array([[  1900.,  30000.,   4000.,  48300.],
+       [  1901.,  47200.,   6100.,  48200.],
+       [  1902.,  70200.,   9800.,  41500.],
+       [  1903.,  77400.,  35200.,  38200.],
+       [  1904.,  36300.,  59400.,  40600.],
+       [  1905.,  20600.,  41700.,  39800.],
+       [  1906.,  18100.,  19000.,  38600.],
+       [  1907.,  21400.,  13000.,  42300.],
+       [  1908.,  22000.,   8300.,  44500.],
+       [  1909.,  25400.,   9100.,  42100.],
+       [  1910.,  27100.,   7400.,  46000.],
+       [  1911.,  40300.,   8000.,  46800.],
+       [  1912.,  57000.,  12300.,  43800.],
+       [  1913.,  76600.,  19500.,  40900.],
+       [  1914.,  52300.,  45700.,  39400.],
+       [  1915.,  19500.,  51100.,  39000.],
+       [  1916.,  11200.,  29700.,  36700.],
+       [  1917.,   7600.,  15800.,  41800.],
+       [  1918.,  14600.,   9700.,  43300.],
+       [  1919.,  16200.,  10100.,  41300.],
+       [  1920.,  24700.,   8600.,  47300.]])
+</code></pre>
+
+<div class="highlight highlight-python"><pre>np.savetxt(<span class="pl-s1"><span class="pl-pds">'</span>pop2.txt<span class="pl-pds">'</span></span>, data)
+data2 <span class="pl-k">=</span> np.loadtxt(<span class="pl-s1"><span class="pl-pds">'</span>pop2.txt<span class="pl-pds">'</span></span>)
+
+<span class="pl-k">**</span>注<span class="pl-k">**</span>：如果你有一个复杂的文本文件，应该尝试：
+<span class="pl-k">*</span> `np.genfromtxt`
+<span class="pl-k">*</span> 使用Python的I<span class="pl-k">/</span>O函数和例如正则式来解析（Python特别适合这个工作）
+
+<span class="pl-k">**</span>提示：用IPython在文件系统中航行<span class="pl-k">**</span>
+</pre></div>
+
+<p>pwd      # 显示当前目录</p>
+
+<pre><code>
+    u'/Users/cloga/Documents/scipy-lecture-notes_cn'
+
+</code></pre>
+
+<p>cd data</p>
+
+<pre><code>
+    /Users/cloga/Documents/scipy-lecture-notes_cn/data
+
+</code></pre>
+
+<p>ls</p>
+
+<pre><code>
+    populations.txt
+
+#### 1.3.4.2.2 图像
+
+使用Matplotlib：
+
+```python
+img = plt.imread('data/elephant.png')
+img.shape, img.dtype
+</code></pre>
+
+<pre><code>((200, 300, 3), dtype('float32'))
+</code></pre>
+
+<div class="highlight highlight-python"><pre>plt.imshow(img)</pre></div>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x10fd13f10&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/919f7e0c98920e6d84ac2e9985740e230d0bbf9d/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3335375f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/919f7e0c98920e6d84ac2e9985740e230d0bbf9d/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3335375f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_357_1.png" style="max-width:100%;"></a></p>
+
+<div class="highlight highlight-python"><pre>plt.savefig(<span class="pl-s1"><span class="pl-pds">'</span>plot.png<span class="pl-pds">'</span></span>)
+plt.imsave(<span class="pl-s1"><span class="pl-pds">'</span>red_elephant<span class="pl-pds">'</span></span>, img[:,:,<span class="pl-c1">0</span>], <span class="pl-vpf">cmap</span><span class="pl-k">=</span>plt.cm.gray)</pre></div>
+
+<pre><code>&lt;matplotlib.figure.Figure at 0x10fba1750&gt;
+</code></pre>
+
+<p>这只保存了一个渠道（RGB）：</p>
+
+<div class="highlight highlight-python"><pre>plt.imshow(plt.imread(<span class="pl-s1"><span class="pl-pds">'</span>red_elephant.png<span class="pl-pds">'</span></span>)) </pre></div>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x11040e150&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/88af84a84c93909d6e017b2950de87fc2234604b/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3336305f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/88af84a84c93909d6e017b2950de87fc2234604b/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3336305f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_360_1.png" style="max-width:100%;"></a></p>
+
+<p>其他包：</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">from</span> scipy.misc <span class="pl-k">import</span> imsave
+imsave(<span class="pl-s1"><span class="pl-pds">'</span>tiny_elephant.png<span class="pl-pds">'</span></span>, img[::<span class="pl-c1">6</span>,::<span class="pl-c1">6</span>])
+plt.imshow(plt.imread(<span class="pl-s1"><span class="pl-pds">'</span>tiny_elephant.png<span class="pl-pds">'</span></span>), <span class="pl-vpf">interpolation</span><span class="pl-k">=</span><span class="pl-s1"><span class="pl-pds">'</span>nearest<span class="pl-pds">'</span></span>)</pre></div>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x110bfbfd0&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/e3c16316749b8f8f602e112a7e1966d7eab705fe/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3336325f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/e3c16316749b8f8f602e112a7e1966d7eab705fe/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3336325f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_362_1.png" style="max-width:100%;"></a></p>
+
+<h4>
+<a id="user-content-13423-numpy的自有格式" class="anchor" href="#13423-numpy%E7%9A%84%E8%87%AA%E6%9C%89%E6%A0%BC%E5%BC%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.4.2.3 Numpy的自有格式</h4>
+
+<p>Numpy有自有的二进制格式，没有便携性但是I/O高效：</p>
+
+<div class="highlight highlight-python"><pre>data <span class="pl-k">=</span> np.ones((<span class="pl-c1">3</span>, <span class="pl-c1">3</span>))
+np.save(<span class="pl-s1"><span class="pl-pds">'</span>pop.npy<span class="pl-pds">'</span></span>, data)
+data3 <span class="pl-k">=</span> np.load(<span class="pl-s1"><span class="pl-pds">'</span>pop.npy<span class="pl-pds">'</span></span>)</pre></div>
+
+<h4>
+<a id="user-content-13424-知名的并且更复杂的文件格式" class="anchor" href="#13424-%E7%9F%A5%E5%90%8D%E7%9A%84%E5%B9%B6%E4%B8%94%E6%9B%B4%E5%A4%8D%E6%9D%82%E7%9A%84%E6%96%87%E4%BB%B6%E6%A0%BC%E5%BC%8F" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.4.2.4 知名的（并且更复杂的）文件格式</h4>
+
+<ul>
+<li>HDF5: <a href="http://code.google.com/p/h5py/">h5py</a>, <a href="http://pytables.org/">PyTables</a>
+</li>
+<li>NetCDF: <code>scipy.io.netcdf_file</code>,
+<a href="http://code.google.com/p/netcdf4-python/">netcdf4-python</a>, ...</li>
+<li>Matlab: <code>scipy.io.loadmat</code>, <code>scipy.io.savemat</code>
+</li>
+<li>MatrixMarket: <code>scipy.io.mmread</code>, <code>scipy.io.mmread</code>
+</li>
+</ul>
+
+<p>... 如果有人使用，那么就可能有一个对应的Python库。</p>
+
+<p><strong>练习：文本数据文件</strong></p>
+
+<p>写一个Python脚本从<a href="http://scipy-%0Alectures.github.io/_downloads/populations.txt">populations.txt</a>加载数据，删除前五行和后五行。将这个小数据集存入<code>pop2.txt</code>。</p>
+
+<p><strong>Numpy内部</strong></p>
+
+<p>如果你对Numpy的内部感兴趣, 有一个关于<a href="http://scipy-lectures.github.io/advanced/advanced_numpy/index.html#advanced-numpy">Advanced Numpy</a>的很好的讨论。</p>
+
+<h2>
+<a id="user-content-135-一些练习" class="anchor" href="#135-%E4%B8%80%E4%BA%9B%E7%BB%83%E4%B9%A0" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.5 一些练习</h2>
+
+<h3>
+<a id="user-content-1351-数组操作" class="anchor" href="#1351-%E6%95%B0%E7%BB%84%E6%93%8D%E4%BD%9C" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.5.1 数组操作</h3>
+
+<ul>
+<li>从2D数组（不需要显示的输入）:</li>
+</ul>
+
+<pre><code>[[1,  6, 11],
+ [2,  7, 12],
+ [3,  8, 13],
+ [4,  9, 14],
+ [5, 10, 15]]
+</code></pre>
+
+<p>并且生成一个第二和第四行的新数组。</p>
+
+<ul>
+<li>将数组a的每一列以元素的方式除以数组b (提示: <code>np.newaxis</code>):</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>a <span class="pl-k">=</span> np.arange(<span class="pl-c1">25</span>).reshape(<span class="pl-c1">5</span>, <span class="pl-c1">5</span>)
+b <span class="pl-k">=</span> np.array([<span class="pl-c1">1.</span>, <span class="pl-c1">5</span>, <span class="pl-c1">10</span>, <span class="pl-c1">15</span>, <span class="pl-c1">20</span>])</pre></div>
+
+<ul>
+<li>难一点的题目：创建10 X 3的随机数数组 （在[0, 1]的范围内）。对于每一行，挑出最接近0.5的数。
+
+<ul>
+<li>用 <code>abs</code>和 <code>argsort</code>找到每一行中最接近的列 <code>j</code>。</li>
+<li>使用象征索引抽取数字。（提示：a[i,j]-数组 <code>i</code> 必须包含 <code>j</code> 中成分的对应行数）</li>
+</ul>
+</li>
+</ul>
+
+<h3>
+<a id="user-content-1352-图片操作给lena加边框" class="anchor" href="#1352-%E5%9B%BE%E7%89%87%E6%93%8D%E4%BD%9C%E7%BB%99lena%E5%8A%A0%E8%BE%B9%E6%A1%86" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.5.2 图片操作：给Lena加边框</h3>
+
+<p>让我们从著名的Lena图（<a href="http://www.cs.cmu.edu/%7Echuck/lennapg/%EF%BC%89">http://www.cs.cmu.edu/~chuck/lennapg/）</a> 上开始，用Numpy数组做一些操作。Scipy在<code>scipy.lena</code>函数中提供了这个图的二维数组：</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">from</span> scipy <span class="pl-k">import</span> misc
+lena <span class="pl-k">=</span> misc.lena()</pre></div>
+
+<p><strong>注</strong>：在旧版的scipy中，你会在 <code>scipy.lena()</code>找到lena。</p>
+
+<p>这是一些通过我们的操作可以获得图片：使用不同的颜色地图，裁剪图片，改变图片的一部分。</p>
+
+<p><a href="https://camo.githubusercontent.com/aa0233682c3a46688e20885f2338e66a6f76c117/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6c656e61732e706e67" target="_blank"><img src="https://camo.githubusercontent.com/aa0233682c3a46688e20885f2338e66a6f76c117/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6c656e61732e706e67" alt="lenas" data-canonical-src="http://scipy-lectures.github.io/_images/lenas.png" style="max-width:100%;"></a></p>
+
+<ul>
+<li>让我们用pylab的 <code>imshow</code>函数显示这个图片。</li>
+</ul>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> pylab <span class="pl-k">as</span> plt
+lena <span class="pl-k">=</span> misc.lena()
+plt.imshow(lena)</pre></div>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x110f51ad0&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/8472c6f32714886ad86a78ca85936c9fcd67635e/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3337305f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/8472c6f32714886ad86a78ca85936c9fcd67635e/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3337305f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_370_1.png" style="max-width:100%;"></a></p>
+
+<ul>
+<li>Lena然后以为色彩显示。要将她展示为灰色需要指定一个颜色地图。</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>plt.imshow(lena, <span class="pl-vpf">cmap</span><span class="pl-k">=</span>plt.cm.gray)</pre></div>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x110fb15d0&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/ebd004f6dbe0aafbae014b8bb07b1b985c78ed9d/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3337325f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/ebd004f6dbe0aafbae014b8bb07b1b985c78ed9d/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3337325f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_372_1.png" style="max-width:100%;"></a></p>
+
+<ul>
+<li>用一个更小的图片中心来创建数组：例如，从图像边缘删除30像素。要检查结果，用 <code>imshow</code> 显示这个新数组。</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>crop_lena <span class="pl-k">=</span> lena[<span class="pl-c1">30</span>:<span class="pl-k">-</span><span class="pl-c1">30</span>,<span class="pl-c1">30</span>:<span class="pl-k">-</span><span class="pl-c1">30</span>]</pre></div>
+
+<ul>
+<li>现在我们为Lena的脸加一个黑色项链形边框。要做到这一点，需要创建一个面具对应于需要变成黑色的像素。这个面具由如下条件定义 <code>(y-256)**2 +(x-256)**2</code>
+</li>
+</ul>
+
+<div class="highlight highlight-python"><pre>y, x <span class="pl-k">=</span> np.ogrid[<span class="pl-c1">0</span>:<span class="pl-c1">512</span>,<span class="pl-c1">0</span>:<span class="pl-c1">512</span>] <span class="pl-c"># x 和 y 像素索引</span>
+y.shape, x.shape</pre></div>
+
+<pre><code>((512, 1), (1, 512))
+</code></pre>
+
+<div class="highlight highlight-python"><pre>centerx, centery <span class="pl-k">=</span> (<span class="pl-c1">256</span>, <span class="pl-c1">256</span>) <span class="pl-c"># 图像中心</span>
+mask <span class="pl-k">=</span> ((y <span class="pl-k">-</span> centery)<span class="pl-k">**</span><span class="pl-c1">2</span> <span class="pl-k">+</span> (x <span class="pl-k">-</span> centerx)<span class="pl-k">**</span><span class="pl-c1">2</span>) <span class="pl-k">&gt;</span> <span class="pl-c1">230</span><span class="pl-k">**</span><span class="pl-c1">2</span> <span class="pl-c"># 圆形</span></pre></div>
+
+<p>接下来我们为面具对应的图片像素赋值为0。语句非常简单并且直觉化：</p>
+
+<div class="highlight highlight-python"><pre>lena[mask] <span class="pl-k">=</span> <span class="pl-c1">0</span>
+plt.imshow(lena)</pre></div>
+
+<pre><code>&lt;matplotlib.image.AxesImage at 0x113d33fd0&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/354accf4c084466e107cc9dfc1b9b5e44b128d30/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3337395f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/354accf4c084466e107cc9dfc1b9b5e44b128d30/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3337395f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_379_1.png" style="max-width:100%;"></a></p>
+
+<ul>
+<li>接下来：将这个练习的所有命令复制到 <code>lena_locket.py</code> 脚本中，并且在IPython中用 <code>%run
+lena_locket.py</code>执行这个脚本，将圆形改为椭圆。</li>
+</ul>
+
+<h3>
+<a id="user-content-1353-数据统计" class="anchor" href="#1353-%E6%95%B0%E6%8D%AE%E7%BB%9F%E8%AE%A1" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.5.3 数据统计</h3>
+
+<p><a href="http://scipy-lectures.github.io/_downloads/populations.txt">populations.txt</a>中的数据描述了野兔和猞猁（以及胡罗比）在加拿大北部过去十年的数量：</p>
+
+<div class="highlight highlight-python"><pre>data <span class="pl-k">=</span> np.loadtxt(<span class="pl-s1"><span class="pl-pds">'</span>data/populations.txt<span class="pl-pds">'</span></span>)
+year, hares, lynxes, carrots <span class="pl-k">=</span> data.T  <span class="pl-c"># 技巧: 列到变量</span>
+plt.axes([<span class="pl-c1">0.2</span>, <span class="pl-c1">0.1</span>, <span class="pl-c1">0.5</span>, <span class="pl-c1">0.8</span>]) 
+plt.plot(year, hares, year, lynxes, year, carrots) 
+plt.legend((<span class="pl-s1"><span class="pl-pds">'</span>Hare<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Lynx<span class="pl-pds">'</span></span>, <span class="pl-s1"><span class="pl-pds">'</span>Carrot<span class="pl-pds">'</span></span>), <span class="pl-vpf">loc</span><span class="pl-k">=</span>(<span class="pl-c1">1.05</span>, <span class="pl-c1">0.5</span>)) </pre></div>
+
+<pre><code>&lt;matplotlib.legend.Legend at 0x1135d9510&gt;
+</code></pre>
+
+<p><a href="https://camo.githubusercontent.com/1c19e3ec4ca815537ae8bf7e0b964ccf0a79deb3/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3338315f312e706e67" target="_blank"><img src="https://camo.githubusercontent.com/1c19e3ec4ca815537ae8bf7e0b964ccf0a79deb3/687474703a2f2f636c6f67612e696e666f2f66696c65732f312e334e756d50795f3131315f66696c65732f312e334e756d50795f3131315f3338315f312e706e67" alt="png" data-canonical-src="http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_381_1.png" style="max-width:100%;"></a></p>
+
+<p>根据<a href="http://scipy-lectures.github.io/_downloads/populations.txt">populations.txt</a>中的数据计算并打印...</p>
+
+<ol>
+<li>每个物种在这个时间段内的数量平均数及标准差。</li>
+<li>每个物种在哪一年数量最多。</li>
+<li>每一年哪个物种数量最多。（提示：<code>np.array(['H', 'L', 'C'])</code>的<code>argsort</code> 和象征索引）</li>
+<li>哪一年数量超过50000。（提示：比较和 <code>np.any</code>）</li>
+<li>每个物种有最少数量的两年。（提示： <code>argsort</code>、象征索引）</li>
+<li>比较（作图）野兔和猞猁总量的变化（看一下 <code>help(np.gradient)</code>）。看一下相关（见 <code>help(np.corrcoef)</code>）。</li>
+</ol>
+
+<p>... 所有都不应该使用for循环。</p>
+
+<p>答案：<a href="http://scipy-lectures.github.io/_downloads/2_2_data_statistics.py">Python源文件</a></p>
+
+<h3>
+<a id="user-content-1354-粗略积分估计" class="anchor" href="#1354-%E7%B2%97%E7%95%A5%E7%A7%AF%E5%88%86%E4%BC%B0%E8%AE%A1" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.5.4 粗略积分估计</h3>
+
+<p>写一个函数  <code>f(a, b, c)</code> 返回$a^b - c$。组成一个24x12x6数组其中包含它值在参数范围[0,1] x [0,1] x [0,1]。</p>
+
+<p>接近的3-D积分</p>
+
+<p><a href="https://camo.githubusercontent.com/10f1125fc146f4ff4361e2bef5ad2affa3683fa8/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6d6174682f373035376330623464663832633236353964373736626364633065623163396531366636316639662e706e67" target="_blank"><img src="https://camo.githubusercontent.com/10f1125fc146f4ff4361e2bef5ad2affa3683fa8/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6d6174682f373035376330623464663832633236353964373736626364633065623163396531366636316639662e706e67" alt="math" data-canonical-src="http://scipy-lectures.github.io/_images/math/7057c0b4df82c2659d776bcdc0eb1c9e16f61f9f.png" style="max-width:100%;"></a></p>
+
+<p>在这个体积之上有相同的平数。准确的结果是<a href="https://camo.githubusercontent.com/9992b051afd68355a6571d80a1d0b9c1bc128d7f/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6d6174682f313366663263383639316330393132316330626261343135353862326164323265353565303737632e706e67" target="_blank"><img src="https://camo.githubusercontent.com/9992b051afd68355a6571d80a1d0b9c1bc128d7f/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6d6174682f313366663263383639316330393132316330626261343135353862326164323265353565303737632e706e67" alt="result" data-canonical-src="http://scipy-lectures.github.io/_images/math/13ff2c8691c09121c0bba41558b2ad22e55e077c.png" style="max-width:100%;"></a>...- 你的相对误差是多少？</p>
+
+<p>（技巧：使用元素级别的操作和广播。你可以用 <code>np.ogrid</code> 获得在 <code>np.ogrid[0:1:20j]</code> 范围内的数据点。）</p>
+
+<p><strong>提醒</strong>Python函数：</p>
+
+<div class="highlight highlight-python"><pre><span class="pl-st">def</span> <span class="pl-en">f</span>(<span class="pl-vpf">a</span>, <span class="pl-vpf">b</span>, <span class="pl-vpf">c</span>):
+    <span class="pl-k">return</span> some_result</pre></div>
+
+<p>答案：<a href="http://scipy-lectures.github.io/_downloads/2_3_crude_integration.py">Python源文件</a></p>
+
+<h3>
+<a id="user-content-1355-mandelbrot集合" class="anchor" href="#1355-mandelbrot%E9%9B%86%E5%90%88" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.5.5 Mandelbrot集合</h3>
+
+<p><a href="https://camo.githubusercontent.com/bf94545530f35591e04d797e732828c8c9cc79cf/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f325f345f6d616e64656c62726f742e706e67" target="_blank"><img src="https://camo.githubusercontent.com/bf94545530f35591e04d797e732828c8c9cc79cf/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f325f345f6d616e64656c62726f742e706e67" alt="mandelbrot" data-canonical-src="http://scipy-lectures.github.io/_images/2_4_mandelbrot.png" style="max-width:100%;"></a></p>
+
+<p>写一个脚本计算Mandelbrot分形。Mandelbrot迭代</p>
+
+<div class="highlight highlight-python"><pre>N_max <span class="pl-k">=</span> <span class="pl-c1">50</span>
+some_threshold <span class="pl-k">=</span> <span class="pl-c1">50</span>
+c <span class="pl-k">=</span> x <span class="pl-k">+</span> <span class="pl-c1">1j</span><span class="pl-k">*</span>y
+<span class="pl-k">for</span> j <span class="pl-k">in</span> <span class="pl-s3">xrange</span>(N_max):
+    z <span class="pl-k">=</span> z<span class="pl-k">**</span><span class="pl-c1">2</span> <span class="pl-k">+</span> c</pre></div>
+
+<p>点（x, y）属于Mandelbrot集合，如果|c| &lt; some_threshold。</p>
+
+<p>作如下计算：</p>
+
+<ul>
+<li>构建一个网格 c = x + 1j*y， 值在范围[-2, 1] x [-1.5, 1.5]</li>
+<li>进行迭代</li>
+<li>构建2-D布尔面具标识输入集合中的点</li>
+<li>用下列方法将结果保存到图片：</li>
+</ul>
+
+<div class="highlight highlight-python"><pre><span class="pl-k">import</span> matplotlib.pyplot <span class="pl-k">as</span> plt
+plt.imshow(mask.T, <span class="pl-vpf">extent</span><span class="pl-k">=</span>[<span class="pl-k">-</span><span class="pl-c1">2</span>, <span class="pl-c1">1</span>, <span class="pl-k">-</span><span class="pl-c1">1.5</span>, <span class="pl-c1">1.5</span>])
+plt.gray()
+plt.savefig(<span class="pl-s1"><span class="pl-pds">'</span>mandelbrot.png<span class="pl-pds">'</span></span>)</pre></div>
+
+<p>答案：<a href="http://scipy-lectures.github.io/_downloads/2_4_mandelbrot.py">Python源文件</a></p>
+
+<h3>
+<a id="user-content-1356-马尔科夫链" class="anchor" href="#1356-%E9%A9%AC%E5%B0%94%E7%A7%91%E5%A4%AB%E9%93%BE" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.5.6 马尔科夫链</h3>
+
+<p><a href="https://camo.githubusercontent.com/fbaa2b89db109c1c23ee2c3b5815388e2909767f/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6d61726b6f762d636861696e2e706e67" target="_blank"><img src="https://camo.githubusercontent.com/fbaa2b89db109c1c23ee2c3b5815388e2909767f/687474703a2f2f73636970792d6c656374757265732e6769746875622e696f2f5f696d616765732f6d61726b6f762d636861696e2e706e67" alt="markov-chain" data-canonical-src="http://scipy-lectures.github.io/_images/markov-chain.png" style="max-width:100%;"></a></p>
+
+<p>马尔可夫链过渡矩阵P以及在状态p的概率分布：
+1. <code>0 &lt;= P[i,j] &lt;= 1</code>：从状态i变化到j的概率
+2. 过度规则： $p_{new} = P^T p_{old}$
+3. <code>all(sum(P, axis=1) == 1)</code>, <code>p.sum() == 1</code>: 正态化</p>
+
+<p>写一个脚本产生五种状态，并且：</p>
+
+<ul>
+<li>构建一个随机矩阵，正态化每一行，以便它是过度矩阵。</li>
+<li>从一个随机（正态化）概率分布<code>p</code>开始，并且进行50步=&gt; <code>p_50</code>
+</li>
+<li>计算稳定分布：P.T的特征值为1的特征向量（在数字上最接近1）=&gt; <code>p_stationary</code>
+</li>
+</ul>
+
+<p>记住正态化向量 - 我并没有...</p>
+
+<ul>
+<li>检查一下 <code>p_50</code> 和 <code>p_stationary</code>是否等于公差1e-5</li>
+</ul>
+
+<p>工具箱：<code>np.random.rand</code>、 <code>.dot()</code>、<code>np.linalg.eig</code>、reductions、<code>abs()</code>、<code>argmin</code>、compa
+risons、<code>all</code>、<code>np.linalg.norm</code>等。</p>
+
+<p>答案：<a href="http://scipy-lectures.github.io/_downloads/2_5_markov_chain.py">Python源文件</a></p>
+</article></body></html>

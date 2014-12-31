@@ -553,7 +553,7 @@ plt.plot(x, y)       # 线图
 
     [<matplotlib.lines.Line2D at 0x1068f38d0>]
 
-![png](1.3NumPy_111_files/1.3NumPy_111_63_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_63_1.png)
 
 ```python
 plt.plot(x, y, 'o')  # 点图
@@ -561,7 +561,7 @@ plt.plot(x, y, 'o')  # 点图
 
     [<matplotlib.lines.Line2D at 0x106b32090>]
 
-![png](1.3NumPy_111_files/1.3NumPy_111_64_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_64_1.png)
 
 
 * 2D 作图:
@@ -574,7 +574,7 @@ plt.colorbar()
 
     <matplotlib.colorbar.Colorbar instance at 0x106a095f0>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_66_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_66_1.png)
 
 
 更多请见matplotlib部分（暂缺）
@@ -1390,7 +1390,7 @@ plt.legend(('Hare', 'Lynx', 'Carrot'), loc=(1.05, 0.5))
 
     <matplotlib.legend.Legend at 0x1070407d0>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_200_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_200_1.png)
 
 随时间变化的人口平均数：
 
@@ -1464,7 +1464,7 @@ plt.ylabel(r"$\sqrt{\langle (\delta x)^2 \rangle}$")
 
     <matplotlib.text.Text at 0x10b529450>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_216_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_216_1.png)
 
 我们找到了物理学上一个著名的结果：均方差记录是时间的平方根！
 
@@ -1611,7 +1611,7 @@ plt.colorbar()
 
     <matplotlib.colorbar.Colorbar instance at 0x10d8d7170>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_238_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_238_1.png)
 
 **评论** : `numpy.ogrid` 函数允许直接创建上一个例子中两个**重要纬度**向量X和Y：
 
@@ -2262,7 +2262,7 @@ plt.plot(x, y, 'o', t, p(t), '-')
     [<matplotlib.lines.Line2D at 0x10f40c2d0>,
      <matplotlib.lines.Line2D at 0x10f40c510>]
 
-![png](1.3NumPy_111_files/1.3NumPy_111_341_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_341_1.png)
 
 更多内容见http://docs.scipy.org/doc/numpy/reference/routines.polynomials.poly1d.html。
 
@@ -2304,7 +2304,7 @@ plt.plot(t, p(t), 'k-', lw=3)
 
     [<matplotlib.lines.Line2D at 0x10f442d10>]
 
-![png](1.3NumPy_111_files/1.3NumPy_111_347_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_347_1.png)
 
 切尔雪夫多项式在插入方面有很多优势。
 
@@ -2395,7 +2395,7 @@ plt.imshow(img)
 
     <matplotlib.image.AxesImage at 0x10fd13f10>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_357_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_357_1.png)
 
 ```python
 plt.savefig('plot.png')
@@ -2412,7 +2412,7 @@ plt.imshow(plt.imread('red_elephant.png'))
 
     <matplotlib.image.AxesImage at 0x11040e150>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_360_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_360_1.png)
 
 其他包：
 
@@ -2424,7 +2424,7 @@ plt.imshow(plt.imread('tiny_elephant.png'), interpolation='nearest')
 
     <matplotlib.image.AxesImage at 0x110bfbfd0>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_362_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_362_1.png)
 
 #### 1.3.4.2.3 Numpy的自有格式
 
@@ -2507,7 +2507,7 @@ plt.imshow(lena)
 
     <matplotlib.image.AxesImage at 0x110f51ad0>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_370_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_370_1.png)
 
 * Lena然后以为色彩显示。要将她展示为灰色需要指定一个颜色地图。
 
@@ -2517,7 +2517,7 @@ plt.imshow(lena, cmap=plt.cm.gray)
 
     <matplotlib.image.AxesImage at 0x110fb15d0>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_372_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_372_1.png)
 
 * 用一个更小的图片中心来创建数组：例如，从图像边缘删除30像素。要检查结果，用 `imshow` 显示这个新数组。
 
@@ -2548,7 +2548,7 @@ plt.imshow(lena)
 
     <matplotlib.image.AxesImage at 0x113d33fd0>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_379_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_379_1.png)
 
 
 * 接下来：将这个练习的所有命令复制到 `lena_locket.py` 脚本中，并且在IPython中用 `%run
@@ -2568,7 +2568,7 @@ plt.legend(('Hare', 'Lynx', 'Carrot'), loc=(1.05, 0.5))
 
     <matplotlib.legend.Legend at 0x1135d9510>
 
-![png](1.3NumPy_111_files/1.3NumPy_111_381_1.png)
+![png](http://cloga.info/files/1.3NumPy_111_files/1.3NumPy_111_381_1.png)
 
 根据[populations.txt](http://scipy-lectures.github.io/_downloads/populations.txt)中的数据计算并打印...
 

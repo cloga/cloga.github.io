@@ -1,6 +1,0 @@
-setwd("/Volumes/Data/Users/riyukifeng/cloga.github.io/notebook")
-load(url("http://d396qusza40orc.cloudfront.net/statistics/lab_resources/nc.RData"))
-source('http://d396qusza40orc.cloudfront.net/statistics/lab_resources/inference.R')
-inference(nc$gained, type = "ci", method = "simulation", conflevel = 0.9, est = "mean",boot_method = "perc")
-load(url("http://d396qusza40orc.cloudfront.net/statistics/lab_resources/gss.RData"))
-inference(y = gss$wordsum, x = gss$class, est = "mean", type = "ht",alternative = "greater", method = "theoretical")

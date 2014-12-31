@@ -2,7 +2,7 @@
 # For more see: http://jekyllrb.com/docs/permalinks/
 permalink: /:categories/:year/:month/:day/:title 
 
-markdown: maruku
+markdown: redcarpet
 
 exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "tables", "changelog.md", "no_intra_emphasis", "fenced_code_blocks", "autolink",  "with_toc_data"]
 pygments: true

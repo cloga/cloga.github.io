@@ -2062,17 +2062,6 @@ np.float64(1e-8) + np.float64(1) == 1
 
 浮点复数：
 
-
-| First Header  | Second Header |
-| ------------- | ------------- |
-| Content Cell  | Content Cell  |
-| Content Cell  | Content Cell  |
-
-First Header  | Second Header
-------------- | -------------
-Content Cell  | Content Cell
-Content Cell  | Content Cell
-
 类型|字节数
 ----|----
 complex64|两个 32-bit 浮点
@@ -2085,6 +2074,7 @@ complex256|两个 128-bit 浮点, 平台依赖
 如果你不知道需要特殊数据类型，那你可能就不需要。
 
 比较使用 `float32`代替 `float64`:
+
 * 一半的内存和硬盘大小
 * 需要一半的宽带（可能在一些操作中更快）
 

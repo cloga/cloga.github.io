@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>高级过滤器+二次交叉细分在信息中心中保存自定义的复杂查询</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>高级过滤器+二次交叉细分在信息中心中保存自定义的复杂查询 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>26 May 2011</span>
+    </div>
+    <div class="content">
+      <p>你是否遇到过多个维度的交叉细分数据需求？比如查看来自百度organic对某一类页面（比如说URI中包含a）的分关键词分日浏览量。如果你没有用高级过滤器或_trackPageview方法重写URI的话，那么从这篇blog中相信你可以找到答案。</p>
+
+<p>首先，先分析一下这个需求：</p>
+
+<p>查看的数据的维度是两个：关键词和日</p>
+
+<p>需查看的细分是来自百度organic，并且URI包含a</p>
+
+<p>看到这个细分条件，你可能想到使用高级细分，构建一个下面的高级细分：&lt;!-- more --&gt;</p>
+
+<p><a href="http://www.cloga.info/wp-content/uploads/2011/05/segment11.05.24.png"><img src="http://www.cloga.info/wp-content/uploads/2011/05/segment11.05.24.png" alt=""></a></p>
+
+<p>其实，这样做的没法做出我们需要的细分的。 因为，高级细分是基于访问的，上面的高级细分的实际含义是获得来源来自百度、且媒介为organic，且访问过包含a的页面的<strong>访问</strong>。看一下下面这张图：</p>
+
+<p><a href="http://www.cloga.info/wp-content/uploads/2011/05/exclude.png"><img src="http://www.cloga.info/wp-content/uploads/2011/05/exclude.png" alt=""></a></p>
+
+<p>可以看到刚才的高级细分中还是包含URI中不包含a的网页。在这里我们应该意识到对于PV级的细分，高级细分是无能为力的，但是，这并不表示GA对PV级的细分无能无力。</p>
+
+<p>让我们回到最初的需求，两个细分条件是来自百度 organic和URI包含a。</p>
+
+<p>其中的任意一个细分条件，都很简单，但是将两个细分条件放在一起则显得有些棘手。这里为大家介绍一下GA一个小技巧，GA的二次交叉细分。</p>
+
+<p>交叉细分是指根据两个维度来细分数据。比如，你可以查看不同渠道的不同城市之间的流量情况。二次交叉细分是指，当你按照一个或二个维度细分数据后（通常是过滤一部分数据）可以再根据其他维度细分或过滤数据。可能听起来有点晕。让我用实例来说明。</p>
+
+<p>对于上面的需求，首先构建第一个层次的维度为关键词、第二个层次的维度为网页，指标为浏览量的自定义报告</p>
+
+<p>点击下钻到baidu / organic中</p>
+
+<p>点击高级过滤器，选择网页包含a，点击【应用过滤器】</p>
+
+<p>这时再将第一个维度选择为关键词，第二个维度选择为天，需要通过RoiRevolution的<a href="http://www.roirevolution.com/blog/2008/06/google_analytics_report_enhancer.php">GA Report Enhancer</a>用户脚本实现（这是一个神奇的脚本，安装之后可以在第二个维度中找到大部分维度，默认情况下GA仅提供部分维度）。</p>
+
+<p>这样我们就获得了来自百度organic对某一类页面（比如说URI中包含a）的分关键词分日浏览量。同时这些查询条件可以通过【添加到信息中心】在信息中心添加一个小模块，点击这个模块下的查看报告链接即可查询这个查询条件下的记录。</p>
+
+<p>开始吧，将你日常经常用到的复杂查询条件添加到信息中心中，构建自己的个性化信息中心。</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#默认-ref">
+    		默认 <span>2</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/gaiq%E5%9C%A8%E7%BA%BF%E8%AF%BE%E7%A8%8B%E4%B8%AD%E6%96%87%E5%AD%97%E5%B9%95/2011/05/11/e5b9bfe5918ae6b4bbe58aa8e8b79fe8b8aae5928cadwordse695b4e59088-gaiqe59ca8e7babfe8afbee7a88b" title="广告活动跟踪和AdWords整合-GAIQ在线课程">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/gaiq%E5%9C%A8%E7%BA%BF%E8%AF%BE%E7%A8%8B%E4%B8%AD%E6%96%87%E5%AD%97%E5%B9%95/2011/05/29/e6b8a0e98193e58fafe8a786e58c96-gaiqe59ca8e7babfe8afbee7a88b" title="渠道可视化—GAIQ在线课程中文字幕">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

@@ -1,0 +1,312 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>网站分析中归因建模(Attribution Modeling)</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>网站分析中归因建模(Attribution Modeling) </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>20 May 2012</span>
+    </div>
+    <div class="content">
+      <p><strong>什么是归因模型？</strong></p>
+
+<p>归因模型是指一个规则集，用于解释转化路径中每个接触点所贡献的转化量或转化价值。例如，大家熟知的GA的的转化归因模型属于”最后互动“归因，即将转化归因为距离转化最近的一个接触点。</p>
+
+<p>[caption id=&quot;attachment_1541&quot; align=&quot;aligncenter&quot; width=&quot;553&quot; caption=&quot;GA中的归因建模&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/05/44564654.png"><img src="http://www.cloga.info/wp-content/uploads/2012/05/44564654.png" alt="Attribution model in GA"></a>[/caption]</p>
+
+<p><strong>网站分析中归因模型的种类及其适用情景</strong></p>
+
+<p>我们先来假设一个场景，以便更好的理解这些模型。</p>
+
+<p>假设有一个访问者，最初通过一个新浪上的Banner广告来到了你的网站，第二天上午，她又通过你们的官方微博发送的信息来到了网站，下午的时候她收到了你们的一封促销邮件，又一次来到的网站并产生了购买。我们来看一下几种归因模型如何归因这个订单。</p>
+
+<p>1、最后互动归因模型</p>
+
+<p>[caption id=&quot;attachment_1542&quot; align=&quot;alignright&quot; width=&quot;113&quot; caption=&quot;最后互动&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/05/Last-Interaction.png"><img src="http://www.cloga.info/wp-content/uploads/2012/05/Last-Interaction.png" alt="Last Interaction"></a>[/caption]</p>
+
+<p>最后互动归因模型会将订单100%归因于转化发生前的一个接触点。促销邮件产生了一个订单。</p>
+
+<p>最后互动归因模型是目前应用最广泛的一种归因模型。&lt;!-- more --&gt;</p>
+
+<p><em>适用情景：</em></p>
+
+<p><em>适用于吸引用户立即购买的广告或Campaign，或者购买周期中不存在考虑周期的情况。</em></p>
+
+<p>[caption id=&quot;attachment_1544&quot; align=&quot;alignright&quot; width=&quot;113&quot; caption=&quot;最初互动归因模型&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/05/First-Interaction1.png"><img src="http://www.cloga.info/wp-content/uploads/2012/05/First-Interaction1.png" alt="First Interaction"></a>[/caption]</p>
+
+<p>2、最初互动归因模型</p>
+
+<p>最初互动归因模型会将订单100%归因于转化路径上最初的接触点。新浪的Banner产生了一个订单。</p>
+
+<p><em>适用情景：</em></p>
+
+<p><em>适用于品牌初创阶段，这个阶段的重点是塑造品牌，因此，应该为能够带来品牌曝光的渠道增加更多的预算。</em></p>
+
+<p>3、线性归因模型</p>
+
+<p>[caption id=&quot;attachment_1545&quot; align=&quot;alignright&quot; width=&quot;113&quot; caption=&quot;线性归因模型&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/05/linear.png"><img src="http://www.cloga.info/wp-content/uploads/2012/05/linear.png" alt="Linear"></a>[/caption]</p>
+
+<p>线性归因模型会将订单按照相等权重分配给转化路径上的每个接触点。新浪的Banner、微博和促销邮件都产生了1/3个订单。</p>
+
+<p><em>适用情景：</em></p>
+
+<p><em>如果你的商业模式中每个接触点都很重要，在整个销售周期中都要维持客户的注意并保持与客户的联系，那么这个模型是比较适用的。</em></p>
+
+<p>4、时间衰退归因模型</p>
+
+<p>[caption id=&quot;attachment_1546&quot; align=&quot;alignright&quot; width=&quot;113&quot; caption=&quot;时间衰退归因模型&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/05/Time-Decay.png"><img src="http://www.cloga.info/wp-content/uploads/2012/05/Time-Decay.png" alt="Time Decay"></a>[/caption]</p>
+
+<p>时间衰退归因模型认为离转化越近的接触点其价值越高。那么，新浪Banner贡献了o.2个订单，微博贡献了0.3个订单，而促销邮件贡献了0.5个订单。（其中为每个渠道分配的权重，即随时间推移权重的变化，可以根据自身情况进行调整。）</p>
+
+<p><em>适用情景：</em></p>
+
+<p><em>如果你进行了一个短期的营销活动，那么推广周期内交互的价值应该会更高，这种情况下，可以适用时间衰退归因模型来评估本次活动的效果。</em></p>
+
+<p>5、基于位置的归因模型</p>
+
+<p>[caption id=&quot;attachment_1547&quot; align=&quot;alignright&quot; width=&quot;113&quot; caption=&quot;基于位置的归因模型&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/05/Position-Based.png"><img src="http://www.cloga.info/wp-content/uploads/2012/05/Position-Based.png" alt="Position Based"></a>[/caption]</p>
+
+<p>基于位置的归因模型为最后交互及最初交互各分配40%的权重，渠道中间的交互分配20%的权重。新浪Banner和促销邮件各产生了0.4个订单而微博产生了0.2个订单。</p>
+
+<p><em>适用情景：</em></p>
+
+<p><em>适用于既关注品牌认知和最终转化的情况。</em></p>
+
+<p>以上这些归因模型只是对转化流程中不同接触点的权重分配不同，如何找到真正适合自身发展阶段的归因模型才是难点所在。</p>
+
+<p><strong>更新：</strong>Lunametric在最新的文章中介绍了如果用Excel用GA免费版的数据构建归因模型：<a href="http://www.lunametrics.com/blog/2012/05/17/multichannel-attribution-modeling-tool/">http://www.lunametrics.com/blog/2012/05/17/multichannel-attribution-modeling-tool/</a>，并给到了一个模版 <a href="https://docs.google.com/spreadsheet/ccc?key=0AliSM9M0UxNsdElTeWxmNnJzX0NOOVdKUmlpcU90ZHc">Attribution Modeling Tool</a>，感谢Kurt的分享~</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#digital分析-ref">
+    		digital分析 <span>32</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#归因模型-ref">归因模型 <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/digital%E5%88%86%E6%9E%90/2012/05/19/e588a9e794a8chromee79a84google-analytics-debuggere8bf9be8a18cgae79a84e69585e99a9ce68e92e999a4" title="利用Chrome的Google Analytics Debugger进行GA的故障排除">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/ga%E7%9A%84js%E6%89%A9%E5%B1%95/2012/06/28/e887aae58aa8e6a087e8aeb0e68980e99c80e8a681e79a84e4ba92e58aa8-e582bbe7939ce7baa7gae887aae58aa8e6a087e8aeb0e69c8de58aa1skyglue" title="自动标记所需要的互动-傻瓜级GA自动标记服务SKYGLUE">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

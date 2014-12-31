@@ -1,0 +1,422 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>分类-Orange教程</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>分类-Orange教程 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>01 February 2014</span>
+    </div>
+    <div class="content">
+      <h1>分类</h1>
+
+<p>Orange的很大一部分是关于机器学习的分类方法或者说监督式数据挖掘。这些方法依赖于带有类别标签实例的数据，类似于议会选举的数据。这是加载这个数据集的代码，显示第一个数据实例，并且显示它的预测类（共和党）：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">data</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&quot;voting&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="p">[</span><span class="s">&#39;n&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;?&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;n&#39;</span><span class="p">,</span> <span class="s">&#39;y&#39;</span><span class="p">,</span> <span class="s">&#39;republican&#39;</span><span class="p">]</span>
+
+<span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">get_class</span><span class="p">()</span>
+
+<span class="o">&lt;</span><span class="n">orange</span><span class="o">.</span><span class="n">Value</span> <span class="s">&#39;party&#39;</span><span class="o">=</span><span class="s">&#39;republican&#39;</span><span class="o">&gt;</span>
+</code></pre></div>
+<h1>学习器（Learners）和 分类器（Classifiers）</h1>
+
+<p>分类使用两个对象：学习器和分类器。学习器评估分类标签数据，并返回一个分类器。给定一个数据实例（一个特征向量），分类器返回一个预测的类别:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">Orange</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&quot;voting&quot;</span><span class="p">)</span>
+<span class="n">learner</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">bayes</span><span class="o">.</span><span class="n">NaiveLearner</span><span class="p">()</span>
+<span class="n">classifier</span> <span class="o">=</span> <span class="n">learner</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">classifier</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="o">&lt;</span><span class="n">orange</span><span class="o">.</span><span class="n">Value</span> <span class="s">&#39;party&#39;</span><span class="o">=</span><span class="s">&#39;republican&#39;</span><span class="o">&gt;</span>
+</code></pre></div>
+<p>上面，我们读取数据，构建了一个[朴素贝叶斯学习器]，给它这个数据集并构建了一个分类器，并用它预测了第一个数据的类别。我们在接下来的代码也采用同样的思路，来预测数据集中前5个实例的类别：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">classifier</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">bayes</span><span class="o">.</span><span class="n">NaiveLearner</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&quot;</span><span class="si">%10s</span><span class="s">; originally </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">classifier</span><span class="p">(</span><span class="n">d</span><span class="p">),</span> <span class="n">d</span><span class="o">.</span><span class="n">getclass</span><span class="p">())</span>
+</code></pre></div>
+<p>这个脚本的输出如下：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">republican; originally republican
+republican; originally republican
+republican; originally democrat
+  democrat; originally democrat
+  democrat; originally democrat
+</code></pre></div>
+<p>朴素的贝叶斯分类器在第三个实例上犯了个错误，但是其他的预测都是准确的。不需要惊讶，因为分类器就是在这个数据集上训练的。</p>
+
+<h1>概率分类</h1>
+
+<p>想要知道分类器分配的概率，比如说，民主党，我们需要使用额外的参数来调用分类器，这个额外的参数指定了输出的类型。如果指定了Orange.classification.Classifier.GetProbabilities，分类器将输出类别的概率:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">classifier</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">bayes</span><span class="o">.</span><span class="n">NaiveLearner</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">target</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">print</span> <span class="s">&quot;Probabilities for </span><span class="si">%s</span><span class="s">:&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">class_var</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span><span class="p">[:</span><span class="mi">5</span><span class="p">]:</span>
+    <span class="n">ps</span> <span class="o">=</span> <span class="n">classifier</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">GetProbabilities</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&quot;</span><span class="si">%5.3f</span><span class="s">; originally </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ps</span><span class="p">[</span><span class="n">target</span><span class="p">],</span> <span class="n">d</span><span class="o">.</span><span class="n">getclass</span><span class="p">())</span>
+</code></pre></div>
+<p>这个脚本的输出也显示出朴素贝叶斯分类器对于第三个数据的分类是多么糟糕：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Probabilities for democrat:
+0.000; originally republican
+0.000; originally republican
+0.005; originally democrat
+0.998; originally democrat
+0.957; originally democrat
+</code></pre></div>
+<h1>交叉验证</h1>
+
+<p>像我们上面这样在训练集上验证分类器通常都只是为了演示的目的。任何评估准确性的效能指标都需要在独立的测试集上进行。这个过程也称为交叉验证，多次运行的平均效果来预测，每次都使用来自原始数据集抽样的不同训练和测试子集：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">data</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&quot;voting&quot;</span><span class="p">)</span>
+<span class="n">bayes</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">bayes</span><span class="o">.</span><span class="n">NaiveLearner</span><span class="p">()</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">evaluation</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">cross_validation</span><span class="p">([</span><span class="n">bayes</span><span class="p">],</span> <span class="n">data</span><span class="p">,</span> <span class="n">folds</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Accuracy: </span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">Orange</span><span class="o">.</span><span class="n">evaluation</span><span class="o">.</span><span class="n">scoring</span><span class="o">.</span><span class="n">CA</span><span class="p">(</span><span class="n">res</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&quot;AUC:      </span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">Orange</span><span class="o">.</span><span class="n">evaluation</span><span class="o">.</span><span class="n">scoring</span><span class="o">.</span><span class="n">AUC</span><span class="p">(</span><span class="n">res</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+<p>交叉验证需要的是一系列学习器。效果的预测器（estimators）也返回一个分数的列表，一个学习器一个分数。因为上面的脚本只有一个学习器，因此使用的列表长度为1.脚本估计了分类准确性和ROC曲线下的面积。后者的分数相当高，表明朴素贝叶斯学习器在议会选举数据集上表现非常好：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Accuracy: 0.90
+AUC:      0.97
+</code></pre></div>
+<h1>一组分类器</h1>
+
+<p>Orange包含广泛的分类算法，包含：</p>
+
+<ul>
+<li><p>logistic回归（logistic regression）(Orange.classification.logreg)</p></li>
+<li><p>k-nearest neighbors (Orange.classification.knn)</p></li>
+<li><p>支持向量机（support vector machines） (Orange.classification.svm)</p></li>
+<li><p>分类树 (Orange.classification.tree)</p></li>
+<li><p>分类规则 (Orange.classification.rules)</p></li>
+</ul>
+
+<p>这些算法中的一些包含在了下面的代码中，下面的代码预估了测试数据的目标类型的概率。这次，训练和测试数据集是分开的：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">Orange</span>
+<span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&quot;voting&quot;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Table</span><span class="p">([</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data</span> <span class="k">if</span> <span class="n">d</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">test</span><span class="p">])</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">regression</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">TreeLearner</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">same_majority_pruning</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">m_pruning</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;tree&quot;</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">knn</span><span class="o">.</span><span class="n">kNNLearner</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">knn</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;k-NN&quot;</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">logreg</span><span class="o">.</span><span class="n">LogRegLearner</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;lr&quot;</span>
+
+<span class="n">classifiers</span> <span class="o">=</span> <span class="p">[</span><span class="n">tree</span><span class="p">,</span> <span class="n">knn</span><span class="p">,</span> <span class="n">lr</span><span class="p">]</span>
+
+<span class="n">target</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">print</span> <span class="s">&quot;Probabilities for </span><span class="si">%s</span><span class="s">:&quot;</span> <span class="o">%</span> <span class="n">data</span><span class="o">.</span><span class="n">domain</span><span class="o">.</span><span class="n">class_var</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="n">target</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&quot;original class &quot;</span><span class="p">,</span>
+<span class="k">print</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%-9s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">l</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">classifiers</span><span class="p">)</span>
+
+<span class="n">return_type</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">Classifier</span><span class="o">.</span><span class="n">GetProbabilities</span>
+<span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">test</span><span class="p">:</span>
+    <span class="k">print</span> <span class="s">&quot;</span><span class="si">%-15s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">getclass</span><span class="p">()),</span>
+    <span class="k">print</span> <span class="s">&quot;     &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%5.3f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">c</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">return_type</span><span class="p">)[</span><span class="n">target</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classifiers</span><span class="p">)</span>
+</code></pre></div>
+<p>对于这五个数据，所观察的分类算法间没有很大的差异：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">Probabilities for republican:
+original class  tree      k-NN      lr
+republican      0.949     1.000     1.000
+republican      0.972     1.000     1.000
+democrat        0.011     0.078     0.000
+democrat        0.015     0.001     0.000
+democrat        0.015     0.032     0.000
+</code></pre></div>
+<p>下面的代码交叉验证了一些学习器。注意这些代码与上面代码的不同。交叉验证需要学习器，而在上面的脚本中，直接将数据给盗了学习器，并且调用了返回的分类器。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">Orange</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&quot;voting&quot;</span><span class="p">)</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">TreeLearner</span><span class="p">(</span><span class="n">sameMajorityPruning</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">mForPruning</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;tree&quot;</span>
+<span class="n">nbc</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">bayes</span><span class="o">.</span><span class="n">NaiveLearner</span><span class="p">()</span>
+<span class="n">nbc</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;nbc&quot;</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">logreg</span><span class="o">.</span><span class="n">LogRegLearner</span><span class="p">()</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s">&quot;lr&quot;</span>
+
+<span class="n">learners</span> <span class="o">=</span> <span class="p">[</span><span class="n">nbc</span><span class="p">,</span> <span class="n">tree</span><span class="p">,</span> <span class="n">lr</span><span class="p">]</span>
+<span class="k">print</span> <span class="s">&quot; &quot;</span><span class="o">*</span><span class="mi">9</span> <span class="o">+</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%-4s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">learner</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">learner</span> <span class="ow">in</span> <span class="n">learners</span><span class="p">)</span>
+<span class="n">res</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">evaluation</span><span class="o">.</span><span class="n">testing</span><span class="o">.</span><span class="n">cross_validation</span><span class="p">(</span><span class="n">learners</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">folds</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="k">print</span> <span class="s">&quot;Accuracy </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">Orange</span><span class="o">.</span><span class="n">evaluation</span><span class="o">.</span><span class="n">scoring</span><span class="o">.</span><span class="n">CA</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+<span class="k">print</span> <span class="s">&quot;AUC      </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="s">&quot; &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%.2f</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">Orange</span><span class="o">.</span><span class="n">evaluation</span><span class="o">.</span><span class="n">scoring</span><span class="o">.</span><span class="n">AUC</span><span class="p">(</span><span class="n">res</span><span class="p">))</span>
+</code></pre></div>
+<p>在ROC曲线的面积方面Logistic regression获胜：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">         nbc  tree lr
+Accuracy 0.90 0.95 0.94
+AUC      0.97 0.94 0.99
+</code></pre></div>
+<h1>报告分类模型</h1>
+
+<p>分类模型是对象，暴露了结构的每个组成部分。例如，你可以用代码反转分类树，并且观察相关的数据实例，可能性和条件。但是，通常提供模型的文本形式输出就足够了。对于logistic回归和决策树，可以用下面的代码说明：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">Orange</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&quot;titanic&quot;</span><span class="p">)</span>
+<span class="n">lr</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">logreg</span><span class="o">.</span><span class="n">LogRegLearner</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">logreg</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">lr</span><span class="p">)</span>
+
+<span class="n">tree</span> <span class="o">=</span> <span class="n">Orange</span><span class="o">.</span><span class="n">classification</span><span class="o">.</span><span class="n">tree</span><span class="o">.</span><span class="n">TreeLearner</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">tree</span><span class="o">.</span><span class="n">to_string</span><span class="p">()</span>
+</code></pre></div>
+<p>logistic回归部分的输出为：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">class attribute = survived
+class values = &lt;no, yes&gt;
+
+      Feature       beta  st. error     wald Z          P OR=exp(beta)
+
+    Intercept      -1.23       0.08     -15.15      -0.00
+ status=first       0.86       0.16       5.39       0.00       2.36
+status=second      -0.16       0.18      -0.91       0.36       0.85
+ status=third      -0.92       0.15      -6.12       0.00       0.40
+    age=child       1.06       0.25       4.30       0.00       2.89
+   sex=female       2.42       0.14      17.04       0.00      11.25
+</code></pre></div>
+<p>决策树可以用dot输出树形图：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">tree</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s">&quot;0.dot&quot;</span><span class="p">,</span> <span class="n">node_shape</span><span class="o">=</span><span class="s">&quot;ellipse&quot;</span><span class="p">,</span> <span class="n">leaf_shape</span><span class="o">=</span><span class="s">&quot;box&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>下图显示了树形图的样例：</p>
+
+<p><img src="http://orange.biolab.si/docs/latest/_images/tree.png" alt="A graphical presentation of a classification tree"></p>
+
+<p><a href="http://orange.biolab.si/docs/latest/tutorial/rst/classification/">原文地址</a></p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python-ref">
+    		python <span>17</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>17</span></a></li>
+     
+    	<li><a href="/tags.html#orange-ref">orange <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#Classification-ref">Classification <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/python/2014/01/28/Gensim_Similarity_Queries" title="gensim文档-相似性查询">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/python/2014/02/07/classify_use_Sklearn" title="用Sklearn做判别分析(分类)">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

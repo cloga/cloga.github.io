@@ -1,0 +1,296 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>自动标记所需要的互动-傻瓜级GA自动标记服务SKYGLUE</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>自动标记所需要的互动-傻瓜级GA自动标记服务SKYGLUE </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>28 June 2012</span>
+    </div>
+    <div class="content">
+      <p>作为一名Digital分析师，相信你遇到过以下这些情景：</p>
+
+<ul>
+<li><p>制作好的Tracking Plan，由于Campaign Site Layout的变化，要临时加班修改</p></li>
+<li><p>客户关心的一些交互数据，由于Tracking Plan的不完善而无法提供</p></li>
+<li><p>一些很小的tag修改，却被技术告知要等到下周更新新版本时才能上线</p></li>
+</ul>
+
+<p>有了自助式自动标记服务以上的问题都迎刃而解。</p>
+
+<p>网站分析工具的实施即标记页面是Digital分析师的主要工作之一。页面标签方式的网站分析工具（比如GA）的出现使分析师只需要在页面上添加简单的几行JS就可以捕捉到基本的网站分析数据（Visit、PV、Avg. Time On Site等），但是，对于一些自定义的交互还是需要分析师进行一些自定义标记，比如监测站内Banner的click数据，表单的填写情况，外链的点击情况，白皮书的下载情况等等。Tag Management System（比如<a href="http://www.tagman.com/">Tag Man</a>、<a href="http://www.tealium.com/">Tealium Universal Tag</a>）进一步提升了分析师对Tag的掌控能力，分析师可以通过统一的后台对不同的页面使用不同的Tracking Code，而不需要麻烦IT同学，但是对于页面上一些自定义交互事件的标记还没很好的一个解决方案。</p>
+
+<p>一次偶然的机会我在Yahoo 的WAW Group里，看到有同学提到SkyGlue，它提供了GA的自动标记服务。其实GA的自动标记服务有很多，比如<a href="www.skyglue.com"><img src="http://cdnwebsite.skyglue.com/wp-content/uploads/2012/05/pyramid_0501_trans.png" alt=""></a><a href="http://www.advanced-web-metrics.com/blog/auto-tracking-file-downloads-outbound-links/">Brian大叔</a>就提供过免费和付费的GA 自动标记脚本，<a href="http://cutroni.com/blog/">Justin同学</a>也有类似的解决方案，甚至Google也有类似的脚本提供，感兴趣的同学可以看一下<a href="https://www.google.com/appserve/fb/forms/cnawcoupon1000/">AdWords Campaign Landing Page</a>中的<a href="https://www.google.com/js/gweb/analytics/autotrack.js">autotrack.js</a>，这里要感谢<a href="http://xiaoq.in/">肖庆同学</a>，提供了这个非常有价值的信息。总的来说，这些自动跟踪的脚本都是很优秀的。但是，这些脚本基本上都是针对a标签的左键click事件进行跟踪，Google提供的autotrack还会额外记录HeatMap数据，只是目前目前还无法利用这些热图数据，同时要使用或修改这些脚本需要有一定JS基础，比如增加对button、img或者input事件的支持等。</p>
+
+<p>而SkyGlue则很好的解决了易用性问题，只需要在页面上添加一段JS，即可以自动的跟踪页面上对几乎是任意Dom元素的跟踪，Iframe、Flash都可以跟踪。同时，可以在他们的后台中对页面可跟踪的Dom指定名称，即使你是一个JS小白，也可以方便的完成对页面上复杂交互的GA部署。其实对页面上交互所有Dom元素的click事件都已经自动标记，你所需做的是在后台为重要的交互起一个有&lt;!-- more --&gt;意义的名字。</p>
+
+<p>下面让我们一起来了解一下这个傻瓜级产品，看看它能为我们的工作提供哪些帮助。</p>
+
+<p>在他们的官网上www.skyglue.com，可以看到这款产品的卖点被归结为4点：自动标记、个体行为跟踪、Dashboard（看截图很漂亮，只是在国内因为众所周知的原因无法使用）、智能分组。</p>
+
+<p>账号的注册比较简单，可以直接使用Google账号，产品的价格是按照PV来收费，有一个月的试用期。对于国内的用户来说，一个比较麻烦的地方时需要使用Master或者Visa的信用卡才可以支付。</p>
+
+<p>后台的界面比较简洁主要有这个部分：Dashboard、安装SkyGlue、自定义跟踪事件、用户行为报告。</p>
+
+<p>下面我们来看一下标签自定义设置的截图。</p>
+
+<p>[caption id=&quot;attachment_1564&quot; align=&quot;aligncenter&quot; width=&quot;681&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/06/123.png"><img src="http://www.cloga.info/wp-content/uploads/2012/06/123.png" alt="SnapShot"></a> 页面标签设置截图[/caption]</p>
+
+<p>其中绿色虚线的部分为可以自动标记的元素，比如页面上的所有链接，页面上的所有图片，页面上输入框，甚至页面上的Iframe以及嵌入的Flash都是可以自动标记。你可以点击任意一个元素，弹出框中会显示这个元素能否被自动跟踪，以及跟踪的名称，同时可以修改这个默认的名称，比如在上例中，我将对新浪微博这个Iframe的点击事情命名为MicroBlog，自定义之后的元素会有绿色实线标注，以便与自动标记区分开。<strong>温馨提示：监测在线客服点击事件的需求，可以很方便的实现。</strong></p>
+
+<p>目前实现自定义跟踪流程还是有一些繁琐，用户需要在setup页面找到要修改名称的元素，如果元素有id或name，则只需填入id或name即可修改名称，如果没有的话，则需要根据tag和其一个唯一的属性来定义这个元素。我使用过<a href="http://adgrok.com/grok-o-matic/">Adgrok</a>（已经被Tweeter收购）的服务，他们提供AdWords投放自助服务，也是使用类似浮层来提高易用性，给用户以所见即所得的用户体验。我想如果SkyGlue能够将自定义跟踪的部分就在Setup模式下完成，而不是Setup模式只是一个查看标签属性的地方。</p>
+
+<p>也许有一天大的WA工具提供商也会提供类似的标记方式，那么也许广大的WA实施工程师将面临失业的可能。</p>
+
+<p>目前SkyGlue只支持将Click事件跟踪为Event，无法指定为虚拟的页面浏览，同时也不支持自定义变量的设置，目前，GA的Event还是有一定的局限性，无法用于渠道可视化和目标流，从这个意义上来说一些click事件跟踪为虚拟页面浏览还是有一定意义的。相信，在不远的将来GA会将事件与页面浏览整合为交互。</p>
+
+<p>当然在目前想要完全实现自动标记还不太现实，毕竟国内大部分交互的Campaign site还是使用Flash进行制作，让我们一起祈祷那些老掉牙的浏览器早日在国内消亡吧~</p>
+
+<p>看完了部署，我们再来看一下实际的跟踪数据：</p>
+
+<p>[caption id=&quot;attachment_1565&quot; align=&quot;aligncenter&quot; width=&quot;705&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/06/23333.png"><img src="http://www.cloga.info/wp-content/uploads/2012/06/23333.png" alt="Tracking Data"></a> 跟踪数据[/caption]</p>
+
+<p>从上面数据可以看到，数据的层次非常清晰，区分了URL、Click这些事件，同时可以发现对于图片和Flash都可以监测到数据。</p>
+
+<p>下面我们再来看一下用户报告，这个功能是可以查看单个访问者的点击流数据。访问者的UID是由SkyGlue生成的，不同于utma cookie中存储的UID，通过GA的自定义变量5来存储，因此，在使用之前，你需要将自定义变量5空出来。这对于研究用户行为（正常行为与作弊行为）有重要的意义。</p>
+
+<p>[caption id=&quot;&quot; align=&quot;aligncenter&quot; width=&quot;760&quot;]<img src="http://cdnwebsite.skyglue.com/wp-content/uploads/2012/06/smart_segment_760.png" alt="UserReport"> 用户报告的数据[/caption]</p>
+
+<p>好了，以上就是自助式GA自动标记服务SkyGlue的一个简单介绍，如果你想要体验这个功能，那么马上访问<a href="http://www.skyglue.com">www.skyglue.com</a>开始试用吧！</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#ga的js扩展-ref">
+    		ga的js扩展 <span>3</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#skyglue-ref">skyglue <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#tag management-ref">tag management <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/digital%E5%88%86%E6%9E%90/2012/05/20/e7bd91e7ab99e58886e69e90e4b8ade5bd92e59ba0e5bbbae6a8a1attribution-modeling" title="网站分析中归因建模(Attribution Modeling)">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/ga%E7%9A%84js%E6%89%A9%E5%B1%95/2012/07/10/e5868de8b088e794a8gae79b91e6b58be59ca8e7babfe5aea2e69c8de79a84e68c89e992aee782b9e587bb" title="再谈用GA监测在线客服的按钮点击">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

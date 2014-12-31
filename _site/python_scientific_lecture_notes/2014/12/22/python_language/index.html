@@ -1,0 +1,1257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>1.2Python语言-Python科学讲座笔记</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>1.2Python语言-Python科学讲座笔记 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>22 December 2014</span>
+    </div>
+    <div class="content">
+      <p>Cloga：这份文档是euroscipy关于Python科学计算资源的一个教程。英文版地址为：<a href="http://scipy-lectures.github.io/">http://scipy-lectures.github.io/</a>，是学习Python科学计算生态体系很好的资料，因此，我会陆续将它翻译为中文，相关Gitbub地址为：<a href="https://github.com/cloga/scipy-lecture-notes_cn">https://github.com/cloga/scipy-lecture-notes_cn</a>，<a href="http://cloga.info/python_scientific_lecture_notes/2014/12/14/python_scientific_lecture_notes_cn/">完整的中文目录</a></p>
+
+<hr>
+
+<p><a href="http://nbviewer.ipython.org/github/cloga/scipy-lecture-notes_cn/blob/master/1.2Python%E8%AF%AD%E8%A8%80.ipynb">本文的IPython版本</a></p>
+
+<blockquote>
+<p>作者 Chris Burns, Christophe Combelles, Emmanuelle Gouillart, Gaël Varoquaux</p>
+
+<p><strong>Python中的科学计算</strong>
+这里我们介绍Python语言。这里只会仅仅解决可以用于Numpy和Scipy的最低要求。想要更多的了解这门语言，请参考http://docs.python.o
+rg/tutorial 这个非常好的教程。也可以借助专门的图书，比如：http://diveintopython.org/.</p>
+</blockquote>
+
+<p>Python是一门<strong>编程语言</strong>，与C、Fortran、BASIC和PHP等等类似。Python的一些特性如下：</p>
+
+<ul>
+<li>一种<em>解释性</em>（不是编译）语言。与C或者Fortran等不同，Python代码在执行前不会编译。另外，Python可以<strong>交互</strong>使用：有许多的Python
+解释器，命令和脚本可以在其中执行。</li>
+<li>在<strong>开源</strong>证书下发布的免费软件：Python可以免费使用和分发，即使用于商用。</li>
+<li><strong>多平台</strong>：Python可以用于所有的主流操作系统，Windows、Linux/Unix、MacOS X, 甚至可能是你有手机操作系统等等。</li>
+<li>可读性很强的语言，有清晰不罗嗦的语法</li>
+<li>拥有大量高质量的包，可以应用于多种多样的应用，从网站框架到科学计算。</li>
+<li>非常简单的接口与其他语言交互，特别是C和C++</li>
+<li>稍后会介绍一些语言的其他特性。例如Python是面向对象的语言，包含动态类型（一个变量可以在程序过程中，可以包含不同的对象类型）。</li>
+</ul>
+
+<p>Python的特有特性的更多信息，请见：http://www.python.org/about/</p>
+
+<h2>1.2.1 第一步</h2>
+
+<p>启动<strong>IPython</strong> Shell(一个增强的Python交互Shell)：</p>
+
+<ul>
+<li>在Linux/Mac终端中输入“ipython”，或者在Windows cmd sheell，</li>
+<li>或者从菜单启动程序，即在<a href="http://www.pythonxy.com/">Python(x,y)</a>或<a href="http://www.enthought%0A.com/products/epd.php">EPD</a>，如果你已经安装这些Python科学套装之一。</li>
+</ul>
+
+<p>如果你的电脑上还没有安装IPython，也可以选择其他Python shells，比如在终端中输入“Python”启动纯Python
+shell，或者Idle解释器。但是，我们建议使用IPython Shell，因为它增强特性，特别是对于科学计算。</p>
+
+<p>如果你已经启动了解释器，输入</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">print &quot;Hello, world!&quot;
+
+Hello, world!
+</code></pre></div>
+<p>接下来就会显示信息&quot;Hello, world!&quot;。你已经执行了你的第一条Python命令，恭喜！</p>
+
+<p>你自己开始吧，输入下列命令</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">a</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">int</span>
+<span class="k">print</span> <span class="n">b</span>
+<span class="mi">6</span>
+<span class="n">a</span><span class="o">*</span><span class="n">b</span>
+<span class="mi">18</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">&#39;hello&#39;</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="nb">str</span>
+<span class="n">b</span> <span class="o">+</span> <span class="n">b</span>
+<span class="s">&#39;hellohello&#39;</span>
+<span class="mi">2</span><span class="o">*</span><span class="n">b</span>
+<span class="s">&#39;hellohello&#39;</span>
+</code></pre></div>
+<p>上面定义了<em>a</em>和<em>b</em>两个变量。注意这里在赋值前没有声明变量类型。相反，在C中，应该写为：
+<code>C
+int a=3;
+</code></p>
+
+<p>另外，变量的类型可以改变，在一个时间点它可以等于一个特定类型，在接下来的时间里，他可以等于另外的类型。<em>b</em>首先等于整数，但是当它被赋值为<em>&quot;hello&quot;</em>时他
+变成等于字符。在Python中，整数的运算符（b＝2*a）原生支持的，一些字符上的操作符例如相加和相乘也是支持的，相当于串联和重复。</p>
+
+<h2>1.2.2 基础类型</h2>
+
+<h3>1.2.2.1 数值类型</h3>
+
+<p>Python支持如下的数值、标量类型：</p>
+
+<p><strong>整型：</strong></p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="mi">2</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">int</span>
+</code></pre></div>
+<p><strong>浮点型：</strong></p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">c</span> <span class="o">=</span> <span class="mf">2.1</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">float</span>
+</code></pre></div>
+<p><strong>复数：</strong></p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="mf">1.5</span> <span class="o">+</span> <span class="mf">0.5j</span>
+<span class="n">a</span><span class="o">.</span><span class="n">real</span>
+<span class="mf">1.5</span>
+<span class="n">a</span><span class="o">.</span><span class="n">imag</span>
+<span class="mf">0.5</span>
+<span class="nb">type</span><span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="mi">0j</span> <span class="p">)</span>
+<span class="nb">complex</span>
+</code></pre></div>
+<p><strong>布尔：</strong></p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">4</span>
+<span class="bp">False</span>
+<span class="n">test</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span> <span class="o">&gt;</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">test</span>
+<span class="bp">False</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">test</span><span class="p">)</span>
+<span class="nb">bool</span>
+</code></pre></div>
+<p>因此，Python shell可以代替你的口袋计算器，因为基本的代数操作符 +、-、*、/、%（模）都已经原生实现了。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">7</span> <span class="o">*</span> <span class="mf">3.</span>
+<span class="mf">21.0</span>
+<span class="mi">2</span><span class="o">**</span><span class="mi">10</span>
+<span class="mi">1024</span>
+<span class="mi">8</span> <span class="o">%</span> <span class="mi">3</span>
+<span class="mi">2</span>
+</code></pre></div>
+<p>类型转化（投射）：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">float</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="mf">1.0</span>
+</code></pre></div>
+<hr>
+
+<p><strong>注意</strong>：整数相除</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="mi">1</span>
+</code></pre></div>
+<p><strong>技巧</strong>：使用浮点：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="mi">3</span> <span class="o">/</span> <span class="mf">2.</span>
+<span class="mf">1.5</span>
+<span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+<span class="mi">1</span>
+<span class="n">a</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<span class="mf">1.5</span>
+</code></pre></div>
+<p>如果你明确想要整除，请使用//：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="mf">3.0</span> <span class="o">//</span> <span class="mi">2</span>
+<span class="mf">1.0</span>
+</code></pre></div>
+<p>Python3改变了除运算符行为。细节请看[python3porting](http://python3porting.com/preparing.html</p>
+
+<h1>use-instead-of-when-dividing-integers)网站.</h1>
+
+<hr>
+
+<h3>1.2.2.2 容器</h3>
+
+<p>Python提供了许多有效的容器类型，其中存储了对象集合。</p>
+
+<h4>1.2.2.2.1 列表</h4>
+
+<p>列表是一个有序的对象集合，对象可以有多种类型。例如：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="nb">list</span>
+</code></pre></div>
+<p>索引：访问包含在列表中的单个对象：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="s">&#39;green&#39;</span>
+</code></pre></div>
+<p>使用负索引，从结尾开始计数：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="s">&#39;white&#39;</span>
+<span class="n">L</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="s">&#39;black&#39;</span>
+</code></pre></div>
+<p><strong>注意：索引从0开始</strong>（和C中一样），而不是1（像在Fortran或Matlab）！</p>
+
+<p>切片：获得规律分布元素的子列表：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span>
+<span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>注意</strong>：L[start:stop]包含索引start&lt;= i &lt;
+stop的元素（i的范围从start到stop-1）。因此，L[start:stop]包含（stop-start）个元素。</p>
+
+<p><strong>切片语法</strong>：<code>L[start:stop:stride]</code></p>
+
+<p>所有切片参数都是可选的：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span>
+<span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">L</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+<span class="p">[</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">L</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+<span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>列表是可变对象，可以被改变：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s">&#39;yellow&#39;</span>
+<span class="n">L</span> 
+<span class="p">[</span><span class="s">&#39;yellow&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;gray&#39;</span><span class="p">,</span> <span class="s">&#39;purple&#39;</span><span class="p">]</span>
+<span class="n">L</span>
+<span class="p">[</span><span class="s">&#39;yellow&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;gray&#39;</span><span class="p">,</span> <span class="s">&#39;purple&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p><strong>注：</strong>一个列表的元素可以有不同的类型：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span><span class="p">]</span>
+<span class="n">L</span>
+<span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span><span class="p">]</span>
+<span class="n">L</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">L</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+<span class="p">(</span><span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#39;hello&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>对于一个所有类型都相同的数值数据集合，使用Numpy模块提供的数组类型通常更有效。Numpy数组是包含固定大小项目的内存组块。使用Numpy数组，元素上的操作可
+以非常快速，因为元素均匀分布在内存上并且更多的操作是通过特殊的C函数而不是Python循环。</p>
+
+<p>Python提供了一大组函数来修改或查询列表。这里是一些例子，更多内容，请见：http://docs.python.org/tutorial/datastruc
+tures.html#more-on-lists</p>
+
+<p>添加和删除元素：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">L</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">L</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;pink&#39;</span><span class="p">)</span>
+<span class="n">L</span>
+<span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;pink&#39;</span><span class="p">]</span>
+<span class="n">L</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span> <span class="c"># 删除并返回最后一个项目</span>
+<span class="s">&#39;pink&#39;</span>
+<span class="n">L</span>
+<span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">L</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="s">&#39;pink&#39;</span><span class="p">,</span> <span class="s">&#39;purple&#39;</span><span class="p">])</span> <span class="c"># 扩展列表L，原地</span>
+<span class="n">L</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">L</span><span class="p">[:</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+<span class="n">L</span>
+<span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>反转：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">r</span> <span class="o">=</span> <span class="n">L</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">r</span>
+<span class="p">[</span><span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">]</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">L</span><span class="p">)</span>
+<span class="n">r2</span>
+<span class="p">[</span><span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">r2</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="c"># 原对象</span>
+<span class="n">r2</span>
+<span class="p">[</span><span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>串联和重复列表：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">r</span> <span class="o">+</span> <span class="n">L</span>
+<span class="p">[</span><span class="s">&#39;white&#39;</span><span class="p">,</span>
+ <span class="s">&#39;black&#39;</span><span class="p">,</span>
+ <span class="s">&#39;green&#39;</span><span class="p">,</span>
+ <span class="s">&#39;blue&#39;</span><span class="p">,</span>
+ <span class="s">&#39;red&#39;</span><span class="p">,</span>
+ <span class="s">&#39;red&#39;</span><span class="p">,</span>
+ <span class="s">&#39;blue&#39;</span><span class="p">,</span>
+ <span class="s">&#39;green&#39;</span><span class="p">,</span>
+ <span class="s">&#39;black&#39;</span><span class="p">,</span>
+ <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">r</span> <span class="o">*</span> <span class="mi">2</span>
+<span class="p">[</span><span class="s">&#39;white&#39;</span><span class="p">,</span>
+ <span class="s">&#39;black&#39;</span><span class="p">,</span>
+ <span class="s">&#39;green&#39;</span><span class="p">,</span>
+ <span class="s">&#39;blue&#39;</span><span class="p">,</span>
+ <span class="s">&#39;red&#39;</span><span class="p">,</span>
+ <span class="s">&#39;white&#39;</span><span class="p">,</span>
+ <span class="s">&#39;black&#39;</span><span class="p">,</span>
+ <span class="s">&#39;green&#39;</span><span class="p">,</span>
+ <span class="s">&#39;blue&#39;</span><span class="p">,</span>
+ <span class="s">&#39;red&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>排序：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="nb">sorted</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="c"># 新对象</span>
+<span class="p">[</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+<span class="n">r</span>
+<span class="p">[</span><span class="s">&#39;white&#39;</span><span class="p">,</span> <span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">]</span>
+<span class="n">r</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span> <span class="c"># 原对象</span>
+<span class="n">r</span>
+<span class="p">[</span><span class="s">&#39;black&#39;</span><span class="p">,</span> <span class="s">&#39;blue&#39;</span><span class="p">,</span> <span class="s">&#39;green&#39;</span><span class="p">,</span> <span class="s">&#39;red&#39;</span><span class="p">,</span> <span class="s">&#39;white&#39;</span><span class="p">]</span>
+</code></pre></div>
+<hr>
+
+<p><strong>方法和面向对象编程</strong></p>
+
+<p>符号r.method() (即 r.append(3) and L.pop())
+是我们第一个关于面向对象编程的例子（OOP）。作为列表，对象r有可以以这种方式调用的方法函数。对于这篇教程不需要关于面向对象编程的更多知识，只需要理解这种符号。</p>
+
+<hr>
+
+<p><strong>发现方法</strong>：</p>
+
+<p>提醒：在IPython中：tab完成 (按tab)</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">In</span> <span class="p">[</span><span class="mi">28</span><span class="p">]:</span> <span class="n">r</span><span class="o">.&lt;</span><span class="n">TAB</span><span class="o">&gt;</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__add__</span>           <span class="n">r</span><span class="o">.</span><span class="n">__iadd__</span>        <span class="n">r</span><span class="o">.</span><span class="n">__setattr__</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__class__</span>         <span class="n">r</span><span class="o">.</span><span class="n">__imul__</span>        <span class="n">r</span><span class="o">.</span><span class="n">__setitem__</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__contains__</span>      <span class="n">r</span><span class="o">.</span><span class="n">__init__</span>        <span class="n">r</span><span class="o">.</span><span class="n">__setslice__</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__delattr__</span>       <span class="n">r</span><span class="o">.</span><span class="n">__iter__</span>        <span class="n">r</span><span class="o">.</span><span class="n">__sizeof__</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__delitem__</span>       <span class="n">r</span><span class="o">.</span><span class="n">__le__</span>          <span class="n">r</span><span class="o">.</span><span class="n">__str__</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__delslice__</span>      <span class="n">r</span><span class="o">.</span><span class="n">__len__</span>         <span class="n">r</span><span class="o">.</span><span class="n">__subclasshook__</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__doc__</span>           <span class="n">r</span><span class="o">.</span><span class="n">__lt__</span>          <span class="n">r</span><span class="o">.</span><span class="n">append</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__eq__</span>            <span class="n">r</span><span class="o">.</span><span class="n">__mul__</span>         <span class="n">r</span><span class="o">.</span><span class="n">count</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__format__</span>        <span class="n">r</span><span class="o">.</span><span class="n">__ne__</span>          <span class="n">r</span><span class="o">.</span><span class="n">extend</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__ge__</span>            <span class="n">r</span><span class="o">.</span><span class="n">__new__</span>         <span class="n">r</span><span class="o">.</span><span class="n">index</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__getattribute__</span>  <span class="n">r</span><span class="o">.</span><span class="n">__reduce__</span>      <span class="n">r</span><span class="o">.</span><span class="n">insert</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__getitem__</span>       <span class="n">r</span><span class="o">.</span><span class="n">__reduce_ex__</span>   <span class="n">r</span><span class="o">.</span><span class="n">pop</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__getslice__</span>      <span class="n">r</span><span class="o">.</span><span class="n">__repr__</span>        <span class="n">r</span><span class="o">.</span><span class="n">remove</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__gt__</span>            <span class="n">r</span><span class="o">.</span><span class="n">__reversed__</span>    <span class="n">r</span><span class="o">.</span><span class="n">reverse</span>
+<span class="n">r</span><span class="o">.</span><span class="n">__hash__</span>          <span class="n">r</span><span class="o">.</span><span class="n">__rmul__</span>        <span class="n">r</span><span class="o">.</span><span class="n">sort</span>
+</code></pre></div>
+<h4>1.2.2.2.2 字符</h4>
+
+<p>不同的字符语法（单引号、双引号或三个引号）：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;Hello, how are you?&#39;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Hi, what&#39;s up&quot;</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s">&#39;&#39;&#39;Hello,                 </span>
+<span class="s">       how are you&#39;&#39;&#39;</span>         <span class="c"># 三个引号可以允许字符跨行</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;Hi,</span>
+<span class="s">what&#39;s up?&quot;&quot;&quot;</span>
+<span class="s">&#39;Hi, what&#39;</span><span class="n">s</span> <span class="n">up</span><span class="err">?</span><span class="s">&#39;</span>
+<span class="n">File</span> <span class="s">&quot;&lt;ipython-input-58-dfe00f996c26&gt;&quot;</span><span class="p">,</span> <span class="n">line</span> <span class="mi">7</span>
+    <span class="s">&#39;Hi, what&#39;</span><span class="n">s</span> <span class="n">up</span><span class="err">?</span><span class="s">&#39;</span>
+              <span class="o">^</span>
+<span class="ne">SyntaxError</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">syntax</span>
+</code></pre></div>
+<p>如果在字符中要是使用引号，那么应该嵌套使用，或者使用&quot;\&quot;进行转义，否则会报错。</p>
+
+<p>换行的符号为 \n，tab符号是\t。</p>
+
+<p>字符也是类似与列表的结合。因此，也可以使用相同的语法和规则索引和切片。</p>
+
+<p>索引：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="s">&#39;h&#39;</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="s">&#39;e&#39;</span>
+<span class="n">a</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="s">&#39;o&#39;</span>
+</code></pre></div>
+<p>（记住负索引从右侧开始计数。）</p>
+
+<p>切片：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">a</span> <span class="o">=</span> <span class="s">&quot;hello, world!&quot;</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span> <span class="c"># 第三到第六个（不包含）元素：元素3、4、5</span>
+<span class="s">&#39;lo,&#39;</span>
+<span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">2</span><span class="p">]</span> <span class="c"># 语法：a[开始：结束：步幅]</span>
+<span class="s">&#39;lo o&#39;</span>
+<span class="n">a</span><span class="p">[::</span><span class="mi">3</span><span class="p">]</span> <span class="c"># 从开始到结尾，每隔3个字母</span>
+<span class="s">&#39;hl r!&#39;</span>
+</code></pre></div>
+<p>重音符号和特殊字符也可以被处理为Unicode字符（请见 http://docs.python.org/tutorial/introduction.html#unicode-strings）。</p>
+
+<p>字符是<strong>不可变</strong>对象，不可能修改内容。不过可以从原始的字符中创建一个新的字符。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">a = &quot;hello, world!&quot;
+a[2] = &#39;z&#39;
+-----------------------------------------------------   ----------------------
+TypeError                                 Traceback (most recent call last)
+&lt;ipython-input-68-8f124c87c8cf&gt; in &lt;module&gt;()
+      1 a = &quot;hello, world!&quot;
+----&gt; 2 a[2] = &#39;z&#39;
+TypeError: &#39;str&#39; object does not support item assignment
+a.replace(&#39;l&#39;, &#39;z&#39;, 1)
+&#39;hezlo, world!&#39;
+a.replace(&#39;l&#39;, &#39;z&#39;)
+&#39;hezzo, worzd!&#39;
+</code></pre></div>
+<p>字符有许多有用的方法，比如上面的a.replace。回忆一下a.面向对象的符号，并且使用tab完成或者help(str)来搜索新的方法。and use tab
+completion or</p>
+
+<p><strong>更多内容</strong> Python提供了操作的字符的高级可能性，看一下模式或格式。感兴趣的读者请参考：http://docs.python.org/library/
+stdtypes.html#string-methods 和 http://docs.python.org/library/string.html#new-
+string-formatting。</p>
+
+<p>字符格式：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&#39;An integer: %i; a float: %f; another string: %s&#39; % (1, 0.1, &#39;string&#39;)
+
+&#39;An integer: 1; a float: 0.100000; another string: string&#39;
+
+i = 102
+filename = &#39;processing_of_dataset_%d.txt&#39; % i
+filename
+
+&#39;processing_of_dataset_102.txt&#39;
+</code></pre></div>
+<h4>1.2.2.2.3. Dictionaries</h4>
+
+<p>字典本质上是一个<strong>映射键值</strong>的高效表格。它是一个<strong>无序</strong>的容器</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">tel = {&#39;emmanuelle&#39;: 5752, &#39;sebastian&#39;: 5578}
+tel[&#39;francis&#39;] = 5915
+tel
+
+{&#39;emmanuelle&#39;: 5752, &#39;francis&#39;: 5915, &#39;sebastian&#39;: 5578}
+
+tel[&#39;sebastian&#39;]
+
+5578
+
+tel.keys()
+
+[&#39;sebastian&#39;, &#39;francis&#39;, &#39;emmanuelle&#39;]
+
+tel.values()
+
+[5578, 5915, 5752]
+</code></pre></div>
+<p>它可以方便的以名字（日期的字符和名称等）存储和获取值。更多信息见
+http://docs.python.org/tutorial/datastructures.html#dictionaries。</p>
+
+<p>一个字典的键（代表值）可以有不同的类型：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">d = {&#39;a&#39;:1, &#39;b&#39;:2, 3:&#39;hello&#39;}
+d
+
+{3: &#39;hello&#39;, &#39;a&#39;: 1, &#39;b&#39;: 2}
+</code></pre></div>
+<h4>1.2.2.2.4. More container types</h4>
+
+<p><strong>元组</strong></p>
+
+<p>元组本质上是不可变列表。元组的元素用括号包起来，或者只是用逗号分割：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">t = 12345, 54321, &#39;hello!&#39;
+t[0]
+
+12345
+
+t
+
+(12345, 54321, &#39;hello!&#39;)
+
+u = (0, 2)
+</code></pre></div>
+<p><strong>集合</strong>：无序，惟一项目：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">s = set((&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;a&#39;))
+s
+
+{&#39;a&#39;, &#39;b&#39;, &#39;c&#39;}
+
+s.difference((&#39;a&#39;, &#39;b&#39;))
+
+{&#39;c&#39;}
+</code></pre></div>
+<h4>1.2.2.3. 赋值运算</h4>
+
+<p><a href="http://docs.python.org/reference/simple_stmts.html#assignment-%0Astatements">Python类库参考：</a></p>
+
+<blockquote>
+<p>赋值语句被用于（重）绑定名称与值，以及修改可变对象的项目或属性。</p>
+</blockquote>
+
+<p>简单来说，它这样工作（简单赋值）：</p>
+
+<ol>
+<li><p>右侧表达式被评估，创建或获得产生的对象</p></li>
+<li><p>左侧的名字被赋值或绑定到右侧的对象</p></li>
+</ol>
+
+<p>需要注意的事情：</p>
+
+<ul>
+<li><p>单个对象可以有多个绑定的名称：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">a = [1, 2, 3]
+b = a
+a
+
+[1, 2, 3]
+
+b
+
+[1, 2, 3]
+
+a is b
+
+True
+
+b[1] = &#39;hi!&#39;
+a
+
+[1, &#39;hi!&#39;, 3]
+</code></pre></div></li>
+<li><p>要在<strong>原地</strong>改变列表，请使用索引或切片：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">a = [1, 2, 3]
+a
+
+[1, 2, 3]
+
+a = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;] # 创建另一个对象
+a
+
+[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]
+
+id(a)
+
+4394695640
+
+a[:] = [1, 2, 3] # 在原地修改对象
+a
+
+[1, 2, 3]
+
+id(a)
+
+4394695640
+</code></pre></div></li>
+</ul>
+
+<p>与上一个id相同，你的可能有所不同...</p>
+
+<ul>
+<li><p>这里的关键观点是可变 vs. 不可变</p>
+
+<ul>
+<li>可变对象可以在原地修改</li>
+<li>不可变对象一旦被创建就不可修改</li>
+</ul></li>
+</ul>
+
+<p><strong>更多内容</strong>在David M. Beazley的文章<a href="http://www.informit.com/articles/art%0Aicle.aspx?p=453682">Python中的类型和对象</a>中也可以找到关于以上问题非常不错的详尽解释。</p>
+
+<h2>1.2.3 流程控制</h2>
+
+<p>控制代码执行顺序。</p>
+
+<h3>1.2.3.1 if/elif/else</h3>
+<div class="highlight"><pre><code class="language-text" data-lang="text">if 2**2 == 4:
+    print &#39;Obvious!&#39;
+
+Obvious!
+</code></pre></div>
+<p><strong>代码块用缩进限定</strong></p>
+
+<hr>
+
+<p><strong>小技巧</strong>：在你的Python解释器内输入下列行，并且注意保持缩进深度。IPython shell会在一行的 :
+符号后自动增加缩进，如果要减少缩进，向左侧移动4个空格使用后退键。按两次回车键离开逻辑块。</p>
+
+<hr>
+<div class="highlight"><pre><code class="language-text" data-lang="text">a = 10
+if a == 1:
+    print(1)
+elif a == 2:
+    print(2)
+else:
+    print(&#39;A lot&#39;)
+
+A lot
+</code></pre></div>
+<p>在脚本中也是强制缩进的。作为练习，在condition.py脚本中以相同的缩进重新输入之前几行，并在IPython中用<code>run
+condition.py</code>执行脚本。</p>
+
+<h3>1.2.3.2 for/range</h3>
+
+<p>在索引上迭代：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">for i in range(4):
+    print(i)
+
+0
+1
+2
+3
+</code></pre></div>
+<p>但是最经常使用，也更易读的是在值上迭代：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">for word in (&#39;cool&#39;, &#39;powerful&#39;, &#39;readable&#39;):
+    print(&#39;Python is %s&#39; % word)
+
+Python is cool
+Python is powerful
+Python is readable
+</code></pre></div>
+<h3>1.2.3.3 while/break/continue</h3>
+
+<p>典型的C式While循环（Mandelbrot问题）：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">z = 1 + 1j
+while abs(z) &lt; 100: 
+    z = z**2 + 1
+z
+
+(-134+352j)
+</code></pre></div>
+<p><strong>更高级的功能</strong></p>
+
+<p>bread 跳出for/while循环：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">z = 1 + 1j
+while abs(z) &lt; 100:
+    if z.imag == 0:
+        break
+    z = z**2 + 1
+    print z
+
+(1+2j)
+(-2+4j)
+(-11-16j)
+(-134+352j)
+</code></pre></div>
+<p>continue 继续下一个循环迭代：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">a = [1, 0, 2, 4]
+for element in a:
+    if element == 0:
+        continue
+    print 1. / element
+
+1.0
+0.5
+0.25
+</code></pre></div>
+<h3>1.2.3.4 条件表达式</h3>
+
+<p><strong>if [OBJECT]：</strong></p>
+
+<p>评估为False：
+    - 任何等于0的数字 (0、0.0、0+0j)
+    - 空容器（列表、元组、集合、字典, ...）
+    - False，None</p>
+
+<p>评估为True：
+    - 任何其他的东西</p>
+
+<p><strong>a == b：</strong></p>
+
+<p>判断逻辑是否相等：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">1 == 1
+
+True
+</code></pre></div>
+<p><strong>a is b：</strong></p>
+
+<p>测试同一性：两边是相同的对象：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">1 is 1
+True
+
+a = 1
+b = 1
+a is b
+
+True
+</code></pre></div>
+<p><strong>a in b：</strong></p>
+
+<p>对于任何集合b：b包含a</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">b = [1, 2, 3]
+2 in b
+
+True
+
+5 in b
+
+False
+</code></pre></div>
+<p>如果b是字典，这个语法测试a是否是b的一个键。</p>
+
+<h3>1.2.3.5. 高级循环</h3>
+
+<h4>1.2.3.5.1 序列循环</h4>
+
+<p>你可以在任何序列上进行循环（字符、列表、字典的键，文件的行...）：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">vowels = &#39;aeiouy&#39;
+for i in &#39;powerful&#39;:
+    if i in vowels:
+        print(i),
+
+o e u
+
+message = &quot;Hello how are you?&quot;
+message.split() # 返回一个列表
+
+[&#39;Hello&#39;, &#39;how&#39;, &#39;are&#39;, &#39;you?&#39;]
+
+for word in message.split():
+    print word
+
+Hello
+how
+are
+you?
+</code></pre></div>
+<p>很少有语言（特别是科学计算语言）允许在整数或索引之外的循环。在Python中，可以在感兴趣的对象上循环，而不用担心你通常不关心的索引。这个功能通常用来让代码更易
+读。</p>
+
+<p><strong>警告</strong>：改变正在循环的序列是不安全的。</p>
+
+<h4>1.2.3.5.2 跟踪列举数</h4>
+
+<p>通常任务是在一个序列上循环，同时跟踪项目数。
+    - 可以像上面，使用带有计数器的while循环。或者一个for循环：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">words = (&#39;cool&#39;, &#39;powerful&#39;, &#39;readable&#39;)
+for i in range(0, len(words)):
+    print i, words[i]
+
+0 cool
+1 powerful
+2 readable
+</code></pre></div>
+<p>但是，Python为这种情况提供了enumerate关键词：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">for index, item in enumerate(words):
+    print index, item
+
+0 cool
+1 powerful
+2 readable
+</code></pre></div>
+<h4>1.2.3.5.3 字典循环</h4>
+
+<p>使用<strong>iteritems</strong>：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">d = {&#39;a&#39;: 1, &#39;b&#39;:1.2, &#39;c&#39;:1j}
+for key, val in d.iteritems():
+    print(&#39;Key: %s has value: %s&#39; % (key, val))
+
+Key: a has value: 1
+Key: c has value: 1j
+Key: b has value: 1.2
+</code></pre></div>
+<h4>1.2.3.5.4 列表理解</h4>
+<div class="highlight"><pre><code class="language-text" data-lang="text">[i**2 for i in range(4)]
+
+[0, 1, 4, 9]
+</code></pre></div>
+<hr>
+
+<p><strong>练习</strong></p>
+
+<p>用Wallis公式，计算π的小数</p>
+
+<p><img src="http://scipy-lectures.github.io/_images/math/31913b3982be13ed2063b0ffccbcab9cf4931fdb.png" alt="Wallis公式"></p>
+
+<hr>
+
+<h2>1.2.4. 定义函数</h2>
+
+<h3>1.2.4.1 函数的定义</h3>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def test():
+    print(&#39;in test function&#39;)
+
+test()
+
+in test function
+</code></pre></div>
+<p><strong>注意</strong>：函数块必须像其他流程控制块一样缩进</p>
+
+<h3>1.2.4.2 返回语句</h3>
+
+<p>函数<strong>可以选择</strong>返回值。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def disk_area(radius):
+    return 3.14 * radius * radius
+
+disk_area(1.5)
+
+7.0649999999999995
+</code></pre></div>
+<p><strong>注意</strong>：默认函数返回<code>None</code>。</p>
+
+<p><strong>注意</strong>：注意定义函数的语法：</p>
+
+<ul>
+<li>def关键字：</li>
+<li>接下来是函数的名称，然后</li>
+<li>在冒号后是在括号中的函数的参数。</li>
+<li>函数体；</li>
+<li>以及可选返回值的返回对象</li>
+</ul>
+
+<h3>1.2.4.3 参数</h3>
+
+<p>必选参数（位置参数）</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def double_it(x):
+    return x * 2
+
+double_it(3)
+
+6
+
+double_it()
+---------------------------------------------------------------------------
+TypeError                                 Traceback (most recent call last)
+
+&lt;ipython-input-25-51cdedbb81b0&gt; in &lt;module&gt;()
+----&gt; 1 double_it()
+
+TypeError: double_it() takes exactly 1 argument (0 given)
+</code></pre></div>
+<p>可选参数（关键词和命名参数）</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def double_it(x=2):
+    return x * 2
+
+double_it()
+
+4
+
+double_it(3)
+
+6
+</code></pre></div>
+<p>关键词参数允许你设置特定默认值。</p>
+
+<p><strong>警告：</strong>默认值在函数定义时被评估，而不是在调用时。如果使用可变类型（即字典或列表）并在函数体内修改他们，这可能会产生问题，因为这个修改会在函数被引用的时候
+一直持续存在。</p>
+
+<p>在关键词参数中使用不可变类型：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">bigx = 10
+def double_it(x=bigx):
+    return x * 2
+bigx = 1e9  # 现在真的非常大
+double_it()
+
+20
+</code></pre></div>
+<p>在关键词参数中使用可变类型（并且在函数体内修改它）：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def add_to_dict(args={&#39;a&#39;: 1, &#39;b&#39;: 2}):
+    for i in args.keys():
+        args[i] += 1
+    print args
+
+add_to_dict
+
+&lt;function __main__.add_to_dict&gt;
+
+add_to_dict()
+
+{&#39;a&#39;: 2, &#39;b&#39;: 3}
+
+add_to_dict()
+
+{&#39;a&#39;: 3, &#39;b&#39;: 4}
+
+add_to_dict()
+
+{&#39;a&#39;: 4, &#39;b&#39;: 5}
+</code></pre></div>
+<p>更复杂的例子，实现Python的切片：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def slicer(seq, start=None, stop=None, step=None):
+    &quot;&quot;&quot;Implement basic python slicing.&quot;&quot;&quot;
+    return seq[start:stop:step]
+
+rhyme = &#39;one fish, two fish, red fish, blue fish&#39;.split()
+
+rhyme
+
+[&#39;one&#39;, &#39;fish,&#39;, &#39;two&#39;, &#39;fish,&#39;, &#39;red&#39;, &#39;fish,&#39;, &#39;blue&#39;, &#39;fish&#39;]
+
+slicer(rhyme)
+
+[&#39;one&#39;, &#39;fish,&#39;, &#39;two&#39;, &#39;fish,&#39;, &#39;red&#39;, &#39;fish,&#39;, &#39;blue&#39;, &#39;fish&#39;]
+
+slicer(rhyme, step=2)
+
+[&#39;one&#39;, &#39;two&#39;, &#39;red&#39;, &#39;blue&#39;]
+
+slicer(rhyme, 1, step=2)
+
+[&#39;fish,&#39;, &#39;fish,&#39;, &#39;fish,&#39;, &#39;fish&#39;]
+
+slicer(rhyme, start=1, stop=4, step=2)
+
+[&#39;fish,&#39;, &#39;fish,&#39;]
+</code></pre></div>
+<p>关键词参数的顺序<strong>不</strong>重要：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">slicer(rhyme, step=2, start=1, stop=4)
+
+[&#39;fish,&#39;, &#39;fish,&#39;]
+</code></pre></div>
+<p>但是，最好是使用与函数定义相同的顺序。</p>
+
+<p><em>关键词参数</em>是特别方便的功能，可以用可变数量的参数来定义一个函数，特别是当函数据绝大多数调用都会使用默认值时。</p>
+
+<h3>1.2.4.4 值传递</h3>
+
+<p>可以在一个函数内部改变变量的值吗？大多数语言（C、Java...）区分了“值传递“和”引用传递“。在Python中，没有严格的这种区分，并且视你的变量是否会修改
+而有一些不同。幸运的是，这些情况存在明确的规则。</p>
+
+<p>函数的参数是对象的引用，传递的是值。当你像一个函数传递了一个变量，Python传递的是对象的引用，这个对象引用的变量（值）。而不是变量本身。</p>
+
+<p>如果<strong>值</strong>传递给函数的值是不可变的，那么这个函数并不会改变调用者的变量。如果<strong>值</strong>是可变的，那么函数将可能在原地修改调用者的变量。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def try_to_modify(x, y, z):
+    x = 23
+    y.append(42)
+    z = [99] # 新引用
+    print(x)
+    print(y)
+    print(z)
+
+a = 77    # 不可变变量
+b = [99]  # 可变变量
+c = [28]
+try_to_modify(a, b, c)
+
+23
+[99, 42]
+[99]
+
+print(a)
+
+77
+
+print(b)
+
+[99, 42]
+
+print(c)
+
+[28]
+</code></pre></div>
+<p>函数有名为<em>local namespace</em>的本地变量表。</p>
+
+<p>变量X只存在于函数try<em>to</em>modify内部。</p>
+
+<h3>1.2.4.5 全局变量</h3>
+
+<p>在函数外定义的变量可以在函数内引用：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">x = 5
+def addx(y):
+    return x + y
+
+addx(10)
+
+15
+</code></pre></div>
+<p>但是，这些全局变量不能在函数内修改，除非在函数内声明<strong>global</strong>。</p>
+
+<p>这样没用：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def setx(y):
+    x = y
+    print(&#39;x is %d&#39; % x)
+
+setx(10)
+
+x is 10
+
+x
+
+5
+</code></pre></div>
+<p>这样可以：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def setx(y):
+    global x
+    x = y
+    print(&#39;x is %d&#39; % x)
+
+setx(10)
+
+x is 10
+
+x
+
+10
+</code></pre></div>
+<h3>1.2.4.6 可变数量参数</h3>
+
+<p>函数的特殊形式：
+    - <em>args：封装成元组的任意数量的位置参数
+    - *</em>kwargs：封装成字典的任意数量的关键词参数</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def variable_args(*args, **kwargs):
+    print &#39;args is&#39;, args
+    print &#39;kwargs is&#39;, kwargs
+
+variable_args(&#39;one&#39;, &#39;two&#39;, x=1, y=2, z=3)
+
+args is (&#39;one&#39;, &#39;two&#39;)
+kwargs is {&#39;y&#39;: 2, &#39;x&#39;: 1, &#39;z&#39;: 3}
+</code></pre></div>
+<h3>1.2.4.7 Docstrings</h3>
+
+<p>关于函数作用及参数的文档。通常惯例：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">def funcname(params):
+    &quot;&quot;&quot;Concise one-line sentence describing the function.
+    Extended summary which can contain multiple paragraphs.
+    &quot;&quot;&quot;
+    # 函数体
+    pass
+
+funcname?
+</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">Type</span><span class="p">:</span>           <span class="n">function</span>
+<span class="n">Base</span> <span class="n">Class</span><span class="p">:</span>     <span class="nb">type</span> <span class="s">&#39;function&#39;</span><span class="o">&gt;</span>
+<span class="n">String</span> <span class="n">Form</span><span class="p">:</span>    <span class="o">&lt;</span><span class="n">function</span> <span class="n">funcname</span> <span class="n">at</span> <span class="mh">0xeaa0f0</span><span class="o">&gt;</span>
+<span class="n">Namespace</span><span class="p">:</span>      <span class="n">Interactive</span>
+<span class="n">File</span><span class="p">:</span>           <span class="o">&lt;</span><span class="n">ipython</span> <span class="n">console</span><span class="o">&gt;</span>
+<span class="n">Definition</span><span class="p">:</span>     <span class="n">funcname</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+<span class="n">Docstring</span><span class="p">:</span>
+    <span class="n">Concise</span> <span class="n">one</span><span class="o">-</span><span class="n">line</span> <span class="n">sentence</span> <span class="n">describing</span> <span class="n">the</span> <span class="n">function</span><span class="o">.</span>
+    <span class="n">Extended</span> <span class="n">summary</span> <span class="n">which</span> <span class="n">can</span> <span class="n">contain</span> <span class="n">multiple</span> <span class="n">paragraphs</span><span class="o">.</span>
+</code></pre></div>
+<p><strong>注 Docstring 指导</strong></p>
+
+<p>为了标准化，Docstring 惯例页面为Python Docstring相关的含义及惯例提供了文档。</p>
+
+<p>Numpy和Scipy模块也为科学计算函数定义了清晰的标准，你可能想要在自己的函数中去遵循，这个标准有参数部分，例子部分等。见http://projects.s
+cipy.org/numpy/wiki/CodingStyleGuidelines#docstring-standard 及
+http://projects.scipy.org/numpy/browser/trunk/doc/example.py#L37</p>
+
+<h3>1.2.4.8 函数作为对象</h3>
+
+<p>函数是一级对象，这意味着他们可以是：</p>
+
+<ul>
+<li>可以被赋值给变量</li>
+<li>列表的一个项目（或任何集合）</li>
+<li><p>作为参数传递给另一个函数</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">va = variable_args
+
+va(&#39;three&#39;, x=1, y=2)
+
+args is (&#39;three&#39;,)
+kwargs is {&#39;y&#39;: 2, &#39;x&#39;: 1}
+</code></pre></div></li>
+</ul>
+
+<h3>1.2.4.9 方法</h3>
+
+<p>方法是对象的函数。你已经在我们关于列表、字典和字符等...的例子上看到了。</p>
+
+<h3>1.2.4.10. 练习</h3>
+
+<p><strong>练习：斐波那契数列</strong></p>
+
+<p>写一个函数来展示斐波那契数列的前n个项目，定义如下：
+    - u<em>0 = 1; u</em>1 = 1
+    - u_(n+2) = u<em>(n+1) + u</em>n</p>
+
+<p><strong>练习：快速排序</strong></p>
+
+<p>实现快速排序算法，定义来自wikipedia：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">function</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+    <span class="n">var</span> <span class="nb">list</span> <span class="n">less</span><span class="p">,</span> <span class="n">greater</span> <span class="k">if</span> <span class="n">length</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span>
+        <span class="k">return</span> <span class="n">array</span>
+    <span class="n">select</span> <span class="ow">and</span> <span class="n">remove</span> <span class="n">a</span> <span class="n">pivot</span> <span class="n">value</span> <span class="n">pivot</span> <span class="kn">from</span> <span class="nn">array</span> <span class="nn">for</span> <span class="nn">each</span> <span class="nn">x</span> <span class="nn">in</span> <span class="nn">array</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">pivot</span> <span class="o">+</span> <span class="mi">1</span> <span class="n">then</span> <span class="n">append</span> <span class="n">x</span> <span class="n">to</span> <span class="n">less</span> <span class="k">else</span> <span class="n">append</span> <span class="n">x</span> <span class="n">to</span> <span class="n">greater</span>
+    <span class="k">return</span> <span class="n">concatenate</span><span class="p">(</span><span class="n">quicksort</span><span class="p">(</span><span class="n">less</span><span class="p">),</span> <span class="n">pivot</span><span class="p">,</span> <span class="n">quicksort</span><span class="p">(</span><span class="n">greater</span><span class="p">))</span>
+</code></pre></div>
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python_scientific_lecture_notes-ref">
+    		python_scientific_lecture_notes <span>4</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>17</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/python_scientific_lecture_notes/2014/12/15/Scientific_computing_with_tools_and_workflow" title="1.1科学计算工具及流程-Python科学讲座笔记">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/python_scientific_lecture_notes/2014/12/31/NumPy_creating_and_manipulating_numerical_data" title="1.3NumPy：创建和操作数值数据">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

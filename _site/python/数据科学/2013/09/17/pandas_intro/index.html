@@ -1,0 +1,690 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>Python中的结构化数据分析利器-Pandas简介</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>Python中的结构化数据分析利器-Pandas简介 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>17 September 2013</span>
+    </div>
+    <div class="content">
+      <p><a href="http://pandas.pydata.org/">Pandas</a>是python的一个数据分析包，最初由<a href="http://www.aqr.com/">AQR Capital Management</a>于2008年4月开发，并于2009年底开源出来，目前由专注于Python数据包开发的<a href="http://pydata.org/">PyData</a>开发team继续开发和维护，属于PyData项目的一部分。Pandas最初被作为金融数据分析工具而开发出来，因此，pandas为时间序列分析提供了很好的支持。 Pandas的名称来自于面板数据（panel data）和python数据分析（data analysis）。panel data是经济学中关于多维数据集的一个术语，在Pandas中也提供了panel的数据类型。 这篇文章会介绍一些Pandas的基本知识，偷了些懒其中采用的例子大部分会来自官方的<a href="http://pandas.pydata.org/pandas-docs/stable/10min.html">10分钟学Pandas</a>。我会加上个人的理解，帮助大家记忆和学习。</p>
+
+<h3>Pandas中的数据结构</h3>
+
+<p>Series：一维数组，与Numpy中的一维array类似。二者与Python基本的数据结构List也很相近，其区别是：List中的元素可以是不同的数据类型，而Array和Series中则只允许存储相同的数据类型，这样可以更有效的使用内存，提高运算效率。</p>
+
+<p>Time- Series：以时间为索引的Series。</p>
+
+<p>DataFrame：二维的表格型数据结构。很多功能与R中的data.frame类似。可以将DataFrame理解为Series的容器。以下的内容主要以DataFrame为主。</p>
+
+<p>Panel ：三维的数组，可以理解为DataFrame的容器。&lt;!-- more --&gt;</p>
+
+<h3>创建DataFrame</h3>
+
+<p>首先引入Pandas及Numpy：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+</code></pre></div>
+<p>官方推荐的缩写形式为pd，你可以选择其他任意的名称。 DataFrame是二维的数据结构，其本质是Series的容器，因此，DataFrame可以包含一个索引以及与这些索引联合在一起的Series，由于一个Series中的数据类型是相同的，而不同Series的数据结构可以不同。因此对于DataFrame来说，每一列的数据结构都是相同的，而不同的列之间则可以是不同的数据结构。或者以数据库进行类比，DataFrame中的每一行是一个记录，名称为Index的一个元素，而每一列则为一个字段，是这个记录的一个属性。 创建DataFrame有多种方式：</p>
+
+<ul>
+<li>以字典的字典或Series的字典的结构构建DataFrame，这时候的最外面字典对应的是DataFrame的列，内嵌的字典及Series则是其中每个值。</li>
+</ul>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">]),</span><span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">3.</span><span class="p">,</span> <span class="mf">4.</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">,</span> <span class="s">&#39;d&#39;</span><span class="p">])}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</code></pre></div>
+<p>可以看到d是一个字典，其中one的值为Series有3个值，而two为Series有4个值。由d构建的为一个4行2列的DataFrame。其中one只有3个值，因此d行one列为NaN（Not a Number）--Pandas默认的缺失值标记。</p>
+
+<ul>
+<li>从列表的字典构建DataFrame，其中嵌套的每个列表（List）代表的是一个列，字典的名字则是列标签。这里要注意的是每个列表中的元素数量应该相同。否则会报错：</li>
+</ul>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="ne">ValueError</span><span class="p">:</span> <span class="n">arrays</span> <span class="n">must</span> <span class="nb">all</span> <span class="n">be</span> <span class="n">same</span> <span class="n">length</span>
+</code></pre></div>
+<ul>
+<li>从字典的列表构建DataFrame，其中每个字典代表的是每条记录（DataFrame中的一行），字典中每个值对应的是这条记录的相关属性。</li>
+</ul>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">d</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span><span class="s">&#39;two&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">},{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span><span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">2</span><span class="p">},{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span><span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">},{</span><span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">4</span><span class="p">}]</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">,</span><span class="s">&#39;c&#39;</span><span class="p">,</span><span class="s">&#39;d&#39;</span><span class="p">],</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;one&#39;</span><span class="p">,</span><span class="s">&#39;two&#39;</span><span class="p">])</span>
+<span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span><span class="o">=</span><span class="s">&#39;index&#39;</span>
+</code></pre></div>
+<p>以上的语句与以Series的字典形式创建的DataFrame相同，只是思路略有不同，一个是以列为单位构建，将所有记录的不同属性转化为多个Series，行标签冗余，另一个是以行为单位构建，将每条记录转化为一个字典，列标签冗余。使用这种方式，如果不通过columns指定列的顺序，那么列的顺序会是随机的。</p>
+
+<p>个人经验是对于从一些已经结构化的数据转化为DataFrame似乎前者更方便，而对于一些需要自己结构化的数据（比如解析Log文件，特别是针对较大数据量时），似乎后者更方便。创建了DataFrame后可以通过index.name属性为DataFrame的索引指定名称。</p>
+
+<h3>DataFrame转换为其他类型</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">to_dict</span><span class="p">(</span><span class="n">outtype</span><span class="o">=</span><span class="s">&#39;dict&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>outtype的参数为‘dict’、‘list’、‘series’和‘records’。
+dict返回的是dict of dict；list返回的是列表的字典；series返回的是序列的字典；records返回的是字典的列表</p>
+
+<h3>查看数据</h3>
+
+<p>head和tail方法可以显示DataFrame前N条和后N条记录，N为对应的参数，默认值为5。这通常是拿到DataFrame后的第一个命令，可以方便的了解数据内容和含义。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</code></pre></div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>index</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>  1</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>  2</td>
+      <td> 2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>  3</td>
+      <td> 3</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>NaN</td>
+      <td> 4</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 2 columns</p>
+</div>
+
+<p>R中的对应函数：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">head(df)
+</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span>
+</code></pre></div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+    <tr>
+      <th>index</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>a</th>
+      <td>  1</td>
+      <td> 1</td>
+    </tr>
+    <tr>
+      <th>b</th>
+      <td>  2</td>
+      <td> 2</td>
+    </tr>
+    <tr>
+      <th>c</th>
+      <td>  3</td>
+      <td> 3</td>
+    </tr>
+    <tr>
+      <th>d</th>
+      <td>NaN</td>
+      <td> 4</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 2 columns</p>
+</div>
+
+<p>index（行）和columns（列）属性，可以获得DataFrame的行和列的标签。这也是了解数据内容和含义的重要步骤。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">index</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">Index([u&#39;a&#39;, u&#39;b&#39;, u&#39;c&#39;, u&#39;d&#39;], dtype=&#39;object&#39;)
+</code></pre></div>
+<p>查看字段名</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">columns</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">Index([u&#39;one&#39;, u&#39;two&#39;], dtype=&#39;object&#39;)
+</code></pre></div>
+<p>decribe方法可以计算各个列的基本描述统计值。包含计数，平均数，标准差，最大值，最小值及4分位差。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</code></pre></div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>one</th>
+      <th>two</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td> 3.0</td>
+      <td> 4.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td> 2.0</td>
+      <td> 2.500000</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td> 1.0</td>
+      <td> 1.290994</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td> 1.0</td>
+      <td> 1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td> 1.5</td>
+      <td> 1.750000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td> 2.0</td>
+      <td> 2.500000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td> 2.5</td>
+      <td> 3.250000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td> 3.0</td>
+      <td> 4.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 2 columns</p>
+</div>
+
+<p>R中的对应函数：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">summary(df)
+</code></pre></div>
+<h3>行列转置</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">T</span>
+</code></pre></div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>index</th>
+      <th>a</th>
+      <th>b</th>
+      <th>c</th>
+      <th>d</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>one</th>
+      <td> 1</td>
+      <td> 2</td>
+      <td> 3</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>two</th>
+      <td> 1</td>
+      <td> 2</td>
+      <td> 3</td>
+      <td>  4</td>
+    </tr>
+  </tbody>
+</table>
+<p>2 rows × 4 columns</p>
+</div>
+
+<h3>排序</h3>
+
+<p>DataFrame提供了多种排序方式。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">sort_index</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div>
+<p>sort_index可以以轴的标签进行排序。axis是指用于排序的轴，可选的值有0和1，默认为0即行标签（Y轴），1为按照列标签排序。 ascending是排序方式，默认为True即降序排列。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="s">&#39;two&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;one&#39;</span><span class="p">,</span><span class="s">&#39;two&#39;</span><span class="p">],</span><span class="n">ascending</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+</code></pre></div>
+<p>DataFrame也提供按照指定列进行排序，可以仅指定一个列作为排序标准（以单独列名作为columns的参数），也可以进行多重排序（columns的参数为一个列名的List，列名的出现顺序决定排序中的优先级），在多重排序中ascending参数也为一个List，分别与columns中的List元素对应。</p>
+
+<h3>读写数据</h3>
+
+<p>DataFrame可以方便的读写数据文件，最常见的文件为CSV或Excel。Pandas读写Excel文件需要<a href="http://pythonhosted.org/openpyxl/">openpyxl</a>（Excel 2007）, <a href="http://www.python-excel.org/">xlrd/xlwt</a>（Excel 2003）。</p>
+
+<p>从CSV中读取数据：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s">&#39;foo.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>R中的对应函数：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">df = read.csv(&#39;foo.csv&#39;)
+</code></pre></div>
+<p>将DataFrame写入CSV：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s">&#39;foo.csv&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>R中的对应函数：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">df.to.csv(&#39;foo.csv&#39;)
+</code></pre></div>
+<p>从Excel中读取数据：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">xls</span> <span class="o">=</span> <span class="n">ExcelFile</span><span class="p">(</span><span class="s">&#39;foo.xlsx&#39;</span><span class="p">)</span>
+<span class="n">xls</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s">&#39;sheet1&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">na_values</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;NA&#39;</span><span class="p">])</span>
+</code></pre></div>
+<p>先定义一个Excel文件，用xls.parse解析sheet1的内容，index<em>col用于指定index列，na</em>values定义缺失值的标识。</p>
+
+<p>将DataFrame写入Excel文件：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s">&#39;foo.xlsx&#39;</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="s">&#39;sheet1&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>默认的sheet为sheet1，也可以指定其他sheet名。</p>
+
+<h3>数据切片</h3>
+
+<p>通过下标选取数据：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="p">[</span><span class="s">&#39;one&#39;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">one</span>
+</code></pre></div>
+<p>以上两个语句是等效的，都是返回df名称为one列的数据，返回的为一个Series。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+<p>下标索引选取的是DataFrame的记录，与List相同DataFrame的下标也是从0开始，区间索引的话，为一个左闭右开的区间，即[0：3]选取的为1-3三条记录。与此等价，还可以用起始的索引名称和结束索引名称选取数据：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="s">&#39;b&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>有一点需要注意的是使用起始索引名称和结束索引名称时，也会包含结束索引的数据。以上两种方式返回的都是DataFrame。</p>
+
+<p>使用标签选取数据：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="err">行标签</span><span class="p">,</span><span class="err">列标签</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="s">&#39;b&#39;</span><span class="p">]</span><span class="c">#选取ab两行数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span><span class="s">&#39;one&#39;</span><span class="p">]</span><span class="c">#选取one列的数据</span>
+</code></pre></div>
+<p>df.loc的第一个参数是行标签，第二个参数为列标签（可选参数，默认为所有列标签），两个参数既可以是列表也可以是单个字符，如果两个参数都为列表则返回的是DataFrame，否则，则为Series。</p>
+
+<p>使用位置选取数据：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="err">行位置</span><span class="p">,</span><span class="err">列位置</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span><span class="c">#选取第二行，第二列的值，返回的为单个值</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">],:]</span><span class="c">#选取第一行及第三行的数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">2</span><span class="p">,:]</span><span class="c">#选取第一行到第三行（不包含）的数据</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span><span class="c">#选取所有记录的第一列的值，返回的为一个Series</span>
+<span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span><span class="c">#选取第一行数据，返回的为一个Series</span>
+</code></pre></div>
+<p>PS：loc为location的缩写，iloc则为integer &amp; location的缩写</p>
+
+<p>更广义的切片方式是使用.ix，它自动根据你给到的索引类型判断是使用位置还是标签进行切片</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">ix</span><span class="p">[</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="s">&#39;b&#39;</span><span class="p">]</span>
+</code></pre></div>
+<p>通过逻辑指针进行数据切片：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="p">[</span><span class="err">逻辑条件</span><span class="p">]</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">one</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">]</span><span class="c">#单个逻辑条件</span>
+<span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="o">.</span><span class="n">one</span> <span class="o">&gt;=</span><span class="mi">1</span> <span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">one</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="p">]</span><span class="c">#多个逻辑条件组合</span>
+</code></pre></div>
+<p>这种方式获得的数据切片都是DataFrame。</p>
+
+<h3>基本运算</h3>
+
+<p>Pandas支持基本的运算及向量化运算。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="c">#计算列的平均值，参数为轴，可选值为0或1.默认为0，即按照列运算</span>
+<span class="n">df</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="c">#计算行的和</span>
+<span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">x</span><span class="o">.</span><span class="n">min</span><span class="p">())</span><span class="c">#将一个函数应用到DataFrame的每一列，这里使用的是匿名lambda函数，与R中apply函数类似</span>
+</code></pre></div>
+<h3>设置索引</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">&#39;one&#39;</span><span class="p">)</span>
+</code></pre></div>
+<h3>重命名列</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s">u&#39;one&#39;</span><span class="p">:</span><span class="s">&#39;1&#39;</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div>
+<h3>查看每个列的数据类型</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">dtypes</span>
+</code></pre></div>
+<p>R中的对应函数：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">str(df)
+</code></pre></div>
+<h3>查看最大值/最小值</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="o">.</span><span class="n">idxmax</span><span class="p">()</span>
+</code></pre></div>
+<h3>重设索引</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div>
+<h3>改变数据类型</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</code></pre></div>
+<h3>计算Series每个值的频率</h3>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</code></pre></div>
+<p>R的对应函数：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">table(df[&#39;A&#39;])
+</code></pre></div>
+<h3>字符方法</h3>
+
+<p>pandas提供许多向量化的字符操作，你可以在str属性中找到它们</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">len</span><span class="p">()</span>
+<span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+</code></pre></div>
+<h3>DataFrame的合并</h3>
+
+<p>Contact：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">ds</span> <span class="o">=</span> <span class="p">[{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span><span class="s">&#39;two&#39;</span><span class="p">:</span><span class="mi">2</span><span class="p">},{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">5</span><span class="p">,</span><span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">3</span><span class="p">},{</span><span class="s">&#39;one&#39;</span> <span class="p">:</span> <span class="mi">6</span><span class="p">,</span><span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">4</span><span class="p">},{</span><span class="s">&#39;two&#39;</span> <span class="p">:</span> <span class="mi">7</span><span class="p">,</span><span class="s">&#39;three&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">}]</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ds</span><span class="p">,</span><span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s">&#39;e&#39;</span><span class="p">,</span><span class="s">&#39;f&#39;</span><span class="p">,</span><span class="s">&#39;g&#39;</span><span class="p">,</span><span class="s">&#39;h&#39;</span><span class="p">])</span>
+<span class="c">##构建一个新的DataFrame，dfs</span>
+<span class="n">df_t</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">df</span><span class="p">,</span><span class="n">dfs</span><span class="p">])</span><span class="c">#合并两个DataFrame</span>
+</code></pre></div>
+<p>Merge（类似SQL中的Join操作）：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">left</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;foo1&#39;</span><span class="p">,</span> <span class="s">&#39;foo2&#39;</span><span class="p">],</span> <span class="s">&#39;lval&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]})</span>
+<span class="n">right</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">&#39;key&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s">&#39;foo1&#39;</span><span class="p">,</span> <span class="s">&#39;foo2&#39;</span><span class="p">],</span> <span class="s">&#39;rval&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]})</span>
+<span class="c">#构建了两个DataFrame</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">left</span><span class="p">,</span> <span class="n">right</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s">&#39;key&#39;</span><span class="p">)</span><span class="c">#按照key列将两个DataFrame join在一起</span>
+</code></pre></div>
+<p>DataFrame中的Group by：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">&#39;A&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;foo&#39;</span><span class="p">],</span>
+                    <span class="s">&#39;B&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s">&#39;one&#39;</span><span class="p">,</span> <span class="s">&#39;one&#39;</span><span class="p">,</span> <span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="s">&#39;three&#39;</span><span class="p">,</span><span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="s">&#39;one&#39;</span><span class="p">,</span> <span class="s">&#39;three&#39;</span><span class="p">],</span>
+                    <span class="s">&#39;C&#39;</span> <span class="p">:</span><span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span> <span class="s">&#39;D&#39;</span> <span class="p">:</span> <span class="n">randn</span><span class="p">(</span><span class="mi">8</span><span class="p">)});</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="c">#按照A列的值分组求和</span>
+<span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="s">&#39;B&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="c">##按照A、B两列的值分组求和</span>
+</code></pre></div>
+<p>对应R函数：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">tapply()
+</code></pre></div>
+<p>在实际应用中，先定义groups，然后再对不同的指标指定不同计算方式。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">groups</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">)</span><span class="c">#按照A列的值分组求和</span>
+<span class="n">groups</span><span class="p">[</span><span class="s">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="c">##按照A列的值分组求B组和</span>
+<span class="n">groups</span><span class="p">[</span><span class="s">&#39;B&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="c">##按照A列的值分组B组计数</span>
+</code></pre></div>
+<p>默认会以groupby的值作为索引，如果不将这些值作为索引，则需要使用as_index=False</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s">&#39;A&#39;</span><span class="p">,</span><span class="s">&#39;B&#39;</span><span class="p">],</span> <span class="n">as_index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</code></pre></div>
+<h3>构建透视表</h3>
+
+<p>使用pivot_table和crosstab都可以创建数据透视表</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s">&#39;A&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s">&#39;one&#39;</span><span class="p">,</span> <span class="s">&#39;one&#39;</span><span class="p">,</span> <span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="s">&#39;three&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">3</span><span class="p">,</span><span class="s">&#39;B&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="s">&#39;C&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">4</span><span class="p">,</span> 
+                <span class="s">&#39;C&#39;</span> <span class="p">:</span> <span class="p">[</span><span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;foo&#39;</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">,</span> <span class="s">&#39;bar&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> 
+                <span class="s">&#39;D&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">),</span> <span class="s">&#39;E&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">12</span><span class="p">)})</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="s">&#39;D&#39;</span><span class="p">,</span> <span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">],</span> <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">])</span><span class="c">#以A、B为行标签，以C为列标签将D列的值汇总求和</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">crosstab</span><span class="p">(</span><span class="n">rows</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">],</span> <span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;C&#39;</span><span class="p">],</span> <span class="n">values</span> <span class="o">=</span> <span class="s">&#39;D&#39;</span><span class="p">)</span><span class="c">#以A、B为行标签，以C为列标签将D列的值汇总求和</span>
+</code></pre></div>
+<h3> 时间序列分析</h3>
+
+<p>时间序列也是Pandas的一个特色。时间序列在Pandas中就是以Timestamp为索引的Series。</p>
+
+<p>pandas提供to_datetime方法将代表时间的字符转化为Timestamp对象：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">s</span> <span class="o">=</span> <span class="s">&#39;2013-09-16 21:00:00&#39;</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</code></pre></div>
+<p>有时我们需要处理时区问题：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">ts</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">utc</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">.</span><span class="n">tz_convert</span><span class="p">(</span><span class="s">&#39;Asia/Shanghai&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>构建一个时间序列：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">rng</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">date_range</span><span class="p">(</span><span class="s">&#39;1/1/2012&#39;</span><span class="p">,</span> <span class="n">periods</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="s">&#39;M&#39;</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rng</span><span class="p">)),</span> <span class="n">index</span><span class="o">=</span><span class="n">rng</span><span class="p">)</span>
+</code></pre></div>
+<p>Pandas提供resample方法对时间序列的时间粒度进行调整：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">ts_h</span><span class="o">=</span><span class="n">ts</span><span class="o">.</span><span class="n">resample</span><span class="p">(</span><span class="s">&#39;H&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s">&#39;count&#39;</span><span class="p">)</span><span class="c">#M,5Min,1s</span>
+</code></pre></div>
+<p>以上是将时间序列调整为小时，还可以支持月（M），分钟（Min）甚至秒（s）等。</p>
+
+<h3>画图</h3>
+
+<p>Pandas也支持一定的绘图功能，需要安装matplot模块。</p>
+
+<p>比如前面创建的时间序列，通过plot()就可以绘制出折线图，也可以使用hist()命令绘制频率分布的直方图。</p>
+
+<p>关于Panda作图，请查看另一篇博文：<a href="http://cloga.info/python/2014/02/23/Plotting_with_Pandas/">用Pandas作图</a></p>
+
+<p>以上是关于Pandas的简单介绍，其实除了Pandas之外，Python还提供了多个科学计算包，比如Numpy，Scipy，以及数据挖掘的包：Scikit Learn，Orage，NLTK等，感兴趣的同学可以了解一下。</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python-ref">
+    		python <span>17</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#数据科学-ref">
+    		数据科学 <span>3</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#dataframe-ref">dataframe <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#Pandas-ref">Pandas <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#数据分析-ref">数据分析 <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#时间序列分析-ref">时间序列分析 <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/python/sna/2013/09/03/networkx_intro" title="复杂网络程序包NetworkX简介">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/python/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/2013/11/30/something_about_python" title="关于Python你不可不知的几件事">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

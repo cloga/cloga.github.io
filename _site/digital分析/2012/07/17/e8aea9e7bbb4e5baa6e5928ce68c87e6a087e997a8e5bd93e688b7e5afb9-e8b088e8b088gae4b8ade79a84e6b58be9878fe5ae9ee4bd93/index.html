@@ -1,0 +1,298 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>让维度和指标门当户对-GA中的测量实体、维度和指标</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>让维度和指标门当户对-GA中的测量实体、维度和指标 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>17 July 2012</span>
+    </div>
+    <div class="content">
+      <p>开始这个话题前，我们先来看一下几个GA中异常数据：</p>
+
+<p>1、查看页面时，UV&gt;visit</p>
+
+<p>[caption id=&quot;attachment_1593&quot; align=&quot;aligncenter&quot; width=&quot;1021&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/07/UV-Visit-Page1.jpg"><img src="http://www.cloga.info/wp-content/uploads/2012/07/UV-Visit-Page1.jpg" alt=""></a> UV&gt;Visit-Page[/caption]</p>
+
+<p>2、同一个页面，在Content&gt;Site Content&gt;All Page和Exit Page中看到的PV数不一致。&lt;!-- more --&gt;</p>
+
+<p>[caption id=&quot;attachment_1594&quot; align=&quot;aligncenter&quot; width=&quot;450&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/07/PV-Allpage.jpg"><img src="http://www.cloga.info/wp-content/uploads/2012/07/PV-Allpage.jpg" alt=""></a> All Pages[/caption]</p>
+
+<p>[caption id=&quot;attachment_1595&quot; align=&quot;aligncenter&quot; width=&quot;561&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/07/PV-Exitpage1.jpg"><img src="http://www.cloga.info/wp-content/uploads/2012/07/PV-Exitpage1.jpg" alt=""></a> Exit Pages[/caption]</p>
+
+<p>3、有的搜索词的Visits with Search为0</p>
+
+<p>[caption id=&quot;attachment_1597&quot; align=&quot;aligncenter&quot; width=&quot;1019&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/07/Search-exit.jpg"><img src="http://www.cloga.info/wp-content/uploads/2012/07/Search-exit.jpg" alt=""></a> Site Search[/caption]</p>
+
+<p>相信大家都曾有过类似的疑问，希望我的这篇文章能够解答大家的这些疑问。</p>
+
+<p>在解答这些疑问前，我们先来看一下GA测量的实体以及维度和指标。</p>
+
+<p>GA测量的实体就是GA测量的东西。GA主要的测量实体是Visit和Pageview，Visitor也是一个实体，只是实际应用较少。当然还有一些其他的实体，比如订单、Event、Search、Social Action等。</p>
+
+<p>维度和指标则是测量实体的一个属性。维度是那些不可以量化的属性，一般用使用文本描述，比如对于一个Visit，这个Visit来源的地域就是维度，而这个visit的Time On site就是一个指标。同样对于Pageview来说，这个Pageview产生的Page name就是个维度，Pageview出现的Frequency就是Pageview这个指标。</p>
+
+<p>需要注意的是维度和指标也是有层次的，相应的可以分为：Visitor级别的维度，GA默认没有这类维度，但是我们可以通过用户定义的值及自定义变量来生成这类维度，比如将GA的UID存在自定义变量中从而分析单个访客的行为，Visitor级别的指标，比如UV；Visit级别的维度，比如地域、来源，这些属性都是Visit级别的，一旦Visit产生就不会更改，Visit级别的指标，比如Visit，Bounce；Pageview级别的维度，比如Page Name，Page Title，这些属性都是Pageview级别的，Pageview级别的指标，比如Pageview，time on page, Exit等。</p>
+
+<p>GA提供了灵活的自定义报告，我们可以灵活的进行维度和指标的组合，但是，在进行维度和指标的组合时要注意维度和指标的门当户对，一个基本的原则是高级的维度可以和低级的指标组成报表，比如Visitor级别的维度可以和Visit、Page级别的指标组成报表，而低级的维度则尽量不要和高级的指标组成报告，比如，Page级别的维度尽量不好与Visit及Visitor的指标组成报表，除非你能很明确的知道这些维度和指标组合的意义，并且能够给出合理的解释。</p>
+
+<p>好了介绍完这些基本的知识，让我们再来看一下前面介绍的那些&quot;问题&quot;数据。</p>
+
+<p><strong>1、查看页面时，UV可能大于visit。</strong></p>
+
+<p>按照我们之前将一些原则来看一下这个自定义报告。页面是个页面级的维度，而Visit则是Visit级别的指标。当违反我们前面的原则构建自定义报告时，你要小心的求证这个这些指标与维度组合后的含义。这里之所以会出现Visit大于UV的情况是因为对于页面Visit其实是这个页面作为Entrance的次数，而不是大家理解的Visit。如果一个页面作为Landing Page的次数较少，那么就会出现UV大于Visit的情况。</p>
+
+<p>对于单个页面来说，真正等同于它所获得Visit的指标其实Unique Pageview。而一组页面的Visit则不能简单由各个页面的UPV相加得到，比如要通过高级细分活动。因为一个Visit访问2个单独的页面的UPV为2，而实际的Visit仅为1。</p>
+
+<p>这里再谈几句UV这个指标，真正意义上的UV是Lifetime的UV，但在实际的应用过程中我们却会遇到Daily UV，Monthly UV，Quarterly UV，Yearly UV。与Visit遇到的问题类似，任何的UV数据都不能简单的加和，都需要重新进行一次查询，因为其需要一次排重。更不要提UV其标识的不是一个人，只是一个浏览器cookie，因此，UV这个指标是最不靠谱的一个指标，建议大家不要使用。</p>
+
+<p><strong>2、同一个页面，在Content&gt;Site Content&gt;All Page和Exit Page中看到的PV数不一致。</strong></p>
+
+<p>先看一下这两个报告。Content&gt;Site Content&gt;All Page这个报告中的Page是Pageview级别的，在这个报告中的Pageview是指每个页面被浏览的次数。而Content&gt;Site Content&gt;Exit Page这个报告中的Exit Page是Visit级别的，只有Visit才会有Exit Page这个属性，同样Landing Page也是Visit级别的维度尽管这两个维度里面都有page这个词，那么Exit Page报告的Pageview的含义其实就与All Page报告中的Pageview的含义完全不同，Exit Page报告中特定页面Pageview的含义是指以这个页面为Exit Page的Visit所获得PV数。这个PV数与All Page中PV数没有任何的关系，即可以大于All Page中这个页面的PV数也可能小于。</p>
+
+<p><strong>3、有的搜索词的Visits with Search为0</strong></p>
+
+<p>我想分析完前两个“问题”数据后，这个“问题”数据就比较好理解了。首先，我们先来判断一下搜索词这个维度是哪个级别的？我们知道一个visit可能触发多个搜索词，因此我们知道，它比Visit低一级，具体是哪个级别，我想网站搜索应该自己是一个级别，同时还可以和Pageview交叉分析，因为我们可以知道一个搜索词是在哪个页面上生成的。既然搜索词比Visit的级别低，那么用Visit With Search这个visit级别的指标就不太合适。Visit With Search这个指标应该与其他的Visit级别的维度一起使用，比如查看一下不同来源对站内搜索的使用情况。</p>
+
+<p>而如果要查看一下每个搜索词各自的Visit其实应该查看的指标是Total Unique Searches，这个指标类似于UPV，其含义就是包含Search Term的Visit数。其注意Total Unique Search大于等于Visit With Search，因为一个visit可能存在多个Search Term。类似的指标还有Unique Event，Unique Event是指特定Event Category获得Visit数。</p>
+
+<p>好了这篇文章就介绍到这里，希望当你下次发现“问题”数据时，能先判断一下所使用的维度和指标都是什么级别，这样组合是否有意义。如果您关于GA的报告数据解读有其他的疑问欢迎给我留言~</p>
+
+<p>PS：关于网站分析中的维度与指标推荐阅读：数码林的<a href="http://blog.digitalforest.cn/webanalytics-basic-catalogue">网站分析基础概念系列</a></p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#digital分析-ref">
+    		digital分析 <span>32</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#指标-ref">指标 <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#维度-ref">维度 <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/ga%E7%9A%84js%E6%89%A9%E5%B1%95/2012/07/10/e5868de8b088e794a8gae79b91e6b58be59ca8e7babfe5aea2e69c8de79a84e68c89e992aee782b9e587bb" title="再谈用GA监测在线客服的按钮点击">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/python/2012/07/25/bluehoste4b88ae5ae89e8a385python3" title="Bluehost上安装Python3">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

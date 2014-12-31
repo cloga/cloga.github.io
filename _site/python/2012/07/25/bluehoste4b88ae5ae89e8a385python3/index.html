@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>Bluehost上安装Python3</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>Bluehost上安装Python3 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>25 July 2012</span>
+    </div>
+    <div class="content">
+      <p>最近做了一次Blog的迁移，从Godaddy的付费空间（是的，我的空间以前就是Godaddy的付费空间，很坑爹各种打不开）上迁到了Bluehost上。迁到Bluehost上主要有两个原因，看到一些评论说Bluehost的访问速度还可以，迁移过来后这几天确实还比较稳定，而且最近Bluehost在做促销，一年的话是$4.95每月，三年的话是$3.95月，应该也比狗爹的便宜，狗爹好像是$5；第二个原因是Bluehost支持多种语言，最近再看一些Python的东西，希望可以找个环境学习测试一下。我看的书是Head First Python里面的东西是基于3.0的，而Bluehost上的Python默认版本是2.6的，貌似是CentOS自带的版本。所以就需要先在Bluehost的空间上安装Python3。经过几天的研究终于将Python3安装上了。</p>
+
+<p>[caption id=&quot;attachment_1605&quot; align=&quot;aligncenter&quot; width=&quot;640&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/07/Python3.png"><img src="http://www.cloga.info/wp-content/uploads/2012/07/Python3.png" alt=""></a> Python3[/caption]</p>
+
+<p>&lt;!-- more --&gt;网上似乎没有相关介绍的文章，这里主要是结合两篇文章：1、<a href="https://my.bluehost.com/cgi/help/python-install">Bluehost关于如何从Python2.6升级到2.7的文章</a>；2、<a href="http://141.109.37.164/%7Elxu/wp/?p=72">在CentOS上安装Python3</a>，希望可以帮到有类似需求的同学少走一些弯路。</p>
+
+<p>1、先要获取Bluehost的SSH权限。这个流程Bluehost有详尽的说明，这里只是简单说一些流程。首先是<a href="https://my.bluehost.com/cgi/help/180">获取SSH权限</a>，默认情况下SSH是不开启的需要手动开启，同时先要验证账户，验证账户的时候各位同为要注意账户的信息不要填写中国的信息，不然验证后就没有了100刀的AdWords代金卷；接着是要<a href="https://my.bluehost.com/cgi/help/putty">创建公钥和私钥</a>；最后是<a href="https://my.bluehost.com/cgi/help/301">连接SSH</a>。</p>
+
+<p>2、下载安装Python3</p>
+
+<h1>下载Python3</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">wget http://www.python.org/ftp/python/3.2/Python-3.2.tar.bz2
+</code></pre></div>
+<p>我这里将Python3安装在根目录下，安装版本是3.2</p>
+
+<h1>解压Python3的tar包</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">tar -xjf Python-3.2.tar.bz2
+</code></pre></div>
+<p>创建了Python-3.2的目录</p>
+
+<h1>安装Python3</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">./configure --prefix=$HOME/python3
+
+make
+
+make install
+</code></pre></div>
+<p>至此，Python3的安装完成了，但是，要加载这个Python还需要修改.bashrc
+3、.bashrc的修改</p>
+
+<h1>进入.bashrc</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">vim ~/.bashrc
+</code></pre></div>
+<h1>将Python3添加进去，按Insert（不知道Bluehost为什么写的是输入/）变成编辑状态输入下面的内容</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">export PATH=$HOME/python3/bin:$PATH
+</code></pre></div>
+<h1>按Esc退出编辑状态，输入</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">:wq
+</code></pre></div>
+<h1>保存退出，再输入</h1>
+<div class="highlight"><pre><code class="language-text" data-lang="text">source ~/.bashrc
+</code></pre></div>
+<p>OK，Python3已经安装到Bluehost上了，你可以使用python3 -v确认一下。希望本篇文章能够给和我一样技术小白有一些帮助~如果你还有任何疑问欢迎给我留言。</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python-ref">
+    		python <span>17</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>17</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/digital%E5%88%86%E6%9E%90/2012/07/17/e8aea9e7bbb4e5baa6e5928ce68c87e6a087e997a8e5bd93e688b7e5afb9-e8b088e8b088gae4b8ade79a84e6b58be9878fe5ae9ee4bd93" title="让维度和指标门当户对-GA中的测量实体、维度和指标">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/digital%E5%88%86%E6%9E%90/2012/07/28/e5a682e4bd95e4bdbfe794a8gae79b91e6b58bflashe4b8ade79a84e4ba92e58aa8" title="使用GA监测Flash中的互动">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

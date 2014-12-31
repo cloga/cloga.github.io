@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>用Pandas作图</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>用Pandas作图 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>23 February 2014</span>
+    </div>
+    <div class="content">
+      <p>关于Pandas的基本使用介绍，请查看另一篇博文：<a href="http://cloga.info/python/%E6%95%B0%E6%8D%AE%E7%A7%91%E5%AD%A6/2013/09/17/pandas_intro/">Python中的结构化数据分析利器-Pandas简介</a></p>
+
+<p>推荐使用ipython的pylab模式，如果要在ipython notebook中嵌入图片，则还需要指定pylab=inline。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">ipython</span> <span class="o">--</span><span class="n">pylab</span> <span class="c">##ipython的pylab模式</span>
+<span class="n">ipython</span> <span class="n">notebook</span> <span class="o">--</span><span class="n">pylab</span><span class="o">=</span><span class="n">inline</span> <span class="c">##notebook的inline模式</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+</code></pre></div>
+<h2>基本画图命令</h2>
+
+<p>Pandas通过整合<a href="http://matplotlib.sourceforge.net/">matplotlib</a>的相关功能实现了基于DataFrame的一些
+作图功能。下面的数据是每年美国男女出生数据：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">url</span> <span class="o">=</span> <span class="s">&#39;http://s3.amazonaws.com/assets.datacamp.com/course/dasi/present.txt&#39;</span>
+<span class="n">present</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_table</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s">&#39; &#39;</span><span class="p">)</span>
+<span class="n">present</span><span class="o">.</span><span class="n">shape</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">(63, 3)
+</code></pre></div><div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present</span><span class="o">.</span><span class="n">columns</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">Index([u&#39;year&#39;, u&#39;boys&#39;, u&#39;girls&#39;], dtype=&#39;object&#39;)
+</code></pre></div>
+<p>可以看到这个数据集共有63条记录，共有三个字段：Year，boys，girls。为了简化计算将year作为索引。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span> <span class="o">=</span> <span class="n">present</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s">&#39;year&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>plot是画图的最主要方法，Series和DataFrame都有plot方法。</p>
+
+<p>可以这样看一下男生出生比例的趋势图：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="p">[</span><span class="s">&#39;boys&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.legend.Legend at 0x10b9c7610&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_9_1.png" alt="png"></p>
+
+<p>这是Series上的plot方法，通过DataFrame的plot方法，你可以将男生和女生出生数量的趋势图画在一起。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x108ce4910&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_11_1.png" alt="png"></p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="o">.</span><span class="n">girls</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;g&#39;</span><span class="p">)</span>
+<span class="n">present_year</span><span class="o">.</span><span class="n">boys</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s">&#39;best&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.legend.Legend at 0x10999e510&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_12_1.png" alt="png"></p>
+
+<p>可以看到DataFrame提供plot方法与在多个Series调用多次plot方法的效果是一致。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;bar&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x10ab31390&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_14_1.png" alt="png"></p>
+
+<p>plot默认生成是曲线图，你可以通过kind参数生成其他的图形，可选的值为：line, bar, barh, kde, density, scatter。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;bar&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x10bb35890&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_16_1.png" alt="png"></p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;barh&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x10eb01890&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_17_1.png" alt="png"></p>
+
+<p>如果你需要累积的柱状图，则只需要指定stacked=True。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x10bbdb3d0&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_19_1.png" alt="png"></p>
+
+<p>制作相对的累积柱状图，需要一点小技巧。</p>
+
+<p>首先需要计算每一行的汇总值，可以在DataFrame上直接调用sum方法，参数为1，表示计算行的汇总。默认为0，表示计算列的汇总。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)[:</span><span class="mi">5</span><span class="p">]</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">year
+1940    2360399
+1941    2513427
+1942    2808996
+1943    2936860
+1944    2794800
+dtype: int64
+</code></pre></div>
+<p>有了每一行的汇总值之后，再用每个元素除以对应行的汇总值就可以得出需要的数据。这里可以使用DataFrame的div函数，同样要指定axis的值为0。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="o">.</span><span class="n">div</span><span class="p">(</span><span class="n">present_year</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;barh&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x113223290&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_23_1.png" alt="png"></p>
+
+<h1>散点图和相关</h1>
+
+<p>plot也可以画出散点图。使用kind=&#39;scatter&#39;, x和y指定x轴和y轴使用的字段。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">present_year</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s">&#39;boys&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s">&#39;girls&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s">&#39;scatter&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x1141c9810&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_25_1.png" alt="png"></p>
+
+<p>再来载入一下鸢尾花数据。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">url_2</span> <span class="o">=</span> <span class="s">&#39;https://raw.github.com/pydata/pandas/master/pandas/tests/data/iris.csv&#39;</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">url_2</span><span class="p">)</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</code></pre></div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SepalLength</th>
+      <th>SepalWidth</th>
+      <th>PetalLength</th>
+      <th>PetalWidth</th>
+      <th>Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td> 5.1</td>
+      <td> 3.5</td>
+      <td> 1.4</td>
+      <td> 0.2</td>
+      <td> Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td> 4.9</td>
+      <td> 3.0</td>
+      <td> 1.4</td>
+      <td> 0.2</td>
+      <td> Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td> 4.7</td>
+      <td> 3.2</td>
+      <td> 1.3</td>
+      <td> 0.2</td>
+      <td> Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td> 4.6</td>
+      <td> 3.1</td>
+      <td> 1.5</td>
+      <td> 0.2</td>
+      <td> Iris-setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td> 5.0</td>
+      <td> 3.6</td>
+      <td> 1.4</td>
+      <td> 0.2</td>
+      <td> Iris-setosa</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 5 columns</p>
+</div>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">iris</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</code></pre></div>
+<div style="max-height:1000px;max-width:1500px;overflow:auto;">
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SepalLength</th>
+      <th>SepalWidth</th>
+      <th>PetalLength</th>
+      <th>PetalWidth</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>SepalLength</th>
+      <td> 1.000000</td>
+      <td>-0.109369</td>
+      <td> 0.871754</td>
+      <td> 0.817954</td>
+    </tr>
+    <tr>
+      <th>SepalWidth</th>
+      <td>-0.109369</td>
+      <td> 1.000000</td>
+      <td>-0.420516</td>
+      <td>-0.356544</td>
+    </tr>
+    <tr>
+      <th>PetalLength</th>
+      <td> 0.871754</td>
+      <td>-0.420516</td>
+      <td> 1.000000</td>
+      <td> 0.962757</td>
+    </tr>
+    <tr>
+      <th>PetalWidth</th>
+      <td> 0.817954</td>
+      <td>-0.356544</td>
+      <td> 0.962757</td>
+      <td> 1.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>4 rows × 4 columns</p>
+</div>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pandas.tools.plotting</span> <span class="kn">import</span> <span class="n">scatter_matrix</span>
+<span class="n">scatter_matrix</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">diagonal</span><span class="o">=</span><span class="s">&#39;kde&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">array([[&lt;matplotlib.axes.AxesSubplot object at 0x1141e5290&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114313610&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x11433fbd0&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114328e10&gt;],
+       [&lt;matplotlib.axes.AxesSubplot object at 0x11411f350&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114198690&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114181b90&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x11436eb90&gt;],
+       [&lt;matplotlib.axes.AxesSubplot object at 0x11438ced0&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114378310&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x1143e34d0&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114d0a810&gt;],
+       [&lt;matplotlib.axes.AxesSubplot object at 0x1143ecd50&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114d40e90&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114d63210&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x114d4a2d0&gt;]], dtype=object)
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_29_1.png" alt="png"></p>
+
+<h1>箱图</h1>
+
+<p>DataFrame提供了boxplot方法可以用来画箱图。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">iris</span><span class="o">.</span><span class="n">boxplot</span><span class="p">()</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">{&#39;boxes&#39;: [&lt;matplotlib.lines.Line2D at 0x1141439d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11416c1d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x1141559d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11414b210&gt;],
+ &#39;caps&#39;: [&lt;matplotlib.lines.Line2D at 0x11416af90&gt;,
+  &lt;matplotlib.lines.Line2D at 0x1141434d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114172790&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114172c90&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114153f90&gt;,
+  &lt;matplotlib.lines.Line2D at 0x1141554d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11414f7d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11414fcd0&gt;],
+ &#39;fliers&#39;: [&lt;matplotlib.lines.Line2D at 0x114145410&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114145b50&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11416cbd0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x1141530d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114151410&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114151b90&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11414bc10&gt;,
+  &lt;matplotlib.lines.Line2D at 0x1141743d0&gt;],
+ &#39;medians&#39;: [&lt;matplotlib.lines.Line2D at 0x114143ed0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11416c6d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114155ed0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11414b710&gt;],
+ &#39;whiskers&#39;: [&lt;matplotlib.lines.Line2D at 0x11416a7d0&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11416aa10&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114172050&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114172290&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114153590&gt;,
+  &lt;matplotlib.lines.Line2D at 0x114153a90&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11414f090&gt;,
+  &lt;matplotlib.lines.Line2D at 0x11414f2d0&gt;]}
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_31_1.png" alt="png"></p>
+
+<p>通过by参数可以计算不同分组情况下，各个字段的箱图。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">iris</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s">&#39;Name&#39;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">array([[&lt;matplotlib.axes.AxesSubplot object at 0x120dd8f50&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x1218d3410&gt;],
+       [&lt;matplotlib.axes.AxesSubplot object at 0x1218f47d0&gt;,
+        &lt;matplotlib.axes.AxesSubplot object at 0x1218de490&gt;]], dtype=object)
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_33_1.png" alt="png"></p>
+
+<h1>直方图和概率密度分布</h1>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">iris</span><span class="o">.</span><span class="n">ix</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="n">iris</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s">&#39;kde&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x117263890&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_35_1.png" alt="png"></p>
+
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_35_2.png" alt="png"></p>
+
+<h1>多变量的可视化</h1>
+
+<p>Radviz</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pandas.tools.plotting</span> <span class="kn">import</span> <span class="n">radviz</span>
+<span class="n">radviz</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="s">&#39;Name&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x11412e550&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_38_1.png" alt="png"></p>
+
+<p>Andrews Curves</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pandas.tools.plotting</span> <span class="kn">import</span> <span class="n">andrews_curves</span>
+<span class="n">andrews_curves</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="s">&#39;Name&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x1218e2d50&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_40_1.png" alt="png"></p>
+
+<p>Parallel Coordinates</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">pandas.tools.plotting</span> <span class="kn">import</span> <span class="n">parallel_coordinates</span>
+<span class="n">parallel_coordinates</span><span class="p">(</span><span class="n">iris</span><span class="p">,</span> <span class="s">&#39;Name&#39;</span><span class="p">)</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">&lt;matplotlib.axes.AxesSubplot at 0x1224b36d0&gt;
+</code></pre></div>
+<p><img src="/files/Plotting_with_Pandas_files/Plotting_with_Pandas_42_1.png" alt="png"></p>
+
+<p>你也可以查看本文的ipython notebook版本：http://nbviewer.ipython.org/gist/cloga/9171281</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python-ref">
+    		python <span>17</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Pandas-ref">Pandas <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>17</span></a></li>
+     
+    	<li><a href="/tags.html#Ploting-ref">Ploting <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/python/2014/02/07/classify_use_Sklearn" title="用Sklearn做判别分析(分类)">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/2014/03/15/marketers_story" title="一个广告人的自白-2014版机械战警观后感">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

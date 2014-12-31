@@ -1,0 +1,394 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>再谈用GA监测在线客服的按钮点击</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>再谈用GA监测在线客服的按钮点击 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>10 July 2012</span>
+    </div>
+    <div class="content">
+      <p>之前我曾有一篇Blog谈到了<a href="http://www.cloga.info/2012/02/24/%E4%BD%BF%E7%94%A8ga%E7%9B%91%E6%B5%8B%E5%95%86%E5%8A%A1%E9%80%9A%E7%AD%89%E5%9C%A8%E7%BA%BF%E5%AE%A2%E6%9C%8D%E7%9A%84%E5%AF%B9%E8%AF%9D/">使用GA监测商务通等在线客服的对话</a>，现在回过头去想其实当时的思路把问题搞得复杂了。</p>
+
+<p>当时的思路是找到对应的DOM仅检测需要的DOM元素的click事件。那也就意味着对于不同的在线客服系统都需要修改code，而实际上只要用一个通用的JS监测a标签以及img的click事件就可以完成监测的目的，这样我们需要做的就是在GA中指定对应的地址。下面我将介绍三种方法来实现对在线客服的监测：利用Skyglue提供的自动监测服务；利用Google提供的Autotrack.js；利用<a href="http://cutroni.com/blog/">Justin</a>的自动跟踪脚本。（已有方法只对Flash之外的图标有效，对flash的咨询图标无效。）</p>
+
+<p><strong>一、利用SkyGlue提供的自动监测服务</strong></p>
+
+<p>关于SkyGlue介绍，请参见<a href="http://www.cloga.info/2012/06/28/%e8%87%aa%e5%8a%a8%e6%a0%87%e8%ae%b0%e6%89%80%e9%9c%80%e8%a6%81%e7%9a%84%e4%ba%92%e5%8a%a8-%e5%82%bb%e7%93%9c%e7%ba%a7ga%e8%87%aa%e5%8a%a8%e6%a0%87%e8%ae%b0%e6%9c%8d%e5%8a%a1skyglue/">自动标记所需要的互动-傻瓜级GA自动标记服务SKYGLUE</a>。</p>
+
+<p>SkyGlue的安装比较简单，你所需要做的只是将SkyGlue的代码放在GA代码的后面即可。</p>
+
+<p>接下来你有两个选择，一个选择是直接使用默认设置。这时对于在线客服相当于一个出站链接，SkyGlue会将其记录为Click::(outbound)::A::对应URL。另外一个选择是在线客服指定一个自定义名称，比如我指定了Click::在线客服这个名称。</p>
+
+<p>下面你所要做的就是在GA中创建一个目标，将这个事件定义为目标。请注意SkyGlue目前是将每个Click都记录为事件，因此你要使用事件目标，SkyGlue只会使用Event Category一个参数。因此在GA的目标设置中只要设置为Event category等于对应名称即可。这样你就完成了利用SkyGlue跟踪在线客户的按钮点击。&lt;!-- more --&gt;</p>
+
+<p><strong>二、利用Google提供的Autotrack.js</strong></p>
+
+<p>这个JS最初是<a href="http://xiaoq.in/">肖庆同学</a>发现的。这个JS也提供了对DOM元素的Click事件的监测，但是与SkyGlue相比灵活性较差，也没有灵活的自定义功能。</p>
+
+<p>这个脚本的部署方式也很简单，代码样例如下：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;script src=&quot;//www.google.com/js/gweb/analytics/autotrack.js&quot;&gt;&lt;/script&gt;
+    &lt;script&gt;
+
+      new gweb.analytics.AutoTrack({
+        profile: &#39;UA-18159656-3&#39;,
+        heatMapper: true});
+    &lt;/script&gt;
+</code></pre></div>
+<p>你要做的是将profile替换为你的网络资源ID，这个脚本自身已经包含对GATC的调用，因此，不需要再调用GATC。hearMapper这个参数是一个可选参数，true表示开启热图。细分的同学可能发现，我们对GA的一些自定义没法地方设置了，比如<em>addOrganic，</em>setDomaiName这些方法，其实这些方法依然是可以添加，只是这个修改要在autotrack.js中进行，修改之后，你应把这个脚本放在自己的服务器上，并调用修改过的脚本。</p>
+
+<p>部署好这个脚本后，它会自动跟踪页面上的点击数据，只支持A标签的点击事件并将其分为link click和Outbound Click两类，相比之下，SkyGlue的监测要更加全面。</p>
+
+<p>autotrack.js使用Event category来对事件进行分类，主要有三类事件，heatmap，link click（站内的点击）和Outbound Click（出站的点击）。在线客户的click事件应该在outbound click中；用Event Action来标记对应的链接，heatmap的Action则统一为click；用Event Label来标记事件发生的页面，heatmap则是对应的坐标。</p>
+
+<p>了解了这些以后，你需要做的是点击一下对应的在线咨询按钮，看一下对应的URL并在GA中对其设置事件目标。</p>
+
+<p><strong>三、利用Justin提供的自动跟踪脚本</strong></p>
+
+<p>Justin提供过下面这段脚本，这段脚本自动实现了对出站链接跟踪，我略微修改了一下也跟踪了站内的Link，同时增加了对img Click事件的跟踪。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;script&gt;
+//
+//  By default, this script will track links to the follwoing file 
+//  types: .doc, .xls, .exe, .zip and .pdf
+//
+var fileTypes    = (&quot;.doc&quot;,&quot;.xls&quot;,&quot;.exe&quot;,&quot;.zip&quot;,&quot;.pdf&quot;);
+
+// This is a debug mode flag.  Change to &#39;&#39; for production.  In debug mode
+// the script will display an alert box and skip sending data to Google 
+// Analytics.
+//
+var debug          = &#39;&#39;;
+
+//
+// This variable controls how outbond links will appear
+// the GA reports.  By default, external links will appear as
+// &#39;/outbound/&#39; where URL is the URL in the anchor tag.
+//
+//var extIdentifier  = &#39;/outbound&#39;+_udl.pathname+&#39;/&#39;+_udl.search+&#39;/&#39;;
+
+/// No need to change anything below this line ///
+
+if (document.getElementsByTagName) { 
+  // Initialize external link handlers 
+  var hrefs = document.getElementsByTagName(&#39;a&#39;); 
+
+  for (var l = 0; l &lt; hrefs.length; l++) { 
+    //protocol, host, hostname, port, pathname, search, hash 
+     if (hrefs[l].hostname == location.host) {
+      var path = hrefs[l].pathname;
+          if (path.indexOf(fileTypes) != -1) {
+               startListening(hrefs[l],&quot;click&quot;,trackDocuments);
+          }else {
+               startListening(hrefs[l],&quot;click&quot;,trackLinks);
+          }
+    } else {
+      startListening(hrefs[l],&quot;click&quot;,trackExternalLinks);
+    }
+  }
+}
+
+function startListening (obj,evnt,func) { 
+  if (obj.addEventListener) {
+    obj.addEventListener(evnt,func,false); 
+  } else if (obj.attachEvent) {
+    obj.attachEvent(&quot;on&quot; + evnt,func); 
+  } 
+} 
+
+function trackDocuments (evnt) { 
+  var url = (evnt.srcElement) ? &quot;/&quot; + evnt.srcElement.pathname : this.pathname; 
+
+  if (!debug) {
+    _gaq.push([&#39;t._trackEvent&#39;,&#39;document&#39;,url,,,,]);
+      } else { 
+          alert(url);
+          return false;
+  }
+} 
+
+function trackExternalLinks (evnt) { 
+  var lnk; 
+  if (evnt.srcElement) { 
+    var elmnt = evnt.srcElement; 
+    while (elmnt.tagName != &quot;A&quot;) { 
+      var newelmnt = elmnt.parentNode; 
+      elmnt = newelmnt; 
+    } 
+    lnk = &quot;/outlinks/&quot; +elmnt.hostname + &quot;/&quot; + elmnt.pathname + elmnt.search; 
+  } else { 
+    lnk = &quot;/outlinks/&quot; + this.hostname + this.pathname + this.search; 
+  } 
+
+  if (!debug) {
+          _gaq.push([&#39;_trackEvent&#39;,&#39;outlinks&#39;,lnk,,,,]);
+      } else {
+          alert(lnk);
+          return false;
+
+  }
+}
+function trackLinks (evnt) {
+  var url = (evnt.srcElement) ? evnt.srcElement.pathname : this.pathname;
+  _gaq.push([&#39;_trackEvent&#39;,&#39;links&#39;,url,,,,]);
+}
+
+function trackImgs (evnt) {
+  var url = (evnt.srcElement) ? evnt.srcElement.src : this.src;
+  _gaq.push([&#39;_trackEvent&#39;,&#39;img&#39;,url,,,,]);
+}
+
+var imgs = document.getElementsByTagName(&#39;img&#39;);
+
+  for (var l = 0; l &lt; imgs.length; l++) {
+        startListening(imgs[l],&quot;click&quot;,trackImgs);
+    }
+&lt;/script&gt;
+</code></pre></div>
+<p>使用这段脚本的一个好处是不需要修改你原来的GATC，如果你进行了一些自定义，那么需要去autotrack中修改。同时这个脚本也支持对跟踪器名称的定义，如果你为你的GA跟踪器指定了不同的名称，那么你只需要对trackLinks，trackImgs和trackExternalLinks进行对应的修改即可。这个脚本使用Event Category来标示Click的类型，共三种imgs，links以及Outlinks，Event Action则是对应的URL。</p>
+
+<p>与前面两个方式类似，你需要实际点击一下在线客服，记录下实际URL并将其在GA中设置为事件目标。</p>
+
+<p>目前我的网站同时使用了三种跟踪方式，感兴趣的同学可以测试一下，每点击一个link会产生4个utm.gif的请求。</p>
+
+<p>好了，关于在线客服的监测就介绍到这里，如果关于这方面您有任何的疑问，欢迎给我留言。</p>
+
+<p>PS：百度统计也提供了类似的解决方案：</p>
+
+<p><a href="http://hi.baidu.com/tongji2009/blog/item/09e04c001583c123738da5fc.html">百度统计推出高级功能，让浮窗无所遁形</a></p>
+
+<p><a href="http://hi.baidu.com/tongji2009/blog/item/3427b6a843a21fdc1f17a26e.html">转化分析代码安装说明-技术文档</a></p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#ga的js扩展-ref">
+    		ga的js扩展 <span>3</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#在线客服-ref">在线客服 <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/ga%E7%9A%84js%E6%89%A9%E5%B1%95/2012/06/28/e887aae58aa8e6a087e8aeb0e68980e99c80e8a681e79a84e4ba92e58aa8-e582bbe7939ce7baa7gae887aae58aa8e6a087e8aeb0e69c8de58aa1skyglue" title="自动标记所需要的互动-傻瓜级GA自动标记服务SKYGLUE">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/digital%E5%88%86%E6%9E%90/2012/07/17/e8aea9e7bbb4e5baa6e5928ce68c87e6a087e997a8e5bd93e688b7e5afb9-e8b088e8b088gae4b8ade79a84e6b58be9878fe5ae9ee4bd93" title="让维度和指标门当户对-GA中的测量实体、维度和指标">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

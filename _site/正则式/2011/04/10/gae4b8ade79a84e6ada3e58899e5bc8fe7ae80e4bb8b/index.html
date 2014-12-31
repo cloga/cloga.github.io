@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>GA中的正则式简介</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>GA中的正则式简介 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>10 April 2011</span>
+    </div>
+    <div class="content">
+      <p>GA是被广泛用来测量和评估网站的分析工具之一。GA团队努力让它更简单更直观。但是，你可能仍会感到使用GA的初始功能有一些局限性。</p>
+
+<p>如果是这样的话，你应该学习一下正则式以及如何在GA中使用正则式。</p>
+
+<p><strong>什么是正则式？</strong></p>
+
+<p>在计算机科学中，正则式（正则表达式）是指一个用来描述或者匹配一系列符合某个句法规则的字符串的单个字符串。在很多文本编辑器或其他工具里，正则表达式通常被用来检索和/或替换那些符合某个模式的文本内容。许多程序设计语言都支持利用正则表达式进行字符串操作。例如，在Perl中就内建了一个功能强大的正则表达式引擎。正则表达式这个概念最初是由Unix中的工具软件（例如sed和grep）普及开的。正则表达式通常缩写成“regex”，单数有regexp、regex，复数有regexps、regexes、regexen。（以上内容引自<a href="http://baike.baidu.com/view/94238.htm">百度百科</a>）&lt;!-- more --&gt;</p>
+
+<p><strong>为什么要在GA</strong><strong>中使用正则式？</strong></p>
+
+<p>正则式是强大的模式匹配工具，利用正则式可以完成许多常规查询无法完成的任务。例如利用默认过滤器查找百度和Google的流量、重写URI、过滤IP段、创建复杂的高级细分……以及其他你能想到的奇妙功能。</p>
+
+<p><strong>GA</strong><strong>中哪里可以使用正则式？</strong></p>
+
+<p>据我所知，目前GA（不是指测试中的新版本）中可以使用正则式的地方主要有报告列表中的默认过滤器及高级过滤器（是的，报告列表中的查询条件是正则式，如果你需要查找的内容包含元字符，而你的查询条件未使用转义符将其转义，那么你很可能看不到想要的条目）、目标及渠道设置（你会发现正则式匹配有时比前向匹配、完全匹配更加方便快捷）、高级细分（高级细分支持更复杂条件及布尔逻辑，即使没有正则式，通过多个条件的组合查询也可以获得想要的结果，但是正则式的使用能给你更大的灵活性）和过滤器（过滤器的查询也是正则式模式，正则式+过滤器可以完成非常奇妙的作用，比如重写URI，内容分组、关联电子商务订单与具体的流量来源等）。</p>
+
+<p><strong>注：</strong>元字符是指在正则式中有特殊含义的字符。比如“.”可以匹配任意一个字符，而“+”可以匹配一个或多个它之前的那个字符。转义符是指“”，在元字符前使用转义符可以将元字符转化为普通字符，比如“?”匹配的是“?”。</p>
+
+<p><strong>如何学习正则式？</strong></p>
+
+<p>相信您和我一样也不是技术出身，对我们而言，能够理解正则式的基本原理，可以编写和测试一些简单的正则式就OK了。因此，让我们看一些例子，进行一些自己的尝试，并且最终理解和书写自己的正则式。</p>
+
+<p>对于正则式，你不使用它的话，不会真正理解它；没有真正理解它，也无法使用它。因此，你应该学一点使用一点。</p>
+
+<p>对于正则式，还有一点，你会发现每一个元字符都很简单。但是，将它们放在一起会变得有些复杂。因此每学习一点，就应该进行一些练习，犯一些错误是正常的。给大家推荐一个正则式测试的小软件<a href="http://www.weitz.de/regex-coach/">http://www.weitz.de/regex-coach/</a>。</p>
+
+<p>这篇文章就到这吧，我会在以后的系列文章中介绍一些GA常用的正则式。如果您对正则式在GA中的应用有任何疑问可以给我留言。</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#正则式-ref">
+    		正则式 <span>2</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#regex-ref">regex <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/gaiq%E5%9C%A8%E7%BA%BF%E8%AF%BE%E7%A8%8B%E4%B8%AD%E6%96%87%E5%AD%97%E5%B9%95/2011/04/07/e697b6e997b4e68c87e6a087-gaiqe59ca8e7babfe8afbee7a88be4b8ade69687e5ad97e5b995" title="时间指标-GAIQ在线课程中文字幕">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/gaiq%E5%9C%A8%E7%BA%BF%E8%AF%BE%E7%A8%8B%E4%B8%AD%E6%96%87%E5%AD%97%E5%B9%95/2011/04/10/e6b581e9878fe69da5e6ba90-gaiqe59ca8e7babfe8afbee7a88be4b8ade69687e5ad97e5b995" title="流量来源-GAIQ在线课程中文字幕">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

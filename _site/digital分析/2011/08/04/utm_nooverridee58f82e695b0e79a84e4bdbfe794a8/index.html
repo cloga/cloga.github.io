@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>utm_nooverride参数的使用</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>utm_nooverride参数的使用 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>04 August 2011</span>
+    </div>
+    <div class="content">
+      <p>首先，我要说的是utm<em>nooverride参数（形式为utm</em>nooverride=1）的作用。这个参数的作用不是将以后所有的转化都计入当前这个关键词（人们常见的误解），GA默认的转化归属方式是最近接触（last touch），这个参数不会改变这个原则，这个参数正确的作用是添加了这个参数的Landing page的访问，如果存在来源cookie（utmz）则会被处理为直接访问，如果没有来源cookie，则会写入本次访问的来源。</p>
+
+<p>这里再说明一下处理为直接访问，不是表示将utmz cookie直接重写为direct，恰恰相反，是保留原来的非直接访问来源，即将本次访问记为上一个非直接访问来源。<em>addIgnoredOrganic和</em>addIgnoredRef方法也是使用这种处理方式。</p>
+
+<p>utm_nooverride参数的应用情境主要有以下三个：&lt;!-- more --&gt;</p>
+
+<p>1、PPC广告中的品牌词</p>
+
+<p>在PPC广告投放过程中，我们经常会遇到这样一种情况：品牌词的转化很好，而其他的通用词、产品词则转化一般，但是，当我们暂停掉看似转化不好的那些词，会发现整个账户的投放效果都受到影响。这是因为，不同的关键词作用于客户购买决策的不同阶段。人们通过通用词、竞品词、产品词了解你的品牌（购买决策的初期阶段），通过品牌词发生转化（购买决策的后期阶段）。</p>
+
+<p>在品牌词的URL后使用utm<em>nooverride参数可以将转化归属计算到上一个访问来源，如果不存在上一个访问来源，则会写入本次的访问来源，这样我们就可以还原一部分品牌词的真实来源。这里我强调了一部分，是因为有些客户需要到网站上多次访问才会最终转化，每次转化都有可能通过不同的渠道，utm</em>nooverride参数仍然无法帮我们获得最初为转化带来贡献的关键词或渠道。这个遗留问题需要一些工具来支持，通过一些自定义的JS和GA的自定义变量也可以解决，不是本文的重点，有时间再和大家分享。</p>
+
+<p>2、Email</p>
+
+<p>有一些你向客户发送的Email，你希望保留客户的原始来源，最典型的例子是注册的激活邮件，如果需要邮件激活，那么，你不会希望由此造成来源cookie的重写（注意，在一个session里是不会重写的），那么，你也需要在url后添加utm_nooverride=1。保留上一个访问来源。</p>
+
+<p>3、第三方支付系统的Callback页面</p>
+
+<p>比如，支付宝支付成功后的Callback页面，你也需要在url后添加utm_nooverride=1。保留上一个访问来源。</p>
+
+<p>好了，如果您对utm_nooverride的作用原理或使用情境有任何问题，欢迎给我留言~</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#digital分析-ref">
+    		digital分析 <span>32</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#nooverride-ref">nooverride <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/ga%E7%9A%84js%E6%89%A9%E5%B1%95/2011/08/03/e588a9e794a8e794a8e688b7e8849ae69cace79b91e6b58be7bd91e7ab99e4bdbfe794a8e79a84e8b79fe8b8aae5b7a5e585b7" title="利用用户脚本监测网站使用的跟踪工具">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/gaiq%E5%9C%A8%E7%BA%BF%E8%AF%BE%E7%A8%8B%E4%B8%AD%E6%96%87%E5%AD%97%E5%B9%95/2011/08/28/e5a49ae6b8a0e98193e8b7afe5be84-gaiqe59ca8e7babfe8afbee7a88be4b8ade69687e5ad97e5b995" title="多渠道路径-GAIQ在线课程中文字幕">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

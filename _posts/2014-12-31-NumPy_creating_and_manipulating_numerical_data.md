@@ -57,16 +57,17 @@ a
 
 **为什么有用：**提供了高速数值操作的节省内存的容器。
 
-
-    L = range(1000)
-    %timeit [i**2 for i in L]
+```python
+L = range(1000)
+%timeit [i**2 for i in L]
+```
 
     10000 loops, best of 3: 93.7 µs per loop
 
-
-
-    a = np.arange(1000)
-    %timeit a**2
+```python
+a = np.arange(1000)
+%timeit a**2
+```
 
     100000 loops, best of 3: 2.16 µs per loop
 
@@ -88,7 +89,6 @@ array(object, dtype=None, copy=True, order=None, subok=False, ndmin=0, ...
 ```python
 np.lookfor('create array')
 ```
-
 
     Search results for 'create array'
     ---------------------------------
@@ -1433,7 +1433,7 @@ t_max = 200      # 我们跟踪行走者的时间
 
 我们随机选择步长1或-1去行走：
 
-```pyton
+```python
 t = np.arange(t_max)
 steps = 2 * np.random.random_integers(0, 1, (n_stories, t_max)) - 1
 np.unique(steps) # 验证: 所有步长是1或-1

@@ -1,0 +1,308 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>开源网站分析工具-OWA介绍</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>开源网站分析工具-OWA介绍 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>23 February 2012</span>
+    </div>
+    <div class="content">
+      <p><img src="http://www.openwebanalytics.com/wp-content/uploads/owa_logo_200w.png" alt="">Google Analytics大家都比较熟悉，其实有许多开源网站分析工具也很强大，可以与GA媲美，有些功能甚至走在了GA的前面。今天为大家介绍的就是这样一款开源的网站分析工具：Open Web Analytics。</p>
+
+<p>首先唠叨几句，关于开源的网站分析与GA相比的优势与劣势。</p>
+
+<p>GA作为免费网站分析的领跑者，制定着行业的准则也影响着行业的走向。但是，其作为一款免费的工具也有一定的局限性。首先，由于是saas架构，因此，数据都是host在google的服务器，这本身限制其在数据敏感的客户中应用。其次，如果数据量较大，GA为保证效率采用抽样数据，会影响数据的准确性。再次，由于GA自身的隐私设置，其中存储的数据都是经过聚合匿名数据，无法获得个体的访问行为，无法与其他数据源，比如CRM进行有效的整合。最后，尽管GA提供了API接口，但是由于抽样数据也同样出现在API中，同时也会受到聚合数据的影响。&lt;!-- more --&gt;</p>
+
+<p>而对于开源的网站分析工具，它们在界面上的功能完善度要落后于GA，但是，由于是开源的软件，数据的可控性很强，与其他数据源的集成也更方便，也可以直接访问开源工具的数据库。</p>
+
+<p>[caption id=&quot;attachment_1443&quot; align=&quot;alignright&quot; width=&quot;192&quot; caption=&quot;click stream&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/02/click-stream.png"><img src="http://www.cloga.info/wp-content/uploads/2012/02/click-stream-192x300.png" alt=""></a>[/caption]</p>
+
+<p>我们来看一下OWA这款工具。</p>
+
+<p>Open Web Analytics（OWA）是开源的网站分析工具，你可以用它来跟踪访问者对网站或应用的使用情况，是用php+Mysql开发的。</p>
+
+<p><strong>一、特色功能介绍</strong></p>
+
+<p>1、支持两种跟踪</p>
+
+<p>OWA既支持用JS的pagetag方式，也可以使用php API进行跟踪。同样是php+mysql的<a href="http://www.piwik.org">piwik</a>也是两种方式都支持。</p>
+
+<p>2、多站点支持：跟踪多个站点，并且可以单独或者将所有站点汇总来查看统计数据。</p>
+
+<p>3、<strong>点击流：</strong>查看每个访问者的实际点击流。（GA由于隐私问题，不提供单独用户的点击流数据，给出的一个聚合数据。）以访问者为单位，可以查看每个访问者每次访问的实际点击流。</p>
+
+<p>4、点击跟踪：准确跟踪访问点击的位置。（实际报告中是跟踪Dom树的点击情况。）</p>
+
+<p>5、<strong>点击热图</strong>：查看访问者的点击热图。（GA中其实不存在热图，页面内分析，不过是图形化的导航摘要。。）<a href="http://demo.openwebanalytics.com/owa/index.php?owa_do=base.overlayLauncher&amp;owa_document_id=3491704707&amp;owa_overlay_params=siteId%3D%3Ec9b7d12e322c7c360fb8f7c72ffe4c41%7C%7C%7Cperiod%3D%3Elast_seven_days%7C%7C%7Caction%3D%3EloadHeatmap%7C%7C%7Cdocument_id%3D%3E3491704707">查看Demo</a></p>
+
+<p>[caption id=&quot;attachment<em>1442&quot; align=&quot;alignleft&quot; width=&quot;300&quot; caption=&quot;dom click&quot;][<img src="http://www.cloga.info/wp-content/uploads/2012/02/dom_click-300x142.png" alt="">](http://www.cloga.info/wp-content/uploads/2012/02/dom</em>click.png)[/caption]</p>
+
+<p>6、<strong>鼠标跟踪</strong>：类似于<a href="http://www.clicktale.com">ClickTale</a>的访问者行为录像，记录访问者在网页上的动作，鼠标轨迹、页面滚动等。所不同的是OWA提供的是单页面的行为录像。而<a href="http://www.clicktale.com">Clicktale</a>提供的是每个访问的行为录像。这个功能应该对UE人员来说价值比较大，可以了解访问者也页面之间的交互情况。<a href="http://demo.openwebanalytics.com/owa/index.php?owa_period=last_thirty_days&amp;owa_document_id=3491704707&amp;owa_do=base.reportDomstreams">查看Demo</a></p>
+
+<p>7、跟踪转化渠道：fall-off分析是网站分析的重要组成部分。即使是开源网站分析工具也是支持的。</p>
+
+<p>8、电子商务跟踪：与GA的方式相同， 用JS提交订单信息和商品信息，完成电子商务跟踪。</p>
+
+<p>9、代码异步加载：自从GA代码改为异步方式加载后，开源工具也纷纷相仿，OWA也是采用异步的方式加载跟踪代码。</p>
+
+<p><strong>二、OWA的安装</strong></p>
+
+<p>1、系统要求</p>
+
+<p>服务器操作系统：Unix和Windows（最近才支持的Windows系统，官方说法是对Windows测试不足。）</p>
+
+<p>php5.2以上</p>
+
+<p>MySQL4.1以上</p>
+
+<p>2、安装流程</p>
+
+<p>（1）<a href="http://wiki.openwebanalytics.com/index.php?title=Download">下载最新版的OWA</a></p>
+
+<p>（2）新建一个OWA用的的MySQL数据库，记住数据库的地址，用户名等信息。</p>
+
+<p>（3）将下载好的OWA上传到服务器上</p>
+
+<p>（4）访问OWA所在路径。比如，你的网站是www.mysite.com，你将OWA放在了根目录下，则请访问www.mysite.com/owa。</p>
+
+<p>（5）进入安装向导，填写相关信息，刚才新建的数据库相关信息，OWA的超级管理员账户密码等。</p>
+
+<p>（6）安装完成。</p>
+
+<p>以上就是关于OWA的基本介绍及安装流程，如果关于OWA您还有其他的问题，欢迎给我留言~</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#开源网站分析工具-ref">
+    		开源网站分析工具 <span>3</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#OWA-ref">OWA <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/digital%E5%88%86%E6%9E%90/2012/02/12/e59f9fe8aebee7bdae-googlee7bd91e7ab99e4bc98e58c96e5b7a5e585b7e5aeb9e69893e8a2abe5bfbde8a786e79a84e4b880e4b8aae8aebee7bdae" title="域设置-Google网站优化工具容易被忽视的一个设置">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/%E7%BD%91%E7%AB%99%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7/2012/03/03/e588a9e794a8gwoe8bf9be8a18ce9a1b5e99da2e7bb84e79a84ab-test" title="利用GWO进行页面组的A/B Test-GWO的高级使用技巧">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

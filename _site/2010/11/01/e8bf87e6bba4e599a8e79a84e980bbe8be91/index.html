@@ -1,0 +1,257 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>过滤器的逻辑</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>过滤器的逻辑 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>01 November 2010</span>
+    </div>
+    <div class="content">
+      <p>如果应用排除过滤器，并且数据记录与过滤模式相匹配，那么Google Analytics将扔掉这条页面浏览，并且继续处理下一条数据记录。如果过滤模式不匹配，那么下一个过滤器（如果有的话）将应用于这一个数据行。这意味着，你既可以创建包含用竖线（|）隔开的多个过滤模式的单个排除过滤器，也可以创建每一个仅包含一个过滤模式的多个排除过滤器。下面是几个例子：</p>
+
+<p><strong>单个排除过滤器</strong>  排除来自217.158.66.33|21.7.158.67.1的流量
+这个正则式的意思是排除来自一个IP地址和另一个IP地址的流量。用两个分开的、一个接一个处理的过滤器也能达到这个目的。</p>
+
+<p><strong>过滤器1/2</strong>  排除来自217.158.66.33的流量</p>
+
+<p><strong>过滤器2/2</strong>  排除来自21.7.158.67.1的流量</p>
+
+<p><strong>注：</strong>过滤器的过滤模式不能大于255个字符。附录A给出了构建正则表达式的概述。</p>
+
+<p>应用包含过滤器的逻辑正相反。应用一个包含过滤器时，如果数据与过滤模式不相符时，这个数据条目将被扔掉。如果你应用多个包含过滤器，那么这是一个重要的区别，因为，这样的话，数据条目必须与每一个包含过滤器相匹配，以便数据条目被存储。例如，如果你为使用你们网络IP地址的内部（员工）访问者使用了一个包含过滤器，那么，再添加一个过滤器，比如，Google搜索访问者，是没有意义的。这种组合不会产生一个内部访问者加Google访问者的报告。这个报告将仅是内部访问者，假设这个过滤器先应用的话，因为在这个过滤器处理的时候，所有的其他东西都被排除了。</p>
+
+<p>与排除过滤器的情况类似，为一个字段包含多个模式，可以创建一个包含过滤器，这个过滤器包含所有的表达式，表达式之间用竖线（|）分开。</p>
+
+<p>**使用多个包含过滤器</p>
+
+<p>**最佳实践建议是每一个配置文件最多分配一个包含过滤器，除非你有特殊的需要并且对了解由此产生的逻辑实现。</p>
+
+<p>**自定义过滤器：可用字段</p>
+
+<p>**构建你自己的自定义过滤器使你能完成许多Google Analytics预设的默认过滤器所无法完成的事情。实际上，你能过滤报告中所展示的每一个可用数据字段。</p>
+
+<p>表8.5和表8.6列出了所有可用的字段及其目的。表8.5列出了用户定义的变量，这些变量的值是由Google Analytics的实施所决定的，例如，着陆页的广告系列参数、电子商务字段等等。
+接下来的部分将讨论这些字段在自定义过滤器中的应用。</p>
+
+<p>表8.5  常规字段列表</p>
+
+<p>表8.6  用户定义的变量</p>
+
+    </div>
+
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#过滤器-ref">过滤器 <span>5</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/2010/11/01/e5889be5bbbae9858de7bdaee69687e4bbb6e8bf87e6bba4e599a8" title="创建配置文件过滤器">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/2010/11/02/e4ba94e7b1bbe5b8b8e794a8e79a84e8bf87e6bba4e599a8" title="五类常用的过滤器">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

@@ -1,0 +1,388 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>利用GWO进行页面组的A/B Test-GWO的高级使用技巧</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>利用GWO进行页面组的A/B Test-GWO的高级使用技巧 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>03 March 2012</span>
+    </div>
+    <div class="content">
+      <p>[caption id=&quot;attachment<em>1350&quot; align=&quot;alignright&quot; width=&quot;180&quot;][<img src="http://www.cloga.info/wp-content/uploads/2011/12/ab0_sm1.gif" alt="">](http://www.cloga.info/wp-content/uploads/2011/12/ab0</em>sm1.gif) A/B Test[/caption]</p>
+
+<p>A/B Test是网站分析的主要工作内容之一。通过A/B Test能够有效的比较多个版本页面之间的效果。<a href="http://www.google.com/websiteoptimizer">Google Web Optimizer（GWO）</a>是Google提供的一款免费工具，利用它营销人员可以很方便的进行A/B Test及多变量测试，所需要做的只是在指定页面上添加几行JS代码，而不需要更多的IT资源。</p>
+
+<p><strong>一、GWO A/B Test访问者分配的基本流程</strong></p>
+
+<p>1、访问者在浏览器中请求实验页面的URL</p>
+
+<p>2、你的网站服务器返回实验页面的HTML代码</p>
+
+<p>3、放在页面顶部的GWO控制脚本执行</p>
+
+<p>4、控制脚本判断应该为访问者分配的页面版本，如果是原始页面，则不作任何处理，如果是替换页面，则按照用户在GWO指定的URL进行跳转&lt;!-- more --&gt;</p>
+
+<p><strong>二、GWO标准的A/B Test的局限性</strong></p>
+
+<p>GWO标准的A/B Test主要用于对单个页面的测试，因为在GWO中输入的替换页面是固定的。比如，测试不同版本首页的效果。但是，如果你想要测试的内容页面组效果，比如不同版本的产品类目页。</p>
+
+<p>原始页面组：</p>
+
+<p>http://www.mysite.com/category1/index.htm</p>
+
+<p>http://www.mysite.com/category2/index.htm</p>
+
+<p>http://www.mysite.com/category3/index.htm</p>
+
+<p>……</p>
+
+<p>对应的实验页面组：</p>
+
+<p>http://www.mysite.com/category1/index-t.htm</p>
+
+<p>http://www.mysite.com/category2/index-t.htm</p>
+
+<p>http://www.mysite.com/category3/index-t.htm</p>
+
+<p>这类的实验无法用GWO标准的A/B Test实现，但是，在实践过程中，却有着巨大的应用价值。通过一些简单的自定义GWO也可以帮我们实现这个需求。</p>
+
+<p><strong>三、用GWO实现页面组A/B Test的基本思路及实现方法</strong></p>
+
+<p>通过一些自定义GWO的A/B Test和多变量Test都可以实现页面组的A/B Test。</p>
+
+<p>1、GWO的A/B Test实现页面组A/B Test</p>
+
+<p>对于GWO的A/B test来说，我们可以指定一组页面（GWO的控制脚本可以放在模板页面）跳转到一个页面，将这个（或多个）跳转的页面作为中间页面，再通过页面JS跳转到对应的替换页面。</p>
+
+<p>以上面的页面组A/B Test情景为例：</p>
+
+<p>（1）在GWO中创建一个A/B Test</p>
+
+<p>（2）任选一个实验页面URL填入GWO中原始页面中</p>
+
+<p>（3）在GWO的界面中不要填写任何的实验页面，而是填写一个中间的跳转页，比如：www.mysite.com/redirect.html。在这个页面上写一段JS跳转脚本。起作用是从referer中获得url，并将替换其中的某一部分，然后跳转。</p>
+
+<p><a href="http://www.cloga.info/wp-content/uploads/2012/02/5555.png"><img src="http://www.cloga.info/wp-content/uploads/2012/02/5555-300x37.png" alt=""></a></p>
+
+<p>对于上面的页面组来说，这段JS跳转脚本要做的就是把referer中的index.htm替换为index-t.htm。例如下面这段：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;script type=&quot;text/javascript&quot;&gt;
+var r=document.referrer
+if(r.indexOf(&#39;index.html&#39;)!=-1){
+　　r2=r.replace(/index.html/,&#39;index-t.html&#39;)
+　　document.location=r2}
+else{
+document.location=&quot;http://www.mysite.com&quot;
+}
+&lt;/script&gt;
+</code></pre></div>
+<p>这样当访问者访问实验页面组时，GWO会进行判断，如果需要为访问者展示替换页面则将访问者跳转到www.mysite.com/redirect.html这个中间页面，这个页面上根据referrer的值再将访问者跳转到对应的具体替换页面上。</p>
+
+<p>（4）填写转化页面URL</p>
+
+<p>（5）在原始页面组中，与标准的A/B Test一样，添加对应的控制脚本及跟踪脚本。</p>
+
+<p>（6）在转化页面添加转化脚本</p>
+
+<p>这种方法的缺点是需要经过两次跳转，对用户体验较差。其优点是实施相对简单一些。</p>
+
+<p>2、用GWO的MVT（多变量测试）来实现页面组A/B Test</p>
+
+<p>整体思路与上一种方法是一致的。一点区别是利用GWO MVT的功能，将URL变化的部分存储在GWO的服务器，再通过一些JS脚本根据这些内容来拼成实际的URL。</p>
+
+<p>还以上面的页面为例：</p>
+
+<p>（1）在GWO中创建一个MVT</p>
+
+<p>（2）从实验页面组中任选一个填入实验页面URL</p>
+
+<p>（3）填入转化页面URL</p>
+
+<p>（4）在实验页面组中添加控制脚本，请注意控制脚本应放在页面的最上面。但是不需要按照指示添加section脚本。在控制脚本下，填入下面的代码：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;!-- utmx section name=&quot;page-url&quot; --&gt;
+&lt;script&gt;
+function filter(v) {
+  var b = utmx(&#39;variation_content&#39;, &#39;page-url&#39;);
+  var u = v[0].contents;
+  if (b &amp;&amp; u.substr(0,7) == &#39;http://&#39; &amp;&amp; b.substr(0, 7) != &#39;http://&#39;) {
+    u = u.substr(7);
+  }
+
+  var l = document.location.href;
+  var prefix = &#39;mysite.com/&#39;;
+  var i = l.indexOf(prefix);
+  var j = l.indexOf(&#39;/&#39;, i + prefix.length);
+  u = u.replace(&#39;category&#39;, l.substring(i + prefix.length, j));
+
+  return u;
+}
+utmx(&#39;url&#39;, &#39;page-url&#39;, 0, filter);
+&lt;/script&gt;
+</code></pre></div>
+<p><code>&lt;!-- utmx section name=&quot;page-url&quot; --&gt;</code>这段注释的作用与Section脚本类似，声明了名为page-url的section。</p>
+
+<p>utmx这个函数在GWO中有多种用途，其调用形式为utmx( feature, arg1, arg2, ... argn )，其中第一个参数是一个字符串用来描述所请求的功能，后面的参数随第一个参数的不同而不同。已知有如下几种情况：</p>
+
+<p>a、用于重定向的跳转：utmx(&#39;url&#39;, &#39;page-url&#39;, 0, filter)，见上面的情况；或者utmx(&#39;url&#39;, &#39;A/B&#39;)，见标准的A/B Test。第一个参数URL，告诉GWO要进行重定向；第二个参数是section的名称，在标准的A/B Test情况下，实际上是为指定了名称为A/B的Section；第三个参数是一个位置标识符，不需要管它；第四个参数是定义在重定向发生前对重定向URL进行过滤的函数。</p>
+
+<p>这个函数的作用机制是这样的：首先，从名为第二个参数的section中获得跳转的URL。然后按照位置标识符及过滤器规则对获取的信息进行重写。最后，按照重写后的URL进行重定向（如果需要展示替换版本的话）。标准A/B Test直接就使用GWO界面中输入的替换URL，因此，不需要位置标识符和URL过滤器。</p>
+
+<p>在调用过滤器函数前，utmx函数会对目标URL做许多事情，首先，它将当前URL的查询参数附加到目标URL后，另外，它会查看目标URL是否包含协议，如果不包含协议，则会为目标URL添加http://。</p>
+
+<p>b、获取当前访问者的变量信息：utmx( &quot;variation<em>number&quot;, section</em>name )及utmx( &quot;variation<em>content&quot;, section</em>name )。这个方法的作用是根据section名称返回数字形式的变量名（0至N-1，原始版本为0，N为替换版本数。）或者在GWO中输入的section的替换信息。</p>
+
+<p>例如，你用utm<em>section在页面上创建了一个名为ABC的section，有二个替换内容，内容以此为DEF、GHI。那么，如果一个访问者被选择为查看DEF，则utmx( &quot;variation</em>number&quot;, &quot;ABC&quot; )会返回1，utmx( &quot;variation_content&quot;, &quot;ABC&quot;)则会返回DEF。</p>
+
+<p>这个主要是获得单个变量的信息。</p>
+
+<p>C、获取当前访问者的组合信息：utmx( &quot;combination&quot; )及utmx( &quot;combination_string&quot; )。前者返回的是数字形式代表的组合信息（0至N-1，N为实验条件数），后者返回的是字符形式的组合信息。后者在GA与GWO数据整合过程中有重要的应用，基本思路是以Visitor级别的自定义变量将访问者的组合信息与访问行为关联，或者将组合信息以参数形式附加在实验URL后，以便比较不同实验条件的效果，我会在下一篇关于GWO高级使用技巧中介绍。</p>
+
+<p>例如，你进行了一个三个变量的MVT，A变量为section a，B变量为section b，C变量为section c，A变量有3个水平，a1、a2、a3，B变量有2个水平b1、b2，C变量有4个水平，c1、c2、c3、c4，即3<em>2</em>4实验设计，共24种实验条件。如果一个访问者被选择的实验条件为a1b2c3，则utmx( &quot;combination&quot; )会返回5，而utmx( &quot;combination<em>string&quot; )会返回1-2-3。utmx( &quot;variation</em>number&quot;, &quot;a&quot; )会返回0，utmx( &quot;variation_content&quot;, &quot;b&quot; )会返回GWO中为b2输入的替换内容。</p>
+
+<p>filter这个方法。它的主要作用是用来重组重定向的URL。稍后我们再来看一下。</p>
+
+<p>（5）在转化页面添加转化脚本。</p>
+
+<p>（6）在GWO的Variation页面输入替换的URL。</p>
+
+<p>[caption id=&quot;attachment_1473&quot; align=&quot;aligncenter&quot; width=&quot;950&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/03/wwww3331.png"><img src="http://www.cloga.info/wp-content/uploads/2012/03/wwww3331.png" alt=""></a> Variation[/caption]</p>
+
+<p>让我们再来看一下filter函数的作用。简单来说呢，就是用当前页面URL（document.location.href）中类别（通过前缀与其后的&quot;/&quot;进行定位）替换GWO界面中Variation中存储的备选URL中category。</p>
+
+<p>到这里，利用MVT进行的页面组A/B Test就介绍完了。与利用GWO的A/B Test进行的页面组A/B Test相比，其优势在于仅使用一次重定向，用户体验稍好，其劣势是JS相对复杂，同时要对GWO的API有一定了解。</p>
+
+<p>以上就是如何用GWO进行页面组的A/B Test的基本思路和实现方式，欢迎您分享这方面的经验，如果有任何疑问，也欢迎给我留言~</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#网站优化工具-ref">
+    		网站优化工具 <span>2</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#网站优化工具-ref">网站优化工具 <span>2</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/%E5%BC%80%E6%BA%90%E7%BD%91%E7%AB%99%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7/2012/02/23/e5bc80e6ba90e7bd91e7ab99e58886e69e90e5b7a5e585b7-owae4bb8be7bb8d" title="开源网站分析工具-OWA介绍">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/digital%E5%88%86%E6%9E%90/ga%20api/2012/03/21/e5858de8b4b9e79a84gae5afbce587bae68f92e4bbb6excellent-analyticse4bdbfe794a8e696b9e6b395e4bb8be7bb8d" title="免费的GA数据导出插件Excellent Analytics使用方法介绍">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

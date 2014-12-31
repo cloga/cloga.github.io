@@ -1,0 +1,310 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>获取GA数据的R包-RGA 简介</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>获取GA数据的R包-RGA 简介 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>26 February 2013</span>
+    </div>
+    <div class="content">
+      <p><a href="https://github.com/skardhamar/rga">RGA</a>是在R中实现的GA API，可以直接将GA数据读入到R中，Coursera的<a href="https://www.coursera.org/course/dataanalysis">Data Analytics</a>的课程中Jeff也提及过。</p>
+
+<p>RGA的使用非常方便，将GA的API方法都封装成R的语句。</p>
+
+<h2>RGA的安装</h2>
+
+<p>由于RGA没有放在CRAN上，因此没法直接用install.packages安装，当然我们可以下载 zip或tar.gz然后手动进行安装。此外，我们还可以用<code>devtools来进行安装。</code></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">install.packages(&quot;devtools&quot;)#安装devtools
+library(devtools)#载入devtools包
+install_github(&quot;rga&quot;, &quot;skardhamar&quot;)#安装rga
+</code></pre></div>
+<h2> RGA的使用&lt;!-- more --&gt;</h2>
+<div class="highlight"><pre><code class="language-text" data-lang="text">library(rga)#载入RGA的包
+rga.open(instance=&quot;ga&quot;)#完成Google的认证流程
+</code></pre></div>
+<p>如果你执行这段代码后报错，如下所示</p>
+
+<p>[caption id=&quot;attachment_1872&quot; align=&quot;aligncenter&quot; width=&quot;666&quot;]<a href="http://www.cloga.info/wp-content/uploads/2013/02/SSL-Error.jpg"><img src="http://www.cloga.info/wp-content/uploads/2013/02/SSL-Error.jpg" alt="SSL Error"></a> SSL Error[/caption]</p>
+
+<p>那么你需要在rga.open之前运行</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;code&gt;options(RCurlOptions = list(verbose = FALSE, capath = system.file(&quot;CurlSSL&quot;, &quot;cacert.pem&quot;, package = &quot;RCurl&quot;), ssl.verifypeer = FALSE))&lt;/code&gt;
+</code></pre></div>
+<p>执行这段代码后，会在默认浏览器中打开Google的认证页面，输入GA的用户和密码后，会返回一个code，用于程序换取token。</p>
+
+<p>[caption id=&quot;attachment_1863&quot; align=&quot;aligncenter&quot; width=&quot;685&quot;]<a href="http://www.cloga.info/wp-content/uploads/2013/02/OAth.jpg"><img src="http://www.cloga.info/wp-content/uploads/2013/02/OAth.jpg" alt="OAth-Step1"></a> OAuth-Step1[/caption]</p>
+
+<p>[caption id=&quot;attachment_1864&quot; align=&quot;aligncenter&quot; width=&quot;379&quot;]<a href="http://www.cloga.info/wp-content/uploads/2013/02/OAth-Step2.jpg"><img src="http://www.cloga.info/wp-content/uploads/2013/02/OAth-Step2.jpg" alt="OAth-Step2"></a> OAuth-Step2[/caption]</p>
+
+<p>默认会使用作者的API Client，如果要使用自己的API则需要指定Client.id和Client.secret(这两个值见<a href="https://code.google.com/apis/console/">Google APIs Consoles</a>):</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">rga.open(instance = &quot;ga&quot;, 
+         client.id = &quot;862341168163-qtefv92ckvn2gveav66im725c3gqj728.apps.googleusercontent.com&quot;, 
+         client.secret = &quot;orSEbf0-S76VZv6RMHe46z_N&quot;)&lt;span style=&quot;font-family: Georgia, &#39;Times New Roman&#39;, &#39;Bitstream Charter&#39;, Times, serif; font-size: 13px; line-height: 19px;&quot;&gt; &lt;/span&gt;
+</code></pre></div>
+<p>[caption id=&quot;attachment_1865&quot; align=&quot;aligncenter&quot; width=&quot;416&quot;]<a href="http://www.cloga.info/wp-content/uploads/2013/02/OAth-Step3.jpg"><img src="http://www.cloga.info/wp-content/uploads/2013/02/OAth-Step3.jpg" alt="OAth-Step3"></a> OAuth-Step3[/caption]</p>
+
+<p>填入code后，GA的OAth过程就完成了。一个ga实例就创建好了，我们可以使用这个实例来获取GA的数据。</p>
+
+<p>下面就是获取数据的基本语法：</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">ga$getData(ids, start.date, end.date, 
+           metrics = &quot;ga:visits&quot;, dimensions = &quot;ga:date&quot;, 
+           sort = &quot;&quot;, filters = &quot;&quot;, segment = &quot;&quot;,
+           start = 1, max = 1000)
+</code></pre></div>
+<p>其中要ids是指profile id其实对应就是GA中一张数据表（是的，每个profile都相当于一张表，不过应该是BigTable）形式为&#39;ga:36050032&#39;，请注意是字符形式。start.date和end.date是指时间范围，格式为&#39;2013-02-26&#39;，也是字符形式。其余的参数可以先不用修改。</p>
+
+<p>[caption id=&quot;attachment_1869&quot; align=&quot;aligncenter&quot; width=&quot;369&quot;]<a href="http://www.cloga.info/wp-content/uploads/2013/02/Profile-ID1.jpg"><img src="http://www.cloga.info/wp-content/uploads/2013/02/Profile-ID1.jpg" alt="Profile ID"></a> Profile ID[/caption]</p>
+
+<p>参数的具体用法参见<a href="https://developers.google.com/analytics/devguides/reporting/core/v3/reference?hl=zh-CN#q_details">GA API文档</a>。</p>
+
+<p>返回的是一个data frame。如果你需要将数据保存为CSV，那么只需要</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">data&lt;-ga$getData(ids, start.date, end.date,
+           metrics = &quot;ga:visits&quot;, dimensions = &quot;ga:date&quot;,
+           sort = &quot;&quot;, filters = &quot;&quot;, segment = &quot;&quot;,
+           start = 1, max = 1000)#将返回的data frame赋值给data，是的R中的赋值用类似-&gt;的箭头，箭头方向表示赋值方向。
+write.csv(data, file = &quot;data.csv&quot;)#将data中的数据写入名为data.csv的文件
+</code></pre></div>
+<p>好了，到这里我们用RGA包成功从GA中取出了数据，并保存为CSV文件，快点动手尝试一下吧~</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#ga api-ref">
+    		ga api <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories.html#r-ref">
+    		r <span>2</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#GA-ref">GA <span>5</span></a></li>
+     
+    	<li><a href="/tags.html#R-ref">R <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#RGA-ref">RGA <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/digital%E5%88%86%E6%9E%90/2013/01/19/attributiontool" title="计算GA归因模型数据的小工具">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/digital%E5%88%86%E6%9E%90/2013/03/18/simplehttpserver" title="用Python的simpleHttpServer搭建本地GA测试环境">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

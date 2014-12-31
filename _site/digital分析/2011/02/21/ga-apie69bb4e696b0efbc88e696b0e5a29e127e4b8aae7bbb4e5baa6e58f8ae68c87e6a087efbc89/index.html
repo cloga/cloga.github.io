@@ -1,0 +1,380 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>GA API更新（新增127个维度及指标）</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>GA API更新（新增127个维度及指标） </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>21 February 2011</span>
+    </div>
+    <div class="content">
+      <p>这次的更新是2011.01.15，添加了一些重要的数据，但是貌似有些新指标并未加入到UI界面中，不知近期是否会更新。</p>
+
+<p>1、更新了新数据</p>
+
+<p>（1）ga:visitors的计算修改为返回该时间段的惟一访客（此前为每日的惟一访客），并且支持更多的维度及指标组合</p>
+
+<p>（2）添加了10个新AdWords维度：</p>
+
+<p>这些指标在AdWords中已经存在只是将更多的AdWords信息直接导入到GA中。</p>
+
+<p>ga:adDistributionNetwork：提供你的广告的网络（内容、搜索、搜索伙伴等）。</p>
+
+<p>ga:adMatchType：关键词所应用的匹配类型（广泛、词组匹配、完全匹配）。内容网络的广告被定义为“内容网络”。</p>
+
+<p>ga:adMatchedQuery：触发你的AdWords广告展示的搜索查询（搜索词）。比较给力的新数据，打通消费端和收入端的AdWords搜索词报告从此可以从GA API中直接获得。</p>
+
+<p>ga:adPlacementDomain：在内容网络中展示你的广告的域。</p>
+
+<p>ga:adPlacementUrl：在内容网络中展示你的广告的URL。</p>
+
+<p>ga:adFormat：AdWords广告的形式（文本、图片、Flash、视频等）。</p>
+
+<p>ga:adTargetingType：AdWords广告如何定位（关键词、展示位置和人群定位等等）。</p>
+
+<p>ga:adTargetingOption：内容网络中你的广告如何管理。值是自动定位还是自选展示位置。</p>
+
+<p>ga:adDisplayUrl：AdWords广告的显示网址。</p>
+
+<p>ga:adDestinationUrl：AdWords广告的目标网址&lt;!-- more --&gt;</p>
+
+<p>（2）为广告系列组添加了指标ga:organicSearches</p>
+
+<p>ga:organicSearches：一个session中发生的自然搜索。这个指标与搜索引擎无关。新增的指标，目前在一个Session中发生的多次搜索引入，只会记录一个访问（第一个来源），其他的来源访问数会记为零。</p>
+
+<p>（3）为站内搜索组添加了指标ga:searchResultViews</p>
+
+<p>ga:searchResultViews：进行一次搜索后查看搜索结果页的次数。</p>
+
+<p>（4）添加了基于时间的三个维度：ga:nthDay, ga:nthWeek, ga:nthMonth</p>
+
+<p>ga:nthDay：在特定日期范围内天的指数。日期范围内第一天的指数（起始日期）是1，第二天是2。</p>
+
+<p>ga:nthWeek：在特定日期范围内周的指数。日期范围内第一周的指数是1，第二周是2。</p>
+
+<p>ga:nthMonth：在特定日期范围内月的指数。日期范围内第一个月的指数是1，第二个月是2。</p>
+
+<p>（5）改变了指标与维度的分组更好的反映了他们代表的功能。</p>
+
+<p>在维度中增加了session、系统、地域/网络、事件跟踪、时间等几个组，并将内容更名为页面跟踪，细化了分组。</p>
+
+<p>同样在指标的分组中，添加了session、AdWords两个分组，并将内容更名为页面跟踪。</p>
+
+<p>2、新的计算指标</p>
+
+<p>下面的计算指标来自于使用基础指标的计算。注：带有(n)的名称支持值1-20。</p>
+
+<p>（1）基于目标的：</p>
+
+<p>ga:costPerConversion：每转化成本（包括电子商务和目标转化）。ga:adCost/ (ga:transactions + ga:goalCompletionsAll)。</p>
+
+<p>ga:costPerGoalConversion：每目标转化成本。ga:adCost / ga:goalCompletionsAll。</p>
+
+<p>ga:costPerTransaction：每交易转化成本。ga:adCost / ga:transactions。</p>
+
+<p>ga:goal(n)AbandonRate：请求目标的放弃率。((ga:goal(n)Starts - ga:goal(n)Completions) / ga:goal(n)Starts) * 100。</p>
+
+<p>ga:goal(n)Abandons：在请求目标上，访问者开始了转化活动而没有最终完成的次数。ga:goal(n)Starts - ga:goal(n)Completions。</p>
+
+<p>ga:goal(n)ConversionRate：完成了请求目标的访问百分比。(ga:goal(n)Completions / ga:visits) * 100。</p>
+
+<p>ga:goalAbandonRateAll：放弃目标率。(ga:goalStartsAll - ga:goalCompletionsAll) / ga:goalStartsAll) * 100。</p>
+
+<p>ga:goalAbandonsAll：开始了一个目标而没有实际完成它们的总次数。ga:goalStartsAll - ga:goalCompletionsAll。</p>
+
+<p>ga:goalConversionRateAll：至少产生一个目标转化的访问百分比。(ga:goalCompletionsAll / ga:visits) * 100。</p>
+
+<p>ga:goalValueAllPerSearch：搜索的平均目标价值。ga:goalValueAll / ga:searchUniques。似乎是一个新指标。</p>
+
+<p>ga:goalValuePerVisit：访问的平均目标价值。ga:goalValueAll / ga:visits。</p>
+
+<p>（2）基于内容（英文原文为page Tracking页面跟踪）的</p>
+
+<p>ga:entranceBounceRate：单页访问百分比（即，从进入页离开网站的访问）。(ga:bounces / ga:entrances) * 100。</p>
+
+<p>ga:visitBounceRate：单页访问百分比（即，从第一页离开网站的访问）。(ga:bounces / ga:visits) * 100。这个指标的引入将跳出率区分为以visit计算和以entrances计算的两种，相信在不远的将来，热门内容中的跳出率将改为以visit计算。</p>
+
+<p>ga:entranceRate：这个页面作为入口的浏览量百分比。(ga:entrances / ga:pageviews) * 100。新增指标，预期出现位置内容报告的最常见目标网页。</p>
+
+<p>ga:exitRate：总页面浏览中发生网站退出的比率。(ga:exits / ga:pageviews) * 100。</p>
+
+<p>ga:pageviewsPerVisit：每次访问平均浏览页数。计算同一页面的重复浏览。ga:pageviews / ga:visits。</p>
+
+<p>ga:avgTimeOnPage：访问者查看此页面或此组页面所花费的平均时间。ga:timeOnPage / (ga:pageviews - ga:exits)</p>
+
+<p>ga:avgTimeOnSite：用总秒数表示的访问者平均会话持续时间。ga:visitLength / ga:visits。原计算公式为：ga:timeOnSite/ga:visits。二者之间的差异未知。</p>
+
+<p>ga:avgEventValue：平均事件价值。ga:eventValue / ga:totalEvents。</p>
+
+<p>（3）基于站内搜索的</p>
+
+<p>ga:avgSearchDepth：进行搜索后查看的平均页数。ga:searchDepth / ga:searchUniques。</p>
+
+<p>ga:avgSearchDuration：搜索后人们在网站上花费的平均时间。ga:searchDuration / ga:searchUniques。</p>
+
+<p>ga:avgSearchResultViews：进行搜索后，人们查看搜索结果页的平均次数。ga:searchResultViews / ga:searchUniques。</p>
+
+<p>ga:searchGoalConversionRateAll：至少完成了一个目标的搜索访问（至少包含一次搜索的访问）的百分比。(ga:goalCompletionsAll / ga:searchUniques) * 100。</p>
+
+<p>ga:searchGoal(n)ConversionRate：完成了所请求的目标的搜索访问（至少包含一次搜索的访问）的百分比。(ga:goal(n)Completions / ga:searchUniques) * 100。</p>
+
+<p>ga:searchExitRate：导致立即跳出的搜索百分比。(ga:searchExits / ga:searchUniques) * 100。</p>
+
+<p>（4）基于电子商务的</p>
+
+<p>ga:itemsPerPurchase：每笔交易平均出售此产品（一组产品）的平均值。ga:itemQuantity / ga:uniquePurchases。</p>
+
+<p>ga:margin：交易的总利润。(ga:transactionRevenue + ga:goalValueAll - ga:adCost) / (ga:transactionRevenue + ga:goalValueAll)。</p>
+
+<p>ga:percentNewVisits：从未访问过的人们的访问的百分比。(ga:newVisits / ga:visits) * 100。</p>
+
+<p>ga:revenuePerItem：每产品的平均收入。ga:itemRevenue / ga:itemQuantity。</p>
+
+<p>ga:revenuePerTransaction：每电子商务交易的平均收入。ga:transactionRevenue / ga:transactions。</p>
+
+<p>ga:ROI：投资回报是总交易利润除以广告花费。(ga:transactionRevenue + ga:goalValueAll - ga:adCost) / ga:adCost。</p>
+
+<p>ga:RPC：RPC或每点击收入是一个广告每次点击所收到的收入（来自电子商务销售和/或目标价值）。(ga:transactionRevenue + ga:goalValueAll) / ga:adClicks。</p>
+
+<p>ga:totalValue：网站的总价值（包括总收入和总目标价值）。ga:transactionRevenue + ga:goalValueAll。</p>
+
+<p>ga:transactionRevenuePerVisit：网站访问的平均交易收入。ga:transactionRevenue / ga:visits。</p>
+
+<p>ga:transactionsPerVisit：网站访问的平均交易数。ga:transactions / ga:visits。</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#digital分析-ref">
+    		digital分析 <span>32</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#API-ref">API <span>1</span></a></li>
+     
+    	<li><a href="/tags.html#GA-ref">GA <span>5</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/%E4%BB%96%E5%B1%B1%E4%B9%8B%E7%9F%B3/2011/02/01/e8b7b3e587bae78e87e8a7a3e5af86" title="跳出率解密">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/%E4%BB%96%E5%B1%B1%E4%B9%8B%E7%9F%B3/2011/02/27/e8a7a3e5af86gae5afbce888aae69198e8a681e68aa5e5918a" title="解密GA导航摘要报告">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

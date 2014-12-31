@@ -1,0 +1,456 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>Google Analytics 不同版本的JS方法介绍</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>Google Analytics 不同版本的JS方法介绍 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>30 May 2014</span>
+    </div>
+    <div class="content">
+      <p>经常有同学会问GA几个版本的方法有什么不同?为什么感觉差异很大?其实这个问题只要了解一点点JS编程基础知识就可以解答。可能有的同学会说我是做网站分析的，了解这些JS编程知识有用吗？我的观点是在没有认知负担的情况下，适当了解一下网站分析的工作原理对职业发展大有裨益。</p>
+
+<h2>常见的几种GA方法</h2>
+
+<p>先来看一下市面上常见的几种GA代码：</p>
+
+<h3>最新的UA代码</h3>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">g</span><span class="p">,</span><span class="nx">r</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">){</span><span class="nx">i</span><span class="p">[</span><span class="s1">&#39;GoogleAnalyticsObject&#39;</span><span class="p">]</span><span class="o">=</span><span class="nx">r</span><span class="p">;</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">||</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="p">(</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">||</span><span class="p">[]).</span><span class="nx">push</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)},</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">l</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="k">new</span> <span class="nb">Date</span><span class="p">();</span><span class="nx">a</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">o</span><span class="p">),</span>
+  <span class="nx">m</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">o</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="nx">a</span><span class="p">.</span><span class="nx">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">a</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">g</span><span class="p">;</span><span class="nx">m</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">)</span>
+  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;//www.google-analytics.com/analytics.js&#39;</span><span class="p">,</span><span class="s1">&#39;ga&#39;</span><span class="p">);</span>
+
+  <span class="nx">ga</span><span class="p">(</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="s1">&#39;UA-xxxxxx-x&#39;</span><span class="p">);</span>
+  <span class="nx">ga</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">,</span> <span class="s1">&#39;pageview&#39;</span><span class="p">);</span>
+
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<h3>GA异步版本</h3>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+
+  <span class="kd">var</span> <span class="nx">_gaq</span> <span class="o">=</span> <span class="nx">_gaq</span> <span class="o">||</span> <span class="p">[];</span>
+  <span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_setAccount&#39;</span><span class="p">,</span> <span class="s1">&#39;UA-xxxxxx-x&#39;</span><span class="p">]);</span>
+  <span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_trackPageview&#39;</span><span class="p">]);</span>
+
+  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">ga</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">ga</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">?</span> <span class="s1">&#39;https://ssl&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://www&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.google-analytics.com/ga.js&#39;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">ga</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
+  <span class="p">})();</span>
+
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<h3>更早版本的GA代码－姑且叫它GA同步代码</h3>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+<span class="kd">var</span> <span class="nx">gaJsHost</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;https:&quot;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">)</span> <span class="o">?</span> <span class="s2">&quot;https://ssl.&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://www.&quot;</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">unescape</span><span class="p">(</span><span class="s2">&quot;%3Cscript src=&#39;&quot;</span> <span class="o">+</span> <span class="nx">gaJsHost</span> <span class="o">+</span> <span class="s2">&quot;google-analytics.com/ga.js&#39; type=&#39;text/javascript&#39;%3E%3C/script%3E&quot;</span><span class="p">));</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+<span class="k">try</span><span class="p">{</span>
+<span class="kd">var</span> <span class="nx">pageTracker</span> <span class="o">=</span> <span class="nx">_gat</span><span class="p">.</span><span class="nx">_getTracker</span><span class="p">(</span><span class="s2">&quot;UA-xxxxxx-x&quot;</span><span class="p">);</span>
+<span class="nx">pageTracker</span><span class="p">.</span><span class="nx">_trackPageview</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<p>这三个版本的代码应该是市面上比较常见的GA代码。按照发布时间降序排列。当然不排除还有使用古董级GA代码或者urchin代码的网站，不过那些不在本文的探讨范围以内。</p>
+
+<h2>GA代码的基本结构</h2>
+
+<p>三个代码虽然看上去有一些差异，但是代码的基本机构是一致。从大的方面来说，代码分为两个部分。
+1、引入GA的JS库，所有的GA方法都是在整个库中定义
+2、定义GA账号及其他初始的代码状态，并触发一个页面跟踪（trackPageview）</p>
+
+<h3>引入GA的JS库</h3>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">g</span><span class="p">,</span><span class="nx">r</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">){</span><span class="nx">i</span><span class="p">[</span><span class="s1">&#39;GoogleAnalyticsObject&#39;</span><span class="p">]</span><span class="o">=</span><span class="nx">r</span><span class="p">;</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">||</span><span class="kd">function</span><span class="p">(){</span>
+  <span class="p">(</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">||</span><span class="p">[]).</span><span class="nx">push</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)},</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">l</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="k">new</span> <span class="nb">Date</span><span class="p">();</span><span class="nx">a</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">o</span><span class="p">),</span>
+  <span class="nx">m</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">o</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span><span class="nx">a</span><span class="p">.</span><span class="nx">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span><span class="nx">a</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">g</span><span class="p">;</span><span class="nx">m</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">)</span>
+  <span class="p">})(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;//www.google-analytics.com/analytics.js&#39;</span><span class="p">,</span><span class="s1">&#39;ga&#39;</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">ga</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">ga</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">?</span> <span class="s1">&#39;https://ssl&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://www&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.google-analytics.com/ga.js&#39;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">ga</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
+  <span class="p">})();</span>
+</code></pre></div><div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+<span class="kd">var</span> <span class="nx">gaJsHost</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;https:&quot;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">)</span> <span class="o">?</span> <span class="s2">&quot;https://ssl.&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://www.&quot;</span><span class="p">);</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">unescape</span><span class="p">(</span><span class="s2">&quot;%3Cscript src=&#39;&quot;</span> <span class="o">+</span> <span class="nx">gaJsHost</span> <span class="o">+</span> <span class="s2">&quot;google-analytics.com/ga.js&#39; type=&#39;text/javascript&#39;%3E%3C/script%3E&quot;</span><span class="p">));</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<p>上面这三段代码虽然看上去差异很大，其实相当于在页面中引入一段JS。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;http://www.google-analytics.com/ga.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">async</span><span class="o">=</span><span class="s2">&quot;&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;http://www.google-analytics.com/analytics.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<p>上面的GA的JS库，下面是UA的JS库。</p>
+
+<p>GA实现的所有方法都是在这个JS库中。</p>
+
+<p>当然Google的工程师也不是没事闲的把简单事情复杂化，非要写各种高大上的版本让大家看不懂，其实不同版本的演化过程也在一定程度上体现了互联网技术的发展的方向。</p>
+
+<h4>GA同步代码</h4>
+
+<p>GA同步代码的部分是最好理解的，</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">gaJsHost</span> <span class="o">=</span> <span class="p">((</span><span class="s2">&quot;https:&quot;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span><span class="p">)</span> <span class="o">?</span> <span class="s2">&quot;https://ssl.&quot;</span> <span class="o">:</span> <span class="s2">&quot;http://www.&quot;</span><span class="p">);</span>
+</code></pre></div>
+<p>这句语句是根据当前URL的协议，定义Google JS的host，如果是http协议就用http协议，如果是https就用https协议。</p>
+
+<p>感兴趣的同学可以使用chrome自带的JS调试工具测试一下这段代码。打开Chrome控制台的快捷键在Windows是F12，Mac下是option＋command＋J。</p>
+
+<p><img src="/files/ga1.png" alt="png"></p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">unescape</span><span class="p">(</span><span class="s2">&quot;%3Cscript src=&#39;&quot;</span> <span class="o">+</span> <span class="nx">gaJsHost</span> <span class="o">+</span> <span class="s2">&quot;google-analytics.com/ga.js&#39; type=&#39;text/javascript&#39;%3E%3C/script%3E&quot;</span><span class="p">));</span>
+</code></pre></div>
+<p>这句语句的作用就是在页面上输入:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s1">&#39;http://www.google-analytics.com/ga.js&#39;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<p>要注意的是这里使用的方式是使用document.write直接在页面html代码中输出字符串。</p>
+
+<p><img src="/files/ga2.png" alt="png"></p>
+
+<p>综上，GA的同步代码通过对当前页面协议对判断，针对http协议和https引用不同版本对JS库，而不是笨拙对采用对不用对协议页面给出不同对跟踪代码的方式，其目的是便利网站管理员的代码部署。不过由于使用的是document.write方式在页面上字符串，如果请求的JS库地址相应比较慢会影响整个网页的加载速度，因此，衍生出异步代码。</p>
+
+<h4>GA异步代码</h4>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">ga</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">);</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">type</span> <span class="o">=</span> <span class="s1">&#39;text/javascript&#39;</span><span class="p">;</span> <span class="nx">ga</span><span class="p">.</span><span class="nx">async</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="nx">ga</span><span class="p">.</span><span class="nx">src</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;https:&#39;</span> <span class="o">==</span> <span class="nb">document</span><span class="p">.</span><span class="nx">location</span><span class="p">.</span><span class="nx">protocol</span> <span class="o">?</span> <span class="s1">&#39;https://ssl&#39;</span> <span class="o">:</span> <span class="s1">&#39;http://www&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.google-analytics.com/ga.js&#39;</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">s</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="s1">&#39;script&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span> <span class="nx">s</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">ga</span><span class="p">,</span> <span class="nx">s</span><span class="p">);</span>
+  <span class="p">})();</span>
+</code></pre></div>
+<p>GA这里使用的方式是定义一个匿名的方法，方法的作用是在第一个script元素前创建一个script用于引用ga.js。</p>
+
+<p>这里需要简单提一下JS定义方法（函数）的基本语法结构。</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">function</span> <span class="err">函数名</span> <span class="p">(</span><span class="err">参数</span><span class="p">)</span> <span class="p">{</span>
+  <span class="err">函数体</span>
+  <span class="p">})</span>
+</code></pre></div>
+<p>上面就是JS定义方法（函数）的基本语法结构，具体来说是有关键字（function），函数的参数，由定界符（大括号）包裹的函数体构成。</p>
+
+<p>先来看函数体的内容一共是三行。</p>
+
+<p>第一行定义了ga这个对象（物品）（var ga = document.createElement(&#39;script&#39;);），并且为ga这个物品增加了type和async的属性值（ga.type = &#39;text/javascript&#39;; ga.async = true;）。</p>
+
+<p>第二行定义了ga这个物品的scr属性，src属性值的定义与同步代码类型，不同协议下调用不同的协议。</p>
+
+<p>第三行先搜索了页面上的script数组的第一个元素（var s = document.getElementsByTagName(&#39;script&#39;)[0];），[0]这种形式叫做下标，用来按位置选取数组的元素，第一个元素的下标是0；将ga插入到了s的前面（s.parentNode.insertBefore(ga, s)）</p>
+
+<p><img src="/files/ga3.png" alt="png"></p>
+
+<p>再来看一下完整的代码。这个函数没有函数名，而且在后面还有()，这种方式定义的方式定义了一个没用名字的函数，并且在调用后马上调用它（匿名函数闭包有木有）。</p>
+
+<h4>UA代码</h4>
+
+<p>有了上面的JS函数基础知识，我们再来看一下UA代码，为了便于理解我整理了一下代码：</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span><span class="nx">s</span><span class="p">,</span><span class="nx">o</span><span class="p">,</span><span class="nx">g</span><span class="p">,</span><span class="nx">r</span><span class="p">,</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">){</span>
+    <span class="nx">i</span><span class="p">[</span><span class="s1">&#39;GoogleAnalyticsObject&#39;</span><span class="p">]</span><span class="o">=</span><span class="nx">r</span><span class="p">;</span>
+    <span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">]</span><span class="o">||</span><span class="kd">function</span><span class="p">(){(</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">=</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">q</span><span class="o">||</span><span class="p">[]).</span><span class="nx">push</span><span class="p">(</span><span class="nx">arguments</span><span class="p">)},</span><span class="nx">i</span><span class="p">[</span><span class="nx">r</span><span class="p">].</span><span class="nx">l</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="k">new</span> <span class="nb">Date</span><span class="p">();</span>
+    <span class="nx">a</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="nx">o</span><span class="p">),</span> <span class="nx">m</span><span class="o">=</span><span class="nx">s</span><span class="p">.</span><span class="nx">getElementsByTagName</span><span class="p">(</span><span class="nx">o</span><span class="p">)[</span><span class="mi">0</span><span class="p">];</span>
+    <span class="nx">a</span><span class="p">.</span><span class="nx">async</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">src</span><span class="o">=</span><span class="nx">g</span><span class="p">;</span>
+    <span class="nx">m</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span><span class="p">(</span><span class="nx">a</span><span class="p">,</span><span class="nx">m</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="p">(</span><span class="nb">window</span><span class="p">,</span><span class="nb">document</span><span class="p">,</span><span class="s1">&#39;script&#39;</span><span class="p">,</span><span class="s1">&#39;//www.google-analytics.com/analytics.js&#39;</span><span class="p">,</span><span class="s1">&#39;ga&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>可以看到这段JS最外层也是匿名函数，所不同的是这个匿名函数是有参数的。</p>
+
+<p>i：window</p>
+
+<p>s：document</p>
+
+<p>o：&#39;script&#39;</p>
+
+<p>g：&#39;//www.google-analytics.com/analytics.js&#39;</p>
+
+<p>r：&#39;ga&#39;</p>
+
+<p>函数体的第一句是定义了i的GoogleAnalyticsObject属性等于r，这里的i是window，window是一个对象代表的使整个页面。获取对象属性的方式可以使用下标的数字（前面提到过获取数组第一个元素是通过下标0，好吧，数组也是对象），也可以使用对应属性的字符串。这里是使用后者。翻译过来后第一行变成：window[&#39;GoogleAnalyticsObject&#39;]=&#39;ga&#39;</p>
+
+<p>函数体的第二句这里是用一个逻辑或二元操作对i[r]进行，其实就是对window[&#39;ga&#39;]进行赋值，||表示的是逻辑与，如果表达式前面为真，则返回前一个表达式，否则返回后一个表达式的值。这种表达方式其实JS的小技巧，为函数指定默认值。||右侧的表达式其实就是默认值。a ＝ a||表达式，这种表达式翻译过来就是如果a不存在就给定义一个a＝表达式。</p>
+
+<p>正如你注意到的逻辑或表达式的右侧即参数的默认值又是一个匿名函数，函数体里面还有默认值赋值的方式。看起来有一些小复杂，还好我们有上面的基础。function(){(i[r].q=i[r].q||[]).push(arguments)}这里也是定义匿名函数，不过没有马上调用，实际上是将i[r]定义为了一个函数。函数体中i[r].q=i[r].q||[]是i[r].q默认值定义一个数组（[]代表的是空数组）。push方式是以先进先出的方式向数组中添加元素。后面的是将当前时间转化为数字赋值给i[r]的r属性。</p>
+
+<p>这里其实定义了一个ga对象，其实是一个方法，其的作用就是向i[r].q（window[&#39;ga&#39;].q）中添加元素。</p>
+
+<p>后面的三句与前面的GA代码功能一致，找到script的对象的第一个元素，在其前面插入一个src为analtics.js的script。</p>
+
+<h3>定义GA账号及其他初始的代码状态，并触发一个页面跟踪（trackPageview）</h3>
+
+<p>引入了GA|UA的JS库后，一些基本的对象方法函数就都定义好了。下一步就是实例化跟踪对象，监测网站数据。</p>
+
+<h4>GA同步代码</h4>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">try</span><span class="p">{</span>
+<span class="kd">var</span> <span class="nx">pageTracker</span> <span class="o">=</span> <span class="nx">_gat</span><span class="p">.</span><span class="nx">_getTracker</span><span class="p">(</span><span class="s2">&quot;UA-xxxxxx-x&quot;</span><span class="p">);</span>
+<span class="nx">pageTracker</span><span class="p">.</span><span class="nx">_trackPageview</span><span class="p">();</span>
+<span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{}</span>
+</code></pre></div>
+<p>首先介绍一下JS里面的try，catch机制。其基本的语法形式为:</p>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="k">try</span><span class="p">{</span>
+    <span class="err">要运行的语句</span>
+<span class="p">}</span>
+<span class="k">catch</span> <span class="p">(</span><span class="err">错误变量</span><span class="p">)</span>
+<span class="p">{}</span>
+</code></pre></div>
+<p>其作用是运行try语法块中的语句，如果报错则，将作为记录在错误变量中，同时也可以运行catch语法块的语句。</p>
+
+<p>GA使用这个语句主要是为了容错处理，也没有后续做任何的处理。</p>
+
+<p>对于同步代码做这个容错处理，主要是因为使用document.write这种同步方式加载js，如果GA JS加载较慢，GA的基本对象方法还没有加载就调用跟踪对象的实例化代码会报错。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">ReferenceError: _gat is not defined
+</code></pre></div>
+<p>try中的第一行语句是实例化了一个跟踪对象，并且定义GA账号为UA-xxxxxx-x，跟踪对象的名称为pageTracker。这里要说一下一个页面上如果使用多个GA账号，则需要为每个跟踪对象指定不同的名称，否则，调用数据只会收集到最后定义的跟踪对象中。</p>
+
+<p>try中的第二行语句触发一个PV计数。</p>
+
+<h4>GA异步代码</h4>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="kd">var</span> <span class="nx">_gaq</span> <span class="o">=</span> <span class="nx">_gaq</span> <span class="o">||</span> <span class="p">[];</span>
+<span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_setAccount&#39;</span><span class="p">,</span> <span class="s1">&#39;UA-xxxxxx-x&#39;</span><span class="p">]);</span>
+<span class="nx">_gaq</span><span class="p">.</span><span class="nx">push</span><span class="p">([</span><span class="s1">&#39;_trackPageview&#39;</span><span class="p">]);</span>
+</code></pre></div>
+<p>可以看到异步代码没有使用try catch做错误处理。因为在GA异步代码中做了一些特殊的处理，如果ga.js没有加载成功，定义的ga方法只会是_gaq这个数组的一个元素而已。</p>
+
+<p>第一行代码是验证_gaq这个数组是否存在，如果不存在则初始化为一个数组。</p>
+
+<p>第二行代码是将定义收集数据的GA账号的方法作为数组元素添加到_gaq中。</p>
+
+<p>第三行代码是将收集PV数据的方法作为数组元素添加到_gaq中。</p>
+
+<p>如果需要部署多个GA代码的话，同样也需要定义不同跟踪器名称，默认的跟踪器为匿名的。</p>
+
+<h4>UA代码</h4>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript">  <span class="nx">ga</span><span class="p">(</span><span class="s1">&#39;create&#39;</span><span class="p">,</span> <span class="s1">&#39;UA-xxxxxx-x&#39;</span><span class="p">);</span>
+  <span class="nx">ga</span><span class="p">(</span><span class="s1">&#39;send&#39;</span><span class="p">,</span> <span class="s1">&#39;pageview&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>通过前面对UA代码加载UA JS库对分析我们已经知道ga已经是一个方法其作用就是向window[&#39;ga&#39;].q中添加元素，也就是说其实UA与GA的异步代码没有本质上的差别，都是在JS库未加载前，用数组的元素在存储相关的跟踪方法及参数，等到JS库加载完毕，就转化为实际的方法向GA服务器提交数据。</p>
+
+<p>关于Google Analytics不同版本的方法介绍就到这里，希望对各位的工作有所帮助，如果你还有问题欢迎给我留言，也可以通过cloga在路上@新浪微博找到我。</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#ga js function-ref">
+    		ga js function <span>1</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#GA JS function-ref">GA JS function <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/%E6%8B%9B%E8%81%98%E4%BF%A1%E6%81%AF/2014/03/26/recruitment" title="代友招聘-顶级4A数据分析，待遇福利一样顶级，急等你来！">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/graphlab%20create/2014/07/26/graphlab_create" title="用Graphlab Create构建简易的推荐引擎">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

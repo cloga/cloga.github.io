@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>网络分析与图简介</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>网络分析与图简介 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>24 December 2012</span>
+    </div>
+    <div class="content">
+      <p>[caption id=&quot;attachment_1774&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/facebook/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Facebook-300x166.png" alt="Friend Visualization"></a> Friend Visualization[/caption]</p>
+
+<p>前面有介绍过<a href="http://www.cloga.info/2012/11/25/%e6%96%b0%e6%b5%aa%e5%be%ae%e5%8d%9a%e4%bc%a0%e6%92%ad%e8%b7%af%e5%be%84%e5%9b%be%e7%9a%84%e5%88%b6%e4%bd%9c/">使用Gephi来制作传播图</a>，图是Social Network分析最常用的表现形式和方式，这篇文章介绍一下基本的相关知识。<a href="http://mlg.ucd.ie/summer">点击查看原始文档</a></p>
+
+<h2>Graph的相关基本概念</h2>
+
+<p>图（Graph）：图是用来表示一组物体之间的关系的方式。</p>
+
+<p>节点（Node）：节点是指要分析的物体，每一个物体就是一个节点，比如在Social Network中每个人就是一个节点。</p>
+
+<p>边（Edge）：Graph中两个节点间的连线，用于表示两个节点的关系。比如在Social Network中两个人的关注关系，微博传播中转发关系。</p>
+
+<p>度（Degree）：节点的度是指与其相连的边数，如果一个节点有3个边，那么这个节点的度就是3。</p>
+
+<p>有向图（Directed Graph）：边代表的关系具有方向的图。比如微博的关注关系，就是有方向的。</p>
+
+<p>输入度（In-degree）：有向图中一个节点收到的边。</p>
+
+<p>输出度（Out-degree）：有向图中一个节点发出的边。</p>
+
+<p>无向图（Undirected Graph）：边代表的关系没有方向的图。</p>
+
+<p>[caption id=&quot;attachment_1771&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/direct-graph/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Direct-Graph-300x101.jpg" alt="Direct Graph"></a> Direct Graph[/caption]</p>
+
+<!-- more -->
+
+<p>加权图（Weighted Graph）：每个边权重不同的图，边的权重可以代表相似度，距离或者链接成本等。加权图与有向和无向是两个不同的维度。因此，在实际应用中会看到有向加权图（边既有方向又有权重）和无向加权图（边有权重但没有方向）。</p>
+
+<p>[caption id=&quot;attachment_1772&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/weighted-graph/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/weighted-Graph-300x104.jpg" alt="Weighted Graph"></a> Weighted Graph[/caption]</p>
+
+<p>属性图（Attributed Graphs）:节点和边上可以承载更多的属性，这类图叫做属性图。</p>
+
+<p>[caption id=&quot;attachment_1773&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/attributed-graph/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Attributed-Graph-300x66.png" alt="Attributed Graph"></a> Attributed Graph[/caption]</p>
+
+<p>自我网络（Ego Networks）：自我网络关注的不是网络整体而是以个体为中心，通过收集自我焦点关联的节点的信息，可以为个体构建一个局部网络。</p>
+
+<p>[caption id=&quot;attachment_1775&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/ego-networks/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Ego-Networks-300x119.png" alt="Ego Networks"></a> Ego Networks[/caption]</p>
+
+<p>偶图（Bipartite Graphs）：在偶图中节点被分成两个独立的集合，以确保同一集合中任意两个节点都不共享一条边。</p>
+
+<p>[caption id=&quot;attachment_1776&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/actors-movies-bipartite-graphs/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Actors-Movies-Bipartite-Graphs-300x138.png" alt="Actors-Movies Bipartite Graphs"></a> Actors-Movies Bipartite Graphs[/caption]</p>
+
+<p>多关系网络（Multi-Relational Networks）：在许多社交网络分析（SNA）的应用程序中，在节点间可能存在多种关系。在一种关系网络中节点间距离很近，而在另一种中则可能距离很远。</p>
+
+<p>[caption id=&quot;attachment_1777&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/multi-relational-networks/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Multi-Relational-Networks-300x159.png" alt="Multi-Relational Networks"></a> Multi-Relational Networks[/caption]</p>
+
+<p>路径（Path）：图中从一个节点到另一个节点的一系列的边叫做路径。路径的长度就是边的个数，通常是寻找两个节点间的最短路径。</p>
+
+<p>图的直径：图的直径是指所有节点间的最短路径中的最长的那条。</p>
+
+<p>连通图（Connected Graph）：每个节点间都用路径连通的图。反之就是非连通图（Disconnected Graph）。</p>
+
+<p>连通分支（Connected Component）：如果一个连通图作为非连通图的一个成分，则这个连通图称为非连通图的连通分支。在许多现实的社交网络中，大部分节点将属于一个巨大的分支。</p>
+
+<p>[caption id=&quot;attachment_1779&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/3-connected-components/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/3-connected-components-300x97.png" alt="3 connected components"></a> 3 connected components[/caption]</p>
+
+<h2>向心性的计算</h2>
+
+<p>临近节点（Neighbourhood）：是指与它有边直接相连的节点（不包括它自身）。</p>
+
+<p>集中系数（Clustering Coefficient）：节点的集中系数=其临近的节点中有边相连的节点数/其临近节点总数。图的集中系数是其每个节点的聚类系数的平均数。节点的集中系数表现了这个节点的临近节点的集中情况。图的集中系数表明图的集中水平。</p>
+
+<p>[caption id=&quot;attachment_1780&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/clustering-coefficient/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Clustering-Coefficient-300x104.png" alt="Clustering Coefficient"></a> Clustering Coefficient[/caption]</p>
+
+<p>度中心性（Degree Centrality）：计算一个节点的边数，度中心性关注单个节点。</p>
+
+<p>Hub节点：度很高的节点。在网络中通常扮演重要的角色。对于一个有向的网络来说，输入度通常用来代表受欢迎程度。</p>
+
+<p>[caption id=&quot;attachment_1781&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/degree/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Degree-300x160.png" alt="Degree"></a> Degree[/caption]</p>
+
+<p>中介中心性（Betweenness Centrality）：出现在许多其他节点间最短路径上的节点有较高的中介中心性分数。</p>
+
+<p>[caption id=&quot;attachment_1782&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/betweeness-centrality/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Betweeness-Centrality-300x173.png" alt="Betweeness Centrality"></a> Betweeness Centrality[/caption]</p>
+
+<p>节点A的度中心性高于节点H，因为节点H的直接连接更少。而节点H有更高的中介中心性，它在这个网络中扮演经纪人的角色，它处在网络内许多节点交往的路径上，因此，它具有控制其他人交往的能力。</p>
+
+<p>特征向量中心性（Eigenvector Centrality）：一个节点的特征向量中心性与其临近节点的中心性得分的总和成正比。与重要的节点连接的节点更重要。有少量有影响的联系人的节点其中心性可能超过拥有大量平庸的联系人的节点。这点与PR值类似。</p>
+
+<p>特征向量中心性的计算：</p>
+
+<p>1、计算图的成对临近矩阵的特征分解</p>
+
+<p>2、选择有最大特征值的特征向量</p>
+
+<p>3、第i个节点的中心性等于特征向量中的第i元素</p>
+
+<h2>随机网络（Random Networks）以及小世界网络（Small World Networks）</h2>
+
+<p>Erdős–Rényi随机图模型（Random Graph Model）：一个有<em>n</em>个非连通节点的图，以概率<em>p</em>在每对节点间创建边。</p>
+
+<p>[caption id=&quot;attachment_1787&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/random-networks/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Random-Networks-300x107.png" alt="Random Networks"></a> Random Networks[/caption]</p>
+
+<p>小世界网络：</p>
+
+<p>1、米尔格拉姆（著名的社会心理学家，曾主持服从实验）的小世界实验（Small World Experiment）：</p>
+
+<p>向内布拉斯加州随机选出的人发送一个包裹，让他们将这个包裹送给波士顿州的一名股票经纪人。要求他们将这个包裹转寄给可能认识这个股票经纪人的人。</p>
+
+<p>尽管大部分节点不是直接连接，但是，每个节点可以通过一个相对较少的几次传递与其他节点相连。</p>
+
+<p>2、凯文·贝肯的六度（Six Degrees of Kevin Bacon）：基于小世界网络的一个室内游戏</p>
+
+<p>从互联网电影数据库（IMDB）找出演员间合作的图。</p>
+
+<p>一个演员的贝肯数是指他与贝肯相连最短路径的度数。</p>
+
+<p>[caption id=&quot;attachment_1789&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/bancon-number/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Bancon-Number-300x63.jpg" alt="Bancon Number"></a> Bancon Number[/caption]</p>
+
+<p>3、小世界网络的典型属性：</p>
+
+<p>高集中系数</p>
+
+<p>短平均路径</p>
+
+<p>很多hub节点</p>
+
+<p>构建一个直径较大的连通图，然后随机在其上添加几条边，图的直径将快速变小。</p>
+
+<p>小世界网络有许多局部的联接和少量的“捷径”。</p>
+
+<p>4、生成小世界网络：</p>
+
+<p>创建<em>n</em>个节点的环，每一个节点与其最近的<em>k</em>个邻近节点相连</p>
+
+<p>以概率<em>p</em>将每个节点与某个目标节点相连。</p>
+
+<p>[caption id=&quot;attachment_1790&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/small-world-network/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/small-world-network-300x91.jpg" alt="small world network"></a> small world network[/caption]</p>
+
+<h2>小团体（Clique）</h2>
+
+<p>小团体（Clique）：是指互相认识的一个社交群组（即每一对节点间都有边。）</p>
+
+<p>极大团（Maximal Clique）：当一个团不是图中其他团的子集时称为极大团。</p>
+
+<p>最大团（Maximum Clique）：当一个团的规模大于等于图中的其他团时称为最大团。</p>
+
+<p>[caption id=&quot;attachment_1792&quot; align=&quot;aligncenter&quot; width=&quot;119&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/clique/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Clique.png" alt="Clique"></a> Clique[/caption]</p>
+
+<h2>团体发现（Community Detection）</h2>
+
+<p>人们经常对在一个节点网络中识别团体很感兴趣</p>
+
+<p>下图反映了在讨论2004年美国大选的博客中两个截然不同的群体</p>
+
+<p>在网页上的链接可以反映交织的网络以及一些突出的网站。在这种情况下，2004年美国大选前政治博客的网络结构反映了两个自然和独立的群组。</p>
+
+<p>[caption id=&quot;attachment_1794&quot; align=&quot;aligncenter&quot; width=&quot;404&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/community-detection/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Community-Detection.png" alt="Community Detection"></a> Community Detection[/caption]</p>
+
+<p>团体（Community）/类别（Cluster）/模块（Module）存在许多种定义：</p>
+
+<ul>
+<li><p>一组有共同性质或在图中扮演类似角色的节点[Fortunato, 2010]</p></li>
+<li><p>一个节点子集其中节点间联系密集，而到其他团体的边则密度较小[Girvan &amp; Newman, 2002]</p></li>
+</ul>
+
+<p>[caption id=&quot;attachment_1797&quot; align=&quot;aligncenter&quot; width=&quot;316&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/girvan-newman-2002/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Girvan-Newman-2002.png" alt="Girvan &amp; Newman ,2002"></a> Girvan &amp; Newman ,2002[/caption]</p>
+
+<h2>图的分割（Graph Partitioning）</h2>
+
+<p>目的：将图的节点分成用户指定数量的独立群组，用于优化与切分边相关的标准。</p>
+
+<p>[caption id=&quot;attachment_1798&quot; align=&quot;aligncenter&quot; width=&quot;458&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/graph-partitioning/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Graph-Partitioning.png" alt="Graph Partitioning"></a> Graph Partitioning[/caption]</p>
+
+<p>最小切分（Min-cut）：就是找到一种分割使边的个数或边的权重最小。</p>
+
+<p>近期的做法是使用更复杂的标准（即标准化分割）以及应用多层次的策略来扩展到大图。</p>
+
+<p><a href="http://www.cs.utexas.edu/users/dml/Software/graclus.html">Graclus [Dhillon et al, 2007]</a></p>
+
+<p>存在的问题：需要预先制定分割的数量，切分原则通常基于聚类层次的强假设。</p>
+
+<h2>层次聚类（Hierarchical Clustering）</h2>
+
+<p>根据相似度计算构建一个聚类树来识别高相似度的节点组。</p>
+
+<p>有两类基本算法：</p>
+
+<ul>
+<li><p>聚合：从每个节点做为一个单独的群体开始，应用自下而上的策略，合并每个层次上最相似的群体。</p></li>
+<li><p>拆分：从包含所有节点的单个群体开始，应用自上而下的策略，将每个层次上选定的群体分为两个子群体。</p></li>
+</ul>
+
+<p>[caption id=&quot;attachment_1799&quot; align=&quot;aligncenter&quot; width=&quot;318&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/hierarchical-clustering/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Hierarchical-Clustering.png" alt="Hierarchical Clustering"></a> Hierarchical Clustering[/caption]</p>
+
+<p>应用在团体发现时的问题：</p>
+
+<ul>
+<li><p>如何从多种不同的聚类方式中进行选择？</p></li>
+<li><p>在图是否真的存在层次结构？</p></li>
+<li><p>通常对大图的扩展性很差</p></li>
+</ul>
+
+<h2>模块度最优化（Modularity Optimisation）</h2>
+
+<p>Newman &amp; Girvan [2004]提出了分割质量的测量</p>
+
+<ul>
+<li><p>随机图不应该有群体结构</p></li>
+<li><p>通过比较实际的节点密度与随机图中的节点期望密度里验证群体的存在</p></li>
+<li><p>Q = (群体中存在的节点数) − (群体中期望存在的节点数)</p></li>
+</ul>
+
+<p>应用聚合技术迭代合并节点组组成更大的群体，使模块度在合并后提升。</p>
+
+<p>近期出现的模块度最大化的高效贪婪方法可以将图的规模扩展到10的9次方个节点。</p>
+
+<p><a href="http://findcommunities.googlepages.com">Louvain Method [Blondel et al, 2008]</a></p>
+
+<p>应用在团体发现时的问题：</p>
+
+<ul>
+<li><p>图的总节点数控制哪个团体被识别[Fortunato, 2010]</p></li>
+<li><p>仅将节点分配给一个团体是否合理？</p></li>
+</ul>
+
+<h2>重叠VS不重叠</h2>
+
+<p>在现实的社交网络中，一个节点可能属于多个团体。</p>
+
+<p>[caption id=&quot;attachment_1800&quot; align=&quot;aligncenter&quot; width=&quot;318&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/overlapping-networks/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Overlapping-Networks.png" alt="Overlapping Networks"></a> Overlapping Networks[/caption]</p>
+
+<p>在许多的现实网络中，真正的“非重叠”团体很少大规模出现[Leskovec et al, 2008]。</p>
+
+<p>团体重叠的普遍存在，使得无法分割网络而不拆分团体[Reid et al, 2011]。</p>
+
+<p>[caption id=&quot;attachment_1801&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/overlapping-networks01/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Overlapping-Networks01-300x143.png" alt="Overlapping In Large Graph"></a> Overlapping In Large Graph[/caption]</p>
+
+<h2>重叠的团体发现</h2>
+
+<p>CFinder:基于小团体渗透技术(clique percolation method [Palla et al, 2005])的一种算法。</p>
+
+<p>K-Clique识别：是完全连接的K各节点的子图。</p>
+
+<p>如果一对K-Clique共享K-1Clique，那么，这两个K-Clique是临近的。</p>
+
+<p>从最大的K-Cliques的组合就可以构成重叠的团体。</p>
+
+<p>K-Cliques的组合是指可以通过临近的K-Clique互相达到的一组K-Clique。</p>
+
+<p>[caption id=&quot;attachment_1802&quot; align=&quot;aligncenter&quot; width=&quot;219&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/4-cliques/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/4-cliques.png" alt="4-Cliques"></a> 4-Cliques[/caption]</p>
+
+<p>贪婪小团体扩展（Greedy Clique Expansion，GCE）：识别不同的小团体作为种子，通过优化本地适应性函数贪婪扩展这些种子<a href="https://sites.google.com/site/greedycliqueexpansion">[Lee et al, 2010]</a>。</p>
+
+<p>MOSES：识别高度重叠的团体的可扩展方法[<a href="https://sites.google.com/site/aaronmcdaid/moses">McDaid et al, 2010</a>]。</p>
+
+<ul>
+<li><p>随机选择一条边，在这个边周围贪婪地扩展一个团体，以便优化目标函数。</p></li>
+<li><p>删除“低质量”的团体</p></li>
+<li><p>通过重新分配个别节点对团体进行微调</p></li>
+</ul>
+
+<h2>动态团体发现（Dynamic Community Finding）</h2>
+
+<p>在许多社交网络分析任务中，需要分析随着时间变化，团体是如何创建和发展的。</p>
+
+<p>通常以“线下的”方式检查大量网络的快照来进行这项研究。</p>
+
+<p>[caption id=&quot;attachment_1803&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/snapshot-of-network/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Snapshot-of-Network-300x103.png" alt="Snapshot of Network"></a> Snapshot of Network[/caption]</p>
+
+<p>可以用生命周期中的关键事件来描述动态团体的特征[Palla et al, 2007; Berger-Wolf et al, 2007]。</p>
+
+<p>[caption id=&quot;attachment_1804&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/dynamic-community/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Dynamic-Community-300x151.png" alt="Dynamic Community"></a> Dynamic Community[/caption]</p>
+
+<p>为图的每个快照应用团体发现算法。</p>
+
+<p>将新生成&quot;后续团体&quot;与过去发现的团体进行匹配。</p>
+
+<p>[caption id=&quot;attachment_1805&quot; align=&quot;aligncenter&quot; width=&quot;300&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/dynamic-community-finding/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Dynamic-Community-Finding-300x105.png" alt="Dynamic Community Finding"></a> Dynamic Community Finding[/caption]</p>
+
+<p><a href="http://mlg.ucd.ie/dynamic">动态团体跟踪软件[Greene et al, 2010]</a></p>
+
+<p>[caption id=&quot;attachment_1806&quot; align=&quot;aligncenter&quot; width=&quot;214&quot;]<a href="http://www.cloga.info/2012/12/24/%e7%bd%91%e7%bb%9c%e5%88%86%e6%9e%90%e4%b8%8e%e5%9b%be%e7%ae%80%e4%bb%8b/dynamic-community01/"><img src="http://www.cloga.info/wp-content/uploads/2012/12/Dynamic-Community01.png" alt="Dynamic Community Evolution "></a> Dynamic Community Evolution[/caption]</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#sna-ref">
+    		sna <span>4</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#social graph-ref">social graph <span>2</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/sna/2012/12/24/gephipic" title="美化一下Gephi生成的微博传播图">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/digital%E5%88%86%E6%9E%90/2013/01/19/attributiontool" title="计算GA归因模型数据的小工具">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

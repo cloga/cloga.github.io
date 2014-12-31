@@ -1,0 +1,341 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>使用Python获取GA数据</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>使用Python获取GA数据 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>12 October 2014</span>
+    </div>
+    <div class="content">
+      <h1>开通GA API访问权限</h1>
+
+<p>首先要为你的google账号开通GA API的访问权限，请保证这个账号同时也有GA账号的访问权限，访问https://console.developers.google.com</p>
+
+<ul>
+<li>新建一个项目</li>
+</ul>
+
+<p><img src="http://cloga.info/files/creatproject.png" alt="png"></p>
+
+<p>使用现有的项目也是可以的，点击项目名称，进入项目中，我这里使用的项目是Cloga_GA</p>
+
+<ul>
+<li>开启GA API</li>
+</ul>
+
+<p>点击右侧的APIS，在其中找到Analytics API，点击off开启GA API</p>
+
+<p><img src="http://cloga.info/files/enableapi.png" alt="png"></p>
+
+<ul>
+<li>获取Client ID和Client Secret</li>
+</ul>
+
+<p>点击Credentials&gt;creat new client ID，有三种类型可以选择，这里我们选择installed application，记下其中的CLIENT ID和CLIENT SECRET</p>
+
+<p><img src="http://cloga.info/files/Clientid.png" alt="png">
+<img src="http://cloga.info/files/Clienttype.png" alt="png">
+<img src="http://cloga.info/files/secret.png" alt="png"></p>
+
+<p>到这里GA的API就开通了。</p>
+
+<h1>找到想要查询数据的view id</h1>
+
+<p>在查询GA数据时需要指定对应的view id。对于GA来说每个跟踪代码（UA-XXX）对应的是property，可以理解为一个收集到数据集，在这个数据集上可以做一些过滤，重写等操作，操作后产生的就是一个view，因此，view是一个报告集。</p>
+
+<p>登陆GA账号，点击admin</p>
+
+<p><img src="http://cloga.info/files/admin.png" alt="png"></p>
+
+<p>点击view setting找到对应的view id</p>
+
+<p><img src="http://cloga.info/files/viewid.png" alt="png"></p>
+
+<h1>安装需要的module</h1>
+
+<p>读取GA的数据，这里使用的是Google提供的<a href="http://code.google.com/p/gdata-python-client/">gdata</a>，此外，需要将GA数据保存为excel，这里使用的是Pandas。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">sudo  pip install --upgrade gdata
+sudo pip install --upgrade pandas
+</code></pre></div>
+<p>在http://pandas.pydata.org/ 可以找到pandas的信息</p>
+
+<h1>认证GA API，获取token</h1>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">EMAIL</span> <span class="o">=</span> <span class="s">&#39;google账号的用户名&#39;</span>
+<span class="n">PWD</span> <span class="o">=</span> <span class="s">&#39;google账号的密码&#39;</span>
+<span class="n">SOURCE_APP_NAME</span> <span class="o">=</span> <span class="s">&#39;Cloga_GA&#39;</span>
+<span class="kn">import</span> <span class="nn">gdata.analytics.client</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="kn">as</span> <span class="nn">pd</span>
+<span class="n">my_client</span> <span class="o">=</span> <span class="n">gdata</span><span class="o">.</span><span class="n">analytics</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">AnalyticsClient</span><span class="p">(</span><span class="n">source</span><span class="o">=</span><span class="n">SOURCE_APP_NAME</span><span class="p">)</span><span class="c">#实例化GA Client</span>
+<span class="n">my_client</span><span class="o">.</span><span class="n">client_login</span><span class="p">(</span>
+    <span class="n">EMAIL</span><span class="p">,</span>
+    <span class="n">pwd</span><span class="p">,</span>
+    <span class="n">source</span><span class="o">=</span><span class="n">SOURCE_APP_NAME</span><span class="p">,</span>
+    <span class="n">service</span><span class="o">=</span><span class="n">my_client</span><span class="o">.</span><span class="n">auth_service</span><span class="p">,</span>
+    <span class="n">account_type</span><span class="o">=</span><span class="s">&#39;GOOGLE&#39;</span>
+<span class="p">)</span>
+</code></pre></div>
+<h1>构建GA查询</h1>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">data_query</span> <span class="o">=</span> <span class="n">gdata</span><span class="o">.</span><span class="n">analytics</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">DataFeedQuery</span><span class="p">({</span>
+    <span class="s">&#39;ids&#39;</span><span class="p">:</span><span class="s">&#39;ga: viewid&#39;</span><span class="p">,</span> <span class="c">#替换为要查询的view id</span>
+    <span class="s">&#39;dimensions&#39;</span><span class="p">:</span><span class="s">&#39;ga:source&#39;</span><span class="p">,</span>
+    <span class="s">&#39;metrics&#39;</span><span class="p">:</span><span class="s">&#39;ga:pageviews&#39;</span><span class="p">,</span>
+    <span class="s">&#39;start-date&#39;</span><span class="p">:</span><span class="s">&#39;2013-5-18&#39;</span><span class="p">,</span>
+    <span class="s">&#39;end-date&#39;</span><span class="p">:</span><span class="s">&#39;2014-10-10&#39;</span><span class="p">,</span>
+    <span class="s">&#39;prettyprint&#39;</span><span class="p">:</span><span class="s">&#39;true&#39;</span>
+    <span class="p">})</span>
+</code></pre></div>
+<p>可以在http://ga-dev-tools.appspot.com/explorer/ 构建好需要的query条件</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">feed</span> <span class="o">=</span> <span class="n">my_client</span><span class="o">.</span><span class="n">GetDataFeed</span><span class="p">(</span><span class="n">data_query</span><span class="p">)</span>
+</code></pre></div>
+<p>feed是从XML中解析的Data feed，具体的数据格式见https://developers.google.com/analytics/devguides/reporting/core/v2/gdataReferenceDataFeed</p>
+
+<h1>解析Data Feed</h1>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">feed</span><span class="o">.</span><span class="n">entry</span><span class="p">:</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">dim</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">dimension</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">dim</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">dim</span><span class="o">.</span><span class="n">value</span>
+    <span class="k">for</span> <span class="n">met</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">metric</span><span class="p">:</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">met</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">met</span><span class="o">.</span><span class="n">value</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s">&#39;ga_data.xlsx&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre></div>
+<p>这样就实现了用python调用GA API，并将结果存入了excel，通过改变data_query部分的参数来查询你自己的数据吧～</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python-ref">
+    		python <span>17</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#python-ref">python <span>2</span></a></li>
+     
+    	<li><a href="/tags.html#ga-ref">ga <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/graphlab%20create/2014/07/26/graphlab_create" title="用Graphlab Create构建简易的推荐引擎">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/python/2014/10/21/build_a_simple_python_app_on_heroku" title="在Heroku上搭建简单的Python Web 应用">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

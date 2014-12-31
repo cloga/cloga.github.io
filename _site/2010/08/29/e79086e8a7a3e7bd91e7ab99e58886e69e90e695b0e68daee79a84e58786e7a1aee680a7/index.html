@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>理解网站分析数据的准确性</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>理解网站分析数据的准确性 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>29 August 2010</span>
+    </div>
+    <div class="content">
+      <p>当谈到网站效果的标准时，网站分析是关键。但是，这种信息只有在你避免了与收集数据相关的一些常见错误时，才是准确的，特别是与多种来源比较时。</p>
+
+<p>偏偏，太多的企业对网站分析报告有肤浅的理解。毕竟，获得数字并不难。严酷的事实是网站分析的数据永远也不可能是百分之百准确的，甚至测量误差线也将很困难。</p>
+
+<p>那么，重点是什么？</p>
+
+<p>尽管有缺陷，但是基本上，误差线在每周或甚至每月都保持相对稳定。甚至比较年与年的行为也是安全的，只要在技术上或终端用户行为没有巨大的变化。只要你使用相同的标准，访问者数的趋势将是准确的。例如，网站分析数据能反映以下的模式：</p>
+
+<p>·30%的流量来自搜索引擎</p>
+
+<p>·50%的流量来到X.html页面</p>
+
+<p>·上周我们从email广告活动增加了20%的订阅转化</p>
+
+<p>·三月里网站目录页的跳出率减少了10%</p>
+
+<p>通过这些指标，营销人员和网站管理员能够确定特定营销活动的直接影响。详细程度是关键。例如，你能确定增加PPC广告——单一搜索引擎的一系列关键字，能否增加这段时期内的投资回报率。只要你能将不准确性控制在最小，那么网站分析工具对测量你的线上业务的访问者流量是有效的。</p>
+
+<p><strong>数据点的冲突是常见的。</strong><strong> </strong></p>
+
+<p>英国的对800个企业的调查表明将近三分之二（63%）的受访者表示，他们遇到过来自不同网络数据测量的信息冲突。</p>
+
+<p>（“网络测量和策略报告2009”，Econsultancy.com，2009年六月）</p>
+
+<p>接下来，我将详细讨论为什么会出现这些不准确，以使你能正确看待这一信息。其目的是使你能对分析数据达到一个可接受的准确性水平。回想一下表2.1，两种收集网站访问者数据的主要方法——日志文件和页面标签——都有局限性。</p>
+
+<h4>影响日志文件访问者数据准确性的问题</h4>
+
+<p>日志文件跟踪通常在服务器上默认安装。可能因为这一原因，系统管理员很少考虑其他的跟踪方法。</p>
+
+<h4>动态分配的IP地址</h4>
+
+<p>一般来说，日志文件法通过将相同的IP地址和浏览器签名的所有点击归为一个人，来跟踪访问者的会话。当网络服务服务提供商在会话过程中分配不同的IP地址时，会出现问题。总部设在美国的comScore的一项研究（http://www.comscore.com/Press<em>Events/Presentations</em>Whitepapers/2007/Cookie<em>Deletion</em>Whitepaper）表明，一台典型的家用PC每个月平均有10.5个不同的IP地址。这些访问者将被日志文件分析软件计算为10个独立访问者。由于每个网络用户都有相同的浏览器签名（当前的IE），所以，这个问题将更加严重。结果，访问者数量被极大的高估。cookies的使用可以克服这一局限性。</p>
+
+<h4>客户端缓存页面</h4>
+
+<p>客户端缓存指存储在访问者电脑上的先前访问页面。在这种情况下，再一次访问相同页面导致这一页面由访问者的电脑提供，因此，这一次访问没有被记录在服务器中。</p>
+
+<p>服务器端缓存来自于网络加速技术，这种技术缓存网站的一个副本，并从他们的服务器提供这一副本以加速传输，这意味着所有随后的网站请求来自缓存而不是网站本身，导致了跟踪信息的丢失。现在，大部分网站都以某种方式缓存以改善性能。例如，在<a href="http://en.wikipedia.org/wiki/Cache">http://en.wikipedia.org/wiki/Cache</a>看一下维基百科关于缓存的解释。</p>
+
+<h4>计算机器人</h4>
+
+<p>机器人，也被称为蜘蛛或网络爬虫，最常被搜索引擎用来抓取和索引页面。但是，也存在其他监测服务器性能的机器人——运行时间、下载速度等等，还有的进行页面分析，包括比价、email搜集和竞争性研究等等。这些影响网站分析，因为日志文件法也包括机器人在你网站上的活动，尽管它们并不是真正的访问者。当计算访问者数量时，机器人占网站综合浏览量的很大比例。遗憾的是，很难完全过滤这些，因为有数千自制的、不知名的机器人存在。因为这个原因，日志分析法可能高估访问者数量，在大多数情况下，这是很严重的。 </p>
+
+    </div>
+
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Google Analytics-ref">Google Analytics <span>28</span></a></li>
+     
+    	<li><a href="/tags.html#web metrics-ref">web metrics <span>28</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/2010/08/28/e7acace4b889e696b9e5b9bfe5918ae8b79fe8b8aae9878de5ae9ae59091e4b8a2e5a4b1e8b79fe8b8aaurlse79a84e8a7a3e586b3e696b9e6a188" title="第三方广告跟踪重定向丢失跟踪URLs的解决方案">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/2010/08/29/e6af94e8be83e4b88de5908ce69c8de58aa1e68f90e4be9be59586e79a84e695b0e68dae" title="比较不同服务提供商的数据">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

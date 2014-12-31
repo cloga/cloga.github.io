@@ -1,0 +1,392 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>gensim文档-主题与转换</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>gensim文档-主题与转换 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>27 January 2014</span>
+    </div>
+    <div class="content">
+      <p>如果你想要查看logging事件不要忘记设置。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> : </span><span class="si">%(levelname)s</span><span class="s"> : </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</code></pre></div>
+<h1>转化接口</h1>
+
+<p>在前面的<a href="http://cloga.info/python/2014/01/27/Gensim_Corpora_and_Vector_Spaces">语料和向量空间</a>的教程中，我们创建了一个文档语料，用向量流来表征。接下来，让我们发动 gensim使用那些语料：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">similarities</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;/tmp/deerwester.dict&#39;</span><span class="p">)</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">MmCorpus</span><span class="p">(</span><span class="s">&#39;/tmp/deerwester.mm&#39;</span><span class="p">)</span>
+<span class="k">print</span> <span class="n">corpus</span>
+
+<span class="n">MmCorpus</span><span class="p">(</span><span class="mi">9</span> <span class="n">documents</span><span class="p">,</span> <span class="mi">12</span> <span class="n">features</span><span class="p">,</span> <span class="mi">28</span> <span class="n">non</span><span class="o">-</span><span class="n">zero</span> <span class="n">entries</span><span class="p">)</span>
+</code></pre></div>
+<p>在这个教程中，我将展示如何从一个向量表征转化为另一个向量。这个过程服务于两个目的：</p>
+
+<ul>
+<li><p>显示出语料中的隐藏结构，发现词的关系，用他们以一种新的（希望是）更语义的方式来描述文档。</p></li>
+<li><p>让文档表征更紧凑。这既可以改善效率（新表征消耗更少的资源）也可以改善效力（忽略边际数据趋势，降低噪音）。</p></li>
+</ul>
+
+<h1>创建转换</h1>
+
+<p>转换是标准的Python对象，通常用训练语料的平均数初始化：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">tfidf</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">TfidfModel</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span> <span class="c"># 第一步--初始化一个模型</span>
+</code></pre></div>
+<p>我们用教程1的旧语料来初始化（训练）转换模型。不同的转换需要不同的初始化参数；假如是TfIdf，“训练”包括简单过一次提供的语料以及文档所有特征的频率。训练其他模型，比如潜在语义分析(Latent Semantic Analysis，LSA)或Latent Dirichlet Allocation（LDA），更加复杂，因此也需要更多的时间。</p>
+
+<p>注意</p>
+
+<p>转换通常在两个具体的向量空间中转化。相同的向量空间（等于相同的特征ids）必须被用于训练和接下来的向量转换。不使用相同的输入特征空间，比如，应用一个不同的字符预处理，使用不同的特征 ids，或者在期望Tfidf向量时使用词袋作为输入向量，将导致转换调用时特征错配，因此，产生垃圾输出和或者运行异常。</p>
+
+<h1>转换向量</h1>
+
+<p>从这里开始，tfidf被作为一个只读的对象，可以被用于将任意向量从旧表征（词袋整数计数）转化为新表征（TfIdf实值加权）：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">doc_bow</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="k">print</span> <span class="n">tfidf</span><span class="p">[</span><span class="n">doc_bow</span><span class="p">]</span> <span class="c"># 第二步--用模型转换向量</span>
+
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.70710678</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.70710678</span><span class="p">)]</span>
+</code></pre></div>
+<p>或者在整个语料上应用转换：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">corpus_tfidf</span> <span class="o">=</span> <span class="n">tfidf</span><span class="p">[</span><span class="n">corpus</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">corpus_tfidf</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">doc</span>
+
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.57735026918962573</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.57735026918962573</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.57735026918962573</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.44424552527467476</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.44424552527467476</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.44424552527467476</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.32448702061385548</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">0.44424552527467476</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">0.32448702061385548</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mf">0.5710059809418182</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.41707573620227772</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">0.41707573620227772</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">0.5710059809418182</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.49182558987264147</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">0.71848116070837686</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mf">0.49182558987264147</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.62825804686700459</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mf">0.62825804686700459</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mf">0.45889394536615247</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">0.70710678118654746</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.70710678118654746</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mf">0.50804290089167492</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.50804290089167492</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">0.69554641952003704</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mf">0.62825804686700459</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">0.45889394536615247</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mf">0.62825804686700459</span><span class="p">)]</span>
+</code></pre></div>
+<p>在这个特殊的案例中，我们转换了训练用的语料，但是，这只是偶然。一旦转化模型被初始化后，它可以被用于任何向量（当然，假如他们来自相同的向量空间），即使他们根本没有被用于训练语料。这在LSA中通过成为折叠的过程实现，在LDA通过主题推断等等。</p>
+
+<p>注意</p>
+
+<p>调用model[语料]只是在旧语料文档流创建了一个封装器 - 实际上转化是在文档迭代时即时完成的。我们不能在调用corpus<em>transformed = model[corpus]时转化整个语料库，因为，这意味着将结果存储在主内存中，这与gensim内存独立的目的相悖。如果你需要在转换后的corpus</em>transformed多次迭代，那么转换是代价昂贵的，<a href="http://radimrehurek.com/gensim/tut1.html#corpus-formats">先系列化结果语料库到硬盘</a>，然后继续使用。</p>
+
+<p>转换也能被序列化，一个叠一个，以一种链式：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">lsi</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">LsiModel</span><span class="p">(</span><span class="n">corpus_tfidf</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="c"># 初始化一个LSI转换</span>
+<span class="n">corpus_lsi</span> <span class="o">=</span> <span class="n">lsi</span><span class="p">[</span><span class="n">corpus_tfidf</span><span class="p">]</span> <span class="c"># 在原始语料上创建一个双重封装器: bow-&gt;tfidf-&gt;fold-in-lsi</span>
+</code></pre></div>
+<p>这里我们用潜在语义索引（<a href="http://en.wikipedia.org/wiki/Latent_semantic_indexing">Latent Semantic Indexing</a>）将我们的Tf-Idf语料库转换到潜在2-D空间（2-D因为我们设置 num<em>topics=2）。现在你可以觉得奇怪：这两个潜在维度是什么？让我们检查一下models.LsiModel.print</em>topics():</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">lsi</span><span class="o">.</span><span class="n">print_topics</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">topic</span> <span class="c">#0(1.594): -0.703*&quot;trees&quot; + -0.538*&quot;graph&quot; + -0.402*&quot;minors&quot; + -0.187*&quot;survey&quot; + -0.061*&quot;system&quot; + -0.060*&quot;response&quot; + -0.060*&quot;time&quot; + -0.058*&quot;user&quot; + -0.049*&quot;computer&quot; + -0.035*&quot;interface&quot;</span>
+<span class="n">topic</span> <span class="c">#1(1.476): -0.460*&quot;system&quot; + -0.373*&quot;user&quot; + -0.332*&quot;eps&quot; + -0.328*&quot;interface&quot; + -0.320*&quot;response&quot; + -0.320*&quot;time&quot; + -0.293*&quot;computer&quot; + -0.280*&quot;human&quot; + -0.171*&quot;survey&quot; + 0.161*&quot;trees&quot;</span>
+</code></pre></div>
+<p>(主题被打印在log中-见本页顶部关于激活logging的说明)</p>
+
+<p>看起来根据LSI，“trees”，“graph” 和 “minors” 都是相关的词（对第一个主题的方向贡献最大），而第二个主题实际上关注自身及其他一些词。和预期类似，前五个文档与第二个主题的联系更近，而剩下的四个文档则更贴近第一个主题：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">corpus_lsi</span><span class="p">:</span> <span class="c"># 在这里，bow-&gt;tfidf 和 tfidf-&gt;lsi 转换实际上都是即时执行的</span>
+    <span class="k">print</span> <span class="n">doc</span>
+
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.066</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.520</span><span class="p">)]</span> <span class="c"># &quot;Human machine interface for lab abc computer applications&quot;</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.197</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.761</span><span class="p">)]</span> <span class="c"># &quot;A survey of user opinion of computer system response time&quot;</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.090</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.724</span><span class="p">)]</span> <span class="c"># &quot;The EPS user interface management system&quot;</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.076</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.632</span><span class="p">)]</span> <span class="c"># &quot;System and human system engineering testing of EPS&quot;</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.102</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.574</span><span class="p">)]</span> <span class="c"># &quot;Relation of user perceived response time to error measurement&quot;</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.703</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.161</span><span class="p">)]</span> <span class="c"># &quot;The generation of random binary unordered trees&quot;</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.877</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.168</span><span class="p">)]</span> <span class="c"># &quot;The intersection graph of paths in trees&quot;</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.910</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.141</span><span class="p">)]</span> <span class="c"># &quot;Graph minors IV Widths of trees and well quasi ordering&quot;</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.617</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.054</span><span class="p">)]</span> <span class="c"># &quot;Graph minors A survey&quot;</span>
+</code></pre></div>
+<p>模型的持久化通过save()和load()函数完成：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">lsi</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;/tmp/model.lsi&#39;</span><span class="p">)</span> <span class="c"># tfidf，lda...也一样</span>
+<span class="n">lsi</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">LsiModel</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s">&#39;/tmp/model.lsi&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>接下来的问题可能是：那些文档间的相似度究竟是怎么样的？是否有方法正态化相似度，以便，给定一个输入的文档，我们可以根据相似度排序其他文档？<a href="http://radimrehurek.com/gensim/tut3.html">下一篇教程</a>中将涵盖相似度查询。</p>
+
+<h1>可用的转换</h1>
+
+<p>Gensim实现了一些流行的向量空间模型算法：</p>
+
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Tf%E2%80%93idf">词频 * 逆向文本概率，Tf-Idf</a>在初始化时期望词袋（整型值）训练语料库。在转换中，它接收一个向量返回相同维度的另一个向量，只是增大了在训练语料库中罕见特征的值。因此，它将整值的向量转化为实值的向量，同时保持维度数不变。也可以视需要将产生的向量用（欧几里得）单位长度进行正态化。</li>
+</ul>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">model</span> <span class="o">=</span> <span class="n">tfidfmodel</span><span class="o">.</span><span class="n">TfidfModel</span><span class="p">(</span><span class="n">bow_corpus</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Latent_semantic_indexing">潜在语义索引，LSI（有时也称为LSA）</a>从词袋或（优先）TfIdf加权的空间转换为低维的潜在空间。对于上面的样本语料库我们只使用了两个潜在的维度，但是，真正的语料库，200-500的目标微博被推荐为“黄金标准”。</li>
+</ul>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">model</span> <span class="o">=</span> <span class="n">lsimodel</span><span class="o">.</span><span class="n">LsiModel</span><span class="p">(</span><span class="n">tfidf_corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+</code></pre></div>
+<p>LSI的训练是唯一的，我们可以在任意时候继续“训练”，只需要提供更多的训练文档。这是通过为底层模型增加更新达到的，这个过程称为线上训练。因为这个，特征，数据的文档流可能几乎是无限的-只要在新文档到达时喂给LSI就行，同时，将计算完的转换模型作为只读来使用！</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">model</span><span class="o">.</span><span class="n">add_documents</span><span class="p">(</span><span class="n">another_tfidf_corpus</span><span class="p">)</span> <span class="c"># 现在 LSI 已经在 tfidf_corpus + another_tfidf_corpus 上进行训练</span>
+<span class="n">lsi_vec</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">tfidf_vec</span><span class="p">]</span> <span class="c"># 将新文档转化到LSI空间，而不影响模型</span>
+<span class="o">...</span>
+<span class="n">model</span><span class="o">.</span><span class="n">add_documents</span><span class="p">(</span><span class="n">more_documents</span><span class="p">)</span> <span class="c"># tfidf_corpus + another_tfidf_corpus + more_documents</span>
+<span class="n">lsi_vec</span> <span class="o">=</span> <span class="n">model</span><span class="p">[</span><span class="n">tfidf_vec</span><span class="p">]</span>
+<span class="o">...</span>
+</code></pre></div>
+<p>关于在无限流中，如何让LSI不断“忘记”旧的观察的细节，请参见<a href="http://radimrehurek.com/gensim/models/lsimodel.html#module-gensim.models.lsimodel">gensim.models.lsimodel</a>文档。如果你想要自己探索，你也可以调整参数，影响LSI算法的速度 vs. 内存占用 vs. 数值精度。</p>
+
+<p>gensim用一种新颖线上增量流式分布训练算法（好拗口！），我发布在<a href="http://radimrehurek.com/gensim/tut2.html#id10">5</a>。gensim在内部也执行来自Halko等等的随机多通道算法，以便加速核内计算部分。更多关于通过计算集群间的分布计算来进一步加速请见<a href="http://radimrehurek.com/gensim/wiki.html">Experiments on the English Wikipedia</a>。</p>
+
+<ul>
+<li><a href="http://www.cis.hut.fi/ella/publications/randproj_kdd.pdf">随机投影，RP</a>目的是减低向量空间的维数。通过引入一点随机性，这是一个非常高效（内存和CPU友好）的方法来逼近文档间的TfIdf距离，推荐的维数也是几百到几千，取决于你的数据集。</li>
+</ul>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">model</span> <span class="o">=</span> <span class="n">rpmodel</span><span class="o">.</span><span class="n">RpModel</span><span class="p">(</span><span class="n">tfidf_corpus</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</code></pre></div>
+<ul>
+<li><a href="http://en.wikipedia.org/wiki/Latent_Dirichlet_allocation">Latent Dirichlet Allocation, LDA</a>也是另一个从词袋计数到低维主题空间的转换。LDA是LSA（也称为多项PCA）的概率扩展，因此，LDA的主题可以被解释为词的概率分布。与LSA类似，这些分布是自动由训练语料库推断出来的。反过来，文档可以解释为这些主题的（软性）组合（又和LSA类似）。<br></li>
+</ul>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">model</span> <span class="o">=</span> <span class="n">ldamodel</span><span class="o">.</span><span class="n">LdaModel</span><span class="p">(</span><span class="n">bow_corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">,</span> <span class="n">num_topics</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+<p>根据[<a href="http://radimrehurek.com/gensim/tut2.html#id7">2</a>]gensim使用了线上LDA参数估计的一个快速实现，修改后可以在计算集群上以<a href="http://radimrehurek.com/gensim/distributed.html">分布模型</a>运行。</p>
+
+<ul>
+<li><a href="http://jmlr.csail.mit.edu/proceedings/papers/v15/wang11a/wang11a.pdf">Hierarchical Dirichlet Process, HDP</a>是一个非参数贝叶斯方法（注意没有请求的主题数):</li>
+</ul>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">model</span> <span class="o">=</span> <span class="n">hdpmodel</span><span class="o">.</span><span class="n">HdpModel</span><span class="p">(</span><span class="n">bow_corpus</span><span class="p">,</span> <span class="n">id2word</span><span class="o">=</span><span class="n">dictionary</span><span class="p">)</span>
+</code></pre></div>
+<p>gensim使用了基于[<a href="http://radimrehurek.com/gensim/tut2.html#id8">3</a>]的快速线上实现。HDP模型是gensim一个新增部分，并且它的学术边界仍然较粗糙-小心使用。</p>
+
+<p>添加新的VSM转换（比如不同的加权方案）非常简单；更多的信息和例子请看一下<a href="http://radimrehurek.com/gensim/apiref.html">API参考</a>或者直接看一下Python代码。</p>
+
+<p>有必要再重复一下，这些是特有的增量实施，不需要将全部语料库一次读入内存。通过小心处理内存，我正在改善<a href="http://radimrehurek.com/gensim/distributed.html">分布计算</a>，也在改善CPU的效率。如果你可以出一份力（测试，提供使用案例或者代码），<a href="radimrehurek%40seznam.cz">请联系原作者</a>。</p>
+
+<p>下一篇教程是关于<a href="http://radimrehurek.com/gensim/tut3.html">相似性查询</a>。</p>
+
+<p><a href="http://radimrehurek.com/gensim/tut2.html">原文地址</a></p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python-ref">
+    		python <span>17</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>17</span></a></li>
+     
+    	<li><a href="/tags.html#gensim-ref">gensim <span>3</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/python/2014/01/27/Gensim_Corpora_and_Vector_Spaces" title="gensim文档-语料库与向量空间">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/python/2014/01/28/Gensim_Similarity_Queries" title="gensim文档-相似性查询">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

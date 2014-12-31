@@ -1,0 +1,252 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>Google Analytics不能做什么</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>Google Analytics不能做什么 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>30 August 2010</span>
+    </div>
+    <div class="content">
+      <p>正如你所预料的，我认为Google Analytics是一个伟大的工具，能帮助需要企业优化、改进他们的网站。在一些情况下，这带来了数千万美元的转化改善，但是，事实上，能完全实现企业的每一件事；有太多的可能性。因此，我将总结一些Google Analytics所不能完成的事，解释这是为什么以及其意义。
+<strong>数据重加工</strong>
+如图3.2所示，网站访问者的数据流及Google Analytics的数据处理意味着报告通常是建立在以往报告之上的。因此，如果，你在实施时有错误（例如，网站的页面没有GATC或设置了错误的过滤器），这种错误将体现在报告中。随着时间的流逝，数据将继续丢失或错误。即使你修正了这个错误，Google Analytics也不能回去重新处理这些数据。
+原因很简单。Google Analytics的所有用户的数据集是巨大的，预处理的，以聚合数据的形式存储，即，与其他的Google Analytics账户混在一起。目前，Google不能分离并重新处理单一的Google Analytics账户。
+不能重新处理数据确实是一个缺点，能使任何安装者失望。为了减轻这一点的影响，你应该随时有一个测试配置文件，在你将新的过滤器及配置设置应用于你的主报告配置文件前，你可以用来试验，这将在第8章“配置指南的最佳做法”中讨论。
+注：为了让你理解Google Analytics每天24小时，每小时必须加工的数据量，考虑以下场景：
+一个典型的网站每小时有100次访问。
+•每次访问平均产生10个综合浏览量，或者每小时1000个数据。
+•有几百万活动的Google Analytics账户。
+因此，Google Analytics每小时处理几十亿行访问者数据。重新处理一个子集不是容易。但是，在将来，这将是可能的。
+<strong>出价管理</strong>
+在Google Analytics报告中查看你的Adwords访问者（例如，网站停留时间、跳出率和电子商务价值），你能在这同一个界面更新出价策略、价格和广告创意，这是不是很棒？现在这是不可能的，你需要登入你的Adwords账户来更改。但是，我希望Google在不远的将来能解决这一问题。毕竟，Google每年200多亿美元的收入的97%来自它的PPC广告。
+<strong>非实时报告
+*<em>正如前面所谈到的，报告通常有3到4小时的延迟。因此，中午查看报告通常是今天早上9点之前的数据。
+提供实时报告对每个网站分析服务提供商都是非常昂贵的（耗费资源），但是，这笔开支是否值得？我还没见过能对实时报告采取行动的用户。通常的情况是，即使是最前卫（不断变化）的网站，报告用户和经理也以周为单位审核和批准潜在的网站变化。因此，在我看来，实时报告不值得。话虽如此，但是，你的报告越及时越好。在本章稍后讨论的Urchin能每小时产生报告。
+*</em>导入第三方消费数据</strong>
+目前，只有来自Adwords和Adsense的消费数据能导入，也允许报告ROI。这意味着来自其他PPC网站、banner广告、email营销、搜索引擎优化等等的访问者获得成本，不可能被计算，因此，这些引入方式在你的报告中没有相关ROI数据——需要你手动计算。
+但是，随着最近Google Analytics导出API的发布，导入第三方消费数据应该也离现实不远了（这只是我自己的猜测）。本章稍后讨论的Urchin软件已经具备了这一功能。
+单个访问者的跟踪（违反Google的政策）
+在2005年，收购了Urchin软件公司和技术之后，Google采取了非常慎重的决定不跟踪个体（在当时的beta版中的一个功能）。即，Google Analytics中的所有访问者数据都以聚合匿名的形式报告。
+尽管，对广告主来说，从访问者之前的行为来识别访问者是很吸引人的，但是，从Google的观点看来，这有些过分——侵犯了使用Google Analytics的终端用户的隐私权（公众）。
+当然，如果你与你的访问者有特殊的协议，他们不介意这种个体跟踪，Urchin软件是可以选择的工具。</p>
+
+    </div>
+
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Google Analytics-ref">Google Analytics <span>28</span></a></li>
+     
+    	<li><a href="/tags.html#web metrics-ref">web metrics <span>28</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/2010/08/30/google-analyticse5a682e4bd95e5b7a5e4bd9c" title="Google Analytics如何工作">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/2010/08/30/google-analyticse4b88ee99a90e7a781" title="Google Analytics与隐私">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

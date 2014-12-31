@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>启用自动标记后的测试</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>启用自动标记后的测试 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>31 August 2010</span>
+    </div>
+    <div class="content">
+      <p>正如在第2章“<a href="http://www.cloga.info/archives/133.html">为什么PPC服务提供商的数据与网站分析报告不符</a>”的部分所讨论的，第三方广告跟踪系统能无意中损坏或去除Google Analytics跟踪AdWords所需要的gclid参数。例如，Adform、Atlas Search、Bluestreak、DoubleClick以及Efficient Frontier等跟踪系统，使用重定向URLs来在企业之外收集访问者统计数据。这些跟踪系统可能无意中破坏了AdWords的glicd。因此，在启用自动跟踪之后通常需要通过点击一个Google搜索结果页的一个广告样本来进行检查。</p>
+
+<p>如果测试失败，那么请联系你的第三方广告跟踪提供商，因为这可能很好解决。例如，你的AdWords自动标记的着陆页URL可能看起来是这样的：</p>
+
+<p><a href="http://www.cloga.info/?gclid=COvQgK7JrY8CFSUWEAodKEEyuA">http://www.cloga.info/?gclid=COvQgK7JrY8CFSUWEAodKEEyuA</a></p>
+
+<p>如果第三方跟踪系统使用了重定向，那最终着陆页将是这样：</p>
+
+<p><a href="http://www.redirect.com/?url=http:/www.cloga.info/?gclid=COvQgK7JrY8CFSUWEAodKEEyuA">http://www.redirect.com?url=http://www.cloga.info/?gclid=COvQgK7JrY8CFSUWEAodKEEyuA</a></p>
+
+<p>注意两个“？”——这是无效的，因为你不能在一个URL中有两个问号。一些第三方跟踪系统可能需要你用#代替第二个？，这样URL就能被正确处理。这应该是第三方广告跟踪系统的事，而不是AdWords的。另一种解决方案是为着陆页添加一个编码的虚拟变量，如：</p>
+
+<p><a href="http://www.cloga.info/%3Fdum=1">http://www.cloga.info/%3Fdum=1</a></p>
+
+<p>AdWords自动标记将添加gclid</p>
+
+<p><a href="http://www.cloga.info/%3Fdum=1%EF%BC%86gclid=COvQgK7JrY8CFSUWEAodKEEyuA">http://www.cloga.info/%3Fdum=1＆gclid=COvQgK7JrY8CFSUWEAodKEEyuA</a></p>
+
+<p>这样就行了。即URL将为Google Analytics的跟踪保留gclid参数的正确格式。然后，你可以在Google Analytics配置设置中排除虚拟变量的跟踪（见第8章“初级设置”）。</p>
+
+<p><strong>注：</strong>如果你已经在着陆页的URL中有参数，那么你不需要添加虚拟参数。但是，你能需要将？改为其等效的编码%3F。</p>
+
+    </div>
+
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Google Analytics-ref">Google Analytics <span>28</span></a></li>
+     
+    	<li><a href="/tags.html#web metrics-ref">web metrics <span>28</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/2010/08/30/google-analyticse58f8aurchine4b98be997b4e98089e68ba9e79a84e6a087e58786" title="Google Analytics及Urchin之间选择的标准">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/2010/08/31/e58f91e78eb0e680a7e4b88ee58685e983a8e68aa5e5918ae585a5e58fa3" title="发现性与内部报告入口">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

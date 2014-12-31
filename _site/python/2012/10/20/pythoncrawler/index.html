@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>用Python写简单爬虫</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>用Python写简单爬虫 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>20 October 2012</span>
+    </div>
+    <div class="content">
+      <p>Python提供了许多Module，通过这些Module，可以很简单的做一些工作。比如，要获得cloga这个词在百度搜索结果页中的排名结果（排名结果+URL），这就是一个很简单的爬虫需求。</p>
+
+<p>首先，要通过urllib2这个Module获得对应的HTML源码。</p>
+
+<script src="https://gist.github.com/cloga/8171284.js"></script>
+
+<p>通过上面这三句就可以将URL的源码存在content变量中，其类型为字符型。</p>
+
+<p>接下来是要从这堆HTML源码中提取我们需要的内容。用Chrome查看一下对应的内容的代码（也可以用Firefox的Firebug）。</p>
+
+<p>[caption id=&quot;attachment_1697&quot; align=&quot;aligncenter&quot; width=&quot;600&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/10/QQ%E6%88%AA%E5%9B%BE20121020214746.png"><img src="http://www.cloga.info/wp-content/uploads/2012/10/QQ%E6%88%AA%E5%9B%BE20121020214746-1024x367.png" alt="Java Console"></a> Java Console[/caption]</p>
+
+<p>可以看到url的信息存储在span标签中，要获取其中的信息可以用正则式。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">import re
+urls_pat=re.compile(r&#39;&lt;span class=&quot;g&quot;&gt;(.*?)&lt;/span&gt;&#39;)
+siteUrls=re.findall(results_pat,content)
+</code></pre></div>
+<!-- more -->
+
+<p>re.compile是将字符串编译为用于python正则式的模式，字符前的r表示是纯字符，这样就不需要对元字符进行两次转义。re.findall返回的是字符串中符合results<em>pat的列表，由于在results</em>pat中使用了子表达式，所以results存储的就是子表达式所匹配的内容，即<span>与</span>之间的内容。</p>
+
+<p>此外，也可以用BeautifulSoup这个Module来获得提取同样的信息。直接从源码中用正则式提取信息适用于那些按照标准写的HTML页面，BeautifulSoup则可以处理一些编写不规范的页面。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">from BeautifulSoup import BeautifulSoup
+soup=BeautifulSoup(content)
+siteUrls=soup.findAll(&#39;span&#39;,attrs={&#39;class&#39;:&#39;g&#39;})
+</code></pre></div>
+<p>BeautifulSoup()可以把刚才抓到的字符串转化为Beautiful的对象。这样就可以应用BeautifulSoup提供的一些方法处理HTML。比如，findAll(&#39;a&#39;)就可以返回一个所有页面的a标签的List，我觉得这个和JS里面的getElementByTagName挺像的。另外也可以指定attrs参数，这个参数就是一个筛选条件，其数据结构是一个字典。findAll(&#39;span&#39;,attrs={&#39;class&#39;:&#39;g&#39;})的意思就是返回所有class=&#39;g&#39;的span标签的内容（包括span标签自身）。</p>
+
+<p>用正则式和BeautifulSoup获得内容还需要进一步处理，因为其中包含html标签。类似，hi.baidu.com/<b>cloga</b> 2010-8-29或者<span>  hi.baidu.com/<b>cloga</b> 2010-8-29  </span>，同样可以用正则式的sub方法替换掉这些标签。</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">strip_tag_pat=re.compile(r&#39;&lt;.*?&gt;&#39;)
+file=open(&#39;results000.csv&#39;,&#39;w&#39;)
+for i in results:
+    i0=re.sub(strip_tag_pat,&#39;&#39;,i)
+    i0=i0.strip()
+    i1=i0.split(&#39; &#39;)
+    date=i1[-1]
+    siteUrl=&#39;&#39;.join(i1[:-1])
+    rank+=1
+    file.write(date+&#39;,&#39;+siteUrl+&#39;,&#39;+str(rank)+&#39;\n&#39;)
+file.close()
+</code></pre></div>
+<p>再来就是把对应的结果输出到文件中，比如，排名、URL、收入日期这样的形式。OK，这样就用Python实现了一个简单的爬虫需求。秀一下上面代码的输出。</p>
+
+<p>[caption id=&quot;attachment_1699&quot; align=&quot;aligncenter&quot; width=&quot;640&quot;]<a href="http://www.cloga.info/wp-content/uploads/2012/10/Result.png"><img src="http://www.cloga.info/wp-content/uploads/2012/10/Result.png" alt="Result"></a> Result[/caption]</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python-ref">
+    		python <span>17</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>17</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/digital%E5%88%86%E6%9E%90/2012/08/14/e5a682e4bd95e588b6e5ae9ae4b880e4b8aae5ae8ce695b4e79a84e79b91e6b58be696b9e6a188" title="如何制定一个完整的监测方案">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/digital%E5%88%86%E6%9E%90/2012/10/25/GTM&Tags" title="在GTM中指定Tag的依存关系">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

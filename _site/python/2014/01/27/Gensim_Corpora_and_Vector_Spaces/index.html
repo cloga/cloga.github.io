@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>gensim文档-语料库与向量空间</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>gensim文档-语料库与向量空间 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>27 January 2014</span>
+    </div>
+    <div class="content">
+      <p>如果你想要查看logging事件不要忘记设置。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%(asctime)s</span><span class="s"> : </span><span class="si">%(levelname)s</span><span class="s"> : </span><span class="si">%(message)s</span><span class="s">&#39;</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</code></pre></div>
+<h1>从字符到向量</h1>
+
+<p>这次让我们从文档表征为字符开始：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span><span class="p">,</span> <span class="n">models</span><span class="p">,</span> <span class="n">similarities</span>
+<span class="n">documents</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;Human machine interface for lab abc computer applications&quot;</span><span class="p">,</span>
+              <span class="s">&quot;A survey of user opinion of computer system response time&quot;</span><span class="p">,</span>
+              <span class="s">&quot;The EPS user interface management system&quot;</span><span class="p">,</span>
+              <span class="s">&quot;System and human system engineering testing of EPS&quot;</span><span class="p">,</span>
+              <span class="s">&quot;Relation of user perceived response time to error measurement&quot;</span><span class="p">,</span>
+              <span class="s">&quot;The generation of random binary unordered trees&quot;</span><span class="p">,</span>
+              <span class="s">&quot;The intersection graph of paths in trees&quot;</span><span class="p">,</span>
+              <span class="s">&quot;Graph minors IV Widths of trees and well quasi ordering&quot;</span><span class="p">,</span>
+              <span class="s">&quot;Graph minors A survey&quot;</span><span class="p">]</span>
+</code></pre></div>
+<p>这是九个文档的小语料库，每个文档只包含一个句子。</p>
+
+<p>首先，让我们标记化这些文档，删除一些常见词（用一个小停用词表）及在语料库中：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># remove common words and tokenize</span>
+<span class="n">stoplist</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s">&#39;for a of the and to in&#39;</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">document</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">stoplist</span><span class="p">]</span>
+          <span class="k">for</span> <span class="n">document</span> <span class="ow">in</span> <span class="n">documents</span><span class="p">]</span>
+
+<span class="c"># remove words that appear only once</span>
+<span class="n">all_tokens</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">texts</span><span class="p">,</span> <span class="p">[])</span>
+<span class="n">tokens_once</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="nb">set</span><span class="p">(</span><span class="n">all_tokens</span><span class="p">)</span> <span class="k">if</span> <span class="n">all_tokens</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="n">word</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">texts</span> <span class="o">=</span> <span class="p">[[</span><span class="n">word</span> <span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">text</span> <span class="k">if</span> <span class="n">word</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">tokens_once</span><span class="p">]</span>
+          <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">]</span>
+
+<span class="k">print</span> <span class="n">texts</span>
+
+<span class="p">[[</span><span class="s">&#39;human&#39;</span><span class="p">,</span> <span class="s">&#39;interface&#39;</span><span class="p">,</span> <span class="s">&#39;computer&#39;</span><span class="p">],</span>
+ <span class="p">[</span><span class="s">&#39;survey&#39;</span><span class="p">,</span> <span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="s">&#39;computer&#39;</span><span class="p">,</span> <span class="s">&#39;system&#39;</span><span class="p">,</span> <span class="s">&#39;response&#39;</span><span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">],</span>
+ <span class="p">[</span><span class="s">&#39;eps&#39;</span><span class="p">,</span> <span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="s">&#39;interface&#39;</span><span class="p">,</span> <span class="s">&#39;system&#39;</span><span class="p">],</span>
+ <span class="p">[</span><span class="s">&#39;system&#39;</span><span class="p">,</span> <span class="s">&#39;human&#39;</span><span class="p">,</span> <span class="s">&#39;system&#39;</span><span class="p">,</span> <span class="s">&#39;eps&#39;</span><span class="p">],</span>
+ <span class="p">[</span><span class="s">&#39;user&#39;</span><span class="p">,</span> <span class="s">&#39;response&#39;</span><span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">],</span>
+ <span class="p">[</span><span class="s">&#39;trees&#39;</span><span class="p">],</span>
+ <span class="p">[</span><span class="s">&#39;graph&#39;</span><span class="p">,</span> <span class="s">&#39;trees&#39;</span><span class="p">],</span>
+ <span class="p">[</span><span class="s">&#39;graph&#39;</span><span class="p">,</span> <span class="s">&#39;minors&#39;</span><span class="p">,</span> <span class="s">&#39;trees&#39;</span><span class="p">],</span>
+ <span class="p">[</span><span class="s">&#39;graph&#39;</span><span class="p">,</span> <span class="s">&#39;minors&#39;</span><span class="p">,</span> <span class="s">&#39;survey&#39;</span><span class="p">]]</span>
+</code></pre></div>
+<p>你处理这些文档的方式可能有些不同；这里我只是用白空格去标记化，接下来将每个词转为小写。事实上，我用这个特别（简单化而低效）的设置来模拟Deerwester等在最初的LSA文章中所做的实验。</p>
+
+<p>处理文档的方式多种多样并且与用途和语言无关，我决定不用任何接口加以限制。而是，每个文档用从中抽取的特征来表征，而不是由“表面”字符形式：如何获取特征取决于你。下面我描述一个通用的一般目的的方法（称为词袋），但是，记住不同的应用领域要求不同的特征，一如既往，输入一堆垃圾，产出的也必然是一堆垃圾······</p>
+
+<p>要将文档转化为向量，我们需要使用一种称为词袋的文档表征。在这种表征中，每个文档是由一个向量来表征，每一个向量元素代表一个问题-答案对，形式如下：</p>
+
+<p>“词汇系统在文档中出现了几次？一次。”</p>
+
+<p>仅用（整型）id来表征这些问题是比较方便的。问题与id之前的映射称为字典：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">texts</span><span class="p">)</span>
+<span class="n">dictionary</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s">&#39;/tmp/deerwester.dict&#39;</span><span class="p">)</span> <span class="c"># store the dictionary, for future reference</span>
+<span class="k">print</span> <span class="n">dictionary</span>
+
+<span class="n">Dictionary</span><span class="p">(</span><span class="mi">12</span> <span class="n">unique</span> <span class="n">tokens</span><span class="p">)</span>
+</code></pre></div>
+<p>这里我们用gensim.corpora.dictionary.Dictionary类为每个出现在语料库中的词分配了一个整型的id。这个类扫描文本，收集词频及其他统计值。最后，我们在处理过的语料库中发现了12个唯一的词，这意味着每个文档将用12个数字表示（即用12维向量）。查看词和id的映射：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">print</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">token2id</span>
+
+<span class="p">{</span><span class="s">&#39;minors&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span> <span class="s">&#39;graph&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&#39;system&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s">&#39;trees&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s">&#39;eps&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span> <span class="s">&#39;computer&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+<span class="s">&#39;survey&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s">&#39;user&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s">&#39;human&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;time&#39;</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span> <span class="s">&#39;interface&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s">&#39;response&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+</code></pre></div>
+<p>实际转化标记化文本为向量：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">new_doc</span> <span class="o">=</span> <span class="s">&quot;Human computer interaction&quot;</span>
+<span class="n">new_vec</span> <span class="o">=</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">new_doc</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+<span class="k">print</span> <span class="n">new_vec</span> <span class="c"># the word &quot;interaction&quot; does not appear in the dictionary and is ignored</span>
+
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+</code></pre></div>
+<p>函数doc2bow()只是计算每个唯一的词的出现频率，将词转化整型词id并且将结果作为稀疏向量返回。因此，稀疏向量[(0, 1), (1, 1)]读作：在文档“Human computer interaction”中,词computer (id 0)和human (id 1)出现1次;其他字典词出现0次。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">texts</span><span class="p">]</span>
+<span class="n">corpora</span><span class="o">.</span><span class="n">MmCorpus</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s">&#39;/tmp/deerwester.mm&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="p">)</span> <span class="c"># store to disk, for later use</span>
+<span class="k">print</span> <span class="n">corpus</span>
+
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+</code></pre></div>
+<p>到这里为止，你要明确的是id=10的向量特征代表问题“词 graph在这个文档中出现了几次” 对于前6个文档答案是”0“，剩下的三个的答案是”1“。事实上我们已经获得了与<a href="http://radimrehurek.com/gensim/tutorial.html#first-example">Quick Example</a>相同的语料向量。</p>
+
+<h1>语料流 - 一次一个文档</h1>
+
+<p>上面的语料库都是作为一个纯Python的List全部加载到内存中。在这个简单的例子中，这没什么，但是，为了让事情更清楚，让我们假设在语料库中有几百万的文档。将这些文档都存入RAM是不现实的。相反，让我们假设这些文档都是存储在硬盘的一个文件上，每个文档一行。Gensim只需要语料库可以每次返回一个文档向量：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">class</span> <span class="nc">MyCorpus</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+     <span class="k">def</span> <span class="nf">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;mycorpus.txt&#39;</span><span class="p">):</span>
+             <span class="c"># assume there&#39;s one document per line, tokens separated by whitespace</span>
+             <span class="k">yield</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">doc2bow</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">())</span>
+</code></pre></div>
+<p>在这里下载样本文件<a href="http://radimrehurek.com/gensim/mycorpus.txt">mycorpus.txt</a>。假设每个文档占据单个文档中的一行并不重要；你可以参照<strong>iter</strong>函数来满足你的输入格式，无论什么格式。游走的字典间，解析XML，访问网络...只需要
+在<strong>iter</strong>中，将解析你的输入恢复为在每个文档中标记的清晰列表，然后通过字典转化标记为他们的id，yield产生的稀疏向量。</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">corpus_memory_friendly</span> <span class="o">=</span> <span class="n">MyCorpus</span><span class="p">()</span> <span class="c"># doesn&#39;t load the corpus into memory!</span>
+<span class="k">print</span> <span class="n">corpus_memory_friendly</span>
+
+<span class="o">&lt;</span><span class="n">__main__</span><span class="o">.</span><span class="n">MyCorpus</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x10d5690</span><span class="o">&gt;</span>
+</code></pre></div>
+<p>现在语料库是一个对象。我们没有定义任何的方式来打印它，因此，print只是输出了对象在内存中的地址。不是非常有用。要查看向量的构成成分，让我们在语料库上进行迭代，并且打印每个文档向量（每次一个）：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">for</span> <span class="n">vector</span> <span class="ow">in</span> <span class="n">corpus_memory_friendly</span><span class="p">:</span> <span class="c"># load one vector into memory at a time</span>
+<span class="k">print</span> <span class="n">vector</span>
+
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+<span class="p">[(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span>
+</code></pre></div>
+<p>尽管输入还是纯Python列表，现在语料库是非常内存友好的，因为，每次最多只有一个向量驻留在RAM中。你的语料现在可以是任意大小。</p>
+
+<p>同样，不需要加载所有的文章到内存就可以构造字典：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># collect statistics about all tokens</span>
+<span class="n">dictionary</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">Dictionary</span><span class="p">(</span><span class="n">line</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="nb">open</span><span class="p">(</span><span class="s">&#39;mycorpus.txt&#39;</span><span class="p">))</span>
+<span class="c"># remove stop words and words that appear only once</span>
+<span class="n">stop_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dictionary</span><span class="o">.</span><span class="n">token2id</span><span class="p">[</span><span class="n">stopword</span><span class="p">]</span> <span class="k">for</span> <span class="n">stopword</span> <span class="ow">in</span> <span class="n">stoplist</span>
+           <span class="k">if</span> <span class="n">stopword</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">token2id</span><span class="p">]</span>
+<span class="n">once_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">tokenid</span> <span class="k">for</span> <span class="n">tokenid</span><span class="p">,</span> <span class="n">docfreq</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="o">.</span><span class="n">dfs</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span><span class="k">if</span> <span class="n">docfreq</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">dictionary</span><span class="o">.</span><span class="n">filter_tokens</span><span class="p">(</span><span class="n">stop_ids</span> <span class="o">+</span> <span class="n">once_ids</span><span class="p">)</span> <span class="c"># remove stop words and words that appear only once</span>
+<span class="n">dictionary</span><span class="o">.</span><span class="n">compactify</span><span class="p">()</span> <span class="c"># remove gaps in id sequence after words that were removed</span>
+<span class="k">print</span> <span class="n">dictionary</span>
+
+<span class="n">Dictionary</span><span class="p">(</span><span class="mi">12</span> <span class="n">unique</span> <span class="n">tokens</span><span class="p">)</span>
+</code></pre></div>
+<p>这就是全部了！至少到目前为止都是关于词袋表征。当然，我们要对这些语料做什么是另外一件事；根本没有涉及到为什么计算每个唯一的词出现的频率会是有用的。事实证明，这并不是很有用，在我们用它在计算一些有意义的文档 vs. 文档相似性之前，我们将需要在最初的简单表征上做一些转换。转换将涵盖在<a href="http://radimrehurek.com/gensim/tut2.html">下一个教程</a>中，在这之前，让我们暂时将注意力转到语料持久化上。</p>
+
+<h1>语料格式</h1>
+
+<p>有一些现存的方法可以序列化向量空间语料（向量序列）到硬盘。Gensim通过前面提到的streaming corpus接口实现了他们：文件以一种懒惰的形式从硬盘中读取，每次读取一个文件，而不是一次将所有语料读入主内存。</p>
+
+<p>一个值得注意的文件格式是 <a href="http://math.nist.gov/MatrixMarket/formats.html">Market Matrix format</a>. 将语料存储为Matrix Market format:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">from</span> <span class="nn">gensim</span> <span class="kn">import</span> <span class="n">corpora</span>
+<span class="c"># create a toy corpus of 2 documents, as a plain Python list</span>
+<span class="n">corpus</span> <span class="o">=</span> <span class="p">[[(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span> <span class="p">[]]</span>  <span class="c"># make one document empty, for the heck of it</span>
+
+<span class="n">corpora</span><span class="o">.</span><span class="n">MmCorpus</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s">&#39;/tmp/corpus.mm&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="p">)</span>
+</code></pre></div>
+<p>其他的格式包括<a href="http://svmlight.joachims.org/">Joachim的 SVMlight 格式</a>,[<a href="http://www.cs.princeton.edu/%7Eblei/lda-c/">Blei的 LDA-C 格式</a>和<a href="http://gibbslda.sourceforge.net/">GibbsLDA++ 格式</a>.</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">corpora</span><span class="o">.</span><span class="n">SvmLightCorpus</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s">&#39;/tmp/corpus.svmlight&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="p">)</span>
+<span class="n">corpora</span><span class="o">.</span><span class="n">BleiCorpus</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s">&#39;/tmp/corpus.lda-c&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="p">)</span>
+<span class="n">corpora</span><span class="o">.</span><span class="n">LowCorpus</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s">&#39;/tmp/corpus.low&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="p">)</span>
+</code></pre></div>
+<p>反过来，从 Matrix Market 文件读取语料迭代器：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">corpus</span> <span class="o">=</span> <span class="n">corpora</span><span class="o">.</span><span class="n">MmCorpus</span><span class="p">(</span><span class="s">&#39;/tmp/corpus.mm&#39;</span><span class="p">)</span>
+</code></pre></div>
+<p>语料对象是数据流，因此，通常你不能直接打印他们：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="k">print</span> <span class="n">corpus</span>
+
+<span class="n">MmCorpus</span><span class="p">(</span><span class="mi">2</span> <span class="n">documents</span><span class="p">,</span> <span class="mi">2</span> <span class="n">features</span><span class="p">,</span> <span class="mi">1</span> <span class="n">non</span><span class="o">-</span><span class="n">zero</span> <span class="n">entries</span><span class="p">)</span>
+</code></pre></div>
+<p>相反，要查看语料的内容：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># one way of printing a corpus: load it entirely into memory</span>
+<span class="k">print</span> <span class="nb">list</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span> <span class="c"># calling list() will convert any sequence to a plain Python list</span>
+<span class="p">[[(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)],</span> <span class="p">[]]</span>
+</code></pre></div>
+<p>或</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="c"># another way of doing it: print one document at a time, making use of the streaming interface</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+    <span class="k">print</span> <span class="n">doc</span>
+
+<span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)]</span>
+<span class="p">[]</span>
+</code></pre></div>
+<p>第二种方式明显更加内存友好，但是，为了测试和开发的目的，什么也不如简单的调用列表（语料）。</p>
+
+<p>要以 Blei’s LDA-C 格式保存相同的 Matrix Market 文档流：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">corpora</span><span class="o">.</span><span class="n">BleiCorpus</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="s">&#39;/tmp/corpus.lda-c&#39;</span><span class="p">,</span> <span class="n">corpus</span><span class="p">)</span>
+</code></pre></div>
+<p>用这种方式，gensim也可以用作一种高效的内存 I/O格式转化工具：只需要用一种格式加载文档流，马上用另一种格式保存。添加新的格式相当简单，查看SVMlight语料的代码作为例子。</p>
+
+<h1>与Numpy和Scipy的兼容性</h1>
+
+<p>Gensim也包含<a href="http://radimrehurek.com/gensim/matutils.html">高效的实用函数</a>来帮助从/向 numpy矩阵转换：</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">corpus</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">matutils</span><span class="o">.</span><span class="n">Dense2Corpus</span><span class="p">(</span><span class="n">numpy_matrix</span><span class="p">)</span>
+<span class="n">numpy_matrix</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">matutils</span><span class="o">.</span><span class="n">corpus2dense</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</code></pre></div>
+<p>以及从/向 scipy.sparse 矩阵转换:</p>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="n">corpus</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">matutils</span><span class="o">.</span><span class="n">Sparse2Corpus</span><span class="p">(</span><span class="n">scipy_sparse_matrix</span><span class="p">)</span>
+<span class="n">scipy_csc_matrix</span> <span class="o">=</span> <span class="n">gensim</span><span class="o">.</span><span class="n">matutils</span><span class="o">.</span><span class="n">corpus2csc</span><span class="p">(</span><span class="n">corpus</span><span class="p">)</span>
+</code></pre></div>
+<p>完整的参考（想要将字典缩小为更小的大小？优化语料和Numpy/SciPy数组间的转换？），请见<a href="http://radimrehurek.com/gensim/apiref.html">API 文档</a>，或者继续下一个教程<a href="http://radimrehurek.com/gensim/tut2.html">主题与转化</a>。</p>
+
+<p><a href="http://radimrehurek.com/gensim/tut1.html">原文地址</a></p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#python-ref">
+    		python <span>17</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#Python-ref">Python <span>17</span></a></li>
+     
+    	<li><a href="/tags.html#gensim-ref">gensim <span>3</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/2014/01/19/sklearn_text_feature_extraction" title="sklearn文本特征提取">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/python/2014/01/27/Gensim_Topics_and_Transformations" title="gensim文档-主题与转换">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

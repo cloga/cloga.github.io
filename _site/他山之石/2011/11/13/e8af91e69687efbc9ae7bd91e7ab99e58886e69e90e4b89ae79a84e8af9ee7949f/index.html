@@ -1,0 +1,444 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="ujianVerification" content="fbba4ee9b28ec33f11f17698ddc55b92" />
+    <link rel="stylesheet" href="/pygments.css">
+    <title>[译文]网站分析业的诞生</title>
+    
+    <meta name="author" content="Cloga Chen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="/assets/themes/bootstrap/resources/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  
+    <!--[if lt IE 9]>
+      <script src="/assets/themes/bootstrap/resources/respond/Respond.min.js"></script>
+    <![endif]-->
+
+    <link href="/atom.xml" type="application/atom+xml" rel="alternate" title="Sitewide ATOM Feed">
+    <link href="/rss.xml" type="application/rss+xml" rel="alternate" title="Sitewide RSS Feed">
+    <script>
+      dataLayer = [];
+    </script>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-default" role="navigation">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Cloga的互联网笔记</a>
+        </div>
+
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+          <ul class="nav navbar-nav">
+            
+            
+            
+
+
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/archive.html">Archive</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/categories.html">Categories</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/pages.html">Pages</a></li>
+      	
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+      	
+      	<li><a href="/tags.html">Tags</a></li>
+      	
+      
+    
+  
+
+
+
+          <li><a href="/about.html">关于Cloga</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      
+<div class="page-header">
+  <h1>[译文]网站分析业的诞生 </h1>
+</div>
+<div class="row post-full">
+  <div class="col-md-12">
+    <div class="date">
+      <span>13 November 2011</span>
+    </div>
+    <div class="content">
+      <p>Cloga：这是UBC的网站分析课程中一部分内容，用两个人的对话浓缩了网站分析业的产生历史和相关技术产生的背景。强烈推荐大家读一下。</p>
+
+<p>从前（1993）在一个大公司有一个IT男，他听说了万维网就下载了一个服务器来玩玩。我们就叫他阿呆吧。</p>
+
+<p>阿呆把这个网站服务器放在一台老式的386电脑上，在上面摆弄了一些HTML并且连在了公司的网络上，他把这台电脑放在了桌子底下。一天，阿呆向他的老板展示它的这一成果，他的老板说：“这确实很棒。但是你的狗的照片应该拿掉。为什么你不扫描一些年报放在上面？”</p>
+
+<p>几个月以后(1995)，这个公司的一个营销男听说了万维网并且看到了一些竞争对手的网站。他想如果他的公司有一个网站的话那该多酷了。我们叫他阿瓜。</p>
+
+<p>阿瓜来到了IT部门找这种网站的材料，阿呆告诉他公司在18个月前就有网站了。阿瓜很震惊，感到受到了羞辱。怎么可以这样？怎么可以在没有通知营销部门前这样做？</p>
+
+<p>“这不是IT部门的职责！”他吼道。“这是在营销！这是在与世界进行交流，这是我的职责！”于是，阿瓜控制了他新发现的玩具，并且洋洋自得了三天。在这段时间之后，他认识到如果想让手册和半导体的混合体运转正常的话，他需要与阿呆一同协作。&lt;!-- more --&gt;</p>
+
+<p>在打破了IT与营销之间不安的平静之后，他们竟然努力想要理解对方的语言，阿瓜问阿呆有没有什么方法了解网站上在发生什么，这段对话在现实世界中用了10年（Cloga：这段对话就是网站分析业发展的缩影）。</p>
+
+<p>“发生了什么？”阿呆问。</p>
+
+<p>“嗯。关于网站上发生了什么我们有哪些信息？”</p>
+
+<p>“哦”阿呆说，“你想要知道什么？”</p>
+
+<p>“你能告诉我什么？”</p>
+
+<p>“你需要什么？”</p>
+
+<p>“你有什么？”</p>
+
+<p>“嗯…”阿呆思索着，“我们有性能监测系统帮助我们规划可用性、吞吐能力和容量。”阿瓜怀疑阿呆是不是切换到了另一种语言，在说出事实还是只是想让阿瓜走开。</p>
+
+<p>阿瓜脸上的表情足以让阿呆动容，他解释道：“我们跟踪了我们服务了多少位和字节，以便知道我们的机器和我们的网络连接能否胜任。”</p>
+
+<p>阿瓜的眼睛里什么也没有闪现（依旧没有听懂），阿呆继续说，“每秒钟我们只能为那么多人提供那么多的页面。如果网站一次来了太多的人，那么，网站的任务和你的潜在客户就会收到错误信息。因此我们要跟踪我们的容量。”</p>
+
+<p>“哦，我明白了。但是，这能告诉我有多少人来到了我们的网站或者他们看了什么吗？”</p>
+
+<p>“是的，我们有服务器日志。”</p>
+
+<p>“很好…什么是服务器日志？”阿呆解释道每个事务系统都保留有一个事物的日志，因此，如果有重大的错误的话，将会保留上一次良好事物的记录。“日志文件记录了出去的每个页面，在什么时间，有多少字节，以及发送到什么IP地址。”</p>
+
+<p>“那么我们知道谁在什么时间看了什么！”阿瓜说。</p>
+
+<p>“差不多。”</p>
+
+<p>阿瓜抬起了头。“为什么只是差不多？”</p>
+
+<p>“IP地址可以是动态的。这意味着今天和明天可能会不同。事实上，在两个页面请求间也可能变化。反过来，许多人可能来自同一个IP地址，如果它们通过同一个公司网关的话。网关汇集所有进出公司的流量，以保证内部IP地址的安全。”</p>
+
+<p>“但是”阿瓜说道，寻找一线希望，“至少我们知道每一个人看了多少页面，对吧？我们知道那个页面最受欢迎！”</p>
+
+<p>“差不多。”</p>
+
+<p>阿瓜眯起了眼睛。“为什么只是差不多？”</p>
+
+<p>“嗯，页面存储在这里与网站访问者之间的缓存文件中，我们通常不知道一个访问者看了同一个页面两次还是其他人通过临时缓存存储看了那些页面。”</p>
+
+<p>“临时…缓存…存储…”</p>
+
+<p>阿呆毫不掩饰的看一下表。“是的，就是那样。”</p>
+
+<p>“所以，我们其实不知道那些页面被看了，我们甚至也不能说人们是不是从首页到了产品页。”</p>
+
+<p>“差不多。”</p>
+
+<p>“我们差不多可以？”</p>
+
+<p>“在一些情况下是可以的。我们开始使用URL标记，这有点帮助。”</p>
+
+<p>“好的”阿瓜说，交叉着双手，不希望被这些技术术语打败。“告诉我这是如何工作的。”</p>
+
+<p>阿呆解释道，发送首页时，为首页上的链接添加一个惟一系列号——每个访问者惟一。当访问者点击这个链接，服务器日志记录到这个系列号然后发送请求的页面，将这个系列号附加到随后的所有页面的连接上。</p>
+
+<p>阿瓜证明着他在认真的听。“因此，你查看服务器日志，看一下同一个人看哪些页面，不论什么IP地址？”</p>
+
+<p>“是的”阿呆说，看着阿瓜就像他不是那个曾经的典型的营销人。</p>
+
+<p>“因此，现在我们知道同一个人是不是经常回来，以及知道说服他们买我们的东西需要多少次访问！”</p>
+
+<p>“基本上不行。如果访问者点击一个Banner广告回来，或者在浏览器中直接输入域名，或者其他我们没有提供系列号的链接点击回来，我们不能认出他是谁。”</p>
+
+<p>“所以我们就没辙了。”</p>
+
+<p>“所以我们想到了cookies。”</p>
+
+<p>“哦，就连我都知道cookies。”</p>
+
+<p>“很好，那我不需要解释了。”</p>
+
+<p>“关于cookies我有一件事不明白…”</p>
+
+<p>“是什么？”</p>
+
+<p>“他们如何工作？”</p>
+
+<p>阿呆想到他的这个玩具网站项目有一天将成为大家伙，以及他需要阿瓜的友好和预算才能做到这一点。他轻轻的叹了一口气，继续说道。“当上网冲浪的人第一次来到网站，他请求一个具体的页面。他是未知的。因此，提供这个页面的服务器在访问者硬件设备上设置了一个cookie。Cookie是一个小的文本文件，可能包含一些实际的信息，但是，通常只是保留一些惟一的标识符。只有设置它的服务器可以读取，但是，当访问者点击下一个链接时，cookie信息会与页面请求一起传回。如果cookie是持久的，那么，即使访问者一个月没有查看网站，他的IP地址改变了几十次，它仍会起作用。”</p>
+
+<p>“所以现在我们已经有了！”</p>
+
+<p>“只是差不多。”</p>
+
+<p>“你的意思是我读到的那些文章，人们如何可以将它们删除？”</p>
+
+<p>“是的，还是缓存的问题。”</p>
+
+<p>阿瓜决定坚持下去。“好吧，那是什么？”</p>
+
+<p>阿呆开始喜欢自己了。自从他上次给高级IT经理讲蠕虫和木马之后，就没有遇到感兴趣的听众了。“创建了超文本传输协议（HTTP）后，人们不希望在互联网上保存任何无关的流量。因此，人们在硬件设备创建了缓存文件。”</p>
+
+<p>“cookie就存放在那吗？”</p>
+
+<p>“不，是在另外一个地方。先不谈那个。当你想要看一个网页时，服务器将页面封包，并且通过网络提供这些包。你的浏览器在你的缓存文件中存储他们，直到可以解释他们。因此，一旦所有的包都进入了缓存，你就可以看到整个页面了。现在，例如说，你看了第二个页面，并且点击了后退按钮。浏览器首先在缓存文件中查找，而不是通过网路获取一个全新的副本。”</p>
+
+<p>“所以，这就是为什么当单击后退按钮时页面立即出现。”阿瓜从来没有遇到过竟然可以这样清楚解释事情的IT男。</p>
+
+<p>“完全正确。但是，服务器不知道你又看了一次首页，因为，没有收到你的请求——因此，不会记录。更糟糕的是，如果你使用AOL，然后可能另一个AOL用户也从AOL缓存文件请求了同一个页面而不是服务器。”</p>
+
+<p>“因此，比我们认为的多许多的人看了我们的网站…我们其实并不能知道人们如何在页面间移动。但是，日志文件记录了我从首页去了页面A，然后是页面B，但是，如果页面A和页面B之间没有链接，那么你就知道我回到了首页，对吗？”</p>
+
+<p>“这只是假设。你可能通过搜索引擎发现页面B，其他人可能通过Email给你一个连接。你可能在出版物中读到这个链接或者从另一个之前查看了AOL的冲浪者的页面链接点击过来，服务器日志根本没有记录到你看了这个页面。”</p>
+
+<p>“我们怎样才能解决所有问题？”</p>
+
+<p>“一个不可见的像素！”</p>
+
+<p>“不可见的像素，我跺三下脚，在我的左肩膀上撒盐（Cloga：貌似是祈求好运的意思）？”</p>
+
+<p>阿呆现在完全进入了教学模式，没有理会阿瓜的幽默企图。“你可以嵌入一个设置为在每个页面上都‘不缓存’的，1×1透明的像素。这样，就可以在页面每次被访问时被记录。”</p>
+
+<p>“为什么不是‘不缓存’整个网站？”</p>
+
+<p>“因为你的用户会反对。当他们每次点击后退按钮时，获得每一页的时间会太长，他们会认为你的网站很愚蠢。”</p>
+
+<p>“但是他们实际上不介意这个像素吗？”</p>
+
+<p>“他们甚至不知道它在那，它是透明的，因此，他们看不到它，因为它是1×1大小的像素，下载不需要时间，我们就能记录这个事件。”</p>
+
+<p>“因此，我们现在有日志文件和cookies，”阿瓜说，试着将所有的东西联系在一起，“我们将在电子商务系统的购物车及其他程序例如产品配置中发生的所有数据都捕捉到。那么，这些数据能被整合到哪里，以便我们可以利用他们？”</p>
+
+<p>“这个问题要比看起来要难得多。完成数据清理、标准化，让它们准备好被细致观察，是非常繁重的工作。这就是创造嗅包器的原因。”</p>
+
+<p>“你告诉我什么是嗅包器，我来买午餐。”阿瓜提议。阿呆在阿瓜放下指向门口的手之前就走出了门，他们继续他们的话题。</p>
+
+<p>“并不是所有你想跟踪的信息服务器都知道。”阿呆边说边把他的食盘放到了食堂窗口。“如果我在表单中输入了email地址，并且点击了提交按钮，我的地址在一个数据包中返回到服务器，并且被预订应用程序读取，而不是服务器。因此，即使一些简单的事——匹配email地址这个网上冲浪的小插曲——也很棘手。因此，他们想出了这种方式（嗅包器）来观察——和记录——所有从服务器出来和从冲浪者那里返回的数据包。”</p>
+
+<p>“那么，现在有一个地方捕获了与这个页面相关的所有的偏好信息、颜色选择、姓名和地址信息。因此，现在我们能看一下每个人在网站上做了什么！”</p>
+
+<p>“事实上不是这样——数据量太大了。如果你存储了进入的每个数据包，你需要的磁盘空间比Google更多。”</p>
+
+<p>“于是，他们想出了——什么？”</p>
+
+<p>“页面标记。”</p>
+
+<p>“好的，”阿瓜边说边举起了他的三明治。“我开动了。”</p>
+
+<p>“你提供了一个正常的页面，然后你在页面底部放了一个Javascript标签。”</p>
+
+<p>“Javascript是页面加载时运行的小程序？”</p>
+
+<p>“恭喜你答对了！”</p>
+
+<p>“那这个标签能干什么？”</p>
+
+<p>“它是一个脚本，它能做你想做的任何东西——在浏览器中。因此，它不是间谍软件或其他类似的东西。它只是查看并收集数据。”</p>
+
+<p>“就像？”</p>
+
+<p>“嗯，例如，如果你预定了一个酒店，你告诉网站你想要在今天在这个酒店为这么多人预订一个房间，并且你有一个促销码，然后，Javascript能确保这些信息都被捕捉到了。因此，你能知道所有的信息，而不需要从千兆字节的数据包中筛选或者试着合并日志文件与预订系统的数据。”</p>
+
+<p>“但是，如果我只是部分完成了表单，并且没有点击提交按钮，那么我怎么能知道表单设计的问题呢？”</p>
+
+<p>“这需要更多的技术，我称之为客户端监视。”</p>
+
+<p>“听起来有点邪恶。”</p>
+
+<p>“落入坏人之手才会这样。客户端跟踪让我可以观察你所做的每件事。我可以记录你的鼠标运动，观察键盘按键动作，看一下你在搜索时如果错拼的话是否按了后退键…”</p>
+
+<p>“但是页面设计者需要实时的，实际的使用数据。实际上，我们知道人们如何使用每个页面！但是，是不是最终也会和数据包嗅探一样，有太多的数据需要手机。”</p>
+
+<p>“是的，这也是为什么你只能在一些特定想要优化的页面使用这种技术。”</p>
+
+<p>“哼。那这些工具中哪一个是网站应该使用的最佳工具？”</p>
+
+<p>“全部。”</p>
+
+<p>“全部？”</p>
+
+<p>“假设我们有能力可以负担的起，有能力实施它们，可以处理所有的结果，并且使用数据来改善网站，那么，你最好的选择是用以上工具的健康组合来获得网站上正在发生什么的清晰图像。”</p>
+
+<p>“那么，使用所有数据的最佳做法是什么？”</p>
+
+<p>“你的意思是，你知道我们可以测量什么，你想要指出我们应该测量什么？”</p>
+
+<p>“当然。”</p>
+
+<p>“对于这个，你需要和阿德聊一下。你可能要请他吃晚餐。”</p>
+
+<p>_Content originally contributed by _Jim Sterne, eMetrics Summit, June 2005.</p>
+
+<p>_Edited by _Ned Kumar (2010)</p>
+
+<p>Content © 2010 Web Analytics Association</p>
+
+    </div>
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-folder-open"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/categories.html#他山之石-ref">
+    		他山之石 <span>6</span>
+    	</a></li>
+    
+  
+
+
+      </ul>
+    
+
+    
+      <ul class="tag_box inline">
+        <li><i class="icon-tags"></i></li>
+        
+        
+
+
+  
+     
+    	<li><a href="/tags.html#网站分析-ref">网站分析 <span>1</span></a></li>
+    
+  
+
+
+
+      </ul>
+    
+
+    <hr>
+    
+    <ul class="pagination">
+      
+        <li class="prev"><a href="/digital%E5%88%86%E6%9E%90/%E4%BB%96%E5%B1%B1%E4%B9%8B%E7%9F%B3/2011/10/24/e8af91e69687efbc9agae4b8ade79a84e6b581e58fafe8a786e58c96e8b7afe5be84e58886e69e90" title="[译文]GA中的流可视化路径分析">&larr; 上一页</a></li>
+      
+        <li><a href="/archive.html">归档列表</a></li>
+      
+        <li class="next"><a href="/digital%E5%88%86%E6%9E%90/2012/02/12/e59f9fe8aebee7bdae-googlee7bd91e7ab99e4bc98e58c96e5b7a5e585b7e5aeb9e69893e8a2abe5bfbde8a786e79a84e4b880e4b8aae8aebee7bdae" title="域设置-Google网站优化工具容易被忽视的一个设置">下一页 &rarr;</a></li>
+      
+    </ul>
+    <hr>
+    <!-- Paste the 3 next lines where you want the sharing button(s) to appear -->
+    <div class="post-sharing">
+     
+
+
+  <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style">
+	<span class="jiathis_txt">分享到：</span>
+	<a class="jiathis_button_tools_1"></a>
+	<a class="jiathis_button_tools_2"></a>
+	<a class="jiathis_button_tools_3"></a>
+	<a class="jiathis_button_tools_4"></a>
+	<a href="http://www.jiathis.com/share?uid=1654363" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+	<a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1343300786690926" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+
+
+
+    </div>    
+    <div class="post-comments">
+    
+
+
+  <!-- UJian Button BEGIN -->
+<div class="ujian-hook"></div>
+<script type="text/javascript">var ujian_config = {num:12,picSize:84,textHeight:45};</script>
+<script type="text/javascript" src="http://v1.ujian.cc/code/ujian.js?uid=1654363"></script>
+<a href="http://www.ujian.cc" style="border:0;"><img src="http://img.ujian.cc/pixel.png" alt="友荐云推荐" style="border:0;padding:0;margin:0;" /></a>
+<!-- UJian Button END -->
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=1654363"></script>
+<!-- UY END -->
+
+
+
+    </div>
+  </div>
+</div>
+
+
+      <hr>
+      <footer>
+        <p>
+          &copy; 2014 Cloga Chen
+          <span class="pull-right text-muted">
+            powered by
+            <a href="http://jekyll-bootstrap-3.github.io" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll-Bootstrap-3</a>
+            and <a href="http://getbootstrap.com" target="_blank">Twitter Bootstrap 3.0.3</a>
+          </span>
+        </p>
+      </footer>
+    </div>
+
+    
+    <script src="/assets/themes/bootstrap/resources/jquery/jquery.min.js"></script>
+    <script src="/assets/themes/bootstrap/resources/bootstrap/js/bootstrap.min.js"></script>
+<!-- Google Tag Manager -->
+<noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-7VF4"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-7VF4');</script>
+<!-- End Google Tag Manager -->
+
+
+  </body>
+</html>
+

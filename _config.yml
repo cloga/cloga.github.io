@@ -4,7 +4,10 @@ permalink: /:categories/:year/:month/:day/:title
 
 markdown: redcarpet
 
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "tables", "changelog.md", "no_intra_emphasis", "fenced_code_blocks", "autolink",  "with_toc_data"]
+redcarpet:
+  extensions: ["no_intra_emphasis", "fenced_code_blocks", "autolink", "tables", "with_toc_data"]
+
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile"]
 pygments: true
 
 # Themes are encouraged to use these universal variables 

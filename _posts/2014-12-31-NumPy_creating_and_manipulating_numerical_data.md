@@ -2102,7 +2102,7 @@ b = np.zeros((1e6,), dtype=np.float32)
 ### 1.3.3.2 结构化的数据类型
 
 名称|类型
--|-
+---|---
 sensor_code|(4个字母的字符)
 position|(浮点)
 value|(浮点)

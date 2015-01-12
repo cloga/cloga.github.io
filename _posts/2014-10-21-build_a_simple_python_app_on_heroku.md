@@ -11,7 +11,7 @@ tags:
 - heroku
 
 ---
-开发一个小应用放在互联网上给大家使用是一件成就感很高的事情，不过支持Python的免费空间不是很多，虽然GAE支持Python，不过由于众所周知的原因，在国内是很难打开GAE，这篇文章为大家介绍一下[Heroku](https://www.heroku.com/)，heroku是支持Python在数据量不大的情况下是免费。
+开发一个小应用放在互联网上给大家使用是一件成就感很高的事情，不过支持Python的免费空间不是很多，虽然GAE支持Python，不过由于众所周知的原因，在国内是很难打开GAE，这篇文章为大家介绍一下[Heroku](https://www.heroku.com/)，heroku支持Python，并且在数据量不大的情况下是免费。
 
 # 涉及到的工具
 * [git](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)：分布式版本管理工具，这里推荐大家看一下[廖雪峰的GIT教程]((http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000))
@@ -153,7 +153,7 @@ web:gunicorn app:app
 
 Profile是一个在应用根目录的文本文件，用于声明用于启动应用的语句
 
-上面的一行语句生命了一个单一的进程类型：web以及运行它需要的语句。Web在这里很重要，它表明这个进程类型将隶属于Heroku的HTTP路由栈，并且在部署时接受web流量
+上面的一行语句声明了一个单一的进程类型：web以及运行它需要的语句。Web在这里很重要，它表明这个进程类型将隶属于Heroku的HTTP路由栈，并且在部署时接受web流量
 
 * 安装gunicoin，并将版本信息计入requirements.txt
 
@@ -181,7 +181,7 @@ heroku create toyapp
 
 ```
 git add -A
-git commot -m 'init'
+git commit -m 'init'
 git push heroku master
 ```
 

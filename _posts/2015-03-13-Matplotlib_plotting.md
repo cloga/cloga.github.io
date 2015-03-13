@@ -175,8 +175,9 @@ pl.plot(X, S, color="red",  linewidth=2.5, linestyle="-")
 
 ---
 **提示**：文档
-[xlim()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xlim)
-[ylim()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.ylim)
+
+- [xlim()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xlim)
+- [ylim()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.ylim)
 
 ---
 
@@ -192,6 +193,7 @@ pl.ylim(C.min() * 1.1, C.max() * 1.1)
 ### 1.4.2.5 设置坐标轴刻度值
 
 **提示**：文档
+
 * [xticks()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xticks)
 * [yticks()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.yticks)
 * [刻度容器](http://matplotlib.sourceforge.net/users/artists.html#axis-container)
@@ -209,6 +211,7 @@ pl.yticks([-1, 0, +1])
 ### 1.4.2.6 设置刻度标签
 
 **提示**：文档
+
 * [操作文本](http://matplotlib.sourceforge.net/users/index_text.html)
 * [xticks()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.xticks)
 * [yticks()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.yticks)
@@ -230,6 +233,7 @@ pl.yticks([-1, 0, +1],
 ### 1.4.2.7 移动脊柱
 
 **提示**：文档
+
 * [脊柱](http://matplotlib.sourceforge.net/api/spines_api.html#matplotlib.spines)
 * [坐标轴容器](http://matplotlib.sourceforge.net/users/artists.html#axis-container)
 * [转换教程](http://matplotlib.sourceforge.net/users/transforms_tutorial.html)
@@ -251,6 +255,7 @@ ax.spines['left'].set_position(('data',0))
 ### 1.4.2.8 添加图例
 
 **提示**：文档
+
 * [图例指南](http://matplotlib.sourceforge.net/users/legend_guide.html)
 * [legend()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.legend)
 * [图例API](http://matplotlib.sourceforge.net/api/legend_api.html#matplotlib.legend.Legend)
@@ -269,6 +274,7 @@ pl.legend(loc='upper left')
 ### 1.4.2.9 标注一些点
 
 **提示**：文档
+
 * [注释坐标轴](http://matplotlib.sourceforge.net/users/annotations_guide.html)
 * [annotate()命令](http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.annotate)
 
@@ -298,6 +304,7 @@ pl.annotate(r'$cos(\frac{2\pi}{3})=-\frac{1}{2}$',
 ### 1.4.2.10 细节是魔鬼
 
 **提示**：文档
+
 * [Artists](http://matplotlib.sourceforge.net/api/artist_api.html)
 * [BBox](http://matplotlib.sourceforge.net/api/artist_api.html#matplotlib.text.Text.set_bbox)
 

@@ -148,7 +148,7 @@ touch Procfile
 在其中输入以下语句
 
 ```
-web:gunicorn app:app
+web: gunicorn app: app
 ```
 
 Profile是一个在应用根目录的文本文件，用于声明用于启动应用的语句

@@ -1,0 +1,57 @@
+<html>
+<head>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/swfobject/2.2/swfobject.js"></script>
+    <script type="text/javascript" src="http://www.ymc.ch/sandbox/video/modernizr.js"></script>
+</head>
+ 
+<body>
+ 
+<style>
+ 
+    .html5video {
+        display: none;
+    }
+    .mp4-support .html5video {
+        display: block;
+    }
+    .mp4-support .flashvideo {
+        display: none;
+    }
+ 
+</style>
+ 
+<script type="text/javascript">
+    if (!Modernizr.video.h264) {
+ 
+        var flashvars = {   flvpFolderLocation: "http://www.ymc.ch/sandbox/video/",
+                            flvpVideoSource: "http://video.holidaycheck.de/data/reisevideos/hc/123/123601.mp4",
+                            flvpWidth: "640",
+                            flvpHeight: "375",
+                            flvpInitVolume: "50",
+                            flvpTurnOnCorners: "true",
+                            flvpBgColor: "#FFFFFF"
+                            };
+                            var params = {
+                            bgcolor: "#FFFFFF",
+                            menu: "false",
+                            allowfullscreen: "false"
+                        };
+        swfobject.embedSWF("http://www.ymc.ch/sandbox/video/FlvPlayer.swf", "embed_player", "640", "375", "9.0.0", "http://www.ymc.ch/sandbox/video/expressInstall.swf", flashvars, params);
+ 
+    }
+</script>
+ 
+<div class="flashvideo">
+    Flash Video<br />
+    <div id="embed_player"></div>
+</div>
+ 
+<div class="html5video">
+    HTML5 Video<br />
+    <video id="videoTag" width="440" height="350" controls="controls">
+        <source src="http://video.holidaycheck.de/data/reisevideos/hc/123/123601.mp4" type="video/mp4">
+    </video>
+</div>
+ 
+</body>
+</html>

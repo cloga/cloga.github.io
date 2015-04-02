@@ -13,19 +13,21 @@
 
   <!-- HLS plugin -->
 
-<!--   <script type="text/javascript">
+  <script type="text/javascript">
   var userAgent = navigator.userAgent;
-  if (userAgent.indexOf("Safari") > -1) {
+  if (ua.match(/version\/([\d.]+).*safari/)) {
     alert("Safari");
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.src = 'src/videojs-hls.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    var js = document.createElement('script'); js.type = 'text/javascript'; js.src = 'src/videojs-hls.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js, s);
+    var js = document.createElement('script'); js.type = 'text/javascript'; js.src = 'src/xhr.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js, s);
   }
   </script>
- -->
+
 <!-- <script src="src/videojs-hls.js"></script> -->
 
   <!-- segment handling -->
-  <script src="src/xhr.js"></script>
+  <!-- <script src="src/xhr.js"></script> -->
   <script src="src/flv-tag.js"></script>
   <script src="src/stream.js"></script>
   <script src="src/exp-golomb.js"></script>

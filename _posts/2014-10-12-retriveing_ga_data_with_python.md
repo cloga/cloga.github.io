@@ -68,7 +68,7 @@ import pandas as pd
 my_client = gdata.analytics.client.AnalyticsClient(source=SOURCE_APP_NAME)#实例化GA Client
 my_client.client_login(
     EMAIL,
-    pwd,
+    PWD,
     source=SOURCE_APP_NAME,
     service=my_client.auth_service,
     account_type='GOOGLE'

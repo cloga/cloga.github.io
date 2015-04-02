@@ -1,5 +1,4 @@
-﻿<!DOCTYPE html>
-<html>
+﻿<html>
 <head>
   <meta charset="utf-8">
   <title>video.js HLS Plugin Example</title>
@@ -34,6 +33,9 @@
 
   <script src="src/bin-utils.js"></script>
   
+  <link href="css/button-styles.css" rel="stylesheet" type="text/css" />
+  <script src="js/video-quality-selector.js"></script>
+
   <!-- example MPEG2-TS segments -->
   <!-- bipbop -->
   <!-- <script src="test/tsSegment.js"></script> -->
@@ -59,14 +61,12 @@
   <div class="info">
     <p>361p</p>
   </div>
-    <video id="video"
-           class="video-js vjs-default-skin"
-           height="360"
-           width="640"
-           controls>
-        <source src="http://videoapi.streaming.mediaservices.chinacloudapi.cn/1574375d-d960-4305-a9bf-f812f63e46fc/海航介绍中文2015.3.26.ism/Manifest(format=m3u8-aapl-v3)"
-                type="application/x-mpegURL">
-    </video>
+
+  <video id="example-2" class="video-js vjs-default-skin" controls width="640" height="360" data-setup='{ "plugins" : { "resolutionSelector" : { "default_res" : "480" } } }'>
+    <source src="https://hnahna.blob.core.chinacloudapi.cn/asset-814d435d-1500-80c3-f42b-f1e4d6aeb604/Microsoft%20Azure%20IaaS%20%E6%A6%82%E8%BF%B0_H264_3400kbps_AAC_und_ch2_96kbps.mp4" type="video/mp4" data-res="360" />
+    <source src="http://videoapi.streaming.mediaservices.chinacloudapi.cn/1574375d-d960-4305-a9bf-f812f63e46fc/海航介绍中文2015.3.26.ism/Manifest(format=m3u8-aapl-v3)" type="application/x-mpegURL" data-res="480" />
+  </video>
+
   <script>
     videojs.options.flash.swf = 'js/video-js.swf';
     // initialize the player

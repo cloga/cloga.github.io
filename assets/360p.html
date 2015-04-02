@@ -15,7 +15,7 @@
 
   <script type="text/javascript">
   var userAgent = navigator.userAgent;
-  if (ua.match(/version\/([\d.]+).*safari/)) {
+  if (userAgent.match(/version\/([\d.]+).*safari/)) {
     alert("Safari");
     var js = document.createElement('script'); js.type = 'text/javascript'; js.src = 'src/videojs-hls.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(js, s);

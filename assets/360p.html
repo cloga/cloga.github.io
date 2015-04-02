@@ -12,6 +12,14 @@
   <script src="js/videojs-media-sources.js"></script>
 
   <!-- HLS plugin -->
+
+  <script type="text/javascript">
+  if (userAgent.indexOf("Safari") > -1) {
+         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.src = 'src/videojs-hls.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  }
+  </script>
+
   <script src="src/videojs-hls.js"></script>
 
   <!-- segment handling -->

@@ -54,28 +54,26 @@ Kurt: 这些导致了近期在营销分析世界的产生了推动力去寻找�
 
 这就是为什么在Analytic Marketing Innovations，我们设计了一个独特的多触点归因模型来告诉我们需要知道的东西，通过应用被称为马尔科夫链的分析模型。
 
-*那么，什么是马尔科夫链模型?*
+**那么，什么是马尔科夫链模型?**
 
-Trich: 
-
-The Markov Chain Model (named after mathematician Andrew Markov) is a method for assigning value to any number of steps along the customer journey (as long as that number is finite).
-
+Trich: 马尔科夫链模型（名字来自于数学家Andrew Markov）是一种为消费者旅行中任意数量步骤（只要步骤是有限）分配值的方法。
 
 ![马尔科夫链模型](http://www.callahancreek.com/stuff/contentmgr/files/1/76c8305480ead76396e4848269d977d5/files/kents_blog_image_words.gif)
-When data scientists employ a Markov Chain Model for multi-touch attribution, we can see the likely chains of events along the various consumer pathways to a sale. The Markov Chain Model assigns credit to each touch along the path to conversion while also sequencing and predicting each step.
 
-All of this, of course, can be quite complicated, because with the increasing fragmentation in how consumers interact with a brand, there are more than just a few pathways to a sale. Using the Markov technique, it is possible to find and understand every statistically significant path, which can add up to thousands of models (paths) for a marketing campaign. That would have been difficult to accomplish using traditional tools and techniques, but is very possible with this approach due to the way the data is managed, integrated and analyzed.
+当数据科学家为多触点归因应用马尔科夫模型后，我们可以看到到达销售前多种消费者路径上的可能事件链。马尔科夫模型为转化路径上的每个接触点分配权重，同时也序列化和预测每个步骤。
 
-Why is the Markov Chain Model better than other models?
+当然，所有这些都非常复杂，因为消费者与品牌交互的碎片正在增加，到销售的路径不仅仅只有几条。使用马尔科夫技术，可以找到并理解每一条统计显著的路径，这可能对一个营销活动总量为几千个的模型（路径）。用传统的技术和方法这可能很难完成，但是，用这种方法却是有可能的，因为管理、整合和分析数据的方式。
 
-Trich: The Markov Chain Model is more effective because it uses superior, proven statistical methods to derive the value for each touch on the customer journey, as well as what combination of touches will be most effective. That knowledge allows more informed, objective decisions (rather than just assigning equal weights or subjective judgments), which in turn leads to marketing efforts that are more effective and quantifiable.
+**为什么马尔科夫链模型比其他模型更好？**
 
-Kurt: Importantly, the models can be used to optimize marketing throughout the execution cycle. Attribution results can be applied in real time because they are relevant at the individual level. Because of this, we can truly optimize the customer journey by predicting the best next step for each interaction an individual may have. For example, if we know that a person who has received an email and then clicked on a banner ad is much more likely to buy if s/he receives another email, the marketing team can then make sure that an email is sent. In other cases, if we can see a certain marketing path is creating fatigue, the team can pull back that type of marketing for some customers.
+Trich: 马尔科夫模型更加有效是因为使用了高级、经过证明的统计方法来获得消费者旅程每个接触点的值，以及哪个触点组合将最有效。这些知识让人们可以更加有见地、客观的进行决策（而不仅仅是等值加权或主观判断），反过来可以让营销努力更加有效和可量化。
 
-Are there particular types of brands that are better suited to this kind of approach than others? 
+Kurt: 重要的是，这些模型可以用于优化营销的整个执行周期。归因结果可以在实时应用，因为他们是与个体级别相关的。因为这一点，我们可以通过预测每个个体可能在每一个交互采取的最佳下一步来真正的优化消费者旅程。例如，如果我们知道一个人收到了邮件，然后点击了banner广告，如果他收到了另一封email更可能购买，那么，营销团队可以确保发送这封邮件。另外的情况是，如果我们看到一个特定的营销路径创造了疲劳，那么营销团队可以召回一些消费者的这类营销。
 
-Jill: Any brand that is executing multi-channel marketing and is committed to learning more about how to make their campaigns more efficient and effective will benefit from this type of marketing attribution analysis. But commitment is key, because it does require an ongoing devotion of time and effort to establish and then use the models.
+**有没有哪类品牌比其他品牌更适合这类方法？**
 
-Typically, it's best to have three months of data to start the analysis. The first step is setting up tracking on a campaign and working with various vendors, including a Data Management Platform (DMP) vendor, which helps combine the online and offline touches. The second step is gathering data for three months and then building models. The final step is analyzing the resulting output to identify the top paths leading to conversion and allowing the development of marketing heuristics for the remainder of the campaign.
+Jill: 任何品牌对多渠道营销都很兴奋，都表示想要更多的学习如何让他们的公司可以高效有效的从这类营销归因分析中收益。但是，投入是关键，因为这需要持续投入时间和努力在建立以及后面使用这些模型。
 
-In an environment of shrinking marketing budgets, there is considerable pressure on marketing departments to demonstrate quantifiable results for each channel, and good multi-touch marketing attribution analysis can be invaluable in this type of assessment. The insights not only improve results overall, but they also help in shifting budget dollars during a campaign from unproductive channels into those that ARE contributing to sales. 
+通常，最好是有三个月的数据来开始分析。第一步是设置活动跟踪，与多种供应商协作，包括一个数据管理平台（DMP）供应商，来帮助整合线上线上的接触点。第二步是收集三个月的数据然后构建模型。最后一个步骤是分析产生的结果，来识别带来转化的热门路径，允许为活动的剩余部分开发营销启发式。
+
+在营销预算缩水的环境下，营销部分有相当大的压力要为每个渠道展示定量化的结果，好的多触点营销归因分析在这类评估中将是无价的。这些洞察不仅仅改善整体结果，而且可以帮助将预算从低效的渠道转移到那些真正贡献销售的渠道。

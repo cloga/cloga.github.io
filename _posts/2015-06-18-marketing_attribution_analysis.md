@@ -40,27 +40,28 @@ Cloga：这篇文章是国外两篇文章的翻译，试图解决营销中的归
 
 -----------
 
-在10月，
-In October, I wrote about the changing world of marketing attribution analysis and why it is important to invest time and resources in this complex form of analysis. I’ve received some great questions and comments, many of them along the lines of “Are you making it more complicated than it needs to be?” or “Are we overthinking it?” My answer to these questions is an unqualified “No!”
+在10月，我写了营销归因分析世界的改变，以及为什么它这么重要，需要投入时间和资源在这个复杂形式的分析中。我收到了一些非常棒的问题和评论，许多都是关于“你是否把它弄的比需要的复杂？”或者“我们是不是想多了？”我的答案毋庸置疑是“不是！”
 
-In my morning scan just today, the tweets, blogs and articles written about marketing fragmentation were too numerous to count. Consumers have more ways than ever to interact with a brand, frequently using multiple channels on the same shopping journey. The thousands of shopping path permutations that can now occur have far outstripped our ability to quickly and easily understand and assess them, let alone quantify the influence each of the touch points (or a combination of them) has on the overall path. And yet we are expected to demonstrate a return on our marketing investment.
+就在我今早的晨读中，关于营销碎片话的微博、博客和文章已经数不胜数。与之前相比，消费者有更多的方式来和品牌交互，通常使用多个渠道在一个购物旅程中。会出现几千的购物路径组合，远远超出了我们快速便捷的理解和评估它们的能力，更不用说量化整个路径上的每个接触点（或触点组合）影响。但是，我们仍然期望可以展示我们的媒体投资回报。
 
-I made the suggestion last month that the way to garner the knowledge and insights we need, given these fragmented paths, is by employing a more advanced analytical approach than is being used today. Easy to say, I know, and if your company is like ours, you may not have that skill set residing in house. So how do you accomplish this? In our case, the solution was to partner with the Data Scientists at Analytic Marketing Innovations: Kurt Seemar, Trich Schultz and Jill Giele. And since I don’t have the knowledge to be able to explain these new multi-touch modeling approaches (yet!), I asked Kurt, Trich and Jill if they would answer a few questions about how these more advanced multi-touch models work.
+上个月我做了一个假设，因为这些碎片化路径，我们收集我们需要的知识和洞察的方式需要使用比以往更加高级的分析方法。简单来说，我知道，如果你的公司和我们的公司类似，在公司内部你可能没有这些技能。因此，你如何完成这个任务？在我们的情况下，解决方案是与Analytic Marketing Innovations的数据科学家：Kurt Seemar、Trich Schultz和Jill Giele合作。因为，我没有解释这些新多触点营销方法的知识（目前没有！），我问了Kurt Seemar、Trich Schultz和Jill Giele一些问题关于这些更高级的多触点模型如何工作。
 
-Can you recap why a multi-touch model is better than a single-touch model?
+** 你可以总结一下为什么多触点模型要比单触点模型更好？**
 
-Jill: Marketers have historically relied on “single-touch attribution,” an attribution method that assigns credit for a sale to either the first touch or the last touch. The method was never perfect, but is now considered by most to be seriously flawed because there are so many more potential touch points that may be contributing to a sale.
+Jill: 营销人员过去一直依赖“单触点归因”，将销售归因于最初或最后的接触的归因模型。这个方法很难说完美，但是，在现在被认为是有严重的瑕疵的，因为有非常多的潜在接触点可能贡献了销售。
 
-Kurt: All of this led to a recent push in the marketing analytics world to find a way to assign a value (credit) to various touch points along the pathway, based on a “multi-touch attribution” algorithm. A common approach to these newer multi-touch models has been to assign a weight to each step on the pathway (either equally or subjectively), but this is still problematic because it doesn’t really tell us what we need to know - the true difference of influence among different touches (or combination of touches) - or predict what the next best touch point should be for the individual consumer who interacts with a brand.
+Kurt: 这些导致了近期在营销分析世界的产生了推动力去寻找一种方式来为路径上的每个接触点赋值（归因权重），基于“多触点归因”算法。这些更新的多触点模型的一种常用的方式是为路径上的每个步骤分配权重（要么相等或者主观分配），但是，这仍然是有问题的，因为，它并不能真正告诉我们我们想要知道的 - 不同接触点（接触点组合）影响的真正区别 - 或者预测与品牌交互的消费者下一个最佳的接触点是哪个。
 
-That’s why at Analytic Marketing Innovations, we designed a unique multi-touch attribution model that tells us what we need to know by employing an analytical method called the Markov Chain Model.
+这就是为什么在Analytic Marketing Innovations，我们设计了一个独特的多触点归因模型来告诉我们需要知道的东西，通过应用被称为马尔科夫链的分析模型。
 
-So, just what is a Markov Chain Model?
+** 那么，什么是马尔科夫链模型？**
 
-Trich: The Markov Chain Model (named after mathematician Andrew Markov) is a method for assigning value to any number of steps along the customer journey (as long as that number is finite).
+Trich: 
+
+The Markov Chain Model (named after mathematician Andrew Markov) is a method for assigning value to any number of steps along the customer journey (as long as that number is finite).
 
 
-
+![马尔科夫链模型](http://www.callahancreek.com/stuff/contentmgr/files/1/76c8305480ead76396e4848269d977d5/files/kents_blog_image_words.gif)
 When data scientists employ a Markov Chain Model for multi-touch attribution, we can see the likely chains of events along the various consumer pathways to a sale. The Markov Chain Model assigns credit to each touch along the path to conversion while also sequencing and predicting each step.
 
 All of this, of course, can be quite complicated, because with the increasing fragmentation in how consumers interact with a brand, there are more than just a few pathways to a sale. Using the Markov technique, it is possible to find and understand every statistically significant path, which can add up to thousands of models (paths) for a marketing campaign. That would have been difficult to accomplish using traditional tools and techniques, but is very possible with this approach due to the way the data is managed, integrated and analyzed.

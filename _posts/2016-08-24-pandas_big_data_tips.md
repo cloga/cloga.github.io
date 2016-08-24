@@ -88,21 +88,21 @@ uid    time
 如果数据量不大的，可以先unique uid，再每次计算一个用户的两次登录间隔，类似这样
 
 ```python
-reg_data = reg\_data.sort\_values(['uid', time]) # 先按照uid和time排一下序
+reg_data = reg_data.sort_values(['uid', time]) # 先按照uid和time排一下序
 uids = reg_data['uid'].unique() # 获得所有的uid
 for u in uid:
 	data = []
-	uid_reg\_data = reg\_data.ix[reg\_data['uid']]
+	uid_reg_data = reg_data.ix[reg_data['uid']]
 	pre = None
-	for i, row in uid_reg\_data.iterrows():
+	for i, row in uid_reg_data.iterrows():
 		if len(pre) = 0:
 			pre = row['time']
 			continue
 		row['days'] = (row['time'] - pre).days
 		data.append(row)
 		pre = row['time']
-	reg_data\_f = pd.DataFrame(pre)
-	reg_data\_f.to\_csv('output.csv', mode='a', header=False)
+	reg_data_f = pd.DataFrame(pre)
+	reg_data_f.to_csv('output.csv', mode='a', header=False)
 ```
 
 这种方法虽然计算逻辑比较清晰易懂，但是缺点也非常明显，计算量巨大，相当与有多少量记录就要计算多少次。
@@ -129,24 +129,24 @@ CCCC
 刚好把值向下错位了一位，是不是恰好是我们需要的。让我们用shift函数来改造一下上面的代码。
 
 ```python
-reg_data = reg\_data.sort\_values(['uid', time]) # 先按照uid和time排一下序
+reg_data = reg_data.sort_values(['uid', time]) # 先按照uid和time排一下序
 uids = reg_data['uid'].unique() # 获得所有的uid
 for u in uid:
 	data = []
-	uid_reg\_data = reg\_data.ix[reg\_data['uid']]
-	uid_reg\_data['pre'] = uid\_reg\_data['time'].shift(1)
-	uid_reg\_data['days'] = uid\_reg\_data['time'] - uid\_reg\_data['pre']
-	uid\_reg\_data.ix[~uid_reg\_data['pre'].isnull()].to\_csv('output.csv', mode='a', header=False)
+	uid_reg_data = reg_data.ix[reg_data['uid']]
+	uid_reg_data['pre'] = uid_reg_data['time'].shift(1)
+	uid_reg_data['days'] = (uid_reg_data['time'] - uid_reg_data['pre']).map(lambda x:x.days)
+	uid_reg_data.ix[~uid_reg_data['pre'].isnull()].to_csv('output.csv', mode='a', header=False)
 
 ```
 
 计算量一下就减少了几个数量级。不过在我的实际应用场景中还是远远不够，我碰到登录日志是10亿级，用户数是千万级的。有没有更简单的方法，答案是有的，有一个小技巧。先上代码。
 
 ```python
-reg_data = reg\_data.sort\_values(['uid', time]) # 先按照uid和time排一下序
-reg_data['pre'] = reg\_data['time'].shift(1)
-reg_data['uid0'] = reg\_data['uid0'].shift(1)
-reg_data['days'] = (reg\_data['time'] - reg\_data['pre']).map(lambda x:x.days)
-reg_data\_f = reg\_data.ix(reg\_data['uid'] == reg\_data['uid0']
+reg_data = reg_data.sort_values(['uid', time]) # 先按照uid和time排一下序
+reg_data['pre'] = reg_data['time'].shift(1)
+reg_data['uid0'] = reg_data['uid0'].shift(1)
+reg_data['days'] = (reg_data['time'] - reg_data['pre']).map(lambda x:x.days)
+reg_data_f = reg_data.ix(reg_data['uid'] == reg_data['uid0']
 ```
 上面的代码就把pandas向量化计算的优势发挥出来了，规避掉了计算过程中最耗费时间的按uid循环。如果我们的uid都是一个只要排序后用shift(1)就可以取到所有前一次登录的时间，不过真实的登录数据中有很多的不用的uid，因此再将uid也shift一下命名为uid0，保留uid和uid0匹配的记录就可以了。

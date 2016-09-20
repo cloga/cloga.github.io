@@ -143,7 +143,7 @@ for u in uid:
 计算量一下就减少了几个数量级。不过在我的实际应用场景中还是远远不够，我碰到登录日志是10亿级，用户数是千万级的。有没有更简单的方法，答案是有的，有一个小技巧。先上代码。
 
 ```python
-reg_data = reg_data.sort_values(['uid', time]) # 先按照uid和time排一下序
+reg_data = reg_data.sort_values(['uid', 'time']) # 先按照uid和time排一下序
 reg_data['pre'] = reg_data['time'].shift(1)
 reg_data['uid0'] = reg_data['uid0'].shift(1)
 reg_data['days'] = (reg_data['time'] - reg_data['pre']).map(lambda x:x.days)

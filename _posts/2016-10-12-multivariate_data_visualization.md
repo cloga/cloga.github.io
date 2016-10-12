@@ -141,6 +141,9 @@ pos.ix[pos['Name']=='Iris-versicolor'].plot(kind='scatter', x='X', y='Y', color=
 
 ```
 
+![](http://cloga.info/files/pca161012.png)
+
+
 需要注意，通过PCA降维实际上是损失了一些信息，我们也可以看一下保留的两个主成分可以解释原始数据的多少。
 
 ```python
@@ -154,8 +157,6 @@ pca.fit(data.ix[:,:-1].values).explained_variance_ratio_
 array([ 0.92461621,  0.05301557])
 
 ```
-
-![](http://cloga.info/files/pca161012.png)
 
 可以看到保留的两个主成分，第一个主成分可以解释原始变异的92.3%，第二个主成分可以解释原始变异的5.3%。也就是说降成两维后仍保留了原始信息的97.8%。
 

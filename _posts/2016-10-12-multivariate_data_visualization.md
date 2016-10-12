@@ -110,6 +110,8 @@ pos.ix[pos['Name']=='Iris-versicolor'].plot(kind='scatter', x='X', y='Y', color=
 
 ```
 
+![](http://cloga.info/files/fa161012.png)
+
 ### [主成分分析（PCA）](http://scikit-learn.org/stable/modules/decomposition.html#principal-component-analysis-pca)
 
 主成分分析是由因子分析进化而来的一种降维的方法，通过正交变换将原始特征转换为线性独立的特征，转换后得到的特征被称为主成分。主成分分析可以将原始维度降维到n个维度，有一个特例情况，就是通过主成分分析将维度降低为2维，这样的话，就可以将多维数据转换为平面中的点，来达到多维数据可视化的目的。
@@ -153,6 +155,8 @@ array([ 0.92461621,  0.05301557])
 
 ```
 
+![](http://cloga.info/files/pca161012.png)
+
 可以看到保留的两个主成分，第一个主成分可以解释原始变异的92.3%，第二个主成分可以解释原始变异的5.3%。也就是说降成两维后仍保留了原始信息的97.8%。
 
 ### [独立成分分析(ICA)](http://scikit-learn.org/stable/modules/decomposition.html#independent-component-analysis-ica)
@@ -181,8 +185,9 @@ ax = pos.ix[pos['Name']=='Iris-setosa'].plot(kind='scatter', x='X', y='Y', color
 
 pos.ix[pos['Name']=='Iris-versicolor'].plot(kind='scatter', x='X', y='Y', color='red', label='Iris-versicolor', ax=ax)
 
-
 ```
+
+![](http://cloga.info/files/ica161012.png)
 
 ### [多维度量尺（Multi-dimensional scaling, MDS）](http://scikit-learn.org/stable/auto_examples/manifold/plot_mds.html#sphx-glr-auto-examples-manifold-plot-mds-py)
 
@@ -211,6 +216,8 @@ ax = pos.ix[pos['Name']=='Iris-setosa'].plot(kind='scatter', x='X', y='Y', color
 pos.ix[pos['Name']=='Iris-versicolor'].plot(kind='scatter', x='X', y='Y', color='red', label='Iris-versicolor', ax=ax)
 
 ```
+
+![mds](http://cloga.info/files/mds161012.png)
 
 看到以上几种算法的结果是不是觉得很神奇，相同类别的数据确实距离更近，尤其是后面几个降维算法的结果，基本上可以通过一些旋转或者坐标转换得到相似的图像。
 

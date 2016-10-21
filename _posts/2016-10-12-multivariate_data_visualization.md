@@ -82,6 +82,7 @@ plt.figure()
 radviz(data, 'Name')
 
 ```
+![雷达图](http://pandas.pydata.org/pandas-docs/stable/_images/radviz.png)
 ### [因素分析(FactorAnalysis, FA)](http://scikit-learn.org/stable/modules/decomposition.html#factor-analysis)
 
 因素分析最初心理学家斯皮尔曼发明，用于研究人类的人格特质，著名的卡特尔16PF（16种相对独立的人格特征）就是应用因素分析方法得来。基于高斯潜在变量的一个简单线性模型，假设每一个观察值都是由低维的潜在变量加正态噪音构成。

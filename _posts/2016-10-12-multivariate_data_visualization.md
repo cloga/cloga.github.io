@@ -1,15 +1,14 @@
 ---
-author: cloga
-comments: true
+title: "多维数据可视化"
+author: "cloga"
+comments: yes
+output: pdf_document
 layout: post
 slug: multivariate data visualization
-title: 多维数据可视化
-categories:
-- 数据分析
 tags:
 - 数据分析
 - 多维数据可视化
-
+categories: 数据分析
 ---
 
 多维数据可视化是指通过一些手段将高维的数据展示在二维的平面中，在进行探索性数据分析及对聚类或分类问题的验证中有着重要的应用。本文将介绍一些常用的多维数据可视化的方法。

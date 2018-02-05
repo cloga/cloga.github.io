@@ -299,6 +299,7 @@ def get_suggestions_es_redis():
     suggestions = r.get(query)
     if suggestions is None:
         # redis缓存中没有则去es中查询
+        # es部分搜索使用统配符模式，默认的match是单词匹配
         query_name_contains = {'query': {'wildcard': {'name': '*' + query + '*'}}}
         suggestions = es.search(index="product_list", doc_type="product_name", body=query_name_contains)
         suggestions = [s['_source']['name'] for s in suggestions['hits']['hits']]

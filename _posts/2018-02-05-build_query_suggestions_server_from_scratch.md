@@ -165,7 +165,7 @@ cd /usr/share/nginx/html
       $("#search-input").autocomplete({
         source:function(req, rep) {
 		$.ajax({
-			url : "http://120.92.93.12:5000/query?q="+encodeURIComponent($("#search-input").val()),
+			url : "http://xxx.xx.xx.xx:5000/query?q="+encodeURIComponent($("#search-input").val()),
 			type : "get",
 			dataType: "json",
 			success: function(data){
@@ -248,7 +248,7 @@ for record in data_df.to_dict('records'):
 python36 data_process.py
 ```
 
-## 搜索建议web服务，使用redis缓存结果
+## 搜索下拉建议web服务，使用redis缓存结果
 
 ```python
 #!/usr/bin/python36
@@ -285,6 +285,13 @@ def get_suggestions_es_redis():
         rst = make_response('')
     rst.headers['Access-Control-Allow-Origin'] = '*'
     return rst
+```
+
+启动flask服务
+
+```ssh
+
+
 ```
 
 至此一个从0开始的搜索下拉框建议就搭建完成了，同时这个demo也具有一定的扩展性，可以在前面增加load banlance或者在后端增加es的集群来进行扩展

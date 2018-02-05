@@ -299,7 +299,7 @@ def get_suggestions_es_redis():
     suggestions = r.get(query)
     if suggestions is None:
         # redis缓存中没有则去es中查询
-        query_name_contains = {'query': {'match': {'name': query}}}
+        query_name_contains = {'query': {'wildcard': {'name': '*' + query + '*'}}}
         suggestions = es.search(index="product_list", doc_type="product_name", body=query_name_contains)
         suggestions = [s['_source']['name'] for s in suggestions['hits']['hits']]
         suggestions = json.dumps(suggestions)
@@ -322,6 +322,10 @@ nohup flask run --host=0.0.0.0&
 ```
 
 flask默认的端口为5000
+
+## es搜索的基本知识
+
+match是单词匹配，因为这个demo中需要的是部分匹配所以使用通配符模式。
 
 至此一个从0开始的搜索下拉框建议就搭建完成了，同时这个demo也具有一定的扩展性，可以在前面增加load banlance或者在后端增加es的集群来进行扩展
 

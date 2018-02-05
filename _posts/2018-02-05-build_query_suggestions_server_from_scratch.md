@@ -309,11 +309,12 @@ def get_suggestions_es_redis():
         rst = make_response(suggestions)
     else:
         rst = make_response('')
+    # 如果跨域需要加这句
     rst.headers['Access-Control-Allow-Origin'] = '*'
     return rst
 ```
 
-启动flask服务
+在suggestions.py所在目录启动flask服务，否则会报路径错误。
 
 ```ssh
 export FLASK_APP=suggestions.py
@@ -322,7 +323,7 @@ export FLASK_DEBUG=1
 nohup flask run --host=0.0.0.0&
 ```
 
-flask默认的端口为5000
+flask默认的端口为5000，flask的地址需要填入静态页面ajax的url部分
 
 ## es搜索的基本知识
 

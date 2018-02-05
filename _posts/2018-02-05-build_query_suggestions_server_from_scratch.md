@@ -3,7 +3,7 @@ title: "从零开始搭建一个搜索下拉推荐"
 author: "cloga"
 comments: yes
 layout: post
-slug: from scatch
+slug: build_query_suggestions_server_from_scratch
 tags:
 - web service
 - python

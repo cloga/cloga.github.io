@@ -316,6 +316,8 @@ def get_suggestions_es_redis():
 
 ```ssh
 export FLASK_APP=suggestions.py
+# 开启debug模式
+export FLASK_DEBUG=1
 nohup flask run --host=0.0.0.0&
 ```
 

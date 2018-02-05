@@ -165,7 +165,7 @@ cd /usr/share/nginx/html
       $("#search-input").autocomplete({
         source:function(req, rep) {
 		$.ajax({
-			url : "http://xxx.xx.xx.xx:5000/query?q="+encodeURIComponent($("#search-input").val()),
+			url : "http://xxx.xx.xx.xx:5000/query?q="+encodeURIComponent($("#search-input").val()), /*这里是flask提供的json数据的地址*/
 			type : "get",
 			dataType: "json",
 			success: function(data){
@@ -250,6 +250,8 @@ python36 data_process.py
 
 ## 搜索下拉建议web服务，使用redis缓存结果
 
+创建suggestions.py，根据搜索内容，返回最相近的相近产品名称
+
 ```python
 #!/usr/bin/python36
 
@@ -290,7 +292,30 @@ def get_suggestions_es_redis():
 启动flask服务
 
 ```ssh
+export FLASK_APP=suggestions.py
+nohup flask run --host=0.0.0.0&
+```
 
+flask默认的端口为5000
+
+## redis的基本命令
+
+安装redis
+
+```ssh
+yum install redis
+```
+
+访问远程redis
+
+```ssh
+redis-cli -h 192.168.1.103 -p 6379 
+
+# 查看所有key
+keys *
+
+# 清空所有key
+FLUSHALL
 
 ```
 

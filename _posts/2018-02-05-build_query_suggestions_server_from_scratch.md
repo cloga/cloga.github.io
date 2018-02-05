@@ -248,6 +248,29 @@ for record in data_df.to_dict('records'):
 python36 data_process.py
 ```
 
+## redis的基本命令
+
+安装redis 客户端
+
+```ssh
+yum install redis
+```
+
+访问远程redis
+
+```ssh
+redis-cli -h 192.168.1.103 -p 6379 
+
+# 查看所有key
+keys *
+
+# 清空所有key
+FLUSHALL
+
+```
+
+使用金山云的redis需要添加白名单
+
 ## 搜索下拉建议web服务，使用redis缓存结果
 
 创建suggestions.py，根据搜索内容，返回最相近的相近产品名称
@@ -297,27 +320,6 @@ nohup flask run --host=0.0.0.0&
 ```
 
 flask默认的端口为5000
-
-## redis的基本命令
-
-安装redis
-
-```ssh
-yum install redis
-```
-
-访问远程redis
-
-```ssh
-redis-cli -h 192.168.1.103 -p 6379 
-
-# 查看所有key
-keys *
-
-# 清空所有key
-FLUSHALL
-
-```
 
 至此一个从0开始的搜索下拉框建议就搭建完成了，同时这个demo也具有一定的扩展性，可以在前面增加load banlance或者在后端增加es的集群来进行扩展
 

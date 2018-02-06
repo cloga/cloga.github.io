@@ -80,6 +80,10 @@ pip install jupyter
 ```
 生成配置文件
 
+```ssh
+jupyter notebook --generate-config
+```
+
 打开ipython生成密文的密码
 
 ```python

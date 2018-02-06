@@ -146,6 +146,8 @@ nohup jupyter notebook --allow-root&
 
 好了 可以访问jupyter来编辑和测试代码了
 
+记得在金山云的虚机上开启对应端口，jupyter notebook为8888
+
 ## nginx承载静态页host
 
 安装nginx
@@ -252,6 +254,8 @@ for record in data_df.to_dict('records'):
 python36 data_process.py
 ```
 
+如果报授权错误，可能需要关闭x-pack
+
 ## redis的基本命令
 
 安装redis 客户端
@@ -273,7 +277,7 @@ FLUSHALL
 
 ```
 
-使用金山云的redis需要添加白名单
+使用金山云的redis需要为访问的ip添加白名单
 
 ## 搜索下拉建议web服务，使用redis缓存结果
 
@@ -327,7 +331,7 @@ export FLASK_DEBUG=1
 nohup flask run --host=0.0.0.0&
 ```
 
-flask默认的端口为5000，flask的地址需要填入静态页面ajax的url部分
+flask默认的端口为5000，flask的地址需要填入静态页面ajax的url部分，记得开启端口
 
 ## es搜索的基本知识
 

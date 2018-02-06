@@ -1,5 +1,5 @@
 ---
-title: "使用金山云从零开始搭建一个搜索下拉推荐"
+title: "使用金山云从零开始搭建一个搜索下拉推荐服务"
 author: "cloga"
 comments: yes
 layout: post

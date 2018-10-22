@@ -11,6 +11,8 @@
 }
 .box_2 {
 }
+.box_3 {
+}
 .ellipse {
 }
 .shape {
@@ -77,6 +79,8 @@
 }
 .line {
 }
+.arrow {
+}
 .text_area {
   color:#000000;
   text-align:left;
@@ -97,6 +101,9 @@
 .menu_item {
 }
 .snapshot {
+}
+.sticky_1 {
+  text-align:left;
 }
 .blockquote {
   font-family:'ArialMT', 'Arial';

@@ -36,7 +36,7 @@ sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
 
 接下来需要填入集群master节点的ip地址，k8s所有节点需要都能访问这ip。
 
-![image-20181230114018982](/files/image-20181230114018982.png){:height="80%"}
+![image-20181230114018982](/files/image-20181230114018982.png){:height="50%" width="50%"}
 
 ### 常用的docker命令
 
@@ -51,25 +51,25 @@ docker  rm $(docker ps -a -q) //   remove删除所有容器
 
 设置k8s集群
 
-![image-20181230114201379](/files/image-20181230114201379.png)
+![image-20181230114201379](/files/image-20181230114201379.png){:height="50%" width="50%"}
 
 点击 add cluster
 
-![image-20181230114326553](/files/image-20181230114326553.png)
+![image-20181230114326553](/files/image-20181230114326553.png){:height="50%" width="50%"}
 
 手动安装需要选择custom，添加k8s集群名
 
 选择下一步
 
-![image-20181230114732513](/files/image-20181230114732513.png)
+![image-20181230114732513](/files/image-20181230114732513.png){:height="50%" width="50%"}
 
 在不同的节点上运行给到的docker命令。在主节点可以选择全部三个节点角色，其他的计算节点只需要选择work角色。
 
-![image-20181230115326867](/files/image-20181230115326867.png)
+![image-20181230115326867](/files/image-20181230115326867.png){:height="50%" width="50%"}
 
 在节点上运行了对应的命令后，rancher会显示集群中有对应的节点加入。
 
-![image-20181230115616101](/files/image-20181230115616101.png)
+![image-20181230115616101](/files/image-20181230115616101.png){:height="50%" width="50%"}
 
 如果后续需要加入更多的节点，可以在节点doshboard页点击edit重新获得对应的docker命令。
 
@@ -77,4 +77,3 @@ docker  rm $(docker ps -a -q) //   remove删除所有容器
 yum install docker
 service docker start
 ```
-

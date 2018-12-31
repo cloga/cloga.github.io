@@ -36,7 +36,7 @@ sudo docker run -d --restart=unless-stopped -p 80:80 -p 443:443 rancher/rancher
 
 接下来需要填入集群master节点的ip地址，k8s所有节点需要都能访问这ip。
 
-![image-20181230114018982](/Users/cloga/Library/Application Support/typora-user-images/image-20181230114018982.png)
+![image-20181230114018982](/files/image-20181230114018982.png){:height="80%"}
 
 ### 常用的docker命令
 

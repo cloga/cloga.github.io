@@ -51,25 +51,25 @@ docker  rm $(docker ps -a -q) //   remove删除所有容器
 
 设置k8s集群
 
-![image-20181230114201379](/Users/cloga/Library/Application Support/typora-user-images/image-20181230114201379.png)
+![image-20181230114201379](/files/image-20181230114201379.png)
 
 点击 add cluster
 
-![image-20181230114326553](/Users/cloga/Library/Application Support/typora-user-images/image-20181230114326553.png)
+![image-20181230114326553](/files/image-20181230114326553.png)
 
 手动安装需要选择custom，添加k8s集群名
 
 选择下一步
 
-![image-20181230114732513](/Users/cloga/Library/Application Support/typora-user-images/image-20181230114732513.png)
+![image-20181230114732513](/files/image-20181230114732513.png)
 
 在不同的节点上运行给到的docker命令。在主节点可以选择全部三个节点角色，其他的计算节点只需要选择work角色。
 
-![image-20181230115326867](/Users/cloga/Library/Application Support/typora-user-images/image-20181230115326867.png)
+![image-20181230115326867](/files/image-20181230115326867.png)
 
 在节点上运行了对应的命令后，rancher会显示集群中有对应的节点加入。
 
-![image-20181230115616101](/Users/cloga/Library/Application Support/typora-user-images/image-20181230115616101.png)
+![image-20181230115616101](/files/image-20181230115616101.png)
 
 如果后续需要加入更多的节点，可以在节点doshboard页点击edit重新获得对应的docker命令。
 

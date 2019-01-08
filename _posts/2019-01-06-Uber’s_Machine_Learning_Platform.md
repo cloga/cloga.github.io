@@ -11,7 +11,7 @@ categories: 他山之石
 
 Uber在自家的博客上用两篇文章的篇幅介绍了他们自己的机器学习平台(Michelangelo)[Meet Michelangelo: Uber’s Machine Learning Platform](https://eng.uber.com/michelangelo/) 和 [Michelangelo PyML: Introducing Uber’s Platform for Rapid Python ML Model Development](https://eng.uber.com/michelangelo-pyml/)。最近看了一下这两篇文章，相关的内容节选如下。
 
-![](https://eng.uber.com/wp-content/uploads/2017/09/Featured-Image.png)
+![](https://eng.uber.com/wp-content/uploads/2017/09/Featured-Image.png){:height="50%" width="50%"}
 
 ## 系统架构
 

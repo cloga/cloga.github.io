@@ -42,7 +42,7 @@ Michelangelo的数据管理组件被拆分为在线和离线pipeline。目前，
 
 另外，在数据管理层增加了一层，特征库，允许团队分享、发现以及在他们的机器学习任务上使用精心设计特征集。Uber的许多建模问题使用相同或类似的特征，使团队在内部项目间共享特征以及不同组织间的团队间分享特征很有价值。
 
-![数据准备pipeline推送数据到特征库和训练数据仓库](http://eng.uber.com/wp-content/uploads/2017/09/image5.png)
+![数据准备pipeline推送数据到特征库和训练数据仓库](http://eng.uber.com/wp-content/uploads/2017/09/image5.png){:height="50%" width="50%"}
 
 图1 数据准备pipeline推送数据到特征库和训练数据仓库
 

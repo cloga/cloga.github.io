@@ -146,15 +146,79 @@ yum install git
 git clone https://github.com/tensorflow/models.git
 ```
 
+安装gcc编译器
 
+```
+yum install gcc gcc-c++ kernel-devel
+```
+
+安装相关组件
+
+```
+conda install tensorflow
+yum install protobuf-compiler python-lxml
+conda install Cython contextlib2 matplotlib
+```
+
+安装coco API
+
+```
+git clone https://github.com/cocodataset/cocoapi.git
+cd cocoapi/PythonAPI
+make
+cp -r pycocotools ~/models/research/
+```
+
+Protobuf编译
+
+```
+cd ~/models/research/
+protoc object_detection/protos/*.proto --python_out=.
+```
+
+添加python路径
+
+```
+export PYTHONPATH=$PYTHONPATH:`pwd`:`pwd`/slim
+```
+
+验证一下安装情况
+
+```python
+python object_detection/builders/model_builder_test.py
+```
+
+![image-20190119183713664](/files/image-20190119183713664.png){:height="50%" width="50%"}
+
+在jupyter中运行/object_detection/object_detection_tutorial.ipynb
+
+![image-20190119184835121](/files/image-20190119184835121.png){:height="50%" width="50%"}
+
+能够生成图片就表示环境没有问题。
 
 ## 将容器导出为容器文件
 
+接下来我们需要把这个容器到处为容器文件，首先从容器中退出，回到宿主机，使用如下命令：
+
+```
+docker export -o <需要保存的本地路径>/<镜像文件名>.tar <容器ID>
+```
+
+将容器保存为镜像有两种方式，一种方式是docker commit将容器保存在镜像，再通过docker save将镜像保存为文件，后续可以通过docker load直接加载镜像到docker镜像库；另一种方式是docker export直接将容器文件存储为容器文件，再通过docker import将容器文件导入到docker镜像库。第一种方式会保留镜像的历史记录，相对生成的docker文件会比较大；第二种方式是直接将当前状态保存下来。这里采用第二种方式。
+
 ## 将自定义容器环境导入为docker镜像
+
+```
+docker import <镜像文件名> <自定义镜像名>:<自定义镜像tag >
+```
+
+使用docker images确认一下相关镜像是否已经在本地的docker镜像库中存在。
 
 ## 用自定义镜像创建一个容器
 
+![image-20190119190357627](/files/image-20190119190357627.png){:height="50%" width="50%"}
 
+![image-20190119190430860](/files/image-20190119190430860.png){:height="50%" width="50%"}
 
-
+可以看到文件的目录结果与上一个容器是一样的，查看一下history，可以看到之前的历史也都保留下来了，用同样的方法启动jupyter notebook，并重跑object_detection_tutorial，demo还是可以跑通，说明制作的自定义docker镜像可以正常运行，大功告成。
 

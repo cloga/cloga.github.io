@@ -15,7 +15,7 @@ Uber在自家的博客上用两篇文章的篇幅介绍了他们自己的机器�
 
 ## 系统架构
 
-Michelangelo由开源系统和内置的组件混合组成。使用的主要的开源组件有[HDFS](http://hadoop.apache.org/), [Spark](https://spark.apache.org/), [Samza](http://samza.apache.org/), [Cassandra](http://cassandra.apache.org/), [MLLib](https://spark.apache.org/mllib/), [XGBoost](https://github.com/dmlc/xgboost), and [TensorFlow](https://www.tensorflow.org/)。Uber通常倾向于使用可能的成熟开源选项，并且将会fork，自定义预计反向贡献，如果没有合适的开源项目，则会自主开发。
+Michelangelo由开源系统和内置的组件混合组成。使用的主要的开源组件有[HDFS](http://hadoop.apache.org/), [Spark](https://spark.apache.org/), [Samza](http://samza.apache.org/), [Cassandra](http://cassandra.apache.org/), [MLLib](https://spark.apache.org/mllib/), [XGBoost](https://github.com/dmlc/xgboost), and [TensorFlow](https://www.tensorflow.org/)。Uber通常倾向于使用可能的成熟开源选项，并且将会fork，自定义以及反向贡献，如果没有合适的开源项目，则会自主开发。
 
 Michelangelo是构筑在Uber的数据和计算基础设置之上，这些基础设施提供了存储Uber所有交易和日志数据的数据湖，从所有Uber服务聚合日志数据的kafka broker，Samza流式计算引擎，Cassandra 集群和Uber自建的服务编排和部署工具。
 
@@ -52,7 +52,7 @@ Uber的交易和日志数据流入HDFS数据湖，可以方便的用Spark和Hive
 
 #### 在线
 
-在线部署的模型不能访问存储在HDFS中的数据，通常考虑性能的情况下直接从后端生产服务计算模型特征是很困难（例如，不可能直接查询UberEATS订单服务计算一个饭店一定时间的平均餐食准备时间）。反之，我们预计算允许在线模型需要的特征，并且存储在Cassandra，在预测时以很低的延迟读取出来。
+在线部署的模型不能访问存储在HDFS中的数据，通常考虑性能的情况下直接从后端生产服务计算模型特征是很困难（例如，不可能直接查询UberEATS订单服务计算一个饭店一定时间的平均餐食准备时间）。反之，我们允许预计算在线模型需要的特征，并且存储在Cassandra，在预测时以很低的延迟读取出来。
 
 Uber提供了两个方式来计算这些在线服务特征，批量预计算和近实时计算，概述如下：
 
@@ -61,5 +61,5 @@ Uber提供了两个方式来计算这些在线服务特征，批量预计算和�
 
 #### 共享特征库
 
-
+构建中心化的特征库很有价值，每个团队可以创建和管理自己团队使用的权威特征，并与其他团队分享。
 

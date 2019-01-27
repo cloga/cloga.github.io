@@ -16,7 +16,7 @@ categories: 他山之石
 - 模型开发
 - 模型服务
 
-![image-20190127174538706](/files/image-20190127174538706.png)
+![image-20190127174538706](/files/image-20190127174538706.png){:height="50%" width="50%"}
 
 当数据科学团队较小的时候，不会面临太多的问题，所有事情都相对较好。
 
@@ -31,7 +31,7 @@ categories: 他山之石
   - 数据没有在标准化的流程中修改
   - 管理复杂的流和定时任务变得不可管理
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/crontab.jpg)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/crontab.jpg){:height="50%" width="50%"}
 
 - 每个数据科学家有他们自己的工具集
 
@@ -40,7 +40,7 @@ categories: 他山之石
   - 一些喜欢Spark
   - 一些喜欢所有
 
-  ![classification_large](https://axsauze.github.io/scalable-data-science/images/mlibs.jpg)
+  ![classification_large](https://axsauze.github.io/scalable-data-science/images/mlibs.jpg){:height="50%" width="50%"}
 
 - 模型服务变得越来越难
 
@@ -53,7 +53,7 @@ categories: 他山之石
   - 数据工程师说是模型出了问题
   - 变成了猫鼠游戏
 
-  ![classification_large](https://axsauze.github.io/scalable-data-science/images/gitblame.jpg)
+  ![classification_large](https://axsauze.github.io/scalable-data-science/images/gitblame.jpg){:height="50%" width="50%"}
 
   幸运的是，许多同行都面临这些的问题有段时间了，这是一个大家都要解决的问题。
 
@@ -67,32 +67,32 @@ categories: 他山之石
 
   因为技术功能变化了，因此基础设施也该对应的进化。
 
-  ![image-20190127132900291](/files/image-20190127132900291.png)
+  ![image-20190127132900291](/files/image-20190127132900291.png){:height="50%" width="50%"}
 
-  ![image-20190127171943291](/files/image-20190127171943291.png)
+  ![image-20190127171943291](/files/image-20190127171943291.png){:height="50%" width="50%"}
 
 ML-OPS的两个原则：
 
 - 重现性（Reproducibility）
 - 编排
 
-![image-20190127172718350](/files/image-20190127172718350.png)
+![image-20190127172718350](/files/image-20190127172718350.png){:height="50%" width="50%"}
 
 ### 原则1:模型和数据的版本
 
-![image-20190127173229710](/files/image-20190127173229710.png)
+![image-20190127173229710](/files/image-20190127173229710.png){:height="50%" width="50%"}
 
 数据科学重现性的古老问题。
 
 解藕管道中每一步。
 
-![image-20190127173703528](/files/image-20190127173703528.png)
+![image-20190127173703528](/files/image-20190127173703528.png){:height="50%" width="50%"}
 
 每一步都包含代码/配置，以及特定的数据数据输入和输出。
 
 每一步的抽象：
 
-![image-20190127174155242](/files/image-20190127174155242.png)
+![image-20190127174155242](/files/image-20190127174155242.png){:height="50%" width="50%"}
 
 - 数据输入
 
@@ -128,7 +128,7 @@ $ cat data-output.csv
 
  在更高一个层面，我们可以把整个管道和数据流抽象出来。
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/mltemp5.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/mltemp5.png){:height="50%" width="50%"}
 
 重现性可以：
 
@@ -140,7 +140,7 @@ $ cat data-output.csv
 
 ### 原则2：模型部署编排
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/mltemp3.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/mltemp3.png){:height="50%" width="50%"}
 
 覆盖生产环境中模型服务的复杂性。
 
@@ -175,9 +175,9 @@ subset of program space to search,
 
 我们可以停止对demo之神祈祷。
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/programming-gods.jpg)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/programming-gods.jpg){:height="50%" width="50%"}
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/compliant-ml.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/compliant-ml.png){:height="50%" width="50%"}
 
 这使数据科学家、数据工程师和devops/mlops工程师：
 
@@ -198,11 +198,11 @@ subset of program space to search,
 
 不同的资源分配结果不同。
 
-![传统的服务器资源分配](https://axsauze.github.io/scalable-data-science/images/arch3.png)
+![传统的服务器资源分配](https://axsauze.github.io/scalable-data-science/images/arch3.png){:height="50%" width="50%"}
 
-![自动扩缩容](https://axsauze.github.io/scalable-data-science/images/arch2.png)
+![自动扩缩容](https://axsauze.github.io/scalable-data-science/images/arch2.png){:height="50%" width="50%"}
 
-![无服务端服务](https://axsauze.github.io/scalable-data-science/images/arch1.png)
+![无服务端服务](https://axsauze.github.io/scalable-data-science/images/arch1.png){:height="50%" width="50%"}
 
 ## 现有工具
 
@@ -230,7 +230,7 @@ sklearn2pmml(estimator=clf,
 
 #### 数据版本控制（DVC），数据科学项目的开源版本控制系统
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/dvc.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/dvc.png){:height="50%" width="50%"}
 
 git的一个分支，由iterative.ai构建，允许将数据、配置和代码通过版本管理系统分组。
 
@@ -284,7 +284,7 @@ def fit_and_predict(data):
 
 #### PACHYDERM
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/pachyderm.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/pachyderm.png){:height="50%" width="50%"}
 
 Pachyderm是端到端的模型版本管理框架，允许管道的可重复定义。Pachyderm包含三个主要组件：
 
@@ -370,13 +370,13 @@ ADD pytrain.py /code/pytrain.py
 
 可重现的管道
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/iris.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/iris.png){:height="50%" width="50%"}
 
 ### 原则2：编排，模型部署编排
 
 #### MLEAP
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/mleapruntime.jpg)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/mleapruntime.jpg){:height="50%" width="50%"}
 
 更深一层的模型序列化。MLeap是一个开源项目，用于抽象多种机器学习库的序列化和执行。
 
@@ -401,22 +401,22 @@ curl -XPUT -H "content-type: application/json" \
 
 MLeap优化过的绑定
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/mleapbundle.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/mleapbundle.png){:height="50%" width="50%"}
 
 #### Seldon-core，企业级机器学习部署
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/seldon1.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/seldon1.png){:height="50%" width="50%"}
 
 更关注模型编排
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/seldon3.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/seldon3.png){:height="50%" width="50%"}
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/seldon2.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/seldon2.png){:height="50%" width="50%"}
 
 处理CI、CD的挑战
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/cicd.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/cicd.png){:height="50%" width="50%"}
 
 可以开启使用Grafana的监控
 
-![classification_large](https://axsauze.github.io/scalable-data-science/images/dashboard.png)
+![classification_large](https://axsauze.github.io/scalable-data-science/images/dashboard.png){:height="50%" width="50%"}

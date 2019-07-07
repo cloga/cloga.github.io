@@ -137,3 +137,31 @@ pip2pi [本地pypi路径] -r requirements.txt
 
 ![pypiserver-simple](/files/pypiserver-simple.png)
 
+## 在pip客户端中设置本地pip源
+
+有多种方式可以指定额外的pip源
+
+### 单次pip命令
+
+```shell
+pip install  --extra-index-url http://localhost:8080/simple/
+```
+
+### 在环境变量中设置```PIP_EXTRA_INDEX_URL```
+
+例如在```~/.bash_profile```增加环境变量
+
+```shell
+export PIP_EXTRA_INDEX_URL=http://localhost:8080/simple/
+```
+
+### 在pip设置文件```~/.pip/pip.conf```中设置```extra-index-url```
+
+```shell
+[global]
+extra-index-url = http://localhost:8080/simple/
+```
+
+
+
+

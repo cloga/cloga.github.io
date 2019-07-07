@@ -133,9 +133,9 @@ pip2pi [本地pypi路径] -r requirements.txt
 
 此时，启动pypiserver后，可以在本地的对应地址看到相关的信息。
 
-![pypiserver-hp](/files/pypiserver-hp.png)
+![pypiserver-hp](/files/pypiserver-hp.png){:height="50%" width="50%"}
 
-![pypiserver-simple](/files/pypiserver-simple.png)
+![pypiserver-simple](/files/pypiserver-simple.png){:height="50%" width="50%"}
 
 ## 在pip客户端中设置本地pip源
 

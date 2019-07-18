@@ -6,7 +6,9 @@ layout: post
 slug: build_your_private_pip_source
 tags:
 - python
-categories: python
+categories: 
+- python
+
 ---
 
 在项目交付过程中，经常遇到没有外网的环境，这时系统如果需要依赖pip源，那么通常需要搭建私有pip源。这里需要解决三个问题。

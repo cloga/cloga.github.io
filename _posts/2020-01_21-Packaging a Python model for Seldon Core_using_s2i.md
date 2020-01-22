@@ -1,26 +1,339 @@
 ---
-title: "人工智能杂谈"
+title: "使用s2i封装Python模型-Seldon Core"
 author: "cloga"
 comments: yes
 layout: post
-slug: murmur_ai
+slug: Packaging_a_Python_model_for_Seldon_Core_using_s2i
 tags:
-- AI
-- deep learning
+- Seldon
+- model serving
 categories: 
-- deep learning
-- AI
-
+- Seldon
+- model serving
+- 他山之石
 ---
 
-机器学习的由来，我觉得可以追溯到哲学家的原始三问：我是谁，我从哪里来，我要去哪里。这三个问题应该是来自哲学家的自我思辨。人类对于世界的探索，从未停止过，对外部世界的探索诞生了物理学，地理，天文等学科，对自身的探索诞生了心理，生理等学科。不过碍于科学技术的发展，人类关于自身的研究一直停留在思辨的阶段，在那个崇尚宗教和神秘力量的年代，也许很多人都想过创造人类来成为上帝，比如弗兰肯斯坦博士。
+[原文联接](https://github.com/SeldonIO/seldon-core/blob/master/docs/wrappers/python.md)
 
-受益于战争与密码学，计算机技术得到了发展，人类的仿生学和自我观察又有了新的工具。人类能否创造出可以比肩人类自身的智能有一次被提上了日程。彼时的天才科学家图灵提出了最初的计算机原型-图灵机的概念，存储器，CPU，IO系统这些现代计算机上的元素在其上都可以找到对应的影子。同时也提出了人工智能的终极一问：图灵测验，如何判断计算机可以完全模拟人类。让人类和计算机共同回答人类提出的问题，如果人类无法判断哪台是计算机那个是人类，那么就证明计算机已经可以模拟人类。
+在这个指南中，将演示将python模型封装在docker镜像中，以便Seldon Core随时使用[source-to-image app s2i](https://github.com/openshift/source-to-image)来部署，所需的步骤。
 
-随着人类对自身认识的发展，心理学和认知科学都有了长足的进步，科学家逐渐开始视图揭开人类智能的密码，了解越多，所能接触到未知领域也就越大。因此，科学家对计算机对人脑的模拟提出了弱化的概念，从最初的结构和功能模拟弱化为单纯的功能类比。虽然通过生理学和认知科学的发展了解到人类传递信息的基础单元神经元的状态与晶体管一直，只有两个状态，但是，人类多个神经元直接的交互方式却是并行进行，而计算机从创造之初就是串行进行（当然按照系统论的角度，串行的底层在更高层上可以实现并行的方式。）。这种差异，也导致直接在功能上想要类比计算机与人脑的计算量在当时是不可能的。另一方面，不追求在结构上进行类比，而仅仅期望计算机可以在某些方面可以实现与人类大脑相似的功能的弱人工智能取得了长足的进步，与之相对前者被称为强人工智能。此时比较令人兴奋的发现当属诺贝尔经济学奖获得者西蒙和纽维尔提出的通用问题求解器，他们用这个程序求解了汉诺塔问题。可以看到的是每一次机器学习的发展必然来自于认知科学的进步，西蒙和纽维尔的发现，得益于认知科学对人类心理过程的描述。汉诺塔问题是一个问题解决中的一个经典问题。在这个阶段，机器学习比较热门的问题是专家系统，即把人类的某些行业经验转化为可以描述的规则，让计算机来简化人类的工作。
+如果对s2i不熟悉，先读一下[s2i的基本说明](https://github.com/SeldonIO/seldon-core/blob/master/docs/wrappers/s2i.md)，然后遵循如下步骤。
 
-反观最近大火的深度学习，其本质也是来源于认知科学一个突破性进展。所谓的深度学习是神经网络算法的进一步发展。在机器学习/数据挖掘中，存在着众多的算法，计算机科学和统计学是算法的主要来源，二者的区别在于计算机科学的算法更注重工程实现，而统计学算法则更注重网络基础。神经网络算法来自于对人类神经系统的模拟。人类的神经系统有感知器，传入神经，神经中枢，传出神经，效应器。人类的神经系统是以神经网络的形式对刺激进行反映，一个刺激会作用于多个神经元，多个神经元共同对刺激作出反映。神经网络算法基于同样的原理。不过受限于计算机的计算能力和可解释性，神经网络一直受到诟病。在这个时期，大放异彩的是支持向量机，随机森林这类浅学习算法。深度学习的灵感来自于认知科学的又一个重大发现。休伯尔和威塞尔，发现在视神经中不同的存在着负责不同功能视神经元，有些神经元负责识别最底层的，在其上的神经元负责从像素中抽象出边，在其上的神经元负责从边的组合中识别出物体的部分，最上层的神经元负责从物体的部分中抽象出物体，视觉神经分层处理的性质给了机器学习科学家启发，模拟人类的视觉神经处理机制，从原始的神经网络中抽取出更多的中间层，从而提高学习的效果。与此同时得益于摩尔定律，计算机的计算性能也得到了几何级数的提升。深度学习模拟（仿生）的源泉是视觉中的物体识别，因为，其在语音识别，图像识别和文本识别这类本身就存在层次化的认知任务中表现了超越其他浅层算法的表现。
+## 步骤1-安装s2i
 
-综上可以看到，人工智能或机器学习本质上和初衷就是用机器来模拟人类，或者称为人类仿生学，而目前还处于非常初级的阶段。一起回顾一下人类的心理过程，注意、感觉、知觉、记忆、思维、想象、情感、意志。目前从功能类比角度，人工智能只是勉强走到了知觉阶段，目前在一些机器学习算法的前沿研究中，已经开始引入了短时记忆，注意这些机制来提高算法的效果，但目前也仅限于认知相关的研究，距离完全模拟人类还有很长的路要走，真正达到科幻电影中提到的机器人伦理学更是遥遥无期。也许强人工智能本身就是一个违命题，期望通过操作无机物来模拟有机物本身就不可行，我们自身也许是来自不同维度的上帝创造的产物，用低维去模拟高维的起点就存在偏差。
+[下载安装s2i](https://github.com/openshift/source-to-image#installation)
 
+- 使用s2i的前提条件是：
+    - Docker
+    - Git（如果从远程的git仓库building）
 
+要检查一下所有东西是否就绪，可以运行
+
+```shell
+s2i usage seldonio/seldon-core-s2i-python3:0.4
+```
+
+## 步骤2-创建源码
+
+要使用s2i创建镜像来封装python模型需要：
+
+- 带有一个运行模型类的python文件
+- requirements.txt或setup.py
+- .s2i/environment - 使用s2i building的模型定义，来正确封装模型
+
+下面是每个步骤的详细步骤：
+
+### Python文件
+
+源码需要包含在一个python文件中，这个文件定义了与文件相同名称的类。例如，看一下wrappers/s2i/python/test/model-template-app/MyModel.py的python模型文件框架：
+
+```python
+class MyModel(object):
+    """
+    Model template. You can load your model parameters in __init__ from a location accessible at runtime
+    """
+ 
+    def __init__(self):
+        """
+        Add any initialization parameters. These will be passed at runtime from the graph definition parameters defined in your seldondeployment kubernetes resource manifest.
+        """
+        print("Initializing")
+ 
+    def predict(self,X,features_names):
+        """
+        Return a prediction.
+ 
+        Parameters
+        ----------
+        X : array-like
+        feature_names : array of feature names (optional)
+        """
+        print("Predict called - will run identity function")
+        return X
+ 
+ 
+    def send_feedback(self,features,feature_names,reward,truth,routing=None):
+ 
+        print("Send feedback called")
+ 
+        return []
+     
+    def class_names(self) -> Iterable[str]:
+```
+
+- 这个文件名称为MyModel.py，它定义了一个MyModel类
+- 这个类包含一个predict方法，接受数组（numpy）X和feature_names（特征名称，必须包含这个参数），并且返回一个预测的数组。
+- 可以在类的init方法添加任何需要的初始化
+- 返回的数组最少是2维
+- feedback提供反馈信息
+- class_names方法：标签后处理
+
+### requrirment.txt
+
+针对代码需要的依赖生成一个requirements.txt。当创建镜像时，这将通过pip安装。如果你喜欢也可以提供一个setup.py。
+
+### .s2i/environment
+
+定义python builder 镜像封装模型需要的关键参数。例如：
+
+```sh
+MODEL_NAME=MyModel
+API_TYPE=REST
+SERVICE_TYPE=MODEL
+PERSISTENCE=0
+```
+
+这些值也可以通过创建镜像时的命令行提供或者覆盖。
+
+MODEL_NAME需要保证与model.py一致
+
+### 步骤3-创建镜像
+
+使用s2i build从源代码创建Docker镜像。需要机器上安装Docker，如果源代码是公开的git仓库还需要安装git。可以从下面三个python builder 镜像选择一个
+
+- Python2：seldonio/seldon-core-s2i-python2:0.4
+- Python3.6：seldonio/seldon-core-s2i-python36:0.4, seldonio/seldon-core-s2i-python3:0.4
+    - 注意[在Python3.7下运行Tensorflow有一些问题](https://github.com/tensorflow/tensorflow/issues/20444)（2018 11月），TensorFlow官方并不支持Python3.7（2018 12月）。
+- Python 3.6 加上 通过[Intel nGraph](https://github.com/NervanaSystems/ngraph)提供的ONNX支持：seldonio/seldon-core-s2i-python3-ngraph-onnx:0.1
+
+- 使用s2i你可以直接从git仓库或本地源文件夹创建镜像。查看[s2i文档](https://github.com/openshift/source-to-image/blob/master/docs/cli.md#s2i-build)了解详情。通用的格式是：
+
+```sh
+s2i build <git-repo> seldonio/seldon-core-s2i-python2:0.4 <my-image-name>
+s2i build <src-folder> seldonio/seldon-core-s2i-python2:0.4 <my-image-name>
+```
+
+使用使用python3，修改为seldonio/seldon-core-s2i-python3。
+
+使用seldon-core内部的测试模板模型的样例：
+
+```sh
+s2i build https://github.com/seldonio/seldon-core.git --context-dir=wrappers/s2i/python/test/model-template-app seldonio/seldon-core-s2i-python2:0.4 seldon-core-template-model
+```
+
+以上s2i build命令：
+
+- 使用Github仓库：https://github.com/seldonio/seldon-core.git 以及这个仓库中的目录wrappers/s2i/python/test/model-template-app
+- 使用builder image seldonio/seldon-core-s2i-python2
+- 创建doker镜像seldon-core-template-model
+
+要从本地的源文件夹创建镜像，这个例子是从seldon-core复制：
+
+```sh
+git clone https://github.com/seldonio/seldon-core.git
+cd seldon-core
+s2i build wrappers/s2i/python/test/model-template-app seldonio/seldon-core-s2i-python2:0.4 seldon-core-template-model
+```
+
+更多的帮助参见：
+
+```sh
+s2i usage seldonio/seldon-core-s2i-python2:0.4
+s2i usage seldonio/seldon-core-s2i-python3:0.4
+s2i build --help
+```
+### 预测数据格式
+
+输入格式参考：https://docs.seldon.io/projects/seldon-core/en/latest/reference/apis/internal-api.html
+
+seldon支持两种数据格式，一种是ndarray，另一种为tensor，二者是等价的，ndarray可以直接输出，tensor的话，需要指定shape和values
+
+输入的数据包含的key如下：
+
+data：数据的值，其下包含：
+
+ndarray / tensor：具体的数据，如果是tensor则需要指定shape和values
+
+names：列名，可选
+
+meta：其他元数据，可选
+
+增加其他的key请求不受影响
+
+数据请求是form中，key为json
+
+```python
+
+headers = {'Content-Type': 'application/x-www-form-urlencoded'}
+import json
+r = requests.post('http://0.0.0.0:5000/predict', data=f'json={data.to_json()}', headers=headers)
+print(r.json())
+```
+
+```json
+{"data":{"names":["alcohol", "chlorides", "citric acid", "density", "fixed acidity", "free sulfur dioxide", "pH", "residual sugar", "sulphates", "total sulfur dioxide", "volatile acidity"],"ndarray":[[12.8, 0.029, 0.48, 0.98, 6.2, 29, 3.33, 1.2, 0.39, 75, 0.66]]}}
+```
+
+```sh
+!curl -H "Content-Type: application/x-www-form-urlencoded" -g 0.0.0.0:5000/predict -d 'json={"data":{"names":["alcohol", "chlorides", "citric acid", "density", "fixed acidity", "free sulfur dioxide", "pH", "residual sugar", "sulphates", "total sulfur dioxide", "volatile acidity"],"ndarray":[[12.8, 0.029, 0.48, 0.98, 6.2, 29, 3.33, 1.2, 0.39, 75, 0.66]]}}'
+```
+
+```sh
+{"data":{"names":["a","b"],"tensor":{"shape":[2,2],"values":[0,0,1,1]}}}
+```
+
+```sh
+curl -v 0.0.0.0:8003/seldon/mymodel/api/v0.1/predictions -d '{"data":{"names":["a","b"],"tensor":{"shape":[2,2],"values":[0,0,1,1]}}}' -H "Content-Type: application/json"
+```
+
+## 使用Keras/Tensorflow模型
+
+要保证后端使用Tensorflow的Keras模型正常工作，需要在模型加载后调用_make_predict_function()。这是因为Flask将从与初始化模型不同的线程来调用预测请求。更多的讨论看一下[这里](https://github.com/keras-team/keras/issues/6462)。
+
+## 参考
+
+### 环境变量
+builder iamge可以理解的必要环境变量解释如下。可以在.s2i/environment环境文件或s2i build提供这些变量。
+
+#### MODEL_NAME
+包含模型的类名。也是将要导入的python文件的名称。
+
+#### API_TYPE
+要创建的API类型。可以是REST或者GRPC。
+
+#### SERVICE_TYPE
+创建的服务类型。可选项为：
+
+- MODEL，模型
+- ROUTER，路由
+- TRANSFORMER，转换器
+- COMBINER，合并器
+- OUTLIER_DETECTOR，异常识别器
+
+#### PERSISTENCE
+设置为0或1。默认是0。如果设置为1，那么模型将被周期保存到redis，并且从redis加载（如果存在的话）或者不存在的话，重新创建。
+
+### 创建不同的服务类型
+
+#### 模型
+- [A minimal skeleton for model source code](https://github.com/cliveseldon/seldon-core/tree/s2i/wrappers/s2i/python/test/model-template-app)
+- [Example models](https://github.com/SeldonIO/seldon-core/tree/master/examples/models)
+
+#### 路由
+- [Description of routers in Seldon Core](https://github.com/SeldonIO/seldon-core/blob/master/components/routers/README.md)
+- [A minimal skeleton for router source code](https://github.com/cliveseldon/seldon-core/tree/s2i/wrappers/s2i/python/test/router-template-app)
+- [Example routers](https://github.com/SeldonIO/seldon-core/tree/master/examples/routers)
+
+#### 转换器
+[A minimal skeleton for transformer source code](https://github.com/cliveseldon/seldon-core/tree/s2i/wrappers/s2i/python/test/transformer-template-app)
+[Example transformers](https://github.com/SeldonIO/seldon-core/tree/master/examples/transformers)
+
+## 高级用法
+### 模型类参数
+当把镜像部署到K8s可以为组件添加参数（arguments），这些参数从定义在SeldonDeloyment的（parameters）生成。例如，[Python TFServing proxy](https://github.com/SeldonIO/seldon-core/tree/master/integrations/tfserving)有个类init函数，形式如下：
+
+```python
+class TfServingProxy(object):
+ 
+def __init__(self,rest_endpoint=None,grpc_endpoint=None,model_name=None,signature_name=None,model_input=None,model_output=None):
+```
+
+这些参数在部署一个Seldon Deployment时设置。可以在[MNIST TFServing example](https://github.com/SeldonIO/seldon-core/blob/master/examples/models/tfserving-mnist/tfserving-mnist.ipynb)找到样例，参数在[SeldonDeployment](https://github.com/SeldonIO/seldon-core/blob/master/examples/models/tfserving-mnist/mnist_tfserving_deployment.json.template)中定义，一部分内容如下：
+
+```json
+
+"graph": {
+            "name": "tfserving-proxy",
+            "endpoint": { "type" : "REST" },
+            "type": "MODEL",
+            "children": [],
+            "parameters":
+            [
+            {
+                "name":"grpc_endpoint",
+                "type":"STRING",
+                "value":"localhost:8000"
+            },
+            {
+                "name":"model_name",
+                "type":"STRING",
+                "value":"mnist-model"
+            },
+            {
+                "name":"model_output",
+                "type":"STRING",
+                "value":"scores"
+            },
+            {
+                "name":"model_input",
+                "type":"STRING",
+                "value":"images"
+            },
+            {
+                "name":"signature_name",
+                "type":"STRING",
+                "value":"predict_images"
+            }
+            ]
+},
+```
+
+允许的参数type值是在[proto buffer definition](https://github.com/SeldonIO/seldon-core/blob/44f7048efd0f6be80a857875058d23efc4221205/proto/seldon_deployment.proto#L117-L131)定义。
+
+### 本地Python依赖
+
+from version 0.5-SNAPSHOT
+
+要使用私有仓库来安装Python依赖，使用如下build命令：
+
+```sh
+s2i build -i <python-wheel-folder>:/whl <src-folder> seldonio/seldon-core-s2i-python2:0.5-SNAPSHOT <my-image-name>
+```
+
+这个命令将优先查看在<python-wheel-folder> 本地的Python Wheels，并使用这些文件而不是在PyPI搜索。
+
+### 自定义指标
+
+from version 0.3
+
+要为响应添加自定义指标，可以在类中定义可选的方法 metrics 返回一个 metric 字典的列表。例子如下：
+
+```python
+class MyModel(object):
+ 
+    def predict(self,X,features_names):
+        return X
+ 
+    def metrics(self):
+        return [{"type":"COUNTER","key":"mycounter","value":1}]
+```
+
+更多自定义指标和和指标字典的格式见[这里](https://github.com/SeldonIO/seldon-core/blob/master/docs/custom_metrics.md)。
+
+这是一个[解释使用python自定义指标模型的notebook例子](https://github.com/SeldonIO/seldon-core/blob/master/examples/models/template_model_with_metrics/modelWithMetrics.ipynb)。
+
+### 自定义元数据
+
+from version 0.3
+
+要添加自定义元数据，可以添加可选 tags 方法，这个方法将返回自定义元数据的字典，如下面的例子所示：
+
+```python
+class UserObject(object):
+ 
+    def predict(self,X,features_names):
+        return X
+ 
+    def tags(self):
+        return {"mytag":1}
+```
